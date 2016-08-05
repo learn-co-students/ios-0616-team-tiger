@@ -13,7 +13,7 @@ class DataStore {
     
     //static makes it a singleton
     static let store = DataStore()
-    var user = User()
+    var user = [User]()
     
     func fetchData() {
         
@@ -22,7 +22,7 @@ class DataStore {
         //storing fetch request
         
         do {
-            user = try self.managedObjectContext.executeFetchRequest(userFetchRequest) as! User
+            user = try managedObjectContext.executeFetchRequest(userFetchRequest) as! [User]
         } catch {
             print("ERROR")
         }
@@ -30,8 +30,12 @@ class DataStore {
     
     func generateData() {
         
-//        let firstUser = NSEntityDescription.insertNewObjectForEntityForName("User", in ManagedO)
-        
+        //possible that we may have to change this from let to var
+        let firstUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
+       
+        saveContext()
+        fetchData()
+
     }
     
     lazy var applicationDocumentsDirectory: NSURL = {
