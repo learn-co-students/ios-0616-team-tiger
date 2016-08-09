@@ -8,18 +8,21 @@
 
 import Foundation
 import CoreData
+import Alamofire
+import SwiftyJSON
 
 class DataStore {
     
+    var farmersMarketDictionary = [:]
+
     //static makes it a singleton
     static let store = DataStore()
     var user = [User]()
     
+    
     func fetchData() {
         
         let userFetchRequest = NSFetchRequest(entityName: "User")
-        //execute fetch request
-        //storing fetch request
         
         do {
             user = try managedObjectContext.executeFetchRequest(userFetchRequest) as! [User]
@@ -32,11 +35,50 @@ class DataStore {
         
         //possible that we may have to change this from let to var
         let firstUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
-       
+        
         saveContext()
         fetchData()
-
+        
     }
+    
+    func farmersMarketParse() {
+        
+        
+        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/j8gx-kc43/rows.json?") .responseJSON { response in
+            self.farmersMarketDictionary = response.result.value as! NSDictionary
+            
+            if let jsonData = response.data {
+                let jsonObj = JSON(data: jsonData)
+                
+                let arrayOfData = jsonObj["data"].array
+                
+                var dictionaryWithInfo = [String:String]()
+                
+                if let arrayOfData = arrayOfData {
+                    
+                    for detail in arrayOfData {
+                        
+                        dictionaryWithInfo["name"] = detail[8].string
+                        dictionaryWithInfo["zip"] = detail[13].string
+                        dictionaryWithInfo["longitude"] = detail[15].string
+                        dictionaryWithInfo["latitude"] = detail[14].string
+                        
+                        if let addressInDictionary = detail[10].string {
+                            
+                            dictionaryWithInfo["address"] = addressInDictionary
+                            print(dictionaryWithInfo)
+                            
+                        } else {
+                            print("IN SEARCH OF ADDRESS")
+                        }
+                    }
+                    print(dictionaryWithInfo)
+                }
+                
+            }
+        }
+    }
+    
     
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.kencooke.Team_Tiger" in the application's documents Application Support directory.
@@ -98,8 +140,8 @@ class DataStore {
                 abort()
             }
         }
+        
     }
     
 }
-
 
