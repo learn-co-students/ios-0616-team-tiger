@@ -8,6 +8,6 @@ target 'Team-Tiger' do
   # Pods for Team-Tiger
 
   pod 'SnapKit', '0.30.0.beta2'
-
+  pod 'Alamofire', '~> 3.4'
 
 end
