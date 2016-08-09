@@ -11,60 +11,30 @@ import Alamofire
 
 class ViewController: UIViewController {
     
-    
-    
     let dataStore = DataStore.store
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
+  // Example use of ParksApiClient
         
-//        let keys = Array(dataStore.parsedParksDictionary.keys)
+//        let apiClient = ParksApiClient()
 //        
-//        var gardens: [[String : String]] = []
-//        
-//        for key in keys {
+//        apiClient.populateParkByTypeBasedOnState("waterfront", type: "Yes") {
 //            
-//            if dataStore.parsedParksDictionary[key]!["type"] == "garden" {
-//                
-//                gardens.append(dataStore.parsedParksDictionary[key]!)
-//                
-//                
-//            }
-//            print(gardens)
-//            
-//        }
-        
-        
-        
-        
-        
-        // Do any additional setup after loading the view, typically from a nib.
-        
-//        var gardens: [[String : String]] = []
-//        
-//        for location in (dataStore.parsedParksDictionary as Dictionary) {
-//            
-//            let dictionary = Dictionary(dictionaryLiteral: location)
-//            if location["type"] = "garden" {
-//                
-//            gardens.append(location)
-//                
-//                
-//            }
+//            print(apiClient.typeResults)
         
 //        }
-        
         
     
+    
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
 }
 

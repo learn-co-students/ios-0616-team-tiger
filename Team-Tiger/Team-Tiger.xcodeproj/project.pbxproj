@@ -20,6 +20,7 @@
 		4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF1F1D53D0290029FD30 /* Team_Tiger.xcdatamodeld */; };
 		4F45BF231D53D0290029FD30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F45BF221D53D0290029FD30 /* Assets.xcassets */; };
 		4F45BF261D53D0290029FD30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F45BF241D53D0290029FD30 /* LaunchScreen.storyboard */; };
+		4F5277751D5A49CC00B4EE49 /* ParksApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5277741D5A49CC00B4EE49 /* ParksApiClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		4F45BF221D53D0290029FD30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F45BF251D53D0290029FD30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F45BF271D53D0290029FD30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F5277741D5A49CC00B4EE49 /* ParksApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParksApiClient.swift; sourceTree = "<group>"; };
 		5A85A8E21CAABFDD5515690C /* Pods-Team-Tiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Team-Tiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger.release.xcconfig"; sourceTree = "<group>"; };
 		6B8FACEC46CF9107F6B21615 /* Pods_Team_Tiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Team_Tiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 				4F45BF181D53D0290029FD30 /* AppDelegate.swift */,
 				11024A4E1D551C490001BAFC /* DataStore.swift */,
 				4F45BF1A1D53D0290029FD30 /* ViewController.swift */,
+				4F5277741D5A49CC00B4EE49 /* ParksApiClient.swift */,
 				11DF7A0C1D5528BE004E410E /* Secrets.swift */,
 				4F45BF1C1D53D0290029FD30 /* Main.storyboard */,
 				11024A701D551FB80001BAFC /* User+CoreDataProperties.swift */,
@@ -237,6 +240,7 @@
 				4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */,
 				11024A741D551FB80001BAFC /* User+CoreDataProperties.swift in Sources */,
 				4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */,
+				4F5277751D5A49CC00B4EE49 /* ParksApiClient.swift in Sources */,
 				11024A4F1D551C490001BAFC /* DataStore.swift in Sources */,
 				4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */,
 				11024A751D551FB80001BAFC /* User.swift in Sources */,
