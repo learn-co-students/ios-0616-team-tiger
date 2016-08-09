@@ -19,17 +19,34 @@ class ViewController: UIViewController {
         
   // Example use of ParksApiClient
         
-//        let apiClient = ParksApiClient()
+
+//        let keys = Array(dataStore.parsedParksDictionary.keys)
 //        
-//        apiClient.populateParkByTypeBasedOnState("waterfront", type: "Yes") {
+//        var gardens: [[String : String]] = []
+//        
+//        for key in keys {
 //            
-//            print(apiClient.typeResults)
-        
+//            if dataStore.parsedParksDictionary[key]!["type"] == "garden" {
+//                
+//                gardens.append(dataStore.parsedParksDictionary[key]!)
+//                
+//                
+//            }
+//            print(gardens)
+//            
 //        }
         
+        
+        
+        
+        
+        // Do any additional setup after loading the view, typically from a nib.
+      
+
     
     
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

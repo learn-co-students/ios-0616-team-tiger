@@ -243,8 +243,11 @@
 				4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */,
 				11024A741D551FB80001BAFC /* User+CoreDataProperties.swift in Sources */,
 				4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */,
+
 				174A95B11D5903F800841B2C /* LocationStuff.swift in Sources */,
+
 				4F5277751D5A49CC00B4EE49 /* ParksApiClient.swift in Sources */,
+
 				11024A4F1D551C490001BAFC /* DataStore.swift in Sources */,
 				4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */,
 				11024A751D551FB80001BAFC /* User.swift in Sources */,

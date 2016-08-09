@@ -14,7 +14,6 @@
 		11024A761D551FB80001BAFC /* Favorites+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11024A721D551FB80001BAFC /* Favorites+CoreDataProperties.swift */; };
 		11024A771D551FB80001BAFC /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11024A731D551FB80001BAFC /* Favorites.swift */; };
 		11DF7A0D1D5528BE004E410E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DF7A0C1D5528BE004E410E /* Secrets.swift */; };
-		174A95B11D5903F800841B2C /* LocationStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174A95B01D5903F800841B2C /* LocationStuff.swift */; };
 		4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF181D53D0290029FD30 /* AppDelegate.swift */; };
 		4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF1A1D53D0290029FD30 /* ViewController.swift */; };
 		4F45BF1E1D53D0290029FD30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F45BF1C1D53D0290029FD30 /* Main.storyboard */; };
@@ -32,7 +31,6 @@
 		11024A721D551FB80001BAFC /* Favorites+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Favorites+CoreDataProperties.swift"; path = "../Favorites+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		11024A731D551FB80001BAFC /* Favorites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Favorites.swift; path = ../Favorites.swift; sourceTree = "<group>"; };
 		11DF7A0C1D5528BE004E410E /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
-		174A95B01D5903F800841B2C /* LocationStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStuff.swift; sourceTree = SOURCE_ROOT; };
 		4F45BF151D53D0290029FD30 /* Team-Tiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team-Tiger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F45BF181D53D0290029FD30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F45BF1A1D53D0290029FD30 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 		4F45BF171D53D0290029FD30 /* Team-Tiger */ = {
 			isa = PBXGroup;
 			children = (
-				174A95B01D5903F800841B2C /* LocationStuff.swift */,
 				4F45BF181D53D0290029FD30 /* AppDelegate.swift */,
 				11024A4E1D551C490001BAFC /* DataStore.swift */,
 				4F45BF1A1D53D0290029FD30 /* ViewController.swift */,
@@ -150,7 +147,7 @@
 				TargetAttributes = {
 					4F45BF141D53D0290029FD30 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 85826LGZGV;
+						DevelopmentTeam = SBQJQSJKE9;
 					};
 				};
 			};
@@ -243,7 +240,6 @@
 				4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */,
 				11024A741D551FB80001BAFC /* User+CoreDataProperties.swift in Sources */,
 				4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */,
-				174A95B11D5903F800841B2C /* LocationStuff.swift in Sources */,
 				4F5277751D5A49CC00B4EE49 /* ParksApiClient.swift in Sources */,
 				11024A4F1D551C490001BAFC /* DataStore.swift in Sources */,
 				4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */,
@@ -362,13 +358,10 @@
 			baseConfigurationReference = 0862F13632B66FB008714CB2 /* Pods-Team-Tiger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Team-Tiger/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kencooke.Team-Tiger";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -377,13 +370,10 @@
 			baseConfigurationReference = 5A85A8E21CAABFDD5515690C /* Pods-Team-Tiger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Team-Tiger/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kencooke.Team-Tiger";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
