@@ -12,8 +12,8 @@ import Alamofire
 
 class DataStore {
     
-    var locationDictionary = [:]
-    var parsedDictionary = [String : [String : String]]()
+    var parsedParksDictionary = [String : [String : String]]()
+    
     
     //static makes it a singleton
     static let store = DataStore()
@@ -45,11 +45,14 @@ class DataStore {
     
     func getParks() {
         
+        var locationDictionary = [:]
+        
+        
         Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
-            self.locationDictionary = response.result.value as! NSDictionary
+            locationDictionary = response.result.value as! NSDictionary
             
             
-            let locationArrays = self.locationDictionary["data"] as! NSArray
+            let locationArrays = locationDictionary["data"] as! NSArray
             
             for location in locationArrays {
                 
@@ -62,12 +65,30 @@ class DataStore {
                 tempDictionary["zip"] = location[13] as? String
                 tempDictionary["coordinates"] = location[8] as? String
                 
-                self.parsedDictionary[(location[17] as? String)!] = tempDictionary
+                self.parsedParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
                 
             }
             
-            print(self.parsedDictionary["TLC Sculpture Park Garden"]!["address"])
+            //print(self.parsedParksDictionary["TLC Sculpture Park Garden"]!["address"])
+            //print(self.parsedParksDictionary)
             
+            
+            let keys = Array(self.parsedParksDictionary.keys)
+            
+            var gardens: [[String : String]] = []
+            
+            for key in keys {
+                
+                if self.parsedParksDictionary[key]!["type"] == "Garden" {
+                    
+                    gardens.append(self.parsedParksDictionary[key]!)
+                    
+                    
+                }
+                
+                
+            }
+            print("Gardens \(gardens)")
         }
         
     }

@@ -11,12 +11,52 @@ import Alamofire
 
 class ViewController: UIViewController {
     
-    var locationDictionary = [:]
-    var parsedDictionary = [String : [String : String]]()
+    
+    
+    let dataStore = DataStore.store
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+//        let keys = Array(dataStore.parsedParksDictionary.keys)
+//        
+//        var gardens: [[String : String]] = []
+//        
+//        for key in keys {
+//            
+//            if dataStore.parsedParksDictionary[key]!["type"] == "garden" {
+//                
+//                gardens.append(dataStore.parsedParksDictionary[key]!)
+//                
+//                
+//            }
+//            print(gardens)
+//            
+//        }
+        
+        
+        
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
+        
+//        var gardens: [[String : String]] = []
+//        
+//        for location in (dataStore.parsedParksDictionary as Dictionary) {
+//            
+//            let dictionary = Dictionary(dictionaryLiteral: location)
+//            if location["type"] = "garden" {
+//                
+//            gardens.append(location)
+//                
+//                
+//            }
+        
+//        }
+        
+        
     
     }
 
