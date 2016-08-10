@@ -12,7 +12,8 @@ import Alamofire
 
 class DataStore {
     
-    var parsedParksDictionary = [String : [String : String]]()
+    var masterParksDictionary = [String : [String : String]]()
+    
     
     
     //static makes it a singleton
@@ -42,6 +43,7 @@ class DataStore {
         
     }
     
+    //Gets all park data at startup
     
     func getParks() {
         
@@ -65,39 +67,55 @@ class DataStore {
                 tempDictionary["zip"] = location[13] as? String
                 tempDictionary["coordinates"] = location[8] as? String
                 
-                self.parsedParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
+                self.masterParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
                 
             }
+    
+        }
+        
+    }
+    
+    //Used to call parks data on demand that is passed to getParkByTypeOnDemand method
+    
+    func getParksOnDemand(completion:(parks: [String : [String : String]]) -> ()) -> () {
+        
+        var parsedParksDictionary = [String : [String : String]]()
+        
+        var locationDictionary = [:]
+        
+        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
+            locationDictionary = response.result.value as! NSDictionary
             
-            //print(self.parsedParksDictionary["TLC Sculpture Park Garden"]!["address"])
-            //print(self.parsedParksDictionary)
             
+            let locationArrays = locationDictionary["data"] as! NSArray
             
-            let keys = Array(self.parsedParksDictionary.keys)
-            
-            var gardens: [[String : String]] = []
-            
-            for key in keys {
+            for location in locationArrays {
                 
-                if self.parsedParksDictionary[key]!["type"] == "Garden" {
-                    
-                    gardens.append(self.parsedParksDictionary[key]!)
-                    
-                }
+//                if self.parsedParksDictionary[key]!["type"] == "Garden" {
+//                    
+//                    gardens.append(self.parsedParksDictionary[key]!)
+//                    
+//                }
+
+                var tempDictionary = [String : String]()
                 
+                tempDictionary["address"] = location[10] as? String
+                tempDictionary["name"] = location[17] as? String
+                tempDictionary["type"] = location[18] as? String
+                tempDictionary["waterfront"] = location[19] as? String
+                tempDictionary["zip"] = location[13] as? String
+                tempDictionary["coordinates"] = location[8] as? String
+
+                
+                parsedParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
                 
             }
-            print("Gardens \(gardens)")
-            var gardensCopy = [[String : AnyObject]]()
-            for garden in gardens {
-                
-                var gardenCopy : [String : AnyObject] = garden
-                if let coordinatesAsString = garden["coordinates"] {
-                    gardenCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
-                    gardensCopy.append(gardenCopy)
-                    print(gardenCopy)
-                }
-            }
+
+            
+            
+            completion(parks: parsedParksDictionary)
+            
+
         }
         
     }

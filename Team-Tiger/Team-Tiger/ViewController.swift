@@ -37,22 +37,34 @@ class ViewController: UIViewController {
 //        var gardens: [[String : String]] = []
 //        
 //        for location in (dataStore.parsedParksDictionary as Dictionary) {
+
+  // Example use of ParksApiClient
+        
+//        let apiClient = ParksApiClient()
+//        
+//        apiClient.populateParkByTypeBasedOnState("waterfront", type: "Yes") {
+
 //            
-//            let dictionary = Dictionary(dictionaryLiteral: location)
-//            if location["type"] = "garden" {
-//                
-//            gardens.append(location)
-//                
-//                
-//            }
+//            print(apiClient.typeResults)
         
 //        }
+
+        //// Changes coordinates to CLLocation for selected type
         
-        
+        //        print("Gardens \(gardens)")
+//        var gardensCopy = [[String : AnyObject]]()
+//        for garden in gardens {
+//            
+//            var gardenCopy : [String : AnyObject] = garden
+//            if let coordinatesAsString = garden["coordinates"] {
+//                gardenCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
+//                gardensCopy.append(gardenCopy)
+//                print(gardenCopy)
+//            }
+//        }
+//    
     
     }
-
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
