@@ -42,7 +42,7 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func sortWithDistance(dictionary: [String : Array<CLLocation>], location: CLLocation) -> [String : CLLocation] {
+    public func sortWithDistance(dictionary: [String : Array<CLLocation>], location: CLLocation) -> [String : CLLocation] {
         let array = dictionary.values.first
         var closestCoordinate = array![0]
         

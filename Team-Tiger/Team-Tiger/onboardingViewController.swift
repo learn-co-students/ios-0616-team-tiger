@@ -11,7 +11,9 @@ import UIKit
 class onboardingViewController: UIViewController {
     
     var controllerIndex: Int?
+    
 
+    
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var introTextLabel: UILabel!
@@ -32,5 +34,4 @@ class onboardingViewController: UIViewController {
         
     }
   
-    
 }

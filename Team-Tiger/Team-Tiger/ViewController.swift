@@ -8,17 +8,17 @@
 
 import UIKit
 import Alamofire
+import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate {
     
     let dataStore = DataStore.store
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+                
   // Example use of ParksApiClient
-        
+//        
 //        let apiClient = ParksApiClient()
 //        
 //        apiClient.populateParkByTypeBasedOnState("type", type: "Garden") {
@@ -26,6 +26,7 @@ class ViewController: UIViewController {
 //            print(apiClient.typeResults)
 //        
 //        }
+//        let dataStore.organizeParkCoordinates(<#T##parks: [[String : String]]##[[String : String]]#>)
 //        var gardensCopy = [[String : AnyObject]]()
 //        
 //        for garden in gardens {
@@ -45,11 +46,9 @@ class ViewController: UIViewController {
 //            }
 //            
 //        }
-
-    
-    
     }
     
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

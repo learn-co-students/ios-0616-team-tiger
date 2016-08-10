@@ -14,6 +14,7 @@ import Alamofire
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let dataStore = DataStore.store
+    
 
     var window: UIWindow?
 

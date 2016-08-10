@@ -61,19 +61,13 @@ class ParksApiClient {
         var parksCopy = [[String : AnyObject]]()
         
         for park in parks {
-          
             var parkCopy : [String : AnyObject] = park
             
             if let coordinatesAsString = park["coordinates"] {
-                
                 parkCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
-                
                 parksCopy.append(parkCopy)
-                
                 print(parkCopy)
-                
             }
-            
         }
         return parksCopy
     }
