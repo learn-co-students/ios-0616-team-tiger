@@ -66,13 +66,18 @@ class ParksApiClient {
             if var parkCopy : [String : AnyObject] = park {
             
             if let coordinatesAsString = park["coordinates"] {
+                
                 parkCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
+                let distanceStuff = LocationStuff().sortWithDistance(parkCopy, location: ViewController().currentLocation)
+                parkCopy["Distance"] = distanceStuff.distance
+//                parkCopy.updateValue(distanceStuff.closest, forKey: "Closest Coordinate")
                 parksCopy.append(parkCopy)
+                
                 print(parkCopy)
             }
         }
         }
-//        parksCopy = LocationStuff().sortWithDistance(parksCopy, location: ViewController().currentLocation.coordinate)
+//        parksCopy = LocationStuff().sortWithDistance(parksCopy[""], location: ViewController().currentLocation.coordinate)
         return parksCopy
     }
     
