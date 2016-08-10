@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import MapKit
 
 class ParksApiClient {
     
-    var typeResults = [[String : String]]()
+    var typeResults = [[String : AnyObject]]()
     
     let dataStore = DataStore.store
     
@@ -47,7 +48,8 @@ class ParksApiClient {
                 if parks[key]![category] == type {
                     
                     self.typeResults.append(parks[key]!)
-                    
+                    // Changes the coordinates to coordinates
+                    self.typeResults = self.organizeParkCoordinates(self.typeResults)
                 }
                 
             }
@@ -57,11 +59,11 @@ class ParksApiClient {
         
     }
     
-    func organizeParkCoordinates(parks : [[String : String]]) -> [[String : AnyObject]] {
+    func organizeParkCoordinates(parks : [[String : AnyObject]]) -> [[String : AnyObject]] {
         var parksCopy = [[String : AnyObject]]()
         
         for park in parks {
-            var parkCopy : [String : AnyObject] = park
+            if var parkCopy : [String : AnyObject] = park {
             
             if let coordinatesAsString = park["coordinates"] {
                 parkCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
@@ -69,6 +71,8 @@ class ParksApiClient {
                 print(parkCopy)
             }
         }
+        }
+//        parksCopy = LocationStuff().sortWithDistance(parksCopy, location: ViewController().currentLocation.coordinate)
         return parksCopy
     }
     

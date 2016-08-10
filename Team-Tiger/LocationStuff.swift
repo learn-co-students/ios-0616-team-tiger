@@ -42,29 +42,35 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    public func sortWithDistance(dictionary: [String : Array<CLLocation>], location: CLLocation) -> [String : CLLocation] {
-        let array = dictionary.values.first
-        var closestCoordinate = array![0]
-        
-        for coordinate in array! {
-            print("\(coordinate.coordinate) is this far away \(coordinate.distanceFromLocation(location))")
-            if coordinate.distanceFromLocation(location) < closestCoordinate.distanceFromLocation(location) {
-                closestCoordinate = coordinate
+    public func sortWithDistance(array: [[String : AnyObject]], location: CLLocation) -> [[String : AnyObject]] {
+        var arrayCopy = [[String : AnyObject]]()
+        for dictionary in array {
+            var closestCoordinate = dictionary["coordinate"]!
+            let coordinates = dictionary["coordinate"] as? Array<CLLocation>
+            for coordinate in coordinates! {
+                print("\(coordinate.coordinate) is this far away \(coordinate.distanceFromLocation(location))")
+                if coordinate.distanceFromLocation(location) < closestCoordinate.distanceFromLocation(location) {
+                    closestCoordinate = coordinate
+                }
             }
+            var dictionaryCopy = dictionary
+            arrayCopy.append(dictionaryCopy)
+            dictionaryCopy.updateValue(closestCoordinate.coordinate, forKey: "Closest Coordinate")
+            dictionaryCopy.updateValue(closestCoordinate.distanceFromLocation(location), forKey: "Distance from User's Location")
+            
         }
-        let sortedArray = [dictionary.keys.first! : closestCoordinate]
-        return sortedArray
+        return arrayCopy
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Failed to find user's location: \(error.localizedDescription)")
     }
     
-    public func makeCoordinatesIntoArray(parks: String) -> Array<CLLocation> {
+    public func makeCoordinatesIntoArray(parks: AnyObject) -> Array<CLLocation> {
         
         print("called")
         
-        var coordinatesCopy = parks.stringByReplacingOccurrencesOfString("(", withString: "")
+        var coordinatesCopy = String(parks.stringByReplacingOccurrencesOfString("(", withString: ""))
         coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString(")", withString: "")
         coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString("MULTIPOLYGON", withString: "")
         var locationArray = coordinatesCopy.componentsSeparatedByString(", ")
@@ -87,9 +93,9 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
         let parksCopy = coordinateArray
         print("Done")
         return parksCopy
-
+        
     }
-
+    
     
 }
 

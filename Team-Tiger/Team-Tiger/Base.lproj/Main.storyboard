@@ -40,7 +40,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="EEL-0D-euG" kind="show" id="fHh-ip-51m"/>
+                                    <segue destination="EEL-0D-euG" kind="show" id="1BL-fz-7qU"/>
                                 </connections>
                             </button>
                         </subviews>

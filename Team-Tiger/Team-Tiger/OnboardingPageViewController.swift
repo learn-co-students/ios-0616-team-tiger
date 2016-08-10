@@ -14,20 +14,12 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
     let textArray = ["Greenway loves you!", "Really, I do!", "Don't you sometimes feel like our time together is all too short?"]
     
     var imageArray: [UIImage] = []
-    let locationManager = CLLocationManager()
-    var currentLocation = CLLocation()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.delegate = self
         self.dataSource = self
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            locationManager.requestLocation()
-        }
-        
 
         providePhotos()
         
@@ -122,23 +114,6 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
             self.imageArray.append(bench)
             
         }
-        
-    }
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            print("Found user's location: \(location)")
-            //            self.currentLocation = (locationManager.location?.coordinate)!
-            self.currentLocation = (locations.first)!
-            self.locationManager.stopUpdatingLocation()
-            print(self.currentLocation)
-            
-        }
-    }
-    
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Failed to find user's location: \(error.localizedDescription)")
     }
     
 }
