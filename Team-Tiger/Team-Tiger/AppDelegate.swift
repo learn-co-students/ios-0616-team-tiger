@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         dataStore.getParks()
+        dataStore.openSpaces()
         
         return true
     }

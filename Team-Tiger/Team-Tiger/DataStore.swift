@@ -92,6 +92,51 @@ class DataStore {
         }
         
     }
+    
+    
+    
+    func openSpaces() {
+        
+        var locationDictionary = [:]
+        
+        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/b7j8-z8a7/rows.json?accessType=DOWNLOAD").responseJSON{
+            (response) in
+            locationDictionary = response.result.value as! NSDictionary
+            
+            let locationArrays = locationDictionary["data"] as! NSArray
+            
+            for location in locationArrays {
+                var tempDictionary = [String : String]()
+                
+
+                tempDictionary["name"] = location[12] as? String
+                tempDictionary["coordinates"] = location[8] as? String
+                
+                self.parsedParksDictionary[(location[12] as? String)!] = tempDictionary as Dictionary
+                
+            }
+            
+            //print(self.parsedParksDictionary["TLC Sculpture Park Garden"]!["address"])
+            //print(self.parsedParksDictionary)
+            
+            
+            let keys = Array(self.parsedParksDictionary.keys)
+            
+            var coordinates: [[String : String]] = []
+            
+            for key in keys {
+                
+                if self.parsedParksDictionary[key]!["name"]! != "" || self.parsedParksDictionary[key]!["name"]!.containsString("cemetery") {
+                    
+                    coordinates.append(self.parsedParksDictionary[key]!)
+                    
+                }
+                
+            }
+            print("Open Space Coordinates \(coordinates)")
+
+            }
+    }
 
     
     

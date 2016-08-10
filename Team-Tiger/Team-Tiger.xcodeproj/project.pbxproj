@@ -95,16 +95,16 @@
 				4F45BF181D53D0290029FD30 /* AppDelegate.swift */,
 				11024A4E1D551C490001BAFC /* DataStore.swift */,
 				4F45BF1A1D53D0290029FD30 /* ViewController.swift */,
-				11DF7A0C1D5528BE004E410E /* Secrets.swift */,
 				4F45BF1C1D53D0290029FD30 /* Main.storyboard */,
-				11024A701D551FB80001BAFC /* User+CoreDataProperties.swift */,
+				11DF7A0C1D5528BE004E410E /* Secrets.swift */,
 				11024A711D551FB80001BAFC /* User.swift */,
-				11024A721D551FB80001BAFC /* Favorites+CoreDataProperties.swift */,
 				11024A731D551FB80001BAFC /* Favorites.swift */,
-				4F45BF221D53D0290029FD30 /* Assets.xcassets */,
-				4F45BF241D53D0290029FD30 /* LaunchScreen.storyboard */,
-				4F45BF271D53D0290029FD30 /* Info.plist */,
+				11024A701D551FB80001BAFC /* User+CoreDataProperties.swift */,
+				11024A721D551FB80001BAFC /* Favorites+CoreDataProperties.swift */,
 				4F45BF1F1D53D0290029FD30 /* Team_Tiger.xcdatamodeld */,
+				4F45BF271D53D0290029FD30 /* Info.plist */,
+				4F45BF241D53D0290029FD30 /* LaunchScreen.storyboard */,
+				4F45BF221D53D0290029FD30 /* Assets.xcassets */,
 			);
 			path = "Team-Tiger";
 			sourceTree = "<group>";
