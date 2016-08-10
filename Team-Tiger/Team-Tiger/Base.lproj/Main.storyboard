@@ -57,7 +57,7 @@
         <!--Onboarding Page View Controller-->
         <scene sceneID="xwz-Bw-CUA">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="vNX-zh-iNv" customClass="OnboardingPageViewController" customModule="Team_Tiger" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="vNX-zh-iNv" customClass="OnboardingPageViewController" customModule="Team_Tiger" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RGt-F1-5nI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="112" y="1154"/>

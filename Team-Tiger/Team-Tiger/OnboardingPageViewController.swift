@@ -16,36 +16,47 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.delegate = self
+        self.dataSource = self
+        
         providePhotos()
         
         let initialViewController = self.viewControllerAtIndex(0)
         
-        self.setViewControllers([initialViewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
-        
+        self.setViewControllers([initialViewController!], direction: .Forward, animated: true, completion: nil)
         
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
-//        var index = (viewController as! onboardingViewController).controllerIndex
-//        
-//        index = index! + 1
+        var index = (viewController as! onboardingViewController).controllerIndex
         
-//        return self.viewControllerAtIndex(index!)
-        return nil
+        if index <= 0 {
+            
+            return nil
+            
+        }
+        
+        index = index! - 1
+        
+        return self.viewControllerAtIndex(index!)
         
         
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
-//        var index = (viewController as! onboardingViewController).controllerIndex
-//        
-//        index = index! - 1
+        var index = (viewController as! onboardingViewController).controllerIndex
         
-//        return self.viewControllerAtIndex(index!)
+        if index >= self.imageArray.count {
+            
+            return nil
+            
+        }
         
-        return nil
+        index = index! + 1
+        
+        return self.viewControllerAtIndex(index!)
         
         
     }
@@ -61,33 +72,33 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         let viewControllerToDisplay = self.storyboard?.instantiateViewControllerWithIdentifier("onboarding") as? onboardingViewController
         
         if let view = viewControllerToDisplay {
-        
-        view.textToDisplay = self.textArray[index]
-        
-        view.imageForBackground = self.imageArray[index]
-        
-        view.controllerIndex = index
-        
-        return view
+            
+            view.textToDisplay = self.textArray[index]
+            
+            view.imageForBackground = self.imageArray[index]
+            
+            view.controllerIndex = index
+            
+            return view
             
         }
         
         return nil
     }
-
-func providePhotos() {
     
-    let benchPhoto = UIImage.init(named: "blurredBench")
-    let plantPhoto = UIImage.init(named: "blurredPlant")
-    let flowerPhoto = UIImage.init(named: "blurredFlowers")
-    
-    if let bench = benchPhoto, flower = flowerPhoto, plant = plantPhoto {
+    func providePhotos() {
         
-        self.imageArray.append(bench)
-        self.imageArray.append(flower)
-        self.imageArray.append(plant)
+        let benchPhoto = UIImage.init(named: "blurredBench")
+        let plantPhoto = UIImage.init(named: "blurredPlant")
+        let flowerPhoto = UIImage.init(named: "blurredFlowers")
+        
+        if let bench = benchPhoto, flower = flowerPhoto, plant = plantPhoto {
+            
+            self.imageArray.append(bench)
+            self.imageArray.append(flower)
+            self.imageArray.append(plant)
+            
+        }
         
     }
-    
-}
 }
