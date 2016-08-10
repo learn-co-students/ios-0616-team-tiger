@@ -16,10 +16,12 @@
 		11DF7A0D1D5528BE004E410E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DF7A0C1D5528BE004E410E /* Secrets.swift */; };
 		4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF181D53D0290029FD30 /* AppDelegate.swift */; };
 		4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF1A1D53D0290029FD30 /* ViewController.swift */; };
-		4F45BF1E1D53D0290029FD30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F45BF1C1D53D0290029FD30 /* Main.storyboard */; };
+		4F45BF1E1D53D0290029FD30 /* Second.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F45BF1C1D53D0290029FD30 /* Second.storyboard */; };
 		4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF1F1D53D0290029FD30 /* Team_Tiger.xcdatamodeld */; };
 		4F45BF231D53D0290029FD30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F45BF221D53D0290029FD30 /* Assets.xcassets */; };
 		4F45BF261D53D0290029FD30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F45BF241D53D0290029FD30 /* LaunchScreen.storyboard */; };
+		8FD139B51D5B8789007CF71E /* bowbridge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FD139B41D5B8789007CF71E /* bowbridge.jpg */; };
+		8FD139B71D5BA3D9007CF71E /* resultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD139B61D5BA3D9007CF71E /* resultsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,13 +35,15 @@
 		4F45BF151D53D0290029FD30 /* Team-Tiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team-Tiger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F45BF181D53D0290029FD30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F45BF1A1D53D0290029FD30 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4F45BF1D1D53D0290029FD30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4F45BF1D1D53D0290029FD30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Second.storyboard; sourceTree = "<group>"; };
 		4F45BF201D53D0290029FD30 /* Team_Tiger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Team_Tiger.xcdatamodel; sourceTree = "<group>"; };
 		4F45BF221D53D0290029FD30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F45BF251D53D0290029FD30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F45BF271D53D0290029FD30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A85A8E21CAABFDD5515690C /* Pods-Team-Tiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Team-Tiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger.release.xcconfig"; sourceTree = "<group>"; };
 		6B8FACEC46CF9107F6B21615 /* Pods_Team_Tiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Team_Tiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FD139B41D5B8789007CF71E /* bowbridge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bowbridge.jpg; sourceTree = "<group>"; };
+		8FD139B61D5BA3D9007CF71E /* resultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = resultsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +99,8 @@
 				4F45BF181D53D0290029FD30 /* AppDelegate.swift */,
 				11024A4E1D551C490001BAFC /* DataStore.swift */,
 				4F45BF1A1D53D0290029FD30 /* ViewController.swift */,
-				4F45BF1C1D53D0290029FD30 /* Main.storyboard */,
+				4F45BF1C1D53D0290029FD30 /* Second.storyboard */,
+				8FD139B61D5BA3D9007CF71E /* resultsTableViewController.swift */,
 				11DF7A0C1D5528BE004E410E /* Secrets.swift */,
 				11024A711D551FB80001BAFC /* User.swift */,
 				11024A731D551FB80001BAFC /* Favorites.swift */,
@@ -105,6 +110,7 @@
 				4F45BF271D53D0290029FD30 /* Info.plist */,
 				4F45BF241D53D0290029FD30 /* LaunchScreen.storyboard */,
 				4F45BF221D53D0290029FD30 /* Assets.xcassets */,
+				8FD139B41D5B8789007CF71E /* bowbridge.jpg */,
 			);
 			path = "Team-Tiger";
 			sourceTree = "<group>";
@@ -172,8 +178,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F45BF261D53D0290029FD30 /* LaunchScreen.storyboard in Resources */,
+				8FD139B51D5B8789007CF71E /* bowbridge.jpg in Resources */,
 				4F45BF231D53D0290029FD30 /* Assets.xcassets in Resources */,
-				4F45BF1E1D53D0290029FD30 /* Main.storyboard in Resources */,
+				4F45BF1E1D53D0290029FD30 /* Second.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +245,7 @@
 				11024A741D551FB80001BAFC /* User+CoreDataProperties.swift in Sources */,
 				4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */,
 				11024A4F1D551C490001BAFC /* DataStore.swift in Sources */,
+				8FD139B71D5BA3D9007CF71E /* resultsTableViewController.swift in Sources */,
 				4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */,
 				11024A751D551FB80001BAFC /* User.swift in Sources */,
 				11024A761D551FB80001BAFC /* Favorites+CoreDataProperties.swift in Sources */,
@@ -247,12 +255,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4F45BF1C1D53D0290029FD30 /* Main.storyboard */ = {
+		4F45BF1C1D53D0290029FD30 /* Second.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				4F45BF1D1D53D0290029FD30 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Second.storyboard;
 			sourceTree = "<group>";
 		};
 		4F45BF241D53D0290029FD30 /* LaunchScreen.storyboard */ = {
