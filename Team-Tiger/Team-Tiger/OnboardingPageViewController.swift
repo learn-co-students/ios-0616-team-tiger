@@ -1,0 +1,93 @@
+////
+////  OnboardingPageViewController.swift
+////  Team-Tiger
+////
+////  Created by Kenneth Cooke on 8/9/16.
+////  Copyright © 2016 kencooke. All rights reserved.
+////
+
+import UIKit
+
+class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+    
+    let textArray = ["Greenway loves you!", "Really, I do!", "Don't you sometimes feel like our time together is all too short?"]
+    var imageArray: [UIImage] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        providePhotos()
+        
+        let initialViewController = self.viewControllerAtIndex(0)
+        
+        self.setViewControllers([initialViewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+        
+        
+    }
+    
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+        
+//        var index = (viewController as! onboardingViewController).controllerIndex
+//        
+//        index = index! + 1
+        
+//        return self.viewControllerAtIndex(index!)
+        return nil
+        
+        
+    }
+    
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+        
+//        var index = (viewController as! onboardingViewController).controllerIndex
+//        
+//        index = index! - 1
+        
+//        return self.viewControllerAtIndex(index!)
+        
+        return nil
+        
+        
+    }
+    
+    func viewControllerAtIndex(index : Int) -> UIViewController? {
+        
+        if((self.textArray.count == 0) || (index >= self.textArray.count)) {
+            
+            return nil
+            
+        }
+        
+        let viewControllerToDisplay = self.storyboard?.instantiateViewControllerWithIdentifier("onboarding") as? onboardingViewController
+        
+        if let view = viewControllerToDisplay {
+        
+        view.textToDisplay = self.textArray[index]
+        
+        view.imageForBackground = self.imageArray[index]
+        
+        view.controllerIndex = index
+        
+        return view
+            
+        }
+        
+        return nil
+    }
+
+func providePhotos() {
+    
+    let benchPhoto = UIImage.init(named: "blurredBench")
+    let plantPhoto = UIImage.init(named: "blurredPlant")
+    let flowerPhoto = UIImage.init(named: "blurredFlowers")
+    
+    if let bench = benchPhoto, flower = flowerPhoto, plant = plantPhoto {
+        
+        self.imageArray.append(bench)
+        self.imageArray.append(flower)
+        self.imageArray.append(plant)
+        
+    }
+    
+}
+}
