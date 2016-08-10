@@ -26,7 +26,26 @@ class ViewController: UIViewController {
 //            print(apiClient.typeResults)
 //        
 //        }
-        
+//        var gardensCopy = [[String : AnyObject]]()
+//        
+//        for garden in gardens {
+//            
+//            
+//            
+//            var gardenCopy : [String : AnyObject] = garden
+//            
+//            if let coordinatesAsString = garden["coordinates"] {
+//                
+//                gardenCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
+//                
+//                gardensCopy.append(gardenCopy)
+//                
+//                print(gardenCopy)
+//                
+//            }
+//            
+//        }
+
     
     
     }

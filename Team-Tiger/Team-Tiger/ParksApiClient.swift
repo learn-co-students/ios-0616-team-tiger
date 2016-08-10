@@ -57,6 +57,26 @@ class ParksApiClient {
         
     }
     
+    func organizeParkCoordinates(parks : [[String : String]]) -> [[String : AnyObject]] {
+        var parksCopy = [[String : AnyObject]]()
+        
+        for park in parks {
+          
+            var parkCopy : [String : AnyObject] = park
+            
+            if let coordinatesAsString = park["coordinates"] {
+                
+                parkCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
+                
+                parksCopy.append(parkCopy)
+                
+                print(parkCopy)
+                
+            }
+            
+        }
+        return parksCopy
+    }
     
     //Combines the custom "get" functions and picks one based on the existence on data in the masterParksDictionary
     func populateParkByTypeBasedOnState(category: String, type: String, completion:() -> ()) {
