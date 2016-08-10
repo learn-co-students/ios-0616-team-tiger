@@ -73,38 +73,71 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
         print("Failed to find user's location: \(error.localizedDescription)")
     }
     
-    func makeCoordinatesIntoArray(places: [[String : AnyObject]]) -> [[String : AnyObject]] {
-        var placesCopy = places
-        for place in places {
-            var coordinatesCopy = place["coordinates"]!.stringByReplacingOccurrencesOfString("(", withString: "")
-            coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString(")", withString: "")
-            coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString("MULTIPOLYGON", withString: "")
-            var locationArray = coordinatesCopy.componentsSeparatedByString(", ")
-            var coordinateArray: [CLLocation] = []
-            
-            for locationSubset in locationArray {
-                if locationSubset == locationArray[0] {
-                    var locationCoordinatesAsString = locationSubset.componentsSeparatedByString(" ")
-                    let locationCoordinates = CLLocation.init(latitude: ((locationCoordinatesAsString[2] as NSString).doubleValue), longitude: ((locationCoordinatesAsString[1] as NSString).doubleValue))
-                    coordinateArray.append(locationCoordinates)
-                    //                print("\(locationCoordinates.coordinate.latitude), \(locationCoordinates.coordinate.longitude)")
-                    
-                } else {
-                    var locationCoordinatesAsString = locationSubset.componentsSeparatedByString(" ")
-                    let locationCoordinates = CLLocation.init(latitude: ((locationCoordinatesAsString[1] as NSString).doubleValue), longitude: ((locationCoordinatesAsString[0] as NSString).doubleValue))
-                    coordinateArray.append(locationCoordinates)
-                    
-                }
+//    func makeCoordinatesIntoArray(places: [[String : AnyObject]]) -> [[String : AnyObject]] {
+//        var placesCopy = places
+//        for place in places {
+//            var coordinatesCopy = place["coordinates"]!.stringByReplacingOccurrencesOfString("(", withString: "")
+//            coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString(")", withString: "")
+//            coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString("MULTIPOLYGON", withString: "")
+//            var locationArray = coordinatesCopy.componentsSeparatedByString(", ")
+//            var coordinateArray: [CLLocation] = []
+//            
+//            for locationSubset in locationArray {
+//                if locationSubset == locationArray[0] {
+//                    var locationCoordinatesAsString = locationSubset.componentsSeparatedByString(" ")
+//                    let locationCoordinates = CLLocation.init(latitude: ((locationCoordinatesAsString[2] as NSString).doubleValue), longitude: ((locationCoordinatesAsString[1] as NSString).doubleValue))
+//                    coordinateArray.append(locationCoordinates)
+//                    //                print("\(locationCoordinates.coordinate.latitude), \(locationCoordinates.coordinate.longitude)")
+//                    
+//                } else {
+//                    var locationCoordinatesAsString = locationSubset.componentsSeparatedByString(" ")
+//                    let locationCoordinates = CLLocation.init(latitude: ((locationCoordinatesAsString[1] as NSString).doubleValue), longitude: ((locationCoordinatesAsString[0] as NSString).doubleValue))
+//                    coordinateArray.append(locationCoordinates)
+//                    
+//                }
+//                
+//            }
+//            var placeCopy = place
+//            placeCopy.updateValue(coordinateArray, forKey: "coordinates")
+//            placesCopy.append(placeCopy)
+//        }
+////        let coordinateDictionary : [ String : Array<CLLocation>] = [coordinates.keys.first! : coordinateArray]
+//        return placesCopy
+//    }
+    public func makeCoordinatesIntoArray(parks: String) -> Array<CLLocation> {
+        print("called")
+        //        var parkCopy : [[String : AnyObject]] = [[:]]
+        //        for array in parks {
+        //            var arrayCopy : [ String : AnyObject ] = array
+        var coordinatesCopy = parks.stringByReplacingOccurrencesOfString("(", withString: "")
+        coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString(")", withString: "")
+        coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString("MULTIPOLYGON", withString: "")
+        var locationArray = coordinatesCopy.componentsSeparatedByString(", ")
+        var coordinateArray: [CLLocation] = []
+        
+        for locationSubset in locationArray {
+            if locationSubset == locationArray[0] {
+                var locationCoordinatesAsString = locationSubset.componentsSeparatedByString(" ")
+                let locationCoordinates = CLLocation.init(latitude: ((locationCoordinatesAsString[2] as NSString).doubleValue), longitude: ((locationCoordinatesAsString[1] as NSString).doubleValue))
+                coordinateArray.append(locationCoordinates)
+                //                print("\(locationCoordinates.coordinate.latitude), \(locationCoordinates.coordinate.longitude)")
                 
+            } else {
+                var locationCoordinatesAsString = locationSubset.componentsSeparatedByString(" ")
+                let locationCoordinates = CLLocation.init(latitude: ((locationCoordinatesAsString[1] as NSString).doubleValue), longitude: ((locationCoordinatesAsString[0] as NSString).doubleValue))
+                coordinateArray.append(locationCoordinates)
             }
-            var placeCopy = place
-            placeCopy.updateValue(coordinateArray, forKey: "coordinates")
-            placesCopy.append(placeCopy)
         }
-//        let coordinateDictionary : [ String : Array<CLLocation>] = [coordinates.keys.first! : coordinateArray]
-        return placesCopy
+        //            parkCopy.append(arrayCopy)
+        //
+        //            arrayCopy.updateValue(coordinateArray, forKey: "coordinates")
+        //        }
+        //        print("parkCopy")
+       let parksCopy = coordinateArray
+        print("Done")
+        
+        return parksCopy
     }
-    
 }
 
 

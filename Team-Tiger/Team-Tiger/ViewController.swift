@@ -16,7 +16,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         let keys = Array(dataStore.parsedParksDictionary.keys)
         
         var gardens: [[String : AnyObject]] = []
@@ -27,16 +26,10 @@ class ViewController: UIViewController {
                 
                 gardens.append(dataStore.parsedParksDictionary[key]!)
                 
-                
             }
 //            print(gardens)
             
-            
         }
-        
-        let gardensCopy = LocationStuff().makeCoordinatesIntoArray(gardens)
-        print(gardens)
-        
         
         
         // Do any additional setup after loading the view, typically from a nib.

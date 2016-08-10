@@ -36,10 +36,10 @@ class DataStore {
         
         //possible that we may have to change this from let to var
         let firstUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
-       
+        
         saveContext()
         fetchData()
-
+        
     }
     
     
@@ -83,16 +83,25 @@ class DataStore {
                     
                     gardens.append(self.parsedParksDictionary[key]!)
                     
-                    
                 }
                 
                 
             }
             print("Gardens \(gardens)")
+            var gardensCopy = [[String : AnyObject]]()
+            for garden in gardens {
+                
+                var gardenCopy : [String : AnyObject] = garden
+                if let coordinatesAsString = garden["coordinates"] {
+                    gardenCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
+                    gardensCopy.append(gardenCopy)
+                    print(gardenCopy)
+                }
+            }
         }
         
     }
-
+    
     
     
     
