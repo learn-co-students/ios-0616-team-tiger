@@ -21,10 +21,10 @@ class ViewController: UIViewController {
         
 //        let apiClient = ParksApiClient()
 //        
-//        apiClient.populateParkByTypeBasedOnState("waterfront", type: "Yes") {
+//        apiClient.populateParkByTypeBasedOnState("type", type: "Garden") {
 //            
 //            print(apiClient.typeResults)
-        
+//        
 //        }
         
     
