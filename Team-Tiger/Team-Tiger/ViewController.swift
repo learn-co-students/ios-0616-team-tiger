@@ -17,24 +17,25 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
+        let keys = Array(dataStore.parsedParksDictionary.keys)
         
-//        let keys = Array(dataStore.parsedParksDictionary.keys)
-//        
-//        var gardens: [[String : String]] = []
-//        
-//        for key in keys {
-//            
-//            if dataStore.parsedParksDictionary[key]!["type"] == "garden" {
-//                
-//                gardens.append(dataStore.parsedParksDictionary[key]!)
-//                
-//                
-//            }
+        var gardens: [[String : AnyObject]] = []
+        
+        for key in keys {
+            
+            if dataStore.parsedParksDictionary[key]!["type"] == "garden" {
+                
+                gardens.append(dataStore.parsedParksDictionary[key]!)
+                
+                
+            }
 //            print(gardens)
-//            
-//        }
+            
+            
+        }
         
-        
+        let gardensCopy = LocationStuff().makeCoordinatesIntoArray(gardens)
+        print(gardens)
         
         
         
