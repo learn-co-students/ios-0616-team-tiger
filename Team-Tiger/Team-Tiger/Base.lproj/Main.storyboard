@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Onboarding View Controller-->
@@ -17,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dm3-kL-dKH">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dm3-kL-dKH">
+                                <rect key="frame" x="-10" y="0.0" width="600" height="600"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Greenway" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjn-ku-G81">
                                 <rect key="frame" x="202" y="79" width="197" height="63"/>
@@ -26,28 +27,40 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4g-UZ-4cD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4g-UZ-4cD">
                                 <rect key="frame" x="183" y="222" width="216" height="156"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gV-nA-CXo">
+                                <rect key="frame" x="236" y="448" width="129" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Let's Get Out!">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="X4g-UZ-4cD" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.7" id="AAm-cY-Ylx"/>
                             <constraint firstItem="dm3-kL-dKH" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="BmC-18-QTk"/>
                             <constraint firstItem="fjn-ku-G81" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="59" id="CRF-XQ-Wlw"/>
+                            <constraint firstItem="4gV-nA-CXo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DD4-L2-hPe"/>
                             <constraint firstItem="fjn-ku-G81" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DuI-gG-nYA"/>
                             <constraint firstItem="dm3-kL-dKH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OCt-Ir-1lG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4gV-nA-CXo" secondAttribute="bottom" constant="122" id="OKD-n1-njI"/>
                             <constraint firstItem="dm3-kL-dKH" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="QIi-wN-lRv"/>
-                            <constraint firstItem="X4g-UZ-4cD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VqH-az-JiP"/>
+                            <constraint firstItem="X4g-UZ-4cD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="nAL-Zf-aGe"/>
                             <constraint firstItem="dm3-kL-dKH" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="nTu-js-Fuo"/>
-                            <constraint firstItem="X4g-UZ-4cD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wSB-lq-ndq"/>
+                            <constraint firstItem="X4g-UZ-4cD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ysO-iR-9pA"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="backgroundImage" destination="dm3-kL-dKH" id="1I3-9c-9Kn"/>
                         <outlet property="introTextLabel" destination="X4g-UZ-4cD" id="LRD-Ci-v5e"/>
+                        <outlet property="startButton" destination="4gV-nA-CXo" id="OTd-eD-qLq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

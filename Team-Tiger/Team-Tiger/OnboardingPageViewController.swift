@@ -11,6 +11,7 @@ import UIKit
 class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
     let textArray = ["Greenway loves you!", "Really, I do!", "Don't you sometimes feel like our time together is all too short?"]
+    
     var imageArray: [UIImage] = []
     
     override func viewDidLoad() {
@@ -79,6 +80,18 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
             
             view.controllerIndex = index
             
+            if view.controllerIndex == 2 {
+                
+                view.buttonHidden = false
+                
+            }
+            
+//            } else {
+//                
+//                view.startButton.hidden = true
+//                
+//            }
+            
             return view
             
         }
@@ -94,9 +107,10 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         
         if let bench = benchPhoto, flower = flowerPhoto, plant = plantPhoto {
             
-            self.imageArray.append(bench)
+            
             self.imageArray.append(flower)
             self.imageArray.append(plant)
+            self.imageArray.append(bench)
             
         }
         
