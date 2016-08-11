@@ -23,7 +23,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
+            
         }
+        dataStore.currentLocation = locationManager.location!
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -36,17 +38,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
             var tableViewArray : NSArray = apiClient.typeResults
             tableViewArray = tableViewArray.sortedArrayUsingDescriptors([sortByDistance])
+            
+            tableViewArray = Array(tableViewArray)
             print("Maybe sorted \(tableViewArray)")
         }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locations.first != nil {
-            
-            dataStore.currentLocation = (locations.first)!
-            print("Current location \(dataStore.currentLocation)")
-            
-        }
+        
+        print(dataStore.currentLocation)
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
