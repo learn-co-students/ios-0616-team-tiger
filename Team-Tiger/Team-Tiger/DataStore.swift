@@ -10,11 +10,20 @@ import Foundation
 import CoreData
 import Alamofire
 import SwiftyJSON
+import CoreLocation
 
 class DataStore {
     
     var farmersMarketDictionary = [:]
 
+
+
+class DataStore {
+    
+    var masterParksDictionary = [String : [String : String]]()
+    var currentLocation = CLLocation()
+    
+    
     //static makes it a singleton
     static let store = DataStore()
     var user = [User]()
@@ -80,6 +89,77 @@ class DataStore {
     }
     
     
+    //Gets all park data at startup
+    
+    func getParks() {
+        
+        var locationDictionary = [:]
+        
+        
+        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
+            locationDictionary = response.result.value as! NSDictionary
+            
+            
+            let locationArrays = locationDictionary["data"] as! NSArray
+            
+            for location in locationArrays {
+                
+                var tempDictionary = [String : String]()
+                
+                tempDictionary["address"] = location[10] as? String
+                tempDictionary["name"] = location[17] as? String
+                tempDictionary["type"] = location[18] as? String
+                tempDictionary["waterfront"] = location[19] as? String
+                tempDictionary["zip"] = location[13] as? String
+                tempDictionary["coordinates"] = location[8] as? String
+                
+                self.masterParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
+                
+            }
+            
+        }
+        
+    }
+    
+    //Used to call parks data on demand that is passed to getParkByTypeOnDemand method
+    
+    func getParksOnDemand(completion:(parks: [String : [String : String]]) -> ()) -> () {
+        
+        var parsedParksDictionary = [String : [String : String]]()
+        
+        var locationDictionary = [:]
+        
+        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
+            locationDictionary = response.result.value as! NSDictionary
+            
+            
+            let locationArrays = locationDictionary["data"] as! NSArray
+            
+            for location in locationArrays {
+                
+                var tempDictionary = [String : String]()
+                
+                tempDictionary["address"] = location[10] as? String
+                tempDictionary["name"] = location[17] as? String
+                tempDictionary["type"] = location[18] as? String
+                tempDictionary["waterfront"] = location[19] as? String
+                tempDictionary["zip"] = location[13] as? String
+                tempDictionary["coordinates"] = location[8] as? String
+                
+                parsedParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
+                
+            }
+            
+            completion(parks: parsedParksDictionary)
+            
+        }
+        
+    }
+    
+    
+    
+    
+>>>>>>> master
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.kencooke.Team_Tiger" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)

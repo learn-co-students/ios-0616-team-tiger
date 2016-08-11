@@ -9,9 +9,5 @@ target 'Team-Tiger' do
   pod 'SwiftyJSON'
 
   pod 'SnapKit', '0.30.0.beta2'
-<<<<<<< HEAD
-=======
-  pod 'Alamofire', '~> 3.4'
->>>>>>> master
 
 end
