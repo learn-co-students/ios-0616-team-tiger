@@ -13,6 +13,11 @@
 		11024A751D551FB80001BAFC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11024A711D551FB80001BAFC /* User.swift */; };
 		11024A761D551FB80001BAFC /* Favorites+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11024A721D551FB80001BAFC /* Favorites+CoreDataProperties.swift */; };
 		11024A771D551FB80001BAFC /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11024A731D551FB80001BAFC /* Favorites.swift */; };
+
+		110E70F21D5D035C0063AE78 /* CommunityGardensTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110E70F11D5D035C0063AE78 /* CommunityGardensTableViewController.swift */; };
+		110E70F41D5D08D00063AE78 /* BotanicalGardensTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110E70F31D5D08D00063AE78 /* BotanicalGardensTableViewController.swift */; };
+		1145F1DD1D5CF7E400DEFA97 /* FarmersMarketTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F1DC1D5CF7E400DEFA97 /* FarmersMarketTableViewController.swift */; };
+
 		11DF7A0D1D5528BE004E410E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DF7A0C1D5528BE004E410E /* Secrets.swift */; };
 		4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF181D53D0290029FD30 /* AppDelegate.swift */; };
 		4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF1A1D53D0290029FD30 /* ViewController.swift */; };
@@ -29,6 +34,10 @@
 		11024A711D551FB80001BAFC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
 		11024A721D551FB80001BAFC /* Favorites+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Favorites+CoreDataProperties.swift"; path = "../Favorites+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		11024A731D551FB80001BAFC /* Favorites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Favorites.swift; path = ../Favorites.swift; sourceTree = "<group>"; };
+
+		110E70F11D5D035C0063AE78 /* CommunityGardensTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityGardensTableViewController.swift; sourceTree = "<group>"; };
+		110E70F31D5D08D00063AE78 /* BotanicalGardensTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotanicalGardensTableViewController.swift; sourceTree = "<group>"; };
+		1145F1DC1D5CF7E400DEFA97 /* FarmersMarketTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FarmersMarketTableViewController.swift; sourceTree = "<group>"; };
 		11DF7A0C1D5528BE004E410E /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		4F45BF151D53D0290029FD30 /* Team-Tiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team-Tiger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F45BF181D53D0290029FD30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +106,12 @@
 				4F45BF1A1D53D0290029FD30 /* ViewController.swift */,
 				11DF7A0C1D5528BE004E410E /* Secrets.swift */,
 				4F45BF1C1D53D0290029FD30 /* Main.storyboard */,
+
+				1145F1DC1D5CF7E400DEFA97 /* FarmersMarketTableViewController.swift */,
+				110E70F11D5D035C0063AE78 /* CommunityGardensTableViewController.swift */,
+				110E70F31D5D08D00063AE78 /* BotanicalGardensTableViewController.swift */,
+				11024A711D551FB80001BAFC /* User.swift */,
+				11024A731D551FB80001BAFC /* Favorites.swift */,
 				11024A701D551FB80001BAFC /* User+CoreDataProperties.swift */,
 				11024A711D551FB80001BAFC /* User.swift */,
 				11024A721D551FB80001BAFC /* Favorites+CoreDataProperties.swift */,
@@ -236,6 +251,8 @@
 				11DF7A0D1D5528BE004E410E /* Secrets.swift in Sources */,
 				4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */,
 				11024A741D551FB80001BAFC /* User+CoreDataProperties.swift in Sources */,
+				110E70F41D5D08D00063AE78 /* BotanicalGardensTableViewController.swift in Sources */,
+				110E70F21D5D035C0063AE78 /* CommunityGardensTableViewController.swift in Sources */,
 				4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */,
 				11024A4F1D551C490001BAFC /* DataStore.swift in Sources */,
 				4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */,
