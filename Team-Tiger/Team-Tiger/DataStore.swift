@@ -43,7 +43,7 @@ class DataStore {
     }
     
     
-    func getParks(completion: () -> ()) {
+    func getParks(completion: NSDictionary -> ()) {
         
         var locationDictionary = [:]
         
@@ -66,7 +66,8 @@ class DataStore {
                 //tempDictionary["coordinates"] = location[8] as? String
                 
                 self.parsedParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
-                
+                completion(self.parsedParksDictionary)
+
             }
             
             //print(self.parsedParksDictionary["TLC Sculpture Park Garden"]!["address"])
@@ -85,8 +86,6 @@ class DataStore {
             
             
         }
-        
-        completion()
     }
 
 

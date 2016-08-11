@@ -20,15 +20,28 @@ class resultsTableViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        dataStore.getParks { 
+    
+        dataStore.getParks { (dictionary) in
             
-            let arrayOfNames2 = Array(self.dataStore.parsedParksDictionary.keys)
-            self.arrayOfNames = arrayOfNames2
-            print(self.arrayOfNames)
-            self.tableView.reloadData()
-            print("data loaded")
+            NSOperationQueue.mainQueue().addOperationWithBlock({ 
+                let arrayOfNames2 = Array(dictionary.allKeys)
+                self.arrayOfNames = arrayOfNames2 as! [String]
+                print(self.arrayOfNames)
+                self.tableView.reloadData()
+                print("data loaded")
+
+            })
+            
         }
+        
+//        dataStore.getParks { 
+//            
+//            let arrayOfNames2 = Array(self.dataStore.parsedParksDictionary.keys)
+//            self.arrayOfNames = arrayOfNames2
+//            print(self.arrayOfNames)
+//            self.tableView.reloadData()
+//            print("data loaded")
+//        }
     
         
     }
