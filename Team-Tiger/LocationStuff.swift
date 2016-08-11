@@ -33,7 +33,6 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
             arrayCopy["Closest Coordinate"] = closestCoordinate
             arrayCopy["Distance"] = closestCoordinate.distanceFromLocation(location) * 0.00062137
 
-            print(closestCoordinate)
         }
         return arrayCopy
     }
