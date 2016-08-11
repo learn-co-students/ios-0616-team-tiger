@@ -9,11 +9,12 @@
 import Foundation
 import CoreData
 import Alamofire
+import CoreLocation
 
 class DataStore {
     
     var masterParksDictionary = [String : [String : String]]()
-    
+    var currentLocation = CLLocation()
     
     
     //static makes it a singleton
@@ -70,7 +71,7 @@ class DataStore {
                 self.masterParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
                 
             }
-    
+            
         }
         
     }

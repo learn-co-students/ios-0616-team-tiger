@@ -15,29 +15,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let dataStore = DataStore.store
 
     let locationManager = CLLocationManager()
-    var currentLocation = CLLocation()
+//    var currentLocation = CLLocation()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            locationManager.requestLocation()
-        }
-        
   // Example use of ParksApiClient
-//        
+//     
+        
+        
         let apiClient = ParksApiClient()
         
-        apiClient.populateParkByTypeBasedOnState("type", type: "Garden") {
+        apiClient.populateParkByTypeBasedOnState("type", type: "Mall") {
             
             // print(apiClient.typeResults)
         
         }
         let gardens = ParksApiClient().organizeParkCoordinates(apiClient.typeResults)
-        print(gardens)
+        print("Yay gardens! \(gardens)")
 //        var gardensCopy = [[String : AnyObject]]()
 //        
 //        for garden in gardens {
@@ -59,11 +54,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 //        }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.requestLocation()
+        }
+
+    }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
 //            print("Found user's location: \(location)")
             //            self.currentLocation = (locationManager.location?.coordinate)!
-            self.currentLocation = (locations.first)!
+            dataStore.currentLocation = (locations.first)!
 //            print(self.currentLocation)
             
         }
@@ -81,3 +86,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
 }
 
+class PendingOperations {
+    
+lazy var generateParksData = [NSIndexPath:NSOperation]()
+    lazy var parksQueue:NSOperationQueue = {
+        var queue = NSOperationQueue()
+        queue.name = "Generate Location Queue"
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+    
+    
+}

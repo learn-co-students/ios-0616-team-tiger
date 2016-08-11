@@ -9,18 +9,21 @@
 import Foundation
 import CoreLocation
 import MapKit
+import CoreData
 
 class LocationStuff: NSObject, CLLocationManagerDelegate {
     
+    let dataStore = DataStore.store
+
     // Move to viewDidLoad
     
     public func sortWithDistance(array: [String : AnyObject], location: CLLocation) -> (closest: CLLocation, distance: Double) {
-        var arrayCopy = array
-        print(ViewController().currentLocation)
+//        var arrayCopy = array
+//        print(dataStore.currentLocation)
         var closestCoordinate = CLLocation()
         if let coordinates = array["coordinate"] as? Array<CLLocation> {
             //        for dictionary in array {
-            closestCoordinate = (coordinates.first)!
+            closestCoordinate = coordinates[0]
             
             for coordinate in coordinates {
                 print("\(coordinate.coordinate) is this far away \(coordinate.distanceFromLocation(location))")
