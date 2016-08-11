@@ -91,7 +91,7 @@ class DataStore {
     
     //Gets all park data at startup
     
-    func getParks() {
+    func getParks(completion: () -> ()) {
         
         var locationDictionary = [:]
         
@@ -117,6 +117,9 @@ class DataStore {
                 
             }
             
+
+            completion()
+
         }
         
     }

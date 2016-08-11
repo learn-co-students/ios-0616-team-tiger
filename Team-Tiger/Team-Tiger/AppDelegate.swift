@@ -23,7 +23,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //Gathers initial park data
-        dataStore.getParks()
+        
+//        dataStore.getParks {
+//            print(self.dataStore.masterParksDictionary)
+//        }
+        
+        AirQualityAPIClient.getAirQualityIndex("10708")
         
         return true
     }

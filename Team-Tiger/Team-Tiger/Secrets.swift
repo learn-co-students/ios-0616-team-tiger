@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+class Secrets {
+    
+    static let airAPIKey: String = "9B289933-8314-48E2-8775-6ACD1C22E5D5"
+    
+}

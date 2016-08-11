@@ -53,6 +53,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 //            }
 //            
 //        }
+        
+    
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
