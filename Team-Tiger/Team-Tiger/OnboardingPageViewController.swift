@@ -37,6 +37,7 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         
     }
     
+    
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
         var index = (viewController as! onboardingViewController).controllerIndex
@@ -94,12 +95,6 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
                 view.buttonHidden = false
                 
             }
-            
-//            } else {
-//                
-//                view.startButton.hidden = true
-//                
-//            }
             
             return view
             

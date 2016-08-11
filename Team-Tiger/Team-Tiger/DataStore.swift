@@ -45,7 +45,7 @@ class DataStore {
     
     //Gets all park data at startup
     
-    func getParks() {
+    func getParks(completion: () -> ()) {
         
         var locationDictionary = [:]
         
@@ -70,7 +70,8 @@ class DataStore {
                 self.masterParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
                 
             }
-    
+            
+            completion()
         }
         
     }
