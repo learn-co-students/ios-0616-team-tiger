@@ -9,62 +9,43 @@
 import Foundation
 import CoreLocation
 import MapKit
+import CoreData
 
 class LocationStuff: NSObject, CLLocationManagerDelegate {
     
+    let dataStore = DataStore.store
+
     // Move to viewDidLoad
     
-    let locationManager = CLLocationManager()
-    var currentLocation = CLLocation()
-    //Working code
-    
-    func getLocation() {
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            locationManager.requestLocation()
-        }
-    }
-    
-    // locationManager.startUpdatingLocation()
-    
-    
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            print("Found user's location: \(location)")
-            //            self.currentLocation = (locationManager.location?.coordinate)!
-            self.currentLocation = (locations.first)!
-            self.locationManager.stopUpdatingLocation()
-            print(self.currentLocation)
+    public func sortWithDistance(array: [String : AnyObject], location: CLLocation) -> (closest: CLLocation, distance: Double) {
+//        var arrayCopy = array
+//        print(dataStore.currentLocation)
+        var closestCoordinate = CLLocation()
+        if let coordinates = array["coordinate"] as? Array<CLLocation> {
+            //        for dictionary in array {
+            closestCoordinate = coordinates[0]
             
-        }
-    }
-    
-    public func sortWithDistance(dictionary: [String : Array<CLLocation>], location: CLLocation) -> [String : CLLocation] {
-        let array = dictionary.values.first
-        var closestCoordinate = array![0]
-        
-        for coordinate in array! {
-            print("\(coordinate.coordinate) is this far away \(coordinate.distanceFromLocation(location))")
-            if coordinate.distanceFromLocation(location) < closestCoordinate.distanceFromLocation(location) {
-                closestCoordinate = coordinate
+            for coordinate in coordinates {
+                print("\(coordinate.coordinate) is this far away \(coordinate.distanceFromLocation(location))")
+                if coordinate.distanceFromLocation(location) < closestCoordinate.distanceFromLocation(location) {
+                    closestCoordinate = coordinate
+                }
             }
+            
+            //            var dictionaryCopy = dictionary
+            //            arrayCopy.append(dictionaryCopy)
+//            arrayCopy.updateValue(closestCoordinate, forKey: "Closest Coordinate")
+//            arrayCopy.updateValue(closestCoordinate.distanceFromLocation(location), forKey: "Distance from User's Location")
+//            print(closestCoordinate)
         }
-        let sortedArray = [dictionary.keys.first! : closestCoordinate]
-        return sortedArray
+        return (closest: closestCoordinate, distance: closestCoordinate.distanceFromLocation(location))
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Failed to find user's location: \(error.localizedDescription)")
-    }
-    
-    public func makeCoordinatesIntoArray(parks: String) -> Array<CLLocation> {
+    public func makeCoordinatesIntoArray(parks: AnyObject) -> Array<CLLocation> {
         
-        print("called")
-        
-        var coordinatesCopy = parks.stringByReplacingOccurrencesOfString("(", withString: "")
+//        print("called")
+        if parks.containsString("MULTIPOLYGON") {
+        var coordinatesCopy = String(parks.stringByReplacingOccurrencesOfString("(", withString: ""))
         coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString(")", withString: "")
         coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString("MULTIPOLYGON", withString: "")
         var locationArray = coordinatesCopy.componentsSeparatedByString(", ")
@@ -85,11 +66,14 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
         }
         
         let parksCopy = coordinateArray
-        print("Done")
+
         return parksCopy
-
+        }
+        else {
+            return parks as! Array<CLLocation>
+        }
     }
-
+    
     
 }
 

@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import MapKit
 
 class ParksApiClient {
     
-    var typeResults = [[String : String]]()
+    var typeResults = [[String : AnyObject]]()
     
     let dataStore = DataStore.store
     
@@ -24,13 +25,13 @@ class ParksApiClient {
         for key in keys {
             
             if dataStore.masterParksDictionary[key]![category] == type {
-                
+//                dataStore.masterParksDictionary[key]? = dataStore.masterParksDictionary[key].o
                 self.typeResults.append(dataStore.masterParksDictionary[key]!)
-                
+
             }
             
         }
-        
+        self.typeResults = self.organizeParkCoordinates(self.typeResults)
     }
     
     //To be used only when masterParkDictionary is empty. Otherwise, use getParkByType
@@ -47,28 +48,39 @@ class ParksApiClient {
                 if parks[key]![category] == type {
                     
                     self.typeResults.append(parks[key]!)
+                    // Changes the coordinates to coordinates
                     
                 }
                 
             }
-            
+            self.typeResults = self.organizeParkCoordinates(self.typeResults)
             completion()
         }
         
     }
     
-    func organizeParkCoordinates(parks : [[String : String]]) -> [[String : AnyObject]] {
+    func organizeParkCoordinates(parks : [[String : AnyObject]]) -> [[String : AnyObject]] {
         var parksCopy = [[String : AnyObject]]()
         
         for park in parks {
             var parkCopy : [String : AnyObject] = park
             
             if let coordinatesAsString = park["coordinates"] {
+                
                 parkCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
+                
+                // Buggy and breaking things
+//                let distanceStuff = LocationStuff().sortWithDistance(parkCopy, location: dataStore.currentLocation)
+//                parkCopy["Distance"] = distanceStuff.distance
+//                parkCopy["Closest Coordinate"] = distanceStuff.closest
                 parksCopy.append(parkCopy)
-                print(parkCopy)
-            }
+//
+//                print(parkCopy)
+            
         }
+        }
+//        return parksCopy
+//        parksCopy = LocationStuff().sortWithDistance(parksCopy[""], location: ViewController().currentLocation.coordinate)
         return parksCopy
     }
     
@@ -79,7 +91,7 @@ class ParksApiClient {
             
             getParkByType(category, type: type)
             
-            print(self.typeResults)
+            print("Results results results\(self.typeResults)")
             
             print("Data existed in masterParksDictionary")
             
@@ -87,7 +99,7 @@ class ParksApiClient {
             
             getParkByTypeOnDemand(category, type: type, completion: {
                 
-                print(self.typeResults)
+                print("Results on demand \(self.typeResults)")
                 
                 print("Data retrieved on demand")
                 

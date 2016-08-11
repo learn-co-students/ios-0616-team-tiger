@@ -13,20 +13,26 @@ import MapKit
 class ViewController: UIViewController, CLLocationManagerDelegate {
     
     let dataStore = DataStore.store
-    
+
+    let locationManager = CLLocationManager()
+//    var currentLocation = CLLocation()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
   // Example use of ParksApiClient
-//        
-//        let apiClient = ParksApiClient()
-//        
-//        apiClient.populateParkByTypeBasedOnState("type", type: "Garden") {
-//            
-//            print(apiClient.typeResults)
-//        
-//        }
-//        let dataStore.organizeParkCoordinates(<#T##parks: [[String : String]]##[[String : String]]#>)
+//     
+        
+        
+        let apiClient = ParksApiClient()
+        
+        apiClient.populateParkByTypeBasedOnState("type", type: "Mall") {
+            
+            // print(apiClient.typeResults)
+        
+        }
+        let gardens = ParksApiClient().organizeParkCoordinates(apiClient.typeResults)
+        print("Yay gardens! \(gardens)")
 //        var gardensCopy = [[String : AnyObject]]()
 //        
 //        for garden in gardens {
@@ -52,6 +58,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.requestLocation()
+        }
+
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+//            print("Found user's location: \(location)")
+            //            self.currentLocation = (locationManager.location?.coordinate)!
+            dataStore.currentLocation = (locations.first)!
+//            print(self.currentLocation)
+            
+        }
+    }
+    
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -60,3 +90,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
 }
 
+class PendingOperations {
+    
+lazy var generateParksData = [NSIndexPath:NSOperation]()
+    lazy var parksQueue:NSOperationQueue = {
+        var queue = NSOperationQueue()
+        queue.name = "Generate Location Queue"
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+    
+    
+}
