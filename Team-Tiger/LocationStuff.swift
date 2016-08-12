@@ -13,68 +13,55 @@ import CoreData
 
 class LocationStuff: NSObject, CLLocationManagerDelegate {
     
-    let dataStore = DataStore.store
-
-    // Move to viewDidLoad
-    
-    public func sortWithDistance(array: [String : AnyObject], location: CLLocation) -> (closest: CLLocation, distance: Double) {
-//        var arrayCopy = array
-//        print(dataStore.currentLocation)
+    public func sortWithDistance(array: [String : AnyObject], location: CLLocation) -> [String : AnyObject] {
+        var arrayCopy = array
         var closestCoordinate = CLLocation()
-        if let coordinates = array["coordinate"] as? Array<CLLocation> {
-            //        for dictionary in array {
-            closestCoordinate = coordinates[0]
+        let coordinates = array["coordinates"] as? Array<CLLocation>
+        closestCoordinate = coordinates![0]
+        
+        for coordinate in coordinates! {
+            if coordinate.distanceFromLocation(location) < closestCoordinate.distanceFromLocation(location) {
+                
+                closestCoordinate = coordinate
+            }
+            arrayCopy["Closest Coordinate"] = closestCoordinate
+            arrayCopy["Distance"] = closestCoordinate.distanceFromLocation(location) * 0.00062137
+        }
+        
+        return arrayCopy
+        
+    }
+    public func makeCoordinatesIntoArray(parks: AnyObject) -> Array<CLLocation> {
+        
+        if parks.containsString("MULTIPOLYGON") {
             
-            for coordinate in coordinates {
-                print("\(coordinate.coordinate) is this far away \(coordinate.distanceFromLocation(location))")
-                if coordinate.distanceFromLocation(location) < closestCoordinate.distanceFromLocation(location) {
-                    closestCoordinate = coordinate
+            let coordinatesCopy = String(parks.stringByReplacingOccurrencesOfString("(", withString: "")).stringByReplacingOccurrencesOfString(")", withString: "").stringByReplacingOccurrencesOfString("MULTIPOLYGON", withString: "")
+            var locationArray = coordinatesCopy.componentsSeparatedByString(", ")
+            var coordinateArray: [CLLocation] = []
+            
+            for locationSubset in locationArray {
+                if locationSubset == locationArray[0] {
+                    
+                    var locationCoordinatesAsString = locationSubset.componentsSeparatedByString(" ")
+                    let locationCoordinates = CLLocation.init(latitude: ((locationCoordinatesAsString[2] as NSString).doubleValue), longitude: ((locationCoordinatesAsString[1] as NSString).doubleValue))
+                    coordinateArray.append(locationCoordinates)
+                    
+                } else {
+                    
+                    var locationCoordinatesAsString = locationSubset.componentsSeparatedByString(" ")
+                    let locationCoordinates = CLLocation.init(latitude: ((locationCoordinatesAsString[1] as NSString).doubleValue), longitude: ((locationCoordinatesAsString[0] as NSString).doubleValue))
+                    coordinateArray.append(locationCoordinates)
+                    
                 }
             }
             
-            //            var dictionaryCopy = dictionary
-            //            arrayCopy.append(dictionaryCopy)
-//            arrayCopy.updateValue(closestCoordinate, forKey: "Closest Coordinate")
-//            arrayCopy.updateValue(closestCoordinate.distanceFromLocation(location), forKey: "Distance from User's Location")
-//            print(closestCoordinate)
-        }
-        return (closest: closestCoordinate, distance: closestCoordinate.distanceFromLocation(location))
-    }
-    
-    public func makeCoordinatesIntoArray(parks: AnyObject) -> Array<CLLocation> {
-        
-//        print("called")
-        if parks.containsString("MULTIPOLYGON") {
-        var coordinatesCopy = String(parks.stringByReplacingOccurrencesOfString("(", withString: ""))
-        coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString(")", withString: "")
-        coordinatesCopy = coordinatesCopy.stringByReplacingOccurrencesOfString("MULTIPOLYGON", withString: "")
-        var locationArray = coordinatesCopy.componentsSeparatedByString(", ")
-        var coordinateArray: [CLLocation] = []
-        
-        for locationSubset in locationArray {
-            if locationSubset == locationArray[0] {
-                var locationCoordinatesAsString = locationSubset.componentsSeparatedByString(" ")
-                let locationCoordinates = CLLocation.init(latitude: ((locationCoordinatesAsString[2] as NSString).doubleValue), longitude: ((locationCoordinatesAsString[1] as NSString).doubleValue))
-                coordinateArray.append(locationCoordinates)
-                
-            } else {
-                
-                var locationCoordinatesAsString = locationSubset.componentsSeparatedByString(" ")
-                let locationCoordinates = CLLocation.init(latitude: ((locationCoordinatesAsString[1] as NSString).doubleValue), longitude: ((locationCoordinatesAsString[0] as NSString).doubleValue))
-                coordinateArray.append(locationCoordinates)
-            }
-        }
-        
-        let parksCopy = coordinateArray
-
-        return parksCopy
-        }
-        else {
+            let parksCopy = coordinateArray
+            return parksCopy
+            
+        } else {
             return parks as! Array<CLLocation>
         }
     }
-    
-    
 }
 
 
