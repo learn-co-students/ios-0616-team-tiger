@@ -16,67 +16,35 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let dataStore = DataStore.store
 
     let locationManager = CLLocationManager()
-//    var currentLocation = CLLocation()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-  // Example use of ParksApiClient
-//     
-        
-        
-        let apiClient = ParksApiClient()
-        
-        apiClient.populateParkByTypeBasedOnState("type", type: "Mall") {
-            
-            // print(apiClient.typeResults)
-        
-        }
-        let gardens = ParksApiClient().organizeParkCoordinates(apiClient.typeResults)
-        print("Yay gardens! \(gardens)")
-//        var gardensCopy = [[String : AnyObject]]()
-//        
-//        for garden in gardens {
-//            
-//            
-//            
-//            var gardenCopy : [String : AnyObject] = garden
-//            
-//            if let coordinatesAsString = garden["coordinates"] {
-//                
-//                gardenCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
-//                
-//                gardensCopy.append(gardenCopy)
-//                
-//                print(gardenCopy)
-//                
-//            }
-//            
-//        }
-        
-    
-        
-        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
+            dataStore.currentLocation = locationManager.location!
         }
-
     }
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-//            print("Found user's location: \(location)")
-            //            self.currentLocation = (locationManager.location?.coordinate)!
-            dataStore.currentLocation = (locations.first)!
-//            print(self.currentLocation)
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        let apiClient = ParksApiClient()
+        
+        apiClient.populateParkByTypeBasedOnState("type", type: "Garden") {
+            //            print(apiClient.typeResults)
+            let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
+            var tableViewArray : NSArray = apiClient.typeResults
+            tableViewArray = tableViewArray.sortedArrayUsingDescriptors([sortByDistance])
+            print("Maybe sorted \(tableViewArray)")
             
         }
+        
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+               print("We know where you are")
     }
     
     
@@ -87,8 +55,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
+    } 
 }
 
 class PendingOperations {
