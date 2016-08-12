@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class ButtonsViewController: UIViewController {
     
@@ -50,7 +52,7 @@ class ButtonsViewController: UIViewController {
                     }
                 }
                 NSOperationQueue.mainQueue().addOperationWithBlock({
-                    self.tableView.reloadData()
+                   // self.tableView.reloadData()
                 })
             } else {
                 print("ERROR: Unable to retrieve farmer's markets")
