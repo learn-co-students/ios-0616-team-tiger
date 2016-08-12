@@ -39,6 +39,9 @@
                                 <state key="normal" title="Let's Get Out!">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="2Wt-41-IBz" kind="show" id="DKa-Di-YPe"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -66,6 +69,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="767" y="1154"/>
+        </scene>
+        <!--TableViewsStoryBoard-->
+        <scene sceneID="elh-QU-C5F">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TableViewsStoryBoard" id="2Wt-41-IBz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ikB-u2-Ec8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2047.5" y="1189"/>
         </scene>
         <!--Onboarding Page View Controller-->
         <scene sceneID="xwz-Bw-CUA">
