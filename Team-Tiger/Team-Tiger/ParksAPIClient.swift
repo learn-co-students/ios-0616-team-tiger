@@ -25,9 +25,9 @@ class ParksApiClient {
         for key in keys {
             
             if dataStore.masterParksDictionary[key]![category] == type {
-//                dataStore.masterParksDictionary[key]? = dataStore.masterParksDictionary[key].o
+                
                 self.typeResults.append(dataStore.masterParksDictionary[key]!)
-
+                
             }
             
         }
@@ -54,6 +54,8 @@ class ParksApiClient {
                 
             }
             self.typeResults = self.organizeParkCoordinates(self.typeResults)
+            
+            
             completion()
         }
         
@@ -68,41 +70,41 @@ class ParksApiClient {
             if let coordinatesAsString = park["coordinates"] {
                 
                 parkCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
-                
-                // Buggy and breaking things
-//                let distanceStuff = LocationStuff().sortWithDistance(parkCopy, location: dataStore.currentLocation)
-//                parkCopy["Distance"] = distanceStuff.distance
-//                parkCopy["Closest Coordinate"] = distanceStuff.closest
+                let testLocation = CLLocation(latitude: 40.75921100, longitude: -73.98463800)
+//                testLocation.coordinate = CLLocationCoordinate2D(latitude: 40.75921100, longitude: -73.98463800)
+                if ButtonsViewController().locationManager.location == nil {
+                    parkCopy = LocationStuff().sortWithDistance(parkCopy, location: testLocation)
+                    print("Used testLocation")
+                } else {
+                parkCopy = LocationStuff().sortWithDistance(parkCopy, location: ButtonsViewController().locationManager.location!)
+                print("Used locationManager  ")
+                }
                 parksCopy.append(parkCopy)
-//
-//                print(parkCopy)
-            
+            }
         }
-        }
-//        return parksCopy
-//        parksCopy = LocationStuff().sortWithDistance(parksCopy[""], location: ViewController().currentLocation.coordinate)
+        
         return parksCopy
     }
     
     //Combines the custom "get" functions and picks one based on the existence on data in the masterParksDictionary
     func populateParkByTypeBasedOnState(category: String, type: String, completion:() -> ()) {
         
-        if dataStore.masterParksDictionary.count != 0 {
+        if self.typeResults.count != 0 {
             
             getParkByType(category, type: type)
             
             print("Results results results\(self.typeResults)")
-            
-            print("Data existed in masterParksDictionary")
-            
+//
+//            print("Data existed in masterParksDictionary")
+            completion()
         } else {
             
             getParkByTypeOnDemand(category, type: type, completion: {
                 
-                print("Results on demand \(self.typeResults)")
+//                print("Results on demand \(self.typeResults)")
                 
                 print("Data retrieved on demand")
-                
+             completion()
             })
         }
     }

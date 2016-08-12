@@ -15,19 +15,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     let dataStore = DataStore.store
 
-    let locationManager = CLLocationManager()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            locationManager.requestLocation()
-            dataStore.currentLocation = locationManager.location!
-        }
-    }
+            }
     
     override func viewWillAppear(animated: Bool) {
         
@@ -43,14 +36,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         
     }
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-               print("We know where you are")
-    }
     
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Failed to find user's location: \(error.localizedDescription)")
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -58,15 +44,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     } 
 }
 
-class PendingOperations {
-    
-lazy var generateParksData = [NSIndexPath:NSOperation]()
-    lazy var parksQueue:NSOperationQueue = {
-        var queue = NSOperationQueue()
-        queue.name = "Generate Location Queue"
-        queue.maxConcurrentOperationCount = 1
-        return queue
-    }()
-    
-    
-}
+//class PendingOperations {
+//    
+//lazy var generateParksData = [NSIndexPath:NSOperation]()
+//    lazy var parksQueue:NSOperationQueue = {
+//        var queue = NSOperationQueue()
+//        queue.name = "Generate Location Queue"
+//        queue.maxConcurrentOperationCount = 1
+//        return queue
+//    }()
+//    
+//    

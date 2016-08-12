@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(self.dataStore.masterParksDictionary)
 //        }
         
-        AirQualityAPIClient.getAirQualityIndex("10708")
+        AirQualityAPIClient.getAirQualityIndex("10012")
         
         return true
     }
