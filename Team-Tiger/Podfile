@@ -6,8 +6,8 @@ target 'Team-Tiger' do
   use_frameworks!
 
   # Pods for Team-Tiger
-
-  pod 'SnapKit', '0.30.0.beta2'
   pod 'Alamofire', '~> 3.4'
+  pod 'SnapKit', '~> 0.15.0'
+  pod 'SwiftyJSON'
 
 end

@@ -7,47 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0EA2771297D2AE154EB89F81 /* Pods_Team_Tiger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B8FACEC46CF9107F6B21615 /* Pods_Team_Tiger.framework */; };
 		11024A4F1D551C490001BAFC /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11024A4E1D551C490001BAFC /* DataStore.swift */; };
 		11024A741D551FB80001BAFC /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11024A701D551FB80001BAFC /* User+CoreDataProperties.swift */; };
 		11024A751D551FB80001BAFC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11024A711D551FB80001BAFC /* User.swift */; };
 		11024A761D551FB80001BAFC /* Favorites+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11024A721D551FB80001BAFC /* Favorites+CoreDataProperties.swift */; };
 		11024A771D551FB80001BAFC /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11024A731D551FB80001BAFC /* Favorites.swift */; };
+		110E70F21D5D035C0063AE78 /* CommunityGardensTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110E70F11D5D035C0063AE78 /* CommunityGardensTableViewController.swift */; };
+		110E70F41D5D08D00063AE78 /* BotanicalGardensTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110E70F31D5D08D00063AE78 /* BotanicalGardensTableViewController.swift */; };
 		11DF7A0D1D5528BE004E410E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DF7A0C1D5528BE004E410E /* Secrets.swift */; };
 		174A95B11D5903F800841B2C /* LocationStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174A95B01D5903F800841B2C /* LocationStuff.swift */; };
 		4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF181D53D0290029FD30 /* AppDelegate.swift */; };
 		4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF1A1D53D0290029FD30 /* ViewController.swift */; };
-		4F45BF1E1D53D0290029FD30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F45BF1C1D53D0290029FD30 /* Main.storyboard */; };
 		4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF1F1D53D0290029FD30 /* Team_Tiger.xcdatamodeld */; };
 		4F45BF231D53D0290029FD30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F45BF221D53D0290029FD30 /* Assets.xcassets */; };
 		4F45BF261D53D0290029FD30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F45BF241D53D0290029FD30 /* LaunchScreen.storyboard */; };
-		4F5277751D5A49CC00B4EE49 /* ParksApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5277741D5A49CC00B4EE49 /* ParksApiClient.swift */; };
+		4F5277751D5A49CC00B4EE49 /* ParksAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5277741D5A49CC00B4EE49 /* ParksAPIClient.swift */; };
+		4F57E5DB1D5D27FA00A6B27B /* KC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F57E5D91D5D27FA00A6B27B /* KC.storyboard */; };
 		4F6B89B61D5A79AE0051BA1C /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6B89B51D5A79AE0051BA1C /* OnboardingPageViewController.swift */; };
-		4F6B89B81D5A7D090051BA1C /* onboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6B89B71D5A7D090051BA1C /* onboardingViewController.swift */; };
+		4F6B89B81D5A7D090051BA1C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6B89B71D5A7D090051BA1C /* OnboardingViewController.swift */; };
+		4F8C6DA31D5BBD3400291193 /* AirQualityAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C6DA21D5BBD3400291193 /* AirQualityAPIClient.swift */; };
+		DD7587198BFFEB1F0FE11928 /* Pods_Team_Tiger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6660E91AC978080390424C0 /* Pods_Team_Tiger.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0862F13632B66FB008714CB2 /* Pods-Team-Tiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Team-Tiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger.debug.xcconfig"; sourceTree = "<group>"; };
 		11024A4E1D551C490001BAFC /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		11024A701D551FB80001BAFC /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "../User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		11024A711D551FB80001BAFC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
 		11024A721D551FB80001BAFC /* Favorites+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Favorites+CoreDataProperties.swift"; path = "../Favorites+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		11024A731D551FB80001BAFC /* Favorites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Favorites.swift; path = ../Favorites.swift; sourceTree = "<group>"; };
+		110E70F11D5D035C0063AE78 /* CommunityGardensTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityGardensTableViewController.swift; sourceTree = "<group>"; };
+		110E70F31D5D08D00063AE78 /* BotanicalGardensTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotanicalGardensTableViewController.swift; sourceTree = "<group>"; };
+		1145F1DC1D5CF7E400DEFA97 /* FarmersMarketTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FarmersMarketTableViewController.swift; sourceTree = "<group>"; };
 		11DF7A0C1D5528BE004E410E /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		174A95B01D5903F800841B2C /* LocationStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStuff.swift; sourceTree = SOURCE_ROOT; };
 		4F45BF151D53D0290029FD30 /* Team-Tiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team-Tiger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F45BF181D53D0290029FD30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F45BF1A1D53D0290029FD30 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4F45BF1D1D53D0290029FD30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F45BF201D53D0290029FD30 /* Team_Tiger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Team_Tiger.xcdatamodel; sourceTree = "<group>"; };
 		4F45BF221D53D0290029FD30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F45BF251D53D0290029FD30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F45BF271D53D0290029FD30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4F5277741D5A49CC00B4EE49 /* ParksApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParksApiClient.swift; sourceTree = "<group>"; };
+		4F5277741D5A49CC00B4EE49 /* ParksAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParksAPIClient.swift; sourceTree = "<group>"; };
+		4F57E5DA1D5D27FA00A6B27B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/KC.storyboard; sourceTree = "<group>"; };
 		4F6B89B51D5A79AE0051BA1C /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
-		4F6B89B71D5A7D090051BA1C /* onboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onboardingViewController.swift; sourceTree = "<group>"; };
-		5A85A8E21CAABFDD5515690C /* Pods-Team-Tiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Team-Tiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger.release.xcconfig"; sourceTree = "<group>"; };
-		6B8FACEC46CF9107F6B21615 /* Pods_Team_Tiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Team_Tiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F6B89B71D5A7D090051BA1C /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		4F8C6DA21D5BBD3400291193 /* AirQualityAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirQualityAPIClient.swift; sourceTree = "<group>"; };
+		A6660E91AC978080390424C0 /* Pods_Team_Tiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Team_Tiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7B2832F296E0C175CC97110 /* Pods-Team-Tiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Team-Tiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger.release.xcconfig"; sourceTree = "<group>"; };
+		F15865EB5669683C33E0A35B /* Pods-Team-Tiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Team-Tiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,26 +62,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EA2771297D2AE154EB89F81 /* Pods_Team_Tiger.framework in Frameworks */,
+				DD7587198BFFEB1F0FE11928 /* Pods_Team_Tiger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2714E1864DA6B6FC51598232 /* Frameworks */ = {
+		063386E6F9ADA74CDD857BEF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6B8FACEC46CF9107F6B21615 /* Pods_Team_Tiger.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4A9BB34BF8A13FE03A856252 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0862F13632B66FB008714CB2 /* Pods-Team-Tiger.debug.xcconfig */,
-				5A85A8E21CAABFDD5515690C /* Pods-Team-Tiger.release.xcconfig */,
+				F15865EB5669683C33E0A35B /* Pods-Team-Tiger.debug.xcconfig */,
+				B7B2832F296E0C175CC97110 /* Pods-Team-Tiger.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -84,8 +83,8 @@
 			children = (
 				4F45BF171D53D0290029FD30 /* Team-Tiger */,
 				4F45BF161D53D0290029FD30 /* Products */,
-				4A9BB34BF8A13FE03A856252 /* Pods */,
-				2714E1864DA6B6FC51598232 /* Frameworks */,
+				063386E6F9ADA74CDD857BEF /* Pods */,
+				E9C411D10D7688EDCFABCCB9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,11 +103,15 @@
 				4F45BF181D53D0290029FD30 /* AppDelegate.swift */,
 				11024A4E1D551C490001BAFC /* DataStore.swift */,
 				4F45BF1A1D53D0290029FD30 /* ViewController.swift */,
-				4F5277741D5A49CC00B4EE49 /* ParksApiClient.swift */,
+				4F8C6DA21D5BBD3400291193 /* AirQualityAPIClient.swift */,
+				4F5277741D5A49CC00B4EE49 /* ParksAPIClient.swift */,
 				11DF7A0C1D5528BE004E410E /* Secrets.swift */,
 				4F6B89B51D5A79AE0051BA1C /* OnboardingPageViewController.swift */,
-				4F6B89B71D5A7D090051BA1C /* onboardingViewController.swift */,
-				4F45BF1C1D53D0290029FD30 /* Main.storyboard */,
+				4F57E5D91D5D27FA00A6B27B /* KC.storyboard */,
+				4F6B89B71D5A7D090051BA1C /* OnboardingViewController.swift */,
+				1145F1DC1D5CF7E400DEFA97 /* FarmersMarketTableViewController.swift */,
+				110E70F11D5D035C0063AE78 /* CommunityGardensTableViewController.swift */,
+				110E70F31D5D08D00063AE78 /* BotanicalGardensTableViewController.swift */,
 				11024A701D551FB80001BAFC /* User+CoreDataProperties.swift */,
 				11024A711D551FB80001BAFC /* User.swift */,
 				11024A721D551FB80001BAFC /* Favorites+CoreDataProperties.swift */,
@@ -121,6 +124,14 @@
 			path = "Team-Tiger";
 			sourceTree = "<group>";
 		};
+		E9C411D10D7688EDCFABCCB9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A6660E91AC978080390424C0 /* Pods_Team_Tiger.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -128,12 +139,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4F45BF2A1D53D0290029FD30 /* Build configuration list for PBXNativeTarget "Team-Tiger" */;
 			buildPhases = (
-				DA1374265D6A52B048A362D2 /* [CP] Check Pods Manifest.lock */,
+				798E94D04FC72C09A3C31544 /* [CP] Check Pods Manifest.lock */,
 				4F45BF111D53D0290029FD30 /* Sources */,
 				4F45BF121D53D0290029FD30 /* Frameworks */,
 				4F45BF131D53D0290029FD30 /* Resources */,
-				42882E42C26F0B75699A8DF3 /* [CP] Embed Pods Frameworks */,
-				CBD20D1A2CB931C30ACC6B04 /* [CP] Copy Pods Resources */,
+				B3E4519F39E960FA73ACE9C8 /* [CP] Embed Pods Frameworks */,
+				BB4D707AAC0853F2D7983F4D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -183,46 +194,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F57E5DB1D5D27FA00A6B27B /* KC.storyboard in Resources */,
 				4F45BF261D53D0290029FD30 /* LaunchScreen.storyboard in Resources */,
 				4F45BF231D53D0290029FD30 /* Assets.xcassets in Resources */,
-				4F45BF1E1D53D0290029FD30 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		42882E42C26F0B75699A8DF3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CBD20D1A2CB931C30ACC6B04 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DA1374265D6A52B048A362D2 /* [CP] Check Pods Manifest.lock */ = {
+		798E94D04FC72C09A3C31544 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -237,6 +218,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		B3E4519F39E960FA73ACE9C8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB4D707AAC0853F2D7983F4D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -248,11 +259,14 @@
 				11DF7A0D1D5528BE004E410E /* Secrets.swift in Sources */,
 				4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */,
 				11024A741D551FB80001BAFC /* User+CoreDataProperties.swift in Sources */,
+				4F8C6DA31D5BBD3400291193 /* AirQualityAPIClient.swift in Sources */,
+				110E70F41D5D08D00063AE78 /* BotanicalGardensTableViewController.swift in Sources */,
+				110E70F21D5D035C0063AE78 /* CommunityGardensTableViewController.swift in Sources */,
 				4F6B89B61D5A79AE0051BA1C /* OnboardingPageViewController.swift in Sources */,
-				4F6B89B81D5A7D090051BA1C /* onboardingViewController.swift in Sources */,
+				4F6B89B81D5A7D090051BA1C /* OnboardingViewController.swift in Sources */,
 				4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */,
 				174A95B11D5903F800841B2C /* LocationStuff.swift in Sources */,
-				4F5277751D5A49CC00B4EE49 /* ParksApiClient.swift in Sources */,
+				4F5277751D5A49CC00B4EE49 /* ParksAPIClient.swift in Sources */,
 				11024A4F1D551C490001BAFC /* DataStore.swift in Sources */,
 				4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */,
 				11024A751D551FB80001BAFC /* User.swift in Sources */,
@@ -263,20 +277,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4F45BF1C1D53D0290029FD30 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4F45BF1D1D53D0290029FD30 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4F45BF241D53D0290029FD30 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				4F45BF251D53D0290029FD30 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		4F57E5D91D5D27FA00A6B27B /* KC.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F57E5DA1D5D27FA00A6B27B /* Base */,
+			);
+			name = KC.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -367,11 +381,16 @@
 		};
 		4F45BF2B1D53D0290029FD30 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0862F13632B66FB008714CB2 /* Pods-Team-Tiger.debug.xcconfig */;
+			baseConfigurationReference = F15865EB5669683C33E0A35B /* Pods-Team-Tiger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"<Multiple",
+					"values>",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "Team-Tiger/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kencooke.Team-Tiger";
@@ -382,11 +401,16 @@
 		};
 		4F45BF2C1D53D0290029FD30 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A85A8E21CAABFDD5515690C /* Pods-Team-Tiger.release.xcconfig */;
+			baseConfigurationReference = B7B2832F296E0C175CC97110 /* Pods-Team-Tiger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"<Multiple",
+					"values>",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "Team-Tiger/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kencooke.Team-Tiger";
