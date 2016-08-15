@@ -183,17 +183,23 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                                 print("IN SEARCH OF ADDRESS")
                             }
                             
-                            let coordinates = CLLocation.init(latitude: (self.dictionaryWithInfo["latitude"] as? Double)!, longitude: (self.dictionaryWithInfo["longitude"] as? Double)!)
-                            print(coordinates)
+                            
+                            //
                             if let location = self.locationManager.location {
+                                let coordinates = CLLocation(latitude: (self.dictionaryWithInfo["latitude"] as! Double), longitude: (self.dictionaryWithInfo["longitude"] as! Double))
+                                 print(coordinates)
+                                let distance = coordinates.distanceFromLocation(location)
+                                //                                    * 0.00062137
                                 
-                                self.dictionaryWithInfo["Distance"] = (coordinates.distanceFromLocation(location) * 0.00062137) as? Double
-                                print("Distance: \(self.dictionaryWithInfo["Distance"])")
+                                self.dictionaryWithInfo.updateValue(distance, forKey: "Distance")
+                                //                                self.dictionaryWithInfo["Distance"] = distance as? Double
+                                //                                print("Distance: \(self.dictionaryWithInfo["Distance"])")
                             }
                             self.farmersMarketArray.append(self.dictionaryWithInfo)
                         }
                     }
                 }
+                print("Count: \(self.farmersMarketArray.count)")
                 self.farmersMarketArray = self.sortMarkets(self.farmersMarketArray)
                 print(self.farmersMarketArray)
                 completionHandler(true)
@@ -280,6 +286,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             print("Yay for location")
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
+            locationManager.startUpdatingLocation()
             //            completion()
         } else {
             print("No go on location")
