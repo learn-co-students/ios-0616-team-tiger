@@ -15,7 +15,7 @@ class CommunityGardensTableViewController: UITableViewController {
     var greenThumbdictionary = [:]
     var arrayOfGardens: [String] = []
     var greenThumbArray: [[String:String]] = []
-    
+    var arrayOfGardenAddresses: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,10 @@ class CommunityGardensTableViewController: UITableViewController {
                 for gardenDictionary in self.greenThumbArray {
                     if let gardenName = gardenDictionary["Garden"] {
                         self.arrayOfGardens.append(gardenName)
+                    }
+                    
+                    if let gardenAddress = gardenDictionary["Address"] {
+                        self.arrayOfGardenAddresses.append(gardenAddress)
                     }
                 }
                 NSOperationQueue.mainQueue().addOperationWithBlock({

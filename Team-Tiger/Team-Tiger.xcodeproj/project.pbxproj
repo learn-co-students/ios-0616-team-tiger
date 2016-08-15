@@ -29,6 +29,8 @@
 		4F6B89B61D5A79AE0051BA1C /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6B89B51D5A79AE0051BA1C /* OnboardingPageViewController.swift */; };
 		4F6B89B81D5A7D090051BA1C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6B89B71D5A7D090051BA1C /* OnboardingViewController.swift */; };
 		4F8C6DA31D5BBD3400291193 /* AirQualityAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C6DA21D5BBD3400291193 /* AirQualityAPIClient.swift */; };
+		8F0257D91D6155DB002F9D5B /* detailVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F0257D81D6155DB002F9D5B /* detailVC.storyboard */; };
+		8F0257DB1D61562A002F9D5B /* detailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0257DA1D61562A002F9D5B /* detailViewController.swift */; };
 		DD7587198BFFEB1F0FE11928 /* Pods_Team_Tiger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6660E91AC978080390424C0 /* Pods_Team_Tiger.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +60,8 @@
 		4F6B89B51D5A79AE0051BA1C /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		4F6B89B71D5A7D090051BA1C /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		4F8C6DA21D5BBD3400291193 /* AirQualityAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirQualityAPIClient.swift; sourceTree = "<group>"; };
+		8F0257D81D6155DB002F9D5B /* detailVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = detailVC.storyboard; sourceTree = "<group>"; };
+		8F0257DA1D61562A002F9D5B /* detailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailViewController.swift; sourceTree = "<group>"; };
 		A6660E91AC978080390424C0 /* Pods_Team_Tiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Team_Tiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B2832F296E0C175CC97110 /* Pods-Team-Tiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Team-Tiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger.release.xcconfig"; sourceTree = "<group>"; };
 		F15865EB5669683C33E0A35B /* Pods-Team-Tiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Team-Tiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Team-Tiger/Pods-Team-Tiger.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,7 +79,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-
 		063386E6F9ADA74CDD857BEF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +120,8 @@
 				4F6B89B51D5A79AE0051BA1C /* OnboardingPageViewController.swift */,
 				4F57E5D91D5D27FA00A6B27B /* KC.storyboard */,
 				4F57E5DC1D5E0AB800A6B27B /* TableViewsStoryBoard.storyboard */,
+				8F0257D81D6155DB002F9D5B /* detailVC.storyboard */,
+				8F0257DA1D61562A002F9D5B /* detailViewController.swift */,
 				4F6B89B71D5A7D090051BA1C /* OnboardingViewController.swift */,
 				1145F1DC1D5CF7E400DEFA97 /* FarmersMarketTableViewController.swift */,
 				4F57E5E01D5E0FCA00A6B27B /* SearchResultsTableViewController.swift */,
@@ -204,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F0257D91D6155DB002F9D5B /* detailVC.storyboard in Resources */,
 				4F57E5DB1D5D27FA00A6B27B /* KC.storyboard in Resources */,
 				4F57E5DD1D5E0AB800A6B27B /* TableViewsStoryBoard.storyboard in Resources */,
 				4F45BF261D53D0290029FD30 /* LaunchScreen.storyboard in Resources */,
@@ -267,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11024A771D551FB80001BAFC /* Favorites.swift in Sources */,
+				8F0257DB1D61562A002F9D5B /* detailViewController.swift in Sources */,
 				11DF7A0D1D5528BE004E410E /* Secrets.swift in Sources */,
 				4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */,
 				11024A741D551FB80001BAFC /* User+CoreDataProperties.swift in Sources */,

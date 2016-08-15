@@ -21,8 +21,10 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     var arrayOfParks: [String] = []
     let locationManager = CLLocationManager()
     
-    let dataStore = DataStore()
+    var passingDictionary: [[String : AnyObject]] = []
     
+    let dataStore = DataStore()
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +69,8 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 
             }
             
+            self.passingDictionary = apiClient.typeResults
+                
             print("Names \(self.arrayOfParks)")
             
         
@@ -171,10 +175,13 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         if segue.identifier == "showParks" {
         
         destinationVC.arrayOfNames = self.arrayOfParks
+        
+        destinationVC.newDictionary = self.passingDictionary
             
         } else {
             
             destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
+            
             
         }
         
