@@ -47,8 +47,6 @@ class DataStore {
     }
     
     func farmersMarketParse() {
-        
-        
         Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/j8gx-kc43/rows.json?") .responseJSON { response in
             self.farmersMarketDictionary = response.result.value as! NSDictionary
             
@@ -90,12 +88,8 @@ class DataStore {
     func getParks(completion: () -> ()) {
         
         var locationDictionary = [:]
-        
-        
         Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
             locationDictionary = response.result.value as! NSDictionary
-            
-            
             let locationArrays = locationDictionary["data"] as! NSArray
             
             for location in locationArrays {
@@ -113,7 +107,6 @@ class DataStore {
                 
             }
             
-
             completion()
 
         }
