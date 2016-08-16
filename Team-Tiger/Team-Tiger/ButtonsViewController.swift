@@ -76,7 +76,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     func getParks() {
         print("Get parks")
         
-        dataStore.populateParkByTypeBasedOnState("type", type: "Garden") {
+        dataStore.populateParkByTypeBasedOnState("type", type: "Park") {
             
             //print("PRINTING ARRAY FROM BUTTON VC\(self.dataStore.parkTypeArray)")
             

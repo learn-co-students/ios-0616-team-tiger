@@ -251,7 +251,7 @@ class DataStore {
             
             for key in keys {
                 
-                if parks[key]![category] == type {
+                if parks[key]![category]?.containsString(type) == true{
                     
                     self.parkTypeArray.append(parks[key]!)
                     // Changes the coordinates to coordinates

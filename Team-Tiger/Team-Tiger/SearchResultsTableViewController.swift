@@ -22,7 +22,7 @@ class SearchResultsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("PARKS IN ARRAY \(dataStore.parkTypeArray)")
+//        print("PARKS IN ARRAY \(dataStore.parkTypeArray)")
       
         
         
@@ -56,15 +56,27 @@ class SearchResultsTableViewController: UITableViewController {
         
         cell.textLabel?.textColor = UIColor.whiteColor()
         
+        let currentLocation = dataStore.parkTypeArray[indexPath.row]
+        
+        let waterfrontValue = currentLocation["waterfront"] as! String
+        
+        print(waterfrontValue)
+        
+        if waterfrontValue == "Yes" {
+            
+            cell.imageView?.image = UIImage.init(named: "tinyWaterfront")
+            
+        } 
+        
         if indexPath.row % 2 == 0 {
             
             cell.backgroundColor = UIColor.init(red: 161.0/255, green: 212.0/255, blue: 144.0/255, alpha: 100.0)
             
-            cell.imageView?.image = UIImage.init(named: "tinyShop")
+            //cell.imageView?.image = UIImage.init(named: "tinyShop")
             
         } else {
             
-            cell.imageView?.image = UIImage.init(named: "tinySpa")
+//            cell.imageView?.image = UIImage.init(named: "tinySpa")
             
             cell.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
             
