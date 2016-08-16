@@ -14,7 +14,8 @@ import CoreLocation
 
 class DataStore {
     
-    var farmersMarketDictionary = [:]
+    var farmersMarketDictionaryArray = []
+    var farmersMarketArray : [[String:AnyObject]] = []
     var parkTypeArray: [[String:AnyObject]] = []
 
     var masterParksDictionary = [String : [String : String]]()
@@ -57,43 +58,120 @@ class DataStore {
         
     }
     
-    func farmersMarketParse() {
-        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/j8gx-kc43/rows.json?") .responseJSON { response in
-            self.farmersMarketDictionary = response.result.value as! NSDictionary
+    func sortArrayByDistance(array : [[String : AnyObject]]) -> [[String : AnyObject]] {
+        var arrayCopy : [[String:AnyObject]] = []
+        let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
+        var tableViewArray : NSArray = array
+        tableViewArray = tableViewArray.sortedArrayUsingDescriptors([sortByDistance])
+        
+        arrayCopy = tableViewArray as! [[String: AnyObject]]
+        return arrayCopy
+    }
+    
+    
+//    func farmersMarketParse() {
+//        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/j8gx-kc43/rows.json?") .responseJSON { response in
+//            self.farmersMarketDictionary = response.result.value as! NSDictionary
+//            
+//            if let jsonData = response.data {
+//                let jsonObj = JSON(data: jsonData)
+//                
+//                let arrayOfData = jsonObj["data"].array
+//                
+//                var dictionaryWithInfo = [String:String]()
+//                
+//                if let arrayOfData = arrayOfData {
+//                    
+//                    for detail in arrayOfData {
+//                        
+//                        dictionaryWithInfo["name"] = detail[8].string
+//                        dictionaryWithInfo["zip"] = detail[13].string
+//                        dictionaryWithInfo["longitude"] = detail[15].string
+//                        dictionaryWithInfo["latitude"] = detail[14].string
+//                        
+//                        if let addressInDictionary = detail[10].string {
+//                            
+//                            dictionaryWithInfo["address"] = addressInDictionary
+//                            print(dictionaryWithInfo)
+//                            
+//                        } else {
+//                            print("IN SEARCH OF ADDRESS")
+//                        }
+//                    }
+//                    print(dictionaryWithInfo)
+//                }
+//                
+//            }
+//        }
+//    }
+    
+    func farmersMarketParse(completionHandler: (Bool) -> ()) {
+        Alamofire.request(.GET, "https://data.ny.gov/resource/farmersmarkets.json?") .responseJSON { response in
+            
+            if let response = response.result.value {
+                self.farmersMarketDictionaryArray = response as! NSArray
+                print("parsing")
+                
+            } else {
+                print("received no response result from farmer's market")
+            }
             
             if let jsonData = response.data {
+                
                 let jsonObj = JSON(data: jsonData)
-                
-                let arrayOfData = jsonObj["data"].array
-                
-                var dictionaryWithInfo = [String:String]()
-                
+                let arrayOfData = jsonObj.array
                 if let arrayOfData = arrayOfData {
-                    
+                    var dictionaryWithInfo : [String:AnyObject] = [:]
                     for detail in arrayOfData {
                         
-                        dictionaryWithInfo["name"] = detail[8].string
-                        dictionaryWithInfo["zip"] = detail[13].string
-                        dictionaryWithInfo["longitude"] = detail[15].string
-                        dictionaryWithInfo["latitude"] = detail[14].string
+                        dictionaryWithInfo.removeAll()
                         
-                        if let addressInDictionary = detail[10].string {
+                        if detail["county"] == "Kings" || detail["county"] == "Queens" || detail["county"] == "New York" || detail["county"] == "Bronx" || detail["county"] == "Richmond" {
+                            dictionaryWithInfo["name"] = detail["market_name"].string
+                            dictionaryWithInfo["zip"] = detail["zip"].string
+                            dictionaryWithInfo["hours"] = detail["operation_hours"].string
+                            dictionaryWithInfo["season"] = detail["operation_season"].string
                             
-                            dictionaryWithInfo["address"] = addressInDictionary
-                            print(dictionaryWithInfo)
+                            if let latitude = detail["location_points"]["latitude"].string {
+                                dictionaryWithInfo["latitude"] = Double(latitude)
+                            }
                             
-                        } else {
-                            print("IN SEARCH OF ADDRESS")
+                            if let longitude = detail["location_points"]["longitude"].string {
+                                dictionaryWithInfo["longitude"] = Double(longitude)
+                            }
+                            
+                            if let addressInDictionary = detail["address_line_1"].string {
+                                dictionaryWithInfo["address"] = addressInDictionary
+                            } else {
+                                
+                                print("IN SEARCH OF ADDRESS")
+                            }
+                            
+                            let location = self.currentLocation
+                            let coordinates = CLLocation(latitude: (dictionaryWithInfo["latitude"] as! Double), longitude: (dictionaryWithInfo["longitude"] as! Double))
+                            
+//                            print(coordinates)
+                            
+                            let distance = (coordinates.distanceFromLocation(location) * 0.00062137)
+                            dictionaryWithInfo.updateValue(distance, forKey: "Distance")
+                            
+                            self.farmersMarketArray.append(dictionaryWithInfo)
                         }
                     }
-                    print(dictionaryWithInfo)
                 }
+                print(self.currentLocation)
+                print("Count: \(self.farmersMarketArray.count)")
+                print("Array: \(self.farmersMarketArray)")
+//                 self.farmersMarketArray = self.sortArrayByDistance(self.farmersMarketArray)
+                
+//                print( self.farmersMarketArray)
+                
+                completionHandler(true)
                 
             }
         }
     }
-    
-    
+
     //Gets all park data at startup
     
     func getParks(completion: () -> ()) {
@@ -152,10 +230,8 @@ class DataStore {
                 parsedParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
                 
             }
-            
             completion(parks: parsedParksDictionary)
-            
-        }
+         }
         
     }
     
@@ -266,7 +342,7 @@ class DataStore {
         }
         
     }
-    
+    // Makes Coordinates Readable.
     func organizeParkCoordinates(parks : [[String : AnyObject]]) -> [[String : AnyObject]] {
         var parksCopy = [[String : AnyObject]]()
         
