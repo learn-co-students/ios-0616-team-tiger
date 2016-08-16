@@ -148,6 +148,7 @@ class DataStore {
                                 print("IN SEARCH OF ADDRESS")
                             }
                             
+                            dictionaryWithInfo["coordinates"] = CLLocation(latitude: (dictionaryWithInfo["latitude"] as? Double)!, longitude: (dictionaryWithInfo["longitude"] as? Double)!)
                                                     
                             self.farmersMarketArray.append(dictionaryWithInfo)
                         }
