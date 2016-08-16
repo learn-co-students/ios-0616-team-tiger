@@ -24,12 +24,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewWillAppear(animated: Bool) {
         
-        let apiClient = ParksApiClient()
         
-        apiClient.populateParkByTypeBasedOnState("type", type: "Garden") {
+        dataStore.populateParkByTypeBasedOnState("type", type: "Garden") {
             //            print(apiClient.typeResults)
             let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
-            var tableViewArray : NSArray = apiClient.typeResults
+            var tableViewArray : NSArray = self.dataStore.parkTypeArray
             tableViewArray = tableViewArray.sortedArrayUsingDescriptors([sortByDistance])
             print("Maybe sorted \(tableViewArray)")
             

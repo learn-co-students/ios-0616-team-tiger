@@ -14,10 +14,28 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     let dataStore = DataStore()
     
+    @IBOutlet weak var blurEffect: UIVisualEffectView!
+    
     var queue = NSOperationQueue()
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+//        
+//        self.blurEffect.layer.cornerRadius = 50
+//        
+//        self.blurEffect.clipsToBounds = true
+        
+        let blur = UIVisualEffectView(effect: UIBlurEffect(style:
+            UIBlurEffectStyle.Light))
+        blur.frame = CGRectMake(200, 200, 100, 100)
+        
+        blur.layer.cornerRadius = 10
+        
+        blur.layer.masksToBounds = true
+        
+        self.view.addSubview(blur)
+        
         queue.addOperationWithBlock {
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.getLocation()
@@ -32,7 +50,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
-                //                self.getParks()
+                                self.getParks()
                 print("All the parks")
             }
             
@@ -68,26 +86,26 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     // Parks
     func getParks() {
         print("Get parks")
-        let apiClient = ParksApiClient()
-        apiClient.populateParkByTypeBasedOnState("type", type: "Garden") {
+        
+        dataStore.populateParkByTypeBasedOnState("type", type: "Garden") {
             
-            print(apiClient.typeResults)
+            print(self.dataStore.parkTypeArray)
             
             let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
             
-            var tableViewArray : NSArray = apiClient.typeResults
+            var tableViewArray : NSArray = self.dataStore.parkTypeArray
             
             tableViewArray = tableViewArray.sortedArrayUsingDescriptors([sortByDistance])
             
-            apiClient.typeResults = tableViewArray as! [[String: AnyObject]]
-            for park in apiClient.typeResults {
+            self.dataStore.parkTypeArray = tableViewArray as! [[String: AnyObject]]
+            for park in self.dataStore.parkTypeArray {
                 
                 //                if self.isLessThan5MilesAway(park) {
                 
                 self.arrayOfParks.append(park["name"] as! String)
                 
             }
-            
+        
         }
         
     }
@@ -132,9 +150,17 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     func fmParse(completionHandler: (Bool) -> ()) {
         Alamofire.request(.GET, "https://data.ny.gov/resource/farmersmarkets.json?") .responseJSON { response in
             
-            self.FMdictionary = response.result.value as! NSArray
+            if let response = response.result.value {
+            
+            self.FMdictionary = response as! NSArray
             
             print("parsing")
+                
+            } else {
+                
+                print("received no response result from farmer's market")
+                
+            }
             
             if let jsonData = response.data {
                 

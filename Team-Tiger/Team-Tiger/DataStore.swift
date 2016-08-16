@@ -15,17 +15,28 @@ import CoreLocation
 class DataStore {
     
     var farmersMarketDictionary = [:]
+    var parkTypeArray: [[String:AnyObject]] = []
 
     var masterParksDictionary = [String : [String : String]]()
     var currentLocation = CLLocation()
     
     
+    
     //static makes it a singleton
     static let store = DataStore()
+    
     var user = [User]()
+    
+//    
+//    func getJohannData(completion:()->()){
+//        ParksApiClient.getJohann { (userArray) in
+//            self.dataStoreUserArray = userArray
+//        }
+//    }
     
     
     func fetchData() {
+   
         
         let userFetchRequest = NSFetchRequest(entityName: "User")
         
@@ -210,6 +221,100 @@ class DataStore {
         }
         
     }
+    
+    func getParkByType(category: String, type: String) {
+        
+        self.parkTypeArray.removeAll()
+        
+        let keys = Array(self.masterParksDictionary.keys)
+        
+        for key in keys {
+            
+            if self.masterParksDictionary[key]![category] == type {
+                
+                self.parkTypeArray.append(self.masterParksDictionary[key]!)
+                
+            }
+            
+        }
+        self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
+    }
+    
+    //To be used only when masterParkDictionary is empty. Otherwise, use getParkByType
+    func getParkByTypeOnDemand(category: String, type: String, completion:() -> ()) {
+        
+        self.getParksOnDemand { (parks) in
+            
+            self.parkTypeArray.removeAll()
+            
+            let keys = Array(parks.keys)
+            
+            for key in keys {
+                
+                if parks[key]![category] == type {
+                    
+                    self.parkTypeArray.append(parks[key]!)
+                    // Changes the coordinates to coordinates
+                    
+                }
+                
+            }
+            self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
+            
+            
+            completion()
+        }
+        
+    }
+    
+    func organizeParkCoordinates(parks : [[String : AnyObject]]) -> [[String : AnyObject]] {
+        var parksCopy = [[String : AnyObject]]()
+        
+        for park in parks {
+            var parkCopy : [String : AnyObject] = park
+            
+            if let coordinatesAsString = park["coordinates"] {
+                
+                parkCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
+                let testLocation = CLLocation(latitude: 40.75921100, longitude: -73.98463800)
+                //                testLocation.coordinate = CLLocationCoordinate2D(latitude: 40.75921100, longitude: -73.98463800)
+                if ButtonsViewController().locationManager.location == nil {
+                    parkCopy = LocationStuff().sortWithDistance(parkCopy, location: testLocation)
+                    print("Used testLocation")
+                } else {
+                    parkCopy = LocationStuff().sortWithDistance(parkCopy, location: ButtonsViewController().locationManager.location!)
+                    print("Used locationManager  ")
+                }
+                parksCopy.append(parkCopy)
+            }
+        }
+        
+        return parksCopy
+    }
+    
+    //Combines the custom "get" functions and picks one based on the existence on data in the masterParksDictionary
+    func populateParkByTypeBasedOnState(category: String, type: String, completion:() -> ()) {
+        
+        if self.masterParksDictionary.count != 0 {
+            
+            getParkByType(category, type: type)
+            
+            print("Results results results\(self.parkTypeArray)")
+            //
+            //            print("Data existed in masterParksDictionary")
+            completion()
+        } else {
+            
+            getParkByTypeOnDemand(category, type: type, completion: {
+                
+                //                print("Results on demand \(self.typeResults)")
+                
+                print("Data retrieved on demand")
+                completion()
+            })
+        }
+    }
+
     
 }
 

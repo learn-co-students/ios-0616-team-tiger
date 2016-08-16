@@ -22,7 +22,9 @@ class AirQualityAPIClient {
         
         Alamofire.request(.GET, "https://airnowapi.org/aq/forecast/zipCode/", parameters: parametersDictionary, encoding: .URL).responseJSON { (response) in
             
-            let forecast = response.result.value as! NSArray
+            
+            
+            if let forecast = response.result.value as! NSArray? {
             
             print(forecast)
             
@@ -44,6 +46,12 @@ class AirQualityAPIClient {
                         
                     }
                     
+                } else {
+                    
+                    print("Sorry, we cannot currently access Air Quality data")
+                    
+                }
+                
                 }
             }
             

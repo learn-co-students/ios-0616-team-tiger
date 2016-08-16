@@ -16,9 +16,13 @@ class SearchResultsTableViewController: UITableViewController {
     
     var tappedCell: Int = 0
     var newDictionary: [[String : AnyObject]] = []
+    
+    var store = DataStore.store
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+      
         
         
         self.tableView.reloadData()
