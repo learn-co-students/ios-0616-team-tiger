@@ -53,6 +53,20 @@ class SearchResultsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("basicCell", forIndexPath: indexPath)
         
+        cell.textLabel?.textColor = UIColor.whiteColor()
+        
+        if indexPath.row % 2 == 0 {
+            
+            cell.backgroundColor = UIColor.init(red: 161.0/255, green: 212.0/255, blue: 144.0/255, alpha: 100.0)
+            
+        } else {
+            
+            
+            cell.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
+            
+        }
+        
+        
         cell.textLabel?.text = arrayOfNames[indexPath.row]
     
         print(valueToPass)

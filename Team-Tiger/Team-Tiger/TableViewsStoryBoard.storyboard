@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -75,7 +74,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Where to?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2v-eb-YnC">
                                 <rect key="frame" x="227" y="110" width="79" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="50"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="60"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -113,7 +112,7 @@
                             <constraint firstItem="xVf-jb-4dI" firstAttribute="top" secondItem="0cX-oy-4KP" secondAttribute="bottom" constant="82" id="omL-CQ-Oh2"/>
                             <constraint firstItem="N4U-pA-ZTY" firstAttribute="centerY" secondItem="FI1-ec-Ddt" secondAttribute="centerY" id="qRO-Ca-Qoa"/>
                             <constraint firstItem="0cX-oy-4KP" firstAttribute="top" secondItem="bNR-9s-0vN" secondAttribute="top" constant="20" id="qgL-dh-Rps"/>
-                            <constraint firstItem="s2v-eb-YnC" firstAttribute="top" secondItem="1Ju-K8-cqY" secondAttribute="bottom" constant="40" id="qzn-9L-CRF"/>
+                            <constraint firstItem="s2v-eb-YnC" firstAttribute="top" secondItem="1Ju-K8-cqY" secondAttribute="bottom" constant="20" id="qzn-9L-CRF"/>
                             <constraint firstItem="NBU-xA-4oJ" firstAttribute="trailing" secondItem="bNR-9s-0vN" secondAttribute="trailing" constant="-30" id="r7g-Yg-XSD"/>
                             <constraint firstItem="0cX-oy-4KP" firstAttribute="leading" secondItem="bNR-9s-0vN" secondAttribute="leading" constant="30" id="sZN-Ba-w5D"/>
                             <constraint firstItem="xVf-jb-4dI" firstAttribute="leading" secondItem="bNR-9s-0vN" secondAttribute="leading" constant="30" id="sdm-m2-Ike"/>
@@ -175,16 +174,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fbG-yc-gaY" id="sKS-5b-T3m">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="flower" translatesAutoresizingMaskIntoConstraints="NO" id="3DI-pd-hkS">
-                                            <rect key="frame" x="531" y="0.0" width="46" height="43"/>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="3DI-pd-hkS" firstAttribute="height" secondItem="sKS-5b-T3m" secondAttribute="height" id="Joq-5l-DUo"/>
-                                        <constraint firstItem="3DI-pd-hkS" firstAttribute="centerY" secondItem="sKS-5b-T3m" secondAttribute="centerY" id="alV-is-yjD"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="3DI-pd-hkS" secondAttribute="trailing" constant="15" id="r4V-DY-HMC"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="KVL-F0-2XH" kind="show" identifier="showDetail" id="9hm-02-MY1"/>
@@ -250,7 +239,6 @@
     </scenes>
     <resources>
         <image name="blurredPlant" width="3000" height="4542"/>
-        <image name="flower" width="144" height="144"/>
         <image name="participate" width="48" height="48"/>
         <image name="rest" width="48" height="48"/>
         <image name="shop" width="48" height="48"/>
