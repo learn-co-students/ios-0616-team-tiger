@@ -8,14 +8,18 @@
 
 import UIKit
 
+
 class SearchResultsTableViewController: UITableViewController {
     
     var arrayOfNames: [String] = []
+    var valueToPass : [String: AnyObject] = [:]
+    
+    var tappedCell: Int = 0
+    var newDictionary: [[String : AnyObject]] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print(arrayOfNames)
         
         self.tableView.reloadData()
         
@@ -32,8 +36,8 @@ class SearchResultsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-    
+   
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
@@ -45,10 +49,23 @@ class SearchResultsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("basicCell", forIndexPath: indexPath)
         
         cell.textLabel?.text = arrayOfNames[indexPath.row]
-        
+    
+        print(valueToPass)
+    
         return cell
     }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+       
+        if segue.identifier == "showDetail" {
+             let newVC = segue.destinationViewController as! detailViewController
+            self.tappedCell = (tableView.indexPathForSelectedRow?.row)!
+           
+            
+            valueToPass = newDictionary[tappedCell]
+            newVC.dictionaryOfData = valueToPass
 
- 
-
+            
+        }
+        
+    }
 }
