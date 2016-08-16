@@ -42,8 +42,13 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 print("Location located")
             }
             NSOperationQueue.mainQueue().addOperationWithBlock {
+//                self.dataStore.currentLocation = self.locationManager.location!
+                //                print("Count: \(self.outdoorWifiSpots.count)")
+                
+            }
+            NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.getFarmersMarkets()
-               
+                
                 print("Farmers markets")
             }
             
@@ -86,9 +91,9 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
         var tableViewArray : NSArray = array
         tableViewArray = tableViewArray.sortedArrayUsingDescriptors([sortByDistance])
-//        print("Table view array: \(tableViewArray)")
+        //        print("Table view array: \(tableViewArray)")
         arrayCopy = tableViewArray as! [[String: AnyObject]]
-//        print("ArrayCopy: \(arrayCopy)")
+        //        print("ArrayCopy: \(arrayCopy)")
         return arrayCopy
     }
     
@@ -98,7 +103,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         
         dataStore.populateParkByTypeBasedOnState("type", type: "Garden") {
             
-//            print(self.dataStore.parkTypeArray)
+            //            print(self.dataStore.parkTypeArray)
             self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
             for park in self.dataStore.parkTypeArray {
                 
@@ -115,7 +120,22 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         
         dataStore.farmersMarketParse { completion in
             if completion {
-                self.dataStore.farmersMarketArray = self.sortArrayByDistance(self.dataStore.farmersMarketArray)
+                var farmersArrayCopy : [[String : AnyObject]] = []
+                for market in self.dataStore.farmersMarketArray {
+                    if let location = self.locationManager.location {
+                        let coordinates = CLLocation(latitude: (market["latitude"] as! Double), longitude: (market["longitude"] as! Double))
+                        
+                        //                            print(coordinates)
+                        
+                        let distance = (coordinates.distanceFromLocation(location) * 0.00062137)
+                        var marketCopy = market
+                        marketCopy.updateValue(distance, forKey: "Distance")
+                        farmersArrayCopy.append(marketCopy)
+                    }
+                    self.dataStore.farmersMarketArray = self.sortArrayByDistance(farmersArrayCopy)
+                    
+                }
+                //                self.dataStore.farmersMarketArray = self.sortArrayByDistance(self.dataStore.farmersMarketArray)
                 for marketDictionary in self.dataStore.farmersMarketArray {
                     
                     //                    if self.isLessThan5MilesAway(marketDictionary) {
@@ -128,7 +148,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 print("ERROR: Unable to retrieve farmer's markets")
                 
             }
-//            print("FarmersMarketsArray : \(self.dataStore.farmersMarketArray)")
+            //            print("FarmersMarketsArray : \(self.dataStore.farmersMarketArray)")
         }
         print("FarmersMarketsArray : \(self.dataStore.farmersMarketArray)")
     }
@@ -189,13 +209,13 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                             if location["lat"] != nil {
                                 tempDictionary["lat"] = location["lat"].string
                             }
-//                            print(tempDictionary)
+                            //                            print(tempDictionary)
                             self.outdoorWifiSpots.append(tempDictionary)
                         }
                     }
                 }
             }
-//            print(self.outdoorWifiSpots)
+            //            print(self.outdoorWifiSpots)
         }
     }
     @IBAction func shopTapped(sender: AnyObject) {
@@ -242,16 +262,14 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        print("We know where you are")
-        
         if locations.count > 0 {
             
-//            dataStore.currentLocation = (locations.first)!
+            dataStore.currentLocation = (locations.first)!
             
             locationManager.stopUpdatingLocation()
             
             //            print("You are here : \(dataStore.currentLocation)")
-            
+            print("We know where you are")
         }
         
     }

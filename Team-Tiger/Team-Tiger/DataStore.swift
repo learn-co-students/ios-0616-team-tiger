@@ -147,14 +147,7 @@ class DataStore {
                                 print("IN SEARCH OF ADDRESS")
                             }
                             
-                            let location = self.currentLocation
-                            let coordinates = CLLocation(latitude: (dictionaryWithInfo["latitude"] as! Double), longitude: (dictionaryWithInfo["longitude"] as! Double))
-                            
-//                            print(coordinates)
-                            
-                            let distance = (coordinates.distanceFromLocation(location) * 0.00062137)
-                            dictionaryWithInfo.updateValue(distance, forKey: "Distance")
-                            
+                                                    
                             self.farmersMarketArray.append(dictionaryWithInfo)
                         }
                     }
@@ -179,7 +172,7 @@ class DataStore {
         var locationDictionary = [:]
         Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
             locationDictionary = response.result.value as! NSDictionary
-            let locationArrays = locationDictionary["data"] as! NSArray
+            let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
             
             for location in locationArrays {
                 
@@ -192,7 +185,7 @@ class DataStore {
                 tempDictionary["zip"] = location[13] as? String
                 tempDictionary["coordinates"] = location[8] as? String
                 
-                self.masterParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
+                self.masterParksDictionary[(location[17] as? String)!] = tempDictionary as? Dictionary
                 
             }
             
@@ -214,7 +207,7 @@ class DataStore {
             locationDictionary = response.result.value as! NSDictionary
             
             
-            let locationArrays = locationDictionary["data"] as! NSArray
+            let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
             
             for location in locationArrays {
                 
