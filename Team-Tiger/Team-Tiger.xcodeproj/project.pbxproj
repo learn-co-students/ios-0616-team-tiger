@@ -26,6 +26,7 @@
 		4F57E5DD1D5E0AB800A6B27B /* TableViewsStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F57E5DC1D5E0AB800A6B27B /* TableViewsStoryBoard.storyboard */; };
 		4F57E5DF1D5E0B7500A6B27B /* ButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E5DE1D5E0B7500A6B27B /* ButtonsViewController.swift */; };
 		4F57E5E11D5E0FCA00A6B27B /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E5E01D5E0FCA00A6B27B /* SearchResultsTableViewController.swift */; };
+		4F57E5E31D5E759000A6B27B /* DetailViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57E5E21D5E759000A6B27B /* DetailViewViewController.swift */; };
 		4F6B89B61D5A79AE0051BA1C /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6B89B51D5A79AE0051BA1C /* OnboardingPageViewController.swift */; };
 		4F6B89B81D5A7D090051BA1C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6B89B71D5A7D090051BA1C /* OnboardingViewController.swift */; };
 		4F8C6DA31D5BBD3400291193 /* AirQualityAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C6DA21D5BBD3400291193 /* AirQualityAPIClient.swift */; };
@@ -55,6 +56,7 @@
 		4F57E5DC1D5E0AB800A6B27B /* TableViewsStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TableViewsStoryBoard.storyboard; sourceTree = "<group>"; };
 		4F57E5DE1D5E0B7500A6B27B /* ButtonsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsViewController.swift; sourceTree = "<group>"; };
 		4F57E5E01D5E0FCA00A6B27B /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
+		4F57E5E21D5E759000A6B27B /* DetailViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewViewController.swift; sourceTree = "<group>"; };
 		4F6B89B51D5A79AE0051BA1C /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		4F6B89B71D5A7D090051BA1C /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		4F8C6DA21D5BBD3400291193 /* AirQualityAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirQualityAPIClient.swift; sourceTree = "<group>"; };
@@ -75,7 +77,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-
 		063386E6F9ADA74CDD857BEF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +111,7 @@
 				4F45BF181D53D0290029FD30 /* AppDelegate.swift */,
 				11024A4E1D551C490001BAFC /* DataStore.swift */,
 				4F45BF1A1D53D0290029FD30 /* ViewController.swift */,
+				4F57E5E21D5E759000A6B27B /* DetailViewViewController.swift */,
 				4F57E5DE1D5E0B7500A6B27B /* ButtonsViewController.swift */,
 				4F8C6DA21D5BBD3400291193 /* AirQualityAPIClient.swift */,
 				4F5277741D5A49CC00B4EE49 /* ParksAPIClient.swift */,
@@ -273,6 +275,7 @@
 				4F8C6DA31D5BBD3400291193 /* AirQualityAPIClient.swift in Sources */,
 				110E70F41D5D08D00063AE78 /* BotanicalGardensTableViewController.swift in Sources */,
 				110E70F21D5D035C0063AE78 /* CommunityGardensTableViewController.swift in Sources */,
+				4F57E5E31D5E759000A6B27B /* DetailViewViewController.swift in Sources */,
 				4F6B89B61D5A79AE0051BA1C /* OnboardingPageViewController.swift in Sources */,
 				4F57E5DF1D5E0B7500A6B27B /* ButtonsViewController.swift in Sources */,
 				4F6B89B81D5A7D090051BA1C /* OnboardingViewController.swift in Sources */,
