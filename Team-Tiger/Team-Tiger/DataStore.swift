@@ -154,9 +154,9 @@ class DataStore {
                         }
                     }
                 }
-                print(self.currentLocation)
-                print("Count: \(self.farmersMarketArray.count)")
-                print("Array: \(self.farmersMarketArray)")
+//                print(self.currentLocation)
+//                print("Count: \(self.farmersMarketArray.count)")
+//                print("Array: \(self.farmersMarketArray)")
 //                 self.farmersMarketArray = self.sortArrayByDistance(self.farmersMarketArray)
                 
 //                print( self.farmersMarketArray)
@@ -370,7 +370,7 @@ class DataStore {
             
             getParkByType(category, type: type)
             
-            print("Results results results\(self.parkTypeArray)")
+//            print("Results results results\(self.parkTypeArray)")
             //
             //            print("Data existed in masterParksDictionary")
             completion()

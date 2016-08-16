@@ -88,7 +88,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     
     func sortArrayByDistance(array : [[String : AnyObject]]) -> [[String : AnyObject]] {
         let sortedByDistance = array.sort { ($0["Distance"] as! Double) < ($1["Distance"] as! Double) }
-        print("Sortedsortedsorted \(sortedByDistance)")
+//        print("Sortedsortedsorted \(sortedByDistance)")
         return sortedByDistance
     }
     
@@ -107,35 +107,50 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     
     // Tweaked to get hours and season of operation
     func getFarmersMarkets() {
-        var farmersArrayCopy : [[String : AnyObject]] = []
+        
         dataStore.farmersMarketParse { completion in
             if completion {
+
                 
-                for market in self.dataStore.farmersMarketArray {
-                    if let location = self.locationManager.location {
-                        let coordinates = CLLocation(latitude: (market["latitude"] as! Double), longitude: (market["longitude"] as! Double))
-                        let distance = (coordinates.distanceFromLocation(location) * 0.00062137)
-                        var marketCopy = market
-                        marketCopy.updateValue(distance, forKey: "Distance")
-                        farmersArrayCopy.append(marketCopy)
+//                self.farmersMarketThings({ // comment out to run on simulator
+                    for marketDictionary in self.dataStore.farmersMarketArray {
+                        
+                        if let marketName = marketDictionary["name"] {
+                            self.arrayOfFarmersMarkets.append(marketName as! String)
+                            print(marketName)
+                        }
                     }
-                }
-                
-                self.dataStore.farmersMarketArray = self.sortArrayByDistance(farmersArrayCopy)
-                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
-                for marketDictionary in self.dataStore.farmersMarketArray {
                     
-                    if let marketName = marketDictionary["name"] {
-                        self.arrayOfFarmersMarkets.append(marketName as! String)
-                    }
-                }
-            } else {
+                    print("FarmersMarketsArray1 : \(self.dataStore.farmersMarketArray)")
+                    print("farmersmarketnames: \(self.arrayOfFarmersMarkets)")
+//                }) comment out to run on simulator
+                            } else {
                 print("ERROR: Unable to retrieve farmer's markets")
             }
-            print("FarmersMarketsArray1 : \(self.dataStore.farmersMarketArray)")
+            
         }
-        print("FarmersMarketsArray2 : \(self.dataStore.farmersMarketArray)")
+//        print("FarmersMarketsArray2 : \(self.dataStore.farmersMarketArray)")
     }
+    
+    func farmersMarketThings(completion : () -> ()) {
+        var farmersArrayCopy : [[String : AnyObject]] = []
+//        print(self.dataStore.farmersMarketArray)
+        for market in self.dataStore.farmersMarketArray {
+            if let location = self.locationManager.location {
+                
+                let distance = ((market["coordinates"] as! CLLocation).distanceFromLocation(location) * 0.00062137)
+                var marketCopy = market
+                marketCopy.updateValue(distance, forKey: "Distance")
+                farmersArrayCopy.append(marketCopy)
+                print(marketCopy)
+            }
+        }
+        
+        self.dataStore.farmersMarketArray = self.sortArrayByDistance(farmersArrayCopy)
+        self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
+        completion()
+    }
+    
     
     // Wifi
     
@@ -197,8 +212,10 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         let destinationVC = segue.destinationViewController as! SearchResultsTableViewController
         if segue.identifier == "showParks" {
             destinationVC.arrayOfNames = self.arrayOfParks
-        } else {
+        } else if segue.identifier == "showShops" {
             destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
+        } else {
+            destinationVC.arrayOfNames = self.arrayOfParks
         }
     }
     //Location Things
@@ -226,6 +243,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             print("We know where you are")
         }
     }
+    
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         
         print("Failed to find user's location: \(error.localizedDescription)")
@@ -265,7 +283,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 if let placemark = placemarks?.first {
                     
                     self.dataStore.currentLocation = placemark.location!
-                    print(self.dataStore.currentLocation)
+//                    print(self.dataStore.currentLocation)
                     
                 }
             })
