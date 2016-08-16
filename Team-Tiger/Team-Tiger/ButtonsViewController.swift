@@ -14,27 +14,38 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     let dataStore = DataStore()
     
-    @IBOutlet weak var blurEffect: UIVisualEffectView!
-    
+    @IBOutlet weak var blurEffect: UIView!
     var queue = NSOperationQueue()
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        self.blurEffect.layer.cornerRadius = 10
+        
+        self.blurEffect.clipsToBounds = true
+        
+//        let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style:
+//            UIBlurEffectStyle.Light))
 //        
-//        self.blurEffect.layer.cornerRadius = 50
+//        blurEffectView.frame = CGRectMake(100, 100, 100, 100)
 //        
-//        self.blurEffect.clipsToBounds = true
+//        blurEffectView.layer.cornerRadius = 10
+//        
+//        blurEffectView.layer.masksToBounds = true
+//        
+//        self.view.addSubview(blurEffectView)
+//        
+//        blurEffectView.widthAnchor.constraintEqualToAnchor(self.view.widthAnchor, multiplier: 0.8).active = true
+////
+//        blurEffectView.centerXAnchor.constraintEqualToAnchor(self.view.centerXAnchor).active = true
+//
+//        blurEffectView.topAnchor.constraintEqualToAnchor(self.view.topAnchor, constant: 40).active = true
+//        
+//        blurEffectView.bottomAnchor.constraintEqualToAnchor(self.view.bottomAnchor, constant: 20).active = true
         
-        let blur = UIVisualEffectView(effect: UIBlurEffect(style:
-            UIBlurEffectStyle.Light))
-        blur.frame = CGRectMake(200, 200, 100, 100)
         
-        blur.layer.cornerRadius = 10
         
-        blur.layer.masksToBounds = true
         
-        self.view.addSubview(blur)
         
         queue.addOperationWithBlock {
             NSOperationQueue.mainQueue().addOperationWithBlock {

@@ -19,38 +19,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="blurredPlant" translatesAutoresizingMaskIntoConstraints="NO" id="N4U-pA-ZTY">
-                                <rect key="frame" x="457" y="119" width="240" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blurredPlant" translatesAutoresizingMaskIntoConstraints="NO" id="N4U-pA-ZTY">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kp9-gd-4rE">
-                                <rect key="frame" x="180" y="277" width="240" height="128"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="KCB-yg-8GS">
-                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Fk-Iv-01V">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNR-9s-0vN">
+                                <rect key="frame" x="60" y="184" width="480" height="347"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fb1-lU-zfF">
+                                        <rect key="frame" x="8" y="8" width="240" height="128"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="JYY-En-0XW">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="cfh-Qd-8fV">
-                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </view>
-                                            <vibrancyEffect>
-                                                <blurEffect style="light"/>
-                                            </vibrancyEffect>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="keyPath">
-                                                    <integer key="value" value="50"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </visualEffectView>
-                                    </subviews>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVf-jb-4dI">
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                        <blurEffect style="light"/>
+                                    </visualEffectView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Fb1-lU-zfF" firstAttribute="centerY" secondItem="bNR-9s-0vN" secondAttribute="centerY" id="H6D-sa-ip3"/>
+                                    <constraint firstItem="Fb1-lU-zfF" firstAttribute="centerX" secondItem="bNR-9s-0vN" secondAttribute="centerX" id="Ixd-u1-Dnv"/>
+                                    <constraint firstItem="Fb1-lU-zfF" firstAttribute="width" secondItem="bNR-9s-0vN" secondAttribute="width" id="Ka3-Z0-wR9"/>
+                                    <constraint firstItem="Fb1-lU-zfF" firstAttribute="height" secondItem="bNR-9s-0vN" secondAttribute="height" id="gZP-hn-qEs"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVf-jb-4dI">
                                 <rect key="frame" x="241" y="326" width="77" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="35"/>
                                 <state key="normal" title="Shop">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -59,9 +53,9 @@
                                     <segue destination="eMw-Ei-Duf" kind="show" identifier="showShops" id="MO3-kh-2p6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHc-0k-6gc">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHc-0k-6gc">
                                 <rect key="frame" x="215" y="439" width="122" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="35"/>
                                 <state key="normal" title="Participate">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -69,9 +63,9 @@
                                     <segue destination="eMw-Ei-Duf" kind="show" identifier="ShowGardens" id="gN2-fu-PLP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cX-oy-4KP">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cX-oy-4KP">
                                 <rect key="frame" x="255" y="214" width="61" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="35"/>
                                 <state key="normal" title="Rest">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -79,28 +73,68 @@
                                     <segue destination="eMw-Ei-Duf" kind="show" identifier="showParks" id="fxQ-vn-wRe"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Where to?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2v-eb-YnC">
+                                <rect key="frame" x="227" y="110" width="79" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="50"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="participate" translatesAutoresizingMaskIntoConstraints="NO" id="yGJ-Ji-JFK">
+                                <rect key="frame" x="536" y="429" width="52" height="50"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="rest" translatesAutoresizingMaskIntoConstraints="NO" id="NBU-xA-4oJ">
+                                <rect key="frame" x="536" y="204" width="52" height="50"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="shop" translatesAutoresizingMaskIntoConstraints="NO" id="qEc-NM-vFZ">
+                                <rect key="frame" x="536" y="316" width="52" height="50"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="kp9-gd-4rE" firstAttribute="width" secondItem="FI1-ec-Ddt" secondAttribute="width" multiplier="0.8" id="1QL-NB-Uv5"/>
                             <constraint firstItem="N4U-pA-ZTY" firstAttribute="width" secondItem="FI1-ec-Ddt" secondAttribute="width" id="36o-9V-Yac"/>
-                            <constraint firstItem="kp9-gd-4rE" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="DLY-OU-G7K"/>
+                            <constraint firstItem="qEc-NM-vFZ" firstAttribute="trailing" secondItem="bNR-9s-0vN" secondAttribute="trailing" constant="-30" id="3B5-x0-noN"/>
+                            <constraint firstItem="bNR-9s-0vN" firstAttribute="top" secondItem="1Ju-K8-cqY" secondAttribute="bottom" constant="120" id="3a2-Kd-EOX"/>
+                            <constraint firstItem="POc-HI-ZEe" firstAttribute="top" secondItem="bNR-9s-0vN" secondAttribute="bottom" constant="20" id="3ls-pl-b8p"/>
+                            <constraint firstItem="qEc-NM-vFZ" firstAttribute="centerY" secondItem="xVf-jb-4dI" secondAttribute="centerY" id="AKj-2D-rqT"/>
                             <constraint firstItem="xVf-jb-4dI" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="Dyy-ha-aN6"/>
                             <constraint firstItem="MHc-0k-6gc" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="DzJ-zy-EJE"/>
+                            <constraint firstItem="qEc-NM-vFZ" firstAttribute="leading" secondItem="xVf-jb-4dI" secondAttribute="trailing" constant="218" id="F16-zl-fNP"/>
+                            <constraint firstItem="yGJ-Ji-JFK" firstAttribute="centerY" secondItem="MHc-0k-6gc" secondAttribute="centerY" id="FYc-3m-Hc7"/>
                             <constraint firstItem="MHc-0k-6gc" firstAttribute="top" secondItem="xVf-jb-4dI" secondAttribute="bottom" constant="83" id="G7h-P1-Tfw"/>
-                            <constraint firstItem="POc-HI-ZEe" firstAttribute="top" secondItem="kp9-gd-4rE" secondAttribute="bottom" constant="20" id="JLH-cm-mJr"/>
-                            <constraint firstItem="kp9-gd-4rE" firstAttribute="top" secondItem="1Ju-K8-cqY" secondAttribute="bottom" constant="20" id="Mxf-zn-aCx"/>
+                            <constraint firstItem="bNR-9s-0vN" firstAttribute="width" secondItem="FI1-ec-Ddt" secondAttribute="width" multiplier="0.8" id="GAZ-5S-qgN"/>
+                            <constraint firstItem="yGJ-Ji-JFK" firstAttribute="leading" secondItem="MHc-0k-6gc" secondAttribute="trailing" constant="199" id="I8s-9i-5GI"/>
+                            <constraint firstItem="MHc-0k-6gc" firstAttribute="leading" secondItem="bNR-9s-0vN" secondAttribute="leading" constant="30" id="NTe-9Y-6BP"/>
                             <constraint firstItem="N4U-pA-ZTY" firstAttribute="height" secondItem="FI1-ec-Ddt" secondAttribute="height" id="O33-oc-YgS"/>
+                            <constraint firstItem="bNR-9s-0vN" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="TlE-8J-hWJ"/>
+                            <constraint firstItem="yGJ-Ji-JFK" firstAttribute="trailing" secondItem="bNR-9s-0vN" secondAttribute="trailing" constant="-30" id="gmE-Cl-jFb"/>
+                            <constraint firstItem="s2v-eb-YnC" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="jLs-XD-ZNc"/>
                             <constraint firstItem="N4U-pA-ZTY" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="kMn-ct-XkY"/>
                             <constraint firstItem="0cX-oy-4KP" firstAttribute="top" secondItem="1Ju-K8-cqY" secondAttribute="bottom" constant="150" id="lCk-dK-GBX"/>
                             <constraint firstItem="xVf-jb-4dI" firstAttribute="top" secondItem="0cX-oy-4KP" secondAttribute="bottom" constant="82" id="omL-CQ-Oh2"/>
                             <constraint firstItem="N4U-pA-ZTY" firstAttribute="centerY" secondItem="FI1-ec-Ddt" secondAttribute="centerY" id="qRO-Ca-Qoa"/>
+                            <constraint firstItem="0cX-oy-4KP" firstAttribute="top" secondItem="bNR-9s-0vN" secondAttribute="top" constant="20" id="qgL-dh-Rps"/>
+                            <constraint firstItem="s2v-eb-YnC" firstAttribute="top" secondItem="1Ju-K8-cqY" secondAttribute="bottom" constant="40" id="qzn-9L-CRF"/>
+                            <constraint firstItem="NBU-xA-4oJ" firstAttribute="trailing" secondItem="bNR-9s-0vN" secondAttribute="trailing" constant="-30" id="r7g-Yg-XSD"/>
+                            <constraint firstItem="0cX-oy-4KP" firstAttribute="leading" secondItem="bNR-9s-0vN" secondAttribute="leading" constant="30" id="sZN-Ba-w5D"/>
+                            <constraint firstItem="xVf-jb-4dI" firstAttribute="leading" secondItem="bNR-9s-0vN" secondAttribute="leading" constant="30" id="sdm-m2-Ike"/>
+                            <constraint firstItem="xVf-jb-4dI" firstAttribute="centerY" secondItem="bNR-9s-0vN" secondAttribute="centerY" id="upC-t3-Vzb"/>
+                            <constraint firstItem="NBU-xA-4oJ" firstAttribute="centerY" secondItem="0cX-oy-4KP" secondAttribute="centerY" id="x1j-up-pah"/>
                             <constraint firstItem="0cX-oy-4KP" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="yOK-qt-foq"/>
+                            <constraint firstItem="NBU-xA-4oJ" firstAttribute="leading" secondItem="0cX-oy-4KP" secondAttribute="trailing" constant="220" id="zE9-2W-CGI"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="lCk-dK-GBX"/>
+                                <exclude reference="qgL-dh-Rps"/>
+                                <exclude reference="zE9-2W-CGI"/>
+                                <exclude reference="F16-zl-fNP"/>
+                                <exclude reference="I8s-9i-5GI"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Greenway" id="1ly-We-Rdn"/>
                     <connections>
-                        <outlet property="blurEffect" destination="5Fk-Iv-01V" id="d9M-uh-GTR"/>
+                        <outlet property="blurEffect" destination="bNR-9s-0vN" id="ffU-Rc-fPZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yOJ-F3-zBW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -217,6 +251,9 @@
     <resources>
         <image name="blurredPlant" width="3000" height="4542"/>
         <image name="flower" width="144" height="144"/>
+        <image name="participate" width="48" height="48"/>
+        <image name="rest" width="48" height="48"/>
+        <image name="shop" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gN2-fu-PLP"/>
