@@ -17,11 +17,12 @@ class SearchResultsTableViewController: UITableViewController {
     var tappedCell: Int = 0
     var newDictionary: [[String : AnyObject]] = []
     
-    var store = DataStore.store
+    let dataStore = DataStore.store
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("PARKS IN ARRAY \(dataStore.parkTypeArray)")
       
         
         
@@ -64,9 +65,7 @@ class SearchResultsTableViewController: UITableViewController {
              let newVC = segue.destinationViewController as! detailViewController
             self.tappedCell = (tableView.indexPathForSelectedRow?.row)!
            
-            
-            valueToPass = newDictionary[tappedCell]
-            newVC.dictionaryOfData = valueToPass
+            newVC.dictionaryOfData = dataStore.parkTypeArray[tappedCell]
 
             
         }

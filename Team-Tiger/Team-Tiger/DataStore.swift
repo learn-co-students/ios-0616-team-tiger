@@ -303,6 +303,7 @@ class DataStore {
             //
             //            print("Data existed in masterParksDictionary")
             completion()
+            
         } else {
             
             getParkByTypeOnDemand(category, type: type, completion: {
@@ -310,6 +311,7 @@ class DataStore {
                 //                print("Results on demand \(self.typeResults)")
                 
                 print("Data retrieved on demand")
+                
                 completion()
             })
         }

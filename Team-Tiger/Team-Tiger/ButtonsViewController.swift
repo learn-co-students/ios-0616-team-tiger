@@ -12,7 +12,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     var arrayOfFarmersMarkets: [String] = []
     var arrayOfParks: [String] = []
     let locationManager = CLLocationManager()
-    let dataStore = DataStore()
+    let dataStore = DataStore.store
     
     @IBOutlet weak var blurEffect: UIView!
     var queue = NSOperationQueue()
@@ -23,28 +23,6 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         self.blurEffect.layer.cornerRadius = 10
         
         self.blurEffect.clipsToBounds = true
-        
-//        let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style:
-//            UIBlurEffectStyle.Light))
-//        
-//        blurEffectView.frame = CGRectMake(100, 100, 100, 100)
-//        
-//        blurEffectView.layer.cornerRadius = 10
-//        
-//        blurEffectView.layer.masksToBounds = true
-//        
-//        self.view.addSubview(blurEffectView)
-//        
-//        blurEffectView.widthAnchor.constraintEqualToAnchor(self.view.widthAnchor, multiplier: 0.8).active = true
-////
-//        blurEffectView.centerXAnchor.constraintEqualToAnchor(self.view.centerXAnchor).active = true
-//
-//        blurEffectView.topAnchor.constraintEqualToAnchor(self.view.topAnchor, constant: 40).active = true
-//        
-//        blurEffectView.bottomAnchor.constraintEqualToAnchor(self.view.bottomAnchor, constant: 20).active = true
-        
-        
-        
         
         
         queue.addOperationWithBlock {
@@ -61,7 +39,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
-                                self.getParks()
+                self.getParks()
                 print("All the parks")
             }
             
@@ -100,7 +78,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         
         dataStore.populateParkByTypeBasedOnState("type", type: "Garden") {
             
-            print(self.dataStore.parkTypeArray)
+            //print("PRINTING ARRAY FROM BUTTON VC\(self.dataStore.parkTypeArray)")
             
             let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
             
@@ -115,8 +93,10 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 
                 self.arrayOfParks.append(park["name"] as! String)
                 
+                
+                
             }
-        
+//            print("PRINTING AFTER SORT ARRAY FROM BUTTON VC\(self.dataStore.parkTypeArray)")
         }
         
     }
@@ -162,10 +142,10 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         Alamofire.request(.GET, "https://data.ny.gov/resource/farmersmarkets.json?") .responseJSON { response in
             
             if let response = response.result.value {
-            
-            self.FMdictionary = response as! NSArray
-            
-            print("parsing")
+                
+                self.FMdictionary = response as! NSArray
+                
+                print("parsing")
                 
             } else {
                 
@@ -190,7 +170,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                             self.dictionaryWithInfo["zip"] = detail["zip"].string
                             self.dictionaryWithInfo["hours"] = detail["operation_hours"].string
                             self.dictionaryWithInfo["season"] = detail["operation_season"].string
-    
+                            
                             if let latitude = detail["location_points"]["latitude"].string {
                                 
                                 self.dictionaryWithInfo["latitude"] = Double(latitude)
@@ -212,7 +192,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                             } else {
                                 
                                 print("IN SEARCH OF ADDRESS")
-                                }
+                            }
                             //
                             
                             if let location = self.locationManager.location {
@@ -223,7 +203,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                                 
                                 let distance = coordinates.distanceFromLocation(location) * 0.00062137
                                 self.dictionaryWithInfo.updateValue(distance, forKey: "Distance")
-                        }
+                            }
                             
                             self.farmersMarketArray.append(self.dictionaryWithInfo)
                             
@@ -355,6 +335,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         let destinationVC = segue.destinationViewController as! SearchResultsTableViewController
         
         if segue.identifier == "showParks" {
+            
             destinationVC.arrayOfNames = self.arrayOfParks
             
         } else {
@@ -381,7 +362,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.requestLocation()
             
             locationManager.startUpdatingLocation()
-          } else {
+        } else {
             
             print("No go on location")
             
@@ -398,13 +379,13 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             
             //            print("You are here : \(dataStore.currentLocation)")
-
+            
         }
-
+        
     }
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-
+        
         print("Failed to find user's location: \(error.localizedDescription)")
     }
-
+    
 }
