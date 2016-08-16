@@ -120,6 +120,7 @@ class DataStore {
                 
                 let jsonObj = JSON(data: jsonData)
                 let arrayOfData = jsonObj.array
+                self.farmersMarketArray.removeAll()
                 if let arrayOfData = arrayOfData {
                     var dictionaryWithInfo : [String:AnyObject] = [:]
                     for detail in arrayOfData {

@@ -38,17 +38,10 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         queue.addOperationWithBlock {
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.getLocation()
-                
                 print("Location located")
             }
             NSOperationQueue.mainQueue().addOperationWithBlock {
-//                self.dataStore.currentLocation = self.locationManager.location!
-                //                print("Count: \(self.outdoorWifiSpots.count)")
-                
-            }
-            NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.getFarmersMarkets()
-                
                 print("Farmers markets")
             }
             
@@ -82,19 +75,13 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func isLessThan5MilesAway(array : [String: AnyObject]) ->Bool {
-        
         return (array["Distance"] as? Double) < 5
     }
     
     func sortArrayByDistance(array : [[String : AnyObject]]) -> [[String : AnyObject]] {
-        var arrayCopy : [[String:AnyObject]] = []
-        let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
-        var tableViewArray : NSArray = array
-        tableViewArray = tableViewArray.sortedArrayUsingDescriptors([sortByDistance])
-        //        print("Table view array: \(tableViewArray)")
-        arrayCopy = tableViewArray as! [[String: AnyObject]]
-        //        print("ArrayCopy: \(arrayCopy)")
-        return arrayCopy
+        let sortedByDistance = array.sort { ($0["Distance"] as! Double) < ($1["Distance"] as! Double) }
+        print("Sortedsortedsorted \(sortedByDistance)")
+        return sortedByDistance
     }
     
     // Parks
@@ -103,12 +90,8 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         
         dataStore.populateParkByTypeBasedOnState("type", type: "Garden") {
             
-            //            print(self.dataStore.parkTypeArray)
             self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
             for park in self.dataStore.parkTypeArray {
-                
-                //                if self.isLessThan5MilesAway(park) {
-                
                 self.arrayOfParks.append(park["name"] as! String)
             }
         }
@@ -124,21 +107,16 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 for market in self.dataStore.farmersMarketArray {
                     if let location = self.locationManager.location {
                         let coordinates = CLLocation(latitude: (market["latitude"] as! Double), longitude: (market["longitude"] as! Double))
-                        
-                        //                            print(coordinates)
-                        
                         let distance = (coordinates.distanceFromLocation(location) * 0.00062137)
                         var marketCopy = market
                         marketCopy.updateValue(distance, forKey: "Distance")
                         farmersArrayCopy.append(marketCopy)
                     }
-                    self.dataStore.farmersMarketArray = self.sortArrayByDistance(farmersArrayCopy)
-                    
                 }
+                
+                self.dataStore.farmersMarketArray = self.sortArrayByDistance(farmersArrayCopy)
                 //                self.dataStore.farmersMarketArray = self.sortArrayByDistance(self.dataStore.farmersMarketArray)
                 for marketDictionary in self.dataStore.farmersMarketArray {
-                    
-                    //                    if self.isLessThan5MilesAway(marketDictionary) {
                     
                     if let marketName = marketDictionary["name"] {
                         self.arrayOfFarmersMarkets.append(marketName as! String)
@@ -146,9 +124,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 }
             } else {
                 print("ERROR: Unable to retrieve farmer's markets")
-                
             }
-            //            print("FarmersMarketsArray : \(self.dataStore.farmersMarketArray)")
         }
         print("FarmersMarketsArray : \(self.dataStore.farmersMarketArray)")
     }
@@ -178,33 +154,22 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 if let arrayOfData = arrayOfData {
                     for location in arrayOfData {
                         if location["location_t"].string == ("Outdoor Kiosk") {
-                            
                             var tempDictionary : [String : AnyObject] = [:]
                             
                             if location["name"] != nil {
                                 tempDictionary["name"] = location["name"].string
                             }
-                            
                             if location["location_t"] != nil {
-                                
                                 tempDictionary["location_t"] = location["location_t"].string
                             }
-                            
                             if location["lon"] != nil {
                                 tempDictionary["long"] = location["lon"].string
-                                
                             }
-                            
                             if location["ssid"] != nil {
-                                
                                 tempDictionary["ssid"] = location["ssid"].string
-                                
                             }
-                            
                             if location["zip"] != nil{
-                                
                                 tempDictionary["zip"] = location["zip"].string
-                                
                             }
                             if location["lat"] != nil {
                                 tempDictionary["lat"] = location["lat"].string
@@ -215,67 +180,45 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                     }
                 }
             }
-            //            print(self.outdoorWifiSpots)
         }
     }
     @IBAction func shopTapped(sender: AnyObject) {
         
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         let destinationVC = segue.destinationViewController as! SearchResultsTableViewController
-        
         if segue.identifier == "showParks" {
             destinationVC.arrayOfNames = self.arrayOfParks
-            
         } else {
-            
             destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
-            
         }
-        
     }
     //Location Things
     
     func getLocation() {
         
         locationManager.delegate = self
-        
         locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
             
             print("Yay for location")
-            
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            
             locationManager.requestLocation()
-            
             locationManager.startUpdatingLocation()
-            
-            
         } else {
-            
             print("No go on location")
-            
         }
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
         if locations.count > 0 {
-            
             dataStore.currentLocation = (locations.first)!
-            
             locationManager.stopUpdatingLocation()
-            
-            //            print("You are here : \(dataStore.currentLocation)")
             print("We know where you are")
         }
-        
     }
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         
         print("Failed to find user's location: \(error.localizedDescription)")
     }
-    
 }
