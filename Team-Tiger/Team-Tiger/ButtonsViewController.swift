@@ -14,6 +14,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     let dataStore = DataStore.store
     
+    @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var blurEffect: UIView!
     var queue = NSOperationQueue()
     override func viewDidLoad() {

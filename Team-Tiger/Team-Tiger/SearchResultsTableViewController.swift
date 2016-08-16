@@ -24,7 +24,7 @@ class SearchResultsTableViewController: UITableViewController {
         
 //        print("PARKS IN ARRAY \(dataStore.parkTypeArray)")
       
-        
+      print(newDictionary)
         
         
         self.tableView.reloadData()
@@ -56,17 +56,8 @@ class SearchResultsTableViewController: UITableViewController {
         
         cell.textLabel?.textColor = UIColor.whiteColor()
         
-        let currentLocation = dataStore.parkTypeArray[indexPath.row]
+        assignIconForCell(cell, indexPath: indexPath)
         
-        let waterfrontValue = currentLocation["waterfront"] as! String
-        
-        print(waterfrontValue)
-        
-        if waterfrontValue == "Yes" {
-            
-            cell.imageView?.image = UIImage.init(named: "tinyWaterfront")
-            
-        } 
         
         if indexPath.row % 2 == 0 {
             
@@ -97,6 +88,34 @@ class SearchResultsTableViewController: UITableViewController {
            
             newVC.dictionaryOfData = dataStore.parkTypeArray[tappedCell]
 
+            
+        }
+        
+    }
+    
+    func assignIconForCell(cell: UITableViewCell, indexPath: NSIndexPath) {
+        
+        let currentLocation = dataStore.parkTypeArray[indexPath.row]
+        
+        let waterfrontValue = currentLocation["waterfront"] as! String
+        
+        print(waterfrontValue)
+        
+        let currentMarketOrGarden = self.arrayOfNames[indexPath.row]
+        
+        if currentMarketOrGarden.lowercaseString.containsString("market") || currentMarketOrGarden.lowercaseString.containsString("stand") {
+            
+            cell.imageView?.image = UIImage.init(named: "tinyShop")
+            
+            
+        } else if waterfrontValue == "Yes" {
+            
+            cell.imageView?.image = UIImage.init(named: "tinyWaterfront")
+            
+        } else if currentMarketOrGarden.lowercaseString.containsString("garden") {
+            
+            cell.imageView?.image = UIImage.init(named: "tinyFlower")
+            
             
         }
         
