@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="E0U-DU-UPr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="E0U-DU-UPr">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAN-cY-l0J">
-                                <rect key="frame" x="13" y="87" width="349" height="43"/>
+                                <rect key="frame" x="40" y="87" width="349" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="349" id="Hy9-pv-Otf"/>
                                     <constraint firstAttribute="height" constant="43" id="tSL-nt-NRx"/>
@@ -35,7 +35,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXg-yb-1Vx">
-                                <rect key="frame" x="13" y="160" width="69" height="21"/>
+                                <rect key="frame" x="40" y="160" width="69" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="BjB-uK-sQV"/>
                                     <constraint firstAttribute="width" constant="69" id="KIW-JT-eEN"/>
@@ -50,7 +50,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AFm-to-cPF">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AFm-to-cPF">
                                 <rect key="frame" x="14" y="218" width="44" height="30"/>
                                 <state key="normal" title="Phone">
                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -72,12 +72,13 @@
                             <constraint firstItem="sAN-cY-l0J" firstAttribute="leading" secondItem="OXg-yb-1Vx" secondAttribute="leading" id="D8V-qT-PFH"/>
                             <constraint firstItem="AFm-to-cPF" firstAttribute="top" secondItem="qIG-pV-btT" secondAttribute="bottom" constant="8" id="Gna-vC-hHe"/>
                             <constraint firstItem="laW-bI-xwP" firstAttribute="top" secondItem="sAN-cY-l0J" secondAttribute="bottom" constant="1" id="KSp-GN-KWi"/>
+                            <constraint firstItem="AFm-to-cPF" firstAttribute="leading" secondItem="qIG-pV-btT" secondAttribute="leading" id="NKJ-Gh-bmG"/>
                             <constraint firstItem="qIG-pV-btT" firstAttribute="top" secondItem="OXg-yb-1Vx" secondAttribute="bottom" constant="8" symbolic="YES" id="dXp-BD-YH5"/>
                             <constraint firstItem="sAN-cY-l0J" firstAttribute="leading" secondItem="laW-bI-xwP" secondAttribute="leading" id="eHK-mD-WMD"/>
                             <constraint firstItem="OXg-yb-1Vx" firstAttribute="top" secondItem="aq0-Zt-Vqb" secondAttribute="top" constant="160" id="eJ3-bR-OgS"/>
                             <constraint firstItem="Qz5-vE-dWe" firstAttribute="leading" secondItem="aq0-Zt-Vqb" secondAttribute="leadingMargin" constant="31" id="ouY-yo-prb"/>
                             <constraint firstItem="Qz5-vE-dWe" firstAttribute="top" secondItem="aq0-Zt-Vqb" secondAttribute="top" constant="372" id="p8F-Ec-4Qf"/>
-                            <constraint firstItem="sAN-cY-l0J" firstAttribute="leading" secondItem="aq0-Zt-Vqb" secondAttribute="leadingMargin" constant="-7" id="uYC-tO-7P2"/>
+                            <constraint firstItem="sAN-cY-l0J" firstAttribute="leading" secondItem="aq0-Zt-Vqb" secondAttribute="leadingMargin" constant="20" id="uYC-tO-7P2"/>
                             <constraint firstItem="STP-0S-lgP" firstAttribute="top" secondItem="Qz5-vE-dWe" secondAttribute="bottom" constant="47" id="vEa-pC-udh"/>
                             <constraint firstItem="sAN-cY-l0J" firstAttribute="leading" secondItem="qIG-pV-btT" secondAttribute="leading" id="zY7-tT-eyH"/>
                         </constraints>

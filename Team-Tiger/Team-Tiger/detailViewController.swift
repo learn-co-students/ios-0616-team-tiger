@@ -21,6 +21,10 @@ class detailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
+        
+        
         // self.locationName.text = locationNameText
         var type = dictionaryOfData["type"] as! String
         locationName.text =  dictionaryOfData["name"] as! String
