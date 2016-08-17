@@ -356,7 +356,7 @@ class DataStore {
                     parkCopy = LocationStuff().sortWithDistance(parkCopy, location: ButtonsViewController().locationManager.location!)
                     print("Used locationManager  ")
                 }
-                parksCopy.append(parkCopy)
+                parksCopy.append(parkCopy) 
             }
         }
         
