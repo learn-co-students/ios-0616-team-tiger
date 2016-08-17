@@ -12,16 +12,27 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     var arrayOfFarmersMarkets: [String] = []
     var arrayOfParks: [String] = []
     let locationManager = CLLocationManager()
+    
     let dataStore = DataStore.store
     
+    var zip : String = ""
+    
+    @IBOutlet weak var blurEffect: UIVisualEffectView!
+    
     @IBOutlet weak var navBar: UINavigationItem!
-    @IBOutlet weak var blurEffect: UIView!
+    
+    
+    
     var queue = NSOperationQueue()
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        
         self.blurEffect.layer.cornerRadius = 10
+        
         
         self.blurEffect.clipsToBounds = true
         
@@ -29,24 +40,28 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         queue.addOperationWithBlock {
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.getLocation()
-                
                 print("Location located")
             }
             NSOperationQueue.mainQueue().addOperationWithBlock {
-                
                 self.getFarmersMarkets()
+                
                 print("Farmers markets")
             }
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
-                self.getParks()
+                self.getParks({
+                    self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
+                    for park in self.dataStore.parkTypeArray {
+                        self.arrayOfParks.append(park["name"] as! String)
+                    }
+                })
+                
                 print("All the parks")
             }
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
-                
-                //                self.getOutdoorWifiSpots()
+                self.getOutdoorWifiSpots()
                 print("Wifi Found")
             }
             
@@ -69,49 +84,46 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func isLessThan5MilesAway(array : [String: AnyObject]) ->Bool {
-        
-        return (array["Distance"] as? Double) < 5
+    func isLessThan5MilesAway(array : [[String: AnyObject]]) -> [[String: AnyObject]] {
+        let arrayCopy = array.filter({ ($0["Distance"] as! Double) < 5.0 })
+        return arrayCopy
     }
+    
+    func sortArrayByDistance(array : [[String : AnyObject]]) -> [[String : AnyObject]] {
+        let sortedByDistance = array.sort { ($0["Distance"] as! Double) < ($1["Distance"] as! Double) }
+        print("Sortedsortedsorted \(sortedByDistance)")
+        return sortedByDistance
+    }
+    
     // Parks
-    func getParks() {
+    func getParks(completion: () -> ()) {
         print("Get parks")
         
         dataStore.populateParkByTypeBasedOnState("type", type: "Park") {
-            
-            //print("PRINTING ARRAY FROM BUTTON VC\(self.dataStore.parkTypeArray)")
-            
-            let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
-            
-            var tableViewArray : NSArray = self.dataStore.parkTypeArray
-            
-            tableViewArray = tableViewArray.sortedArrayUsingDescriptors([sortByDistance])
-            
-            self.dataStore.parkTypeArray = tableViewArray as! [[String: AnyObject]]
-            for park in self.dataStore.parkTypeArray {
-                
-                //                if self.isLessThan5MilesAway(park) {
-                
-                self.arrayOfParks.append(park["name"] as! String)
-                
-                
-                
-            }
-//            print("PRINTING AFTER SORT ARRAY FROM BUTTON VC\(self.dataStore.parkTypeArray)")
+            completion()
         }
-        
     }
     // Farmers' Market
     
     // Tweaked to get hours and season of operation
     func getFarmersMarkets() {
-        
-        self.fmParse { completion in
+        var farmersArrayCopy : [[String : AnyObject]] = []
+        dataStore.farmersMarketParse { completion in
             if completion {
                 
-                for marketDictionary in self.farmersMarketArray {
-                    
-                    //                    if self.isLessThan5MilesAway(marketDictionary) {
+                for market in self.dataStore.farmersMarketArray {
+                    if let location = self.locationManager.location {
+                        let coordinates = CLLocation(latitude: (market["latitude"] as! Double), longitude: (market["longitude"] as! Double))
+                        let distance = (coordinates.distanceFromLocation(location) * 0.00062137)
+                        var marketCopy = market
+                        marketCopy.updateValue(distance, forKey: "Distance")
+                        farmersArrayCopy.append(marketCopy)
+                    }
+                }
+                
+                self.dataStore.farmersMarketArray = self.sortArrayByDistance(farmersArrayCopy)
+                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
+                for marketDictionary in self.dataStore.farmersMarketArray {
                     
                     if let marketName = marketDictionary["name"] {
                         self.arrayOfFarmersMarkets.append(marketName as! String)
@@ -121,107 +133,9 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 print("ERROR: Unable to retrieve farmer's markets")
                 
             }
-            
-            //            self.getCoordinates()
-            
-            print(self.arrayOfFarmersMarkets)
+            print("FarmersMarketsArray1 : \(self.dataStore.farmersMarketArray)")
         }
-    }
-    
-    func sortMarkets(array : [[String : AnyObject]]) -> [[String : AnyObject]] {
-        
-        var arrayCopy : [[String : AnyObject]] = []
-        let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
-        var tableViewArray : NSArray = array
-        tableViewArray = tableViewArray.sortedArrayUsingDescriptors([sortByDistance])
-        
-        arrayCopy = tableViewArray as! [[String: AnyObject]]
-        return arrayCopy
-    }
-    
-    func fmParse(completionHandler: (Bool) -> ()) {
-        Alamofire.request(.GET, "https://data.ny.gov/resource/farmersmarkets.json?") .responseJSON { response in
-            
-            if let response = response.result.value {
-                
-                self.FMdictionary = response as! NSArray
-                
-                print("parsing")
-                
-            } else {
-                
-                print("received no response result from farmer's market")
-                
-            }
-            
-            if let jsonData = response.data {
-                
-                let jsonObj = JSON(data: jsonData)
-                let arrayOfData = jsonObj.array
-                if let arrayOfData = arrayOfData {
-                    
-                    //                    print(arrayOfData)
-                    
-                    for detail in arrayOfData {
-                        
-                        self.dictionaryWithInfo.removeAll()
-                        
-                        if detail["county"] == "Kings" || detail["county"] == "Queens" || detail["county"] == "New York" || detail["county"] == "Bronx" || detail["county"] == "Richmond" {
-                            self.dictionaryWithInfo["name"] = detail["market_name"].string
-                            self.dictionaryWithInfo["zip"] = detail["zip"].string
-                            self.dictionaryWithInfo["hours"] = detail["operation_hours"].string
-                            self.dictionaryWithInfo["season"] = detail["operation_season"].string
-                            
-                            if let latitude = detail["location_points"]["latitude"].string {
-                                
-                                self.dictionaryWithInfo["latitude"] = Double(latitude)
-                                
-                            }
-                            
-                            if let longitude = detail["location_points"]["longitude"].string {
-                                
-                                self.dictionaryWithInfo["longitude"] = Double(longitude)
-                                
-                            }
-                            
-                            if let addressInDictionary = detail["address_line_1"].string {
-                                
-                                self.dictionaryWithInfo["address"] = addressInDictionary
-                                
-                                
-                                
-                            } else {
-                                
-                                print("IN SEARCH OF ADDRESS")
-                            }
-                            //
-                            
-                            if let location = self.locationManager.location {
-                                
-                                let coordinates = CLLocation(latitude: (self.dictionaryWithInfo["latitude"] as! Double), longitude: (self.dictionaryWithInfo["longitude"] as! Double))
-                                
-                                print(coordinates)
-                                
-                                let distance = coordinates.distanceFromLocation(location) * 0.00062137
-                                self.dictionaryWithInfo.updateValue(distance, forKey: "Distance")
-                            }
-                            
-                            self.farmersMarketArray.append(self.dictionaryWithInfo)
-                            
-                        }
-                    }
-                }
-                
-                print("Count: \(self.farmersMarketArray.count)")
-                
-                self.farmersMarketArray = self.sortMarkets(self.farmersMarketArray)
-                
-                print(self.farmersMarketArray)
-                
-                completionHandler(true)
-                
-            }
-        }
+        print("FarmersMarketsArray2 : \(self.dataStore.farmersMarketArray)")
     }
     
     // Wifi
@@ -245,148 +159,119 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 
                 let jsonObj = JSON(data: jsonData)
                 
-                
-                
                 let arrayOfData = jsonObj.array
-                
-                
-                
                 if let arrayOfData = arrayOfData {
-                    
-                    
-                    
                     for location in arrayOfData {
-                        
-                        
-                        
                         if location["location_t"].string == ("Outdoor Kiosk") {
-                            
                             var tempDictionary : [String : AnyObject] = [:]
                             
-                            //                            print("Outdoor \(location["name"])")
-                            
                             if location["name"] != nil {
-                                
                                 tempDictionary["name"] = location["name"].string
-                                
                             }
-                            
                             if location["location_t"] != nil {
-                                
                                 tempDictionary["location_t"] = location["location_t"].string
-                                
                             }
-                            
-                            
-                            
                             if location["lon"] != nil {
-                                
                                 tempDictionary["long"] = location["lon"].string
-                                
                             }
-                            
-                            
-                            
                             if location["ssid"] != nil {
-                                
                                 tempDictionary["ssid"] = location["ssid"].string
-                                
                             }
-                            
-                            
-                            
                             if location["zip"] != nil{
-                                
                                 tempDictionary["zip"] = location["zip"].string
-                                
                             }
-                            
-                            
-                            
                             if location["lat"] != nil {
-                                
                                 tempDictionary["lat"] = location["lat"].string
-                                
                             }
-                            
-                            
-                            
-                            print(tempDictionary)
-                            
+                            //                            print(tempDictionary)
                             self.outdoorWifiSpots.append(tempDictionary)
-                            
                         }
-                        
                     }
-                    
                 }
-                
             }
-            
-            print(self.outdoorWifiSpots)
-            
         }
-        
     }
     @IBAction func shopTapped(sender: AnyObject) {
         
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         let destinationVC = segue.destinationViewController as! SearchResultsTableViewController
-        
         if segue.identifier == "showParks" {
             
             destinationVC.arrayOfNames = self.arrayOfParks
-            
         } else {
-            
             destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
-            
         }
-        
     }
     //Location Things
     
     func getLocation() {
         
         locationManager.delegate = self
-        
         locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
             
             print("Yay for location")
-            
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            
             locationManager.requestLocation()
-            
             locationManager.startUpdatingLocation()
         } else {
             
             print("No go on location")
-            
         }
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        print("We know where you are")
-        
         if locations.count > 0 {
-            
             dataStore.currentLocation = (locations.first)!
-            
-            locationManager.stopUpdatingLocation()
-            
-            //            print("You are here : \(dataStore.currentLocation)")
+            self.locationManager.stopUpdatingLocation()
             
         }
-        
     }
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+            
+            print("Failed to find user's location: \(error.localizedDescription)")
+        }
         
-        print("Failed to find user's location: \(error.localizedDescription)")
-    }
+        
+        func getZipCode() -> String {
+            var alertController:UIAlertController?
+            alertController = UIAlertController(title: "Location",
+                                                message: "Please enter your approximate address and zip code",
+                                                preferredStyle: .Alert)
+            alertController!.addTextFieldWithConfigurationHandler(
+                {(textField: UITextField!) in
+                    textField.placeholder = "Enter Address"
+            })
+            let action = UIAlertAction(title: "Submit",
+                                       style: UIAlertActionStyle.Default,
+                                       handler: {[weak self]
+                                        (paramAction:UIAlertAction!) in
+                                        if let textFields = alertController?.textFields{
+                                            
+                                            let theTextFields = textFields as [UITextField]
+                                            let enteredText = theTextFields[0].text
+                                            self?.zip = enteredText!
+                                        }
+                })
+            
+            alertController?.addAction(action)
+            self.presentViewController(alertController!,
+                                       animated: true,
+                                       completion: nil)
+            return self.zip
+        }
+        
+        func getCoordinatesFromZipCode(zip: String) {
+            
+            let zipCode = CLGeocoder().geocodeAddressString(zip, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+                if let placemark = placemarks?.first {
+                    
+                    self.dataStore.currentLocation = placemark.location!
+                    print(self.dataStore.currentLocation)
+                    
+                }
+            })
+        }
     
 }
