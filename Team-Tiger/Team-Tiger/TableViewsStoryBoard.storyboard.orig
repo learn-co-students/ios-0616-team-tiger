@@ -172,6 +172,11 @@
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="basicCell" textLabel="fAJ-xL-VSj" imageView="bfc-qn-sUk" style="IBUITableViewCellStyleDefault" id="fbG-yc-gaY">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
+<<<<<<< HEAD
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fbG-yc-gaY" id="sKS-5b-T3m">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+=======
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" tableViewCell="fbG-yc-gaY" id="sKS-5b-T3m">
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -188,6 +193,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
+>>>>>>> c7975b905825d1ee9dbe9a404e41885b55a7cd04
                                 </tableViewCellContentView>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -259,10 +265,13 @@
     </scenes>
     <resources>
         <image name="blurredPlant" width="3000" height="4542"/>
+<<<<<<< HEAD
+=======
         <image name="participate" width="48" height="48"/>
         <image name="rest" width="48" height="48"/>
         <image name="shop" width="48" height="48"/>
         <image name="tinySpa" width="18" height="18"/>
+>>>>>>> c7975b905825d1ee9dbe9a404e41885b55a7cd04
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gN2-fu-PLP"/>

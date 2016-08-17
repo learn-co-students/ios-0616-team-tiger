@@ -38,7 +38,7 @@ class DataStore {
     
     func fetchData() {
    
-        
+    
         let userFetchRequest = NSFetchRequest(entityName: "User")
         
         do {
