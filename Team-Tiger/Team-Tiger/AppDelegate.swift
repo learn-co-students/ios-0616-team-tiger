@@ -9,12 +9,13 @@
 import UIKit
 import CoreData
 import Alamofire
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
     
     let dataStore = DataStore.store
-    
+        let locationManager = CLLocationManager()
 
     var window: UIWindow?
 
@@ -29,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         
         AirQualityAPIClient.getAirQualityIndex("10012")
+//        getLocation()
+        
         
         return true
     }
@@ -119,6 +122,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+//    func getLocation() {
+//        
+//        locationManager.delegate = self
+//        
+//        locationManager.requestWhenInUseAuthorization()
+//        
+//        if CLLocationManager.locationServicesEnabled() {
+//            
+//            print("Yay for location")
+//            
+//            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+//            
+//            locationManager.requestLocation()
+//            
+//            locationManager.startUpdatingLocation()
+//            
+//            print(dataStore.currentLocation)
+//        
+//        } else {
+//            
+//            print("No go on location")
+//            
+//        }
+//    }
+//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        
+//        print("We know where you are")
+//        
+//        if locations.count > 0 {
+//            
+//                        dataStore.currentLocation = (locations.first)!
+//            
+//            locationManager.stopUpdatingLocation()
+//            
+//            //            print("You are here : \(dataStore.currentLocation)")
+//            
+//        }
+//        
+//    }
+//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+//        
+//        print("Failed to find user's location: \(error.localizedDescription)")
+//    }
 }
 

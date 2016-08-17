@@ -88,7 +88,12 @@ class SearchResultsTableViewController: UITableViewController {
              let newVC = segue.destinationViewController as! detailViewController
             self.tappedCell = (tableView.indexPathForSelectedRow?.row)!
            
+<<<<<<< HEAD
+           
+            newVC.dictionaryOfData = store.parkTypeArray[tappedCell]
+=======
             newVC.dictionaryOfData = dataStore.parkTypeArray[tappedCell]
+>>>>>>> c7975b905825d1ee9dbe9a404e41885b55a7cd04
 
             
         }
