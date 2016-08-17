@@ -19,8 +19,12 @@ class detailViewController: UIViewController {
     
     var dictionaryOfData: [String : AnyObject] = [:]
     
+    let dataStore = DataStore.store
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         self.view.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
         
@@ -53,6 +57,8 @@ class detailViewController: UIViewController {
         UIApplication.sharedApplication().openURL(url)
     }
     
+    @IBAction func saveToFavoritesTapped(sender: AnyObject) {
+    }
     
     
    
