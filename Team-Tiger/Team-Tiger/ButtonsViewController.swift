@@ -122,7 +122,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 }
                 
                 self.dataStore.farmersMarketArray = self.sortArrayByDistance(farmersArrayCopy)
-                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
+//                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
                 for marketDictionary in self.dataStore.farmersMarketArray {
                     
                     if let marketName = marketDictionary["name"] {
@@ -216,10 +216,15 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
             locationManager.startUpdatingLocation()
+//            self.dataStore.currentLocation = locationManager.location!
         } else {
             
             print("No go on location")
         }
+    }
+    
+    func locationManager(manager: CLLocationManager, startUpdatingLocation location: CLLocation) {
+        dataStore.currentLocation = location
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {
