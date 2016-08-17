@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 //            print(self.dataStore.masterParksDictionary)
 //        }
         
+        dataStore.fetchData()
+        
         AirQualityAPIClient.getAirQualityIndex("10012")
 //        getLocation()
         
