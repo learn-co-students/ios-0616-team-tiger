@@ -39,16 +39,14 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         
         queue.addOperationWithBlock {
             NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.getLocation()
-                print("Location located")
+//                self.getLocation()
+                
+//                print("Location located")
             }
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.getFarmersMarkets()
                 
                 print("Farmers markets")
-            }
-            
-            NSOperationQueue.mainQueue().addOperationWithBlock {
                 
                 self.getParks({
                     self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
@@ -58,12 +56,19 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 })
                 
                 print("All the parks")
+                
+                self.getOutdoorWifiSpots()
+                print("Wifi Found")
+//
             }
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.getOutdoorWifiSpots()
-                print("Wifi Found")
+                
+                
             }
+            
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                            }
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 
@@ -77,6 +82,8 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+//        self.getLocation()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -99,9 +106,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     func getParks(completion: () -> ()) {
         print("Get parks")
         
-        dataStore.populateParkByTypeBasedOnState("type", type: "Park") {
-            completion()
-        }
+//        self.arrayOfParks = dataStore.parkTypeArray
     }
     // Farmers' Market
     
@@ -112,17 +117,17 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             if completion {
                 
                 for market in self.dataStore.farmersMarketArray {
-                    if let location = self.locationManager.location {
+                    let location = self.dataStore.currentLocation
                         let coordinates = CLLocation(latitude: (market["latitude"] as! Double), longitude: (market["longitude"] as! Double))
                         let distance = (coordinates.distanceFromLocation(location) * 0.00062137)
                         var marketCopy = market
                         marketCopy.updateValue(distance, forKey: "Distance")
                         farmersArrayCopy.append(marketCopy)
-                    }
+                    
                 }
-                
+                print("Copycopycopycopy : \(farmersArrayCopy)")
                 self.dataStore.farmersMarketArray = self.sortArrayByDistance(farmersArrayCopy)
-//                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
+                //                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
                 for marketDictionary in self.dataStore.farmersMarketArray {
                     
                     if let marketName = marketDictionary["name"] {
@@ -133,9 +138,9 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 print("ERROR: Unable to retrieve farmer's markets")
                 
             }
-            print("FarmersMarketsArray1 : \(self.dataStore.farmersMarketArray)")
+//            print("FarmersMarketsArray1 : \(self.dataStore.farmersMarketArray)")
         }
-        print("FarmersMarketsArray2 : \(self.dataStore.farmersMarketArray)")
+//        print("FarmersMarketsArray2 : \(self.dataStore.farmersMarketArray)")
     }
     
     // Wifi
@@ -216,8 +221,9 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
             locationManager.startUpdatingLocation()
-//            self.dataStore.currentLocation = locationManager.location!
+//                        self.dataStore.currentLocation = locationManager.location!
         } else {
+            self.getZipCode()
             
             print("No go on location")
         }
@@ -225,6 +231,23 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, startUpdatingLocation location: CLLocation) {
         dataStore.currentLocation = location
+        print("Data Store Location : \(dataStore.currentLocation)")
+//        self.getFarmersMarkets()
+//        
+//        print("Farmers markets")
+//        
+//        self.getParks({
+//            self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
+//            for park in self.dataStore.parkTypeArray {
+//                self.arrayOfParks.append(park["name"] as! String)
+//            }
+//        })
+//        
+//        print("All the parks")
+//        
+//        self.getOutdoorWifiSpots()
+//        print("Wifi Found")
+        
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {
@@ -233,50 +256,57 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             
         }
     }
-        func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-            
-            print("Failed to find user's location: \(error.localizedDescription)")
-        }
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         
-        
-        func getZipCode() -> String {
-            var alertController:UIAlertController?
-            alertController = UIAlertController(title: "Location",
-                                                message: "Please enter your approximate address and zip code",
-                                                preferredStyle: .Alert)
-            alertController!.addTextFieldWithConfigurationHandler(
-                {(textField: UITextField!) in
-                    textField.placeholder = "Enter Address"
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
+    
+    
+    func getZipCode() {
+        var alertController:UIAlertController?
+        alertController = UIAlertController(title: "Location",
+                                            message: "Please enter your approximate address and zip code",
+                                            preferredStyle: .Alert)
+        alertController!.addTextFieldWithConfigurationHandler(
+            {(textField: UITextField!) in
+                textField.placeholder = "Enter Address"
+        })
+        let action = UIAlertAction(title: "Submit",
+                                   style: UIAlertActionStyle.Default,
+                                   handler: {[weak self]
+                                    (paramAction:UIAlertAction!) in
+                                    if let textFields = alertController?.textFields{
+                                        
+                                        let theTextFields = textFields as [UITextField]
+                                        let enteredText = theTextFields[0].text
+                                        self?.zip = enteredText!
+                                    }
             })
-            let action = UIAlertAction(title: "Submit",
-                                       style: UIAlertActionStyle.Default,
-                                       handler: {[weak self]
-                                        (paramAction:UIAlertAction!) in
-                                        if let textFields = alertController?.textFields{
-                                            
-                                            let theTextFields = textFields as [UITextField]
-                                            let enteredText = theTextFields[0].text
-                                            self?.zip = enteredText!
-                                        }
-                })
-            
-            alertController?.addAction(action)
-            self.presentViewController(alertController!,
-                                       animated: true,
-                                       completion: nil)
-            return self.zip
-        }
         
-        func getCoordinatesFromZipCode(zip: String) {
-            
-            let zipCode = CLGeocoder().geocodeAddressString(zip, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-                if let placemark = placemarks?.first {
-                    
-                    self.dataStore.currentLocation = placemark.location!
-                    print(self.dataStore.currentLocation)
-                    
-                }
-            })
-        }
+        alertController?.addAction(action)
+        self.presentViewController(alertController!,
+                                   animated: true,
+                                   completion: nil)
+        let zipCode = CLGeocoder().geocodeAddressString(self.zip, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+            if let placemark = placemarks?.first {
+                
+                self.dataStore.currentLocation = placemark.location!
+                print(self.dataStore.currentLocation)
+                
+            }
+        })
+    }
+    
+    func getCoordinatesFromZipCode(zip: String) {
+        
+        let zipCode = CLGeocoder().geocodeAddressString(zip, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+            if let placemark = placemarks?.first {
+                
+                self.dataStore.currentLocation = placemark.location!
+                print(self.dataStore.currentLocation)
+                
+            }
+        })
+    }
     
 }

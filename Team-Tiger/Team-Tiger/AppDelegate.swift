@@ -30,9 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 //        }
         
         AirQualityAPIClient.getAirQualityIndex("10012")
-//        getLocation()
+        getLocation()
         
-        
+//        dataStore.populateParkByTypeBasedOnState("type", type: "Garden", completion: { 
+//            print("Got gardens")
+//        })
         return true
     }
 
@@ -122,48 +124,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             }
         }
     }
-//    func getLocation() {
-//        
-//        locationManager.delegate = self
-//        
-//        locationManager.requestWhenInUseAuthorization()
-//        
-//        if CLLocationManager.locationServicesEnabled() {
-//            
-//            print("Yay for location")
-//            
-//            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-//            
-//            locationManager.requestLocation()
-//            
-//            locationManager.startUpdatingLocation()
-//            
-//            print(dataStore.currentLocation)
-//        
-//        } else {
-//            
-//            print("No go on location")
-//            
-//        }
-//    }
-//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        
-//        print("We know where you are")
-//        
-//        if locations.count > 0 {
-//            
-//                        dataStore.currentLocation = (locations.first)!
-//            
-//            locationManager.stopUpdatingLocation()
-//            
-//            //            print("You are here : \(dataStore.currentLocation)")
-//            
-//        }
-//        
-//    }
-//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-//        
-//        print("Failed to find user's location: \(error.localizedDescription)")
-//    }
+    func getLocation() {
+        
+        locationManager.delegate = self
+        
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            
+            print("Yay for location")
+            
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            
+            locationManager.requestLocation()
+            
+            locationManager.startUpdatingLocation()
+            
+            print(dataStore.currentLocation)
+        
+        } else {
+            
+            print("No go on location")
+            
+        }
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        print("We know where you are")
+        
+        if locations.count > 0 {
+            
+                        dataStore.currentLocation = (locations.first)!
+            
+            locationManager.stopUpdatingLocation()
+            
+            //            print("You are here : \(dataStore.currentLocation)")
+            
+        }
+        
+    }
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
 }
 
