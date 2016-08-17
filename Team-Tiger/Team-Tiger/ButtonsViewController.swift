@@ -122,7 +122,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 }
                 
                 self.dataStore.farmersMarketArray = self.sortArrayByDistance(farmersArrayCopy)
-                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
+//                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
                 for marketDictionary in self.dataStore.farmersMarketArray {
                     
                     if let marketName = marketDictionary["name"] {
