@@ -21,7 +21,9 @@ class detailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // self.locationName.text = locationNameText
+        
+       // self.locationName.text = locationNameText
+   
         var type = dictionaryOfData["type"] as! String
         locationName.text =  dictionaryOfData["name"] as? String
         locationAddress.text =  dictionaryOfData["address"] as? String
