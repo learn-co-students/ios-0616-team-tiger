@@ -17,16 +17,21 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
         var arrayCopy = array
         var closestCoordinate = CLLocation()
         let coordinates = array["coordinates"] as? Array<CLLocation>
-        closestCoordinate = coordinates![0]
+        //        closestCoordinate = coordinates![0]
         
+        var latitudeTotal = 0.0
+        var longitudeTotal = 0.0
+        var totalCount = Double((coordinates!.count))
         for coordinate in coordinates! {
-            if coordinate.distanceFromLocation(location) < closestCoordinate.distanceFromLocation(location) {
-                
-                closestCoordinate = coordinate
-            }
-            arrayCopy["Closest Coordinate"] = closestCoordinate
-            arrayCopy["Distance"] = closestCoordinate.distanceFromLocation(location) * 0.00062137
+            //            if coordinate.distanceFromLocation(location) < closestCoordinate.distanceFromLocation(location) {
+            latitudeTotal = latitudeTotal + coordinate.coordinate.latitude
+            longitudeTotal = longitudeTotal + coordinate.coordinate.longitude
+            //                closestCoordinate = coordinate
         }
+        closestCoordinate = CLLocation(latitude: latitudeTotal/totalCount, longitude: longitudeTotal/totalCount)
+        arrayCopy["coordinate"] = closestCoordinate
+        print("Average coordinates : \(closestCoordinate), \(array["name"])")
+        arrayCopy["Distance"] = closestCoordinate.distanceFromLocation(location) * 0.00062137
         
         return arrayCopy
         
