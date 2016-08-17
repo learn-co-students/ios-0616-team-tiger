@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cl7-d1-sKg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cl7-d1-sKg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -139,18 +138,8 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fbG-yc-gaY" id="sKS-5b-T3m">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="flower" translatesAutoresizingMaskIntoConstraints="NO" id="3DI-pd-hkS">
-                                            <rect key="frame" x="531" y="0.0" width="46" height="43"/>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="3DI-pd-hkS" firstAttribute="height" secondItem="sKS-5b-T3m" secondAttribute="height" id="Joq-5l-DUo"/>
-                                        <constraint firstItem="3DI-pd-hkS" firstAttribute="centerY" secondItem="sKS-5b-T3m" secondAttribute="centerY" id="alV-is-yjD"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="3DI-pd-hkS" secondAttribute="trailing" constant="15" id="r4V-DY-HMC"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="KVL-F0-2XH" kind="show" identifier="showDetail" id="9hm-02-MY1"/>
@@ -216,7 +205,6 @@
     </scenes>
     <resources>
         <image name="blurredPlant" width="3000" height="4542"/>
-        <image name="flower" width="144" height="144"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gN2-fu-PLP"/>

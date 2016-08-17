@@ -12,7 +12,11 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     var arrayOfFarmersMarkets: [String] = []
     var arrayOfParks: [String] = []
     let locationManager = CLLocationManager()
-    let dataStore = DataStore()
+    let dataStore = DataStore.store
+    
+    //var passingDictionary: [[String : AnyObject]] = []
+    
+    
     
     @IBOutlet weak var blurEffect: UIVisualEffectView!
     
@@ -20,6 +24,8 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+    
         
 //        
 //        self.blurEffect.layer.cornerRadius = 50

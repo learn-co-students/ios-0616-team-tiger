@@ -37,7 +37,7 @@ class DataStore {
     
     func fetchData() {
    
-        
+    
         let userFetchRequest = NSFetchRequest(entityName: "User")
         
         do {
@@ -101,7 +101,7 @@ class DataStore {
         var locationDictionary = [:]
         Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
             locationDictionary = response.result.value as! NSDictionary
-            let locationArrays = locationDictionary["data"] as! NSArray
+            let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
             
             for location in locationArrays {
                 
@@ -136,7 +136,7 @@ class DataStore {
             locationDictionary = response.result.value as! NSDictionary
             
             
-            let locationArrays = locationDictionary["data"] as! NSArray
+            let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
             
             for location in locationArrays {
                 

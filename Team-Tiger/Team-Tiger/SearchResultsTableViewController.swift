@@ -12,7 +12,7 @@ import UIKit
 class SearchResultsTableViewController: UITableViewController {
     
     var arrayOfNames: [String] = []
-    var valueToPass : [String: AnyObject] = [:]
+   
     
     var tappedCell: Int = 0
     var newDictionary: [[String : AnyObject]] = []
@@ -54,7 +54,9 @@ class SearchResultsTableViewController: UITableViewController {
         
         cell.textLabel?.text = arrayOfNames[indexPath.row]
     
-        print(valueToPass)
+
+       
+        
     
         return cell
     }
@@ -64,9 +66,8 @@ class SearchResultsTableViewController: UITableViewController {
              let newVC = segue.destinationViewController as! detailViewController
             self.tappedCell = (tableView.indexPathForSelectedRow?.row)!
            
-            
-            valueToPass = newDictionary[tappedCell]
-            newVC.dictionaryOfData = valueToPass
+           
+            newVC.dictionaryOfData = store.parkTypeArray[tappedCell]
 
             
         }
