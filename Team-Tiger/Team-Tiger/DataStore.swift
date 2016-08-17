@@ -35,7 +35,7 @@ class DataStore {
     //        }
     //    }
     
-    
+     
     func fetchData() {
         
         
@@ -46,12 +46,20 @@ class DataStore {
         } catch {
             print("ERROR")
         }
+        
+        if user.count == 0 {
+            
+            generateData()
+            
+        }
     }
     
     func generateData() {
         
         //possible that we may have to change this from let to var
         let firstUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
+        
+        firstUser.favorites = []
         
         saveContext()
         fetchData()

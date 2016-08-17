@@ -88,7 +88,7 @@ class SearchResultsTableViewController: UITableViewController {
              let newVC = segue.destinationViewController as! detailViewController
             self.tappedCell = (tableView.indexPathForSelectedRow?.row)!
            
-            newVC.dictionaryOfData = dataStore.parkTypeArray[tappedCell]
+            newVC.locationToPresent = dataStore.parkTypeArray[tappedCell]
 
             
         }
