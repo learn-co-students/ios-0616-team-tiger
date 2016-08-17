@@ -24,18 +24,18 @@ class detailViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
         
-        
         // self.locationName.text = locationNameText
+
         var type = dictionaryOfData["type"] as! String
-        locationName.text =  dictionaryOfData["name"] as! String
-        locationAddress.text =  dictionaryOfData["address"] as! String
+        locationName.text =  dictionaryOfData["name"] as? String
+        locationAddress.text =  dictionaryOfData["address"] as? String
        
         //to replace after kens icons populate tableview
         if type.containsString("Garden") {
             type = type + " 🌿"
         }
         locationType.text = type
-        zipCode.text =  dictionaryOfData["zip"] as! String
+        zipCode.text =  dictionaryOfData["zip"] as? String
         
         print("Addresses of parks: \(locationAddress.text)")
         print(dictionaryOfData)
@@ -49,7 +49,7 @@ class detailViewController: UIViewController {
     }
     
     @IBAction func phoneNumber(sender: AnyObject) {
-        var url: NSURL = NSURL(string: "tel://3472321892")!
+        let url: NSURL = NSURL(string: "tel://3472321892")!
         UIApplication.sharedApplication().openURL(url)
     }
     

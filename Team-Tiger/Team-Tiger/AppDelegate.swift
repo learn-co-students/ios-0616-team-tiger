@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let locationManager = CLLocationManager()
 
     var window: UIWindow?
-
+var zip : String = ""
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -30,10 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 //        }
         
         AirQualityAPIClient.getAirQualityIndex("10012")
-//        getLocation()
-        
-        
-        return true
+        getLocation()
+                return true
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -52,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -122,48 +121,82 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             }
         }
     }
-//    func getLocation() {
+    func getLocation() {
+        
+        locationManager.delegate = self
+        
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            
+            print("Yay for location")
+            
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            
+            locationManager.requestLocation()
+            
+            locationManager.startUpdatingLocation()
+            
+            print(dataStore.currentLocation)
+        
+        } else {
+//            getZipCode()
+            print("No go on location")
+            
+        }
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        print("We know where you are")
+        
+        if locations.count > 0 {
+            
+                        dataStore.currentLocation = (locations.first)!
+            
+            locationManager.stopUpdatingLocation()
+            
+            //            print("You are here : \(dataStore.currentLocation)")
+            
+        }
+        
+    }
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
+//    func getZipCode() {
+//        var alertController:UIAlertController?
+//        alertController = UIAlertController(title: "Location",
+//                                            message: "Please enter your approximate address and/0 zip code",
+//                                            preferredStyle: .Alert)
+//        alertController!.addTextFieldWithConfigurationHandler(
+//            {(textField: UITextField!) in
+//                textField.placeholder = "Enter Address"
+//        })
+//        let action = UIAlertAction(title: "Submit",
+//                                   style: UIAlertActionStyle.Default,
+//                                   handler: {[weak self]
+//                                    (paramAction:UIAlertAction!) in
+//                                    if let textFields = alertController?.textFields{
+//                                        
+//                                        let theTextFields = textFields as [UITextField]
+//                                        let enteredText = theTextFields[0].text
+//                                        self?.zip = enteredText!
+//                                    }
+//            })
 //        
-//        locationManager.delegate = self
-//        
-//        locationManager.requestWhenInUseAuthorization()
-//        
-//        if CLLocationManager.locationServicesEnabled() {
-//            
-//            print("Yay for location")
-//            
-//            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-//            
-//            locationManager.requestLocation()
-//            
-//            locationManager.startUpdatingLocation()
-//            
-//            print(dataStore.currentLocation)
-//        
-//        } else {
-//            
-//            print("No go on location")
-//            
-//        }
-//    }
-//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        
-//        print("We know where you are")
-//        
-//        if locations.count > 0 {
-//            
-//                        dataStore.currentLocation = (locations.first)!
-//            
-//            locationManager.stopUpdatingLocation()
-//            
-//            //            print("You are here : \(dataStore.currentLocation)")
-//            
-//        }
-//        
-//    }
-//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-//        
-//        print("Failed to find user's location: \(error.localizedDescription)")
+//        alertController?.addAction(action)
+//        self.presentViewController(alertController!,
+//                                   animated: true,
+//                                   completion: nil)
+//        let zipCode = CLGeocoder().geocodeAddressString(self.zip, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+//            if let placemark = placemarks?.first {
+//                
+//                self.dataStore.currentLocation = placemark.location!
+//                print(self.dataStore.currentLocation)
+//                
+//            }
+//        })
 //    }
 }
 
