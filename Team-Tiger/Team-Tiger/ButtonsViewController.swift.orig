@@ -12,10 +12,18 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     var arrayOfFarmersMarkets: [String] = []
     var arrayOfParks: [String] = []
     let locationManager = CLLocationManager()
+<<<<<<< HEAD
+    let dataStore = DataStore.store
+    
+    //var passingDictionary: [[String : AnyObject]] = []
+    
+    
+=======
     
     let dataStore = DataStore.store
     
     var zip : String = ""
+>>>>>>> c7975b905825d1ee9dbe9a404e41885b55a7cd04
     
     @IBOutlet weak var blurEffect: UIVisualEffectView!
     
@@ -30,6 +38,15 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         
         super.viewDidLoad()
         
+<<<<<<< HEAD
+    
+        
+//        
+//        self.blurEffect.layer.cornerRadius = 50
+//        
+//        self.blurEffect.clipsToBounds = true
+=======
+>>>>>>> c7975b905825d1ee9dbe9a404e41885b55a7cd04
         
         self.blurEffect.layer.cornerRadius = 10
         
@@ -122,7 +139,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 }
                 
                 self.dataStore.farmersMarketArray = self.sortArrayByDistance(farmersArrayCopy)
-//                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
+                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
                 for marketDictionary in self.dataStore.farmersMarketArray {
                     
                     if let marketName = marketDictionary["name"] {
@@ -216,15 +233,10 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
             locationManager.startUpdatingLocation()
-//            self.dataStore.currentLocation = locationManager.location!
         } else {
             
             print("No go on location")
         }
-    }
-    
-    func locationManager(manager: CLLocationManager, startUpdatingLocation location: CLLocation) {
-        dataStore.currentLocation = location
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {

@@ -38,7 +38,7 @@ class DataStore {
     
     func fetchData() {
    
-        
+    
         let userFetchRequest = NSFetchRequest(entityName: "User")
         
         do {
@@ -301,7 +301,7 @@ class DataStore {
         
         for key in keys {
             
-            if self.masterParksDictionary[key]![category] == type {
+            if self.masterParksDictionary[key]![category]!.containsString(type) == true {
                 
                 self.parkTypeArray.append(self.masterParksDictionary[key]!)
                 
@@ -322,7 +322,7 @@ class DataStore {
             
             for key in keys {
                 
-                if parks[key]![category] == type {
+                if parks[key]![category]?.containsString(type) == true{
                     
                     self.parkTypeArray.append(parks[key]!)
                     // Changes the coordinates to coordinates
@@ -374,6 +374,7 @@ class DataStore {
             //
             //            print("Data existed in masterParksDictionary")
             completion()
+            
         } else {
             
             getParkByTypeOnDemand(category, type: type, completion: {
@@ -381,6 +382,7 @@ class DataStore {
                 //                print("Results on demand \(self.typeResults)")
                 
                 print("Data retrieved on demand")
+                
                 completion()
             })
         }
