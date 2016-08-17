@@ -301,7 +301,7 @@ class DataStore {
         
         for key in keys {
             
-            if parks[key]![category]?.containsString(type) == true {
+            if self.masterParksDictionary[key]![category]!.containsString(type) == true {
                 
                 self.parkTypeArray.append(self.masterParksDictionary[key]!)
                 
