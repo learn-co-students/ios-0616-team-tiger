@@ -24,9 +24,7 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>testing</string>
-	<key>NSLocationWhenInUseUsageDescription </key>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please allow access so we can suggest location based activities!</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
