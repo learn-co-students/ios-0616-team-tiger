@@ -216,10 +216,15 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
             locationManager.startUpdatingLocation()
+//            self.dataStore.currentLocation = locationManager.location!
         } else {
             
             print("No go on location")
         }
+    }
+    
+    func locationManager(manager: CLLocationManager, startUpdatingLocation location: CLLocation) {
+        dataStore.currentLocation = location
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {
