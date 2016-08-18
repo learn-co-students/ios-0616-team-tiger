@@ -40,11 +40,11 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         queue.addOperationWithBlock {
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 //                self.getLocation()
-                self.dataStore.populateParkByTypeBasedOnState("type", type: "Park", completion: {
-                    
-                    //                                    self.dataStore.populateParkByTypeBasedOnState("type", type: "Community Park", completion: {
-                    print(self.dataStore.parkTypeArray)
-                })
+//                self.dataStore.populateParkByTypeBasedOnState("type", type: "Park", completion: {
+//                    
+//                    //                                    self.dataStore.populateParkByTypeBasedOnState("type", type: "Community Park", completion: {
+//                    print(self.dataStore.parkTypeArray)
+//                })
                 
             
             //            self.dataStore.populateParkByTypeBasedOnState("type", type: "Garden", completion: {
@@ -214,13 +214,21 @@ func getOutdoorWifiSpots()  {
 }
 override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     let destinationVC = segue.destinationViewController as! SearchResultsTableViewController
+    
     if segue.identifier == "showParks" {
         
         destinationVC.arrayOfNames = self.arrayOfParks
-    } else if segue.identifier == "showParks" {
+        
+    } else if segue.identifier == "showGardens" {
+        
+       // destinationVC.arrayOfNames = dataStore.gardenArray
+        
+        print("No Garden Data")
         
     } else {
+        
         destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
+        
     }
 }
 //Location Things

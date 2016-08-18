@@ -15,7 +15,6 @@ class SearchResultsTableViewController: UITableViewController {
    
     
     var tappedCell: Int = 0
-    var newDictionary: [[String : AnyObject]] = []
     
     let dataStore = DataStore.store
 
@@ -24,7 +23,7 @@ class SearchResultsTableViewController: UITableViewController {
         
 //        print("PARKS IN ARRAY \(dataStore.parkTypeArray)")
       
-      print(newDictionary)
+      print(self.arrayOfNames)
         
         
         self.tableView.reloadData()
