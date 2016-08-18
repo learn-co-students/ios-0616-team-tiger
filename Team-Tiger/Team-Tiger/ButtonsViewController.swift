@@ -24,52 +24,30 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     var queue = NSOperationQueue()
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
-        
         self.blurEffect.layer.cornerRadius = 10
-        
-        
         self.blurEffect.clipsToBounds = true
-        
-        //
-        //        queue.addOperationWithBlock {
-        //            NSOperationQueue.mainQueue().addOperationWithBlock {
-        //                self.getLocation()
-        //                self.dataStore.populateParkByTypeBasedOnState("type", type: "Park", completion: {
-        //
-        //                    print("Parks \(self.dataStore.parkTypeArray)")
-        ////                })
-        //                self.getParks({
-        //                    print("All the parks")
         self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
         
-        dataStore.populateParkByTypeBasedOnState("type", type: "Park", completion: {
-            print("Got parks")
-        })
-        
-        for park in self.dataStore.parkTypeArray {
-            self.arrayOfParks.append((park["name"] as? String)!)
-            print(park["Distance"])
+        dataStore.populateParkByTypeBasedOnState("type", type: "Park") { (success) in
+            
+            self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
+            
+            if success {
+                for park in self.dataStore.parkTypeArray {
+                    self.arrayOfParks.append((park["name"] as? String)!)
+                    print(park["Distance"])
+                }
+                print("Got parks")
+            }
         }
-        //                })
         
         print("All the parks")
-        
-        //            }
-        //            NSOperationQueue.mainQueue().addOperationWithBlock {
         self.getFarmersMarkets()
-        
         print("Farmers markets")
         
- //        print(coordinates)
-        
-        self.getOutdoorWifiSpots()
         print("Wifi Found")
-        //
-        //            }
-        //        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -77,7 +55,6 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        //        self.getLocation()
         
     }
     
@@ -97,15 +74,6 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         return sortedByDistance
     }
     
-    // Parks
-    func getParks(completion: () -> ()) {
-        print("Get parks")
-        dataStore.populateParkByTypeBasedOnState("type", type: "Park", completion: {
-            print("Got parks")
-        })
-        print("Button parks \(dataStore.parkTypeArray)")
-        //        self.arrayOfParks = dataStore.parkTypeArray
-    }
     // Farmers' Market
     
     // Tweaked to get hours and season of operation
@@ -123,9 +91,8 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                     farmersArrayCopy.append(marketCopy)
                     
                 }
-                //            print("Copycopycopycopy : \(farmersArrayCopy)")
                 self.dataStore.farmersMarketArray = self.sortArrayByDistance(farmersArrayCopy)
-                //                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
+                self.dataStore.farmersMarketArray = self.isLessThan5MilesAway(self.dataStore.farmersMarketArray)
                 
                 for marketDictionary in self.dataStore.farmersMarketArray {
                     
@@ -135,11 +102,8 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 }
             } else {
                 print("ERROR: Unable to retrieve farmer's markets")
-                
             }
-            
         }
-        
     }
     
     // Wifi
@@ -156,7 +120,6 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             response in
             
             locationArray = response.result.value as! Array
-            
             print("parsing")
             
             if let jsonData = response.data {
@@ -195,6 +158,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
     }
+    
     @IBAction func shopTapped(sender: AnyObject) {
         
     }
@@ -202,12 +166,12 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destinationVC = segue.destinationViewController as! SearchResultsTableViewController
         if segue.identifier == "showParks" {
-            self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
-            for park in self.dataStore.parkTypeArray {
-                self.arrayOfParks.append((park["name"] as? String)!)
-                print(park["Distance"])
-            }
-
+            //            self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
+            //            for park in self.dataStore.parkTypeArray {
+            //                self.arrayOfParks.append((park["name"] as? String)!)
+            //                print(park["Distance"])
+            //            }
+            
             print(self.dataStore.parkTypeArray)
             print(self.arrayOfParks)
             destinationVC.arrayOfNames = self.arrayOfParks

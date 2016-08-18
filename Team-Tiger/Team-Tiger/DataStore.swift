@@ -21,7 +21,7 @@ class DataStore {
     var masterParksDictionary = [String : [String : String]]()
     var currentLocation = CLLocation()
     var arrayOfParks: [String] = []
-    
+    var greenThumbArray: [[String:String]] = []
     
     //static makes it a singleton
     static let store = DataStore()
@@ -283,6 +283,12 @@ class DataStore {
 //        print("ParkTypeArray = \(self.parkTypeArray)")
     }
     
+//    func getGardens() {
+//        self.populateParkByTypeBasedOnState("type", type: "Garden") { 
+//            
+//            
+//        }
+//    }
     //To be used only when masterParkDictionary is empty. Otherwise, use getParkByType
     func getParkByTypeOnDemand(category: String, type: String, completion:() -> ()) {
         
@@ -297,14 +303,16 @@ class DataStore {
                 if parks[key]![category]?.containsString(type) == true{
                     
                     self.parkTypeArray.append(parks[key]!)
+                    print("i have the parks")
                 }
+                
             }
             
             self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
 //            print("ParkTypeArray = \(self.parkTypeArray)")
-            
+            completion()
         }
-        completion()
+        
     }
     // Makes Coordinates Readable.
     func organizeParkCoordinates(parks : [[String : AnyObject]]) -> [[String : AnyObject]] {
@@ -328,7 +336,7 @@ class DataStore {
     }
     
     //Combines the custom "get" functions and picks one based on the existence on data in the masterParksDictionary
-    func populateParkByTypeBasedOnState(category: String, type: String, completion:() -> ()) {
+    func populateParkByTypeBasedOnState(category: String, type: String, completion:(Bool) -> ()) {
         
         if self.masterParksDictionary.count != 0 {
             
@@ -338,18 +346,65 @@ class DataStore {
 //            
             //
             //            print("Data existed in masterParksDictionary")
-            completion()
+            completion(true)
             
         } else {
             
-            getParkByTypeOnDemand(category, type: type, completion: {
+            print("I have nothing in data store so i need to populate \(self.parkTypeArray)")
+
+            getParkByTypeOnDemand(category, type: type, completion:  {
                 
                 //                print("Results on demand \(self.typeResults)")
+//                print("Data retrieved on demand")
                 
-                print("Data retrieved on demand")
-                
-                completion()
+                completion(true)
             })
+            
+//            getParkByTypeOnDemand(category, type: type, completion: { (Success) -> () in
+////                print("Results on demand \()")
+//                
+//            })
+        }
+    }
+    
+    
+    func greenThumbParse(completionHandler: (Bool) -> ()) {
+        
+        // var greenThumbArray: [[String: String]] = []
+        
+        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/ajxm-kzmj/rows.json?") .responseJSON { response in
+            
+//            self.greenThumbdictionary = response.result.value as! NSDictionary
+            
+            if let jsonData = response.data {
+                let jsonObj = JSON(data: jsonData)
+                
+                let arrayOfData = jsonObj["data"].array
+                
+                var dictionaryWithInfo = [String:String]()
+                
+                if let arrayOfData = arrayOfData {
+                    
+                    for detail in arrayOfData {
+                        
+                        dictionaryWithInfo["Garden"] = detail[12].string
+                        dictionaryWithInfo["Address"] = detail[13].string
+                        //dictionaryWithInfo["Cross Streets"] = detail[17].string
+                        
+                        if let neighborhoodInDictionary = detail[16].string {
+                            
+                            dictionaryWithInfo["neighborhood"] = neighborhoodInDictionary
+                            
+                        } else {
+                            print("\n\n\n NEIGHBORHOOD ISN'T PROVIDED\n\n\n")
+                        }
+                        
+//                        self.greenThumbArray.append(dictionaryWithInfo)
+                    }
+                    completionHandler(true)
+                    
+                }
+            }
         }
     }
 }
