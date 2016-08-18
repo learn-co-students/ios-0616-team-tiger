@@ -13,7 +13,7 @@ import CoreData
 
 class LocationStuff: NSObject, CLLocationManagerDelegate {
     
-    public func sortWithDistance(array: [String : AnyObject], location: CLLocation) -> [String : AnyObject] {
+    public func sortWithDistance(array: [String : AnyObject]) -> [String : AnyObject] {
         var arrayCopy = array
         var closestCoordinate = CLLocation()
         let coordinates = array["coordinates"] as? Array<CLLocation>
@@ -29,9 +29,9 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
             //                closestCoordinate = coordinate
         }
         closestCoordinate = CLLocation(latitude: latitudeTotal/totalCount, longitude: longitudeTotal/totalCount)
-        arrayCopy["coordinate"] = closestCoordinate
+        arrayCopy["coordinates"] = closestCoordinate
         print("Average coordinates : \(closestCoordinate), \(array["name"])")
-        arrayCopy["Distance"] = closestCoordinate.distanceFromLocation(location) * 0.00062137
+        
         
         return arrayCopy
         

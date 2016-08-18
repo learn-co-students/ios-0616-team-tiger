@@ -21,22 +21,16 @@ class DataStore {
     var masterParksDictionary = [String : [String : String]]()
     var currentLocation = CLLocation()
     var airQualityReport = []
-    
-    
+    var arrayOfParks: [String] = []
+    var greenThumbArray: [[String:AnyObject]] = []
+
     
     //static makes it a singleton
     static let store = DataStore()
     
     var user = [User]()
     
-    //
-    //    func getJohannData(completion:()->()){
-    //        ParksApiClient.getJohann { (userArray) in
-    //            self.dataStoreUserArray = userArray
-    //        }
-    //    }
     
-     
     func fetchData() {
         
         
@@ -49,9 +43,7 @@ class DataStore {
         }
         
         if user.count == 0 {
-            
             generateData()
-            
         }
     }
     
@@ -64,7 +56,6 @@ class DataStore {
         
         saveContext()
         fetchData()
-        
     }
     
     func sortArrayByDistance(array : [[String : AnyObject]]) -> [[String : AnyObject]] {
@@ -76,43 +67,6 @@ class DataStore {
         arrayCopy = tableViewArray as! [[String: AnyObject]]
         return arrayCopy
     }
-    
-    
-    //    func farmersMarketParse() {
-    //        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/j8gx-kc43/rows.json?") .responseJSON { response in
-    //            self.farmersMarketDictionary = response.result.value as! NSDictionary
-    //
-    //            if let jsonData = response.data {
-    //                let jsonObj = JSON(data: jsonData)
-    //
-    //                let arrayOfData = jsonObj["data"].array
-    //
-    //                var dictionaryWithInfo = [String:String]()
-    //
-    //                if let arrayOfData = arrayOfData {
-    //
-    //                    for detail in arrayOfData {
-    //
-    //                        dictionaryWithInfo["name"] = detail[8].string
-    //                        dictionaryWithInfo["zip"] = detail[13].string
-    //                        dictionaryWithInfo["longitude"] = detail[15].string
-    //                        dictionaryWithInfo["latitude"] = detail[14].string
-    //
-    //                        if let addressInDictionary = detail[10].string {
-    //
-    //                            dictionaryWithInfo["address"] = addressInDictionary
-    //                            print(dictionaryWithInfo)
-    //
-    //                        } else {
-    //                            print("IN SEARCH OF ADDRESS")
-    //                        }
-    //                    }
-    //                    print(dictionaryWithInfo)
-    //                }
-    //
-    //            }
-    //        }
-    //    }
     
     func farmersMarketParse(completionHandler: (Bool) -> ()) {
         Alamofire.request(.GET, "https://data.ny.gov/resource/farmersmarkets.json?") .responseJSON { response in
@@ -141,6 +95,7 @@ class DataStore {
                             dictionaryWithInfo["zip"] = detail["zip"].string
                             dictionaryWithInfo["hours"] = detail["operation_hours"].string
                             dictionaryWithInfo["season"] = detail["operation_season"].string
+                            dictionaryWithInfo["phone"] = detail["phone"].string
                             
                             if let latitude = detail["location_points"]["latitude"].string {
                                 dictionaryWithInfo["latitude"] = Double(latitude)
@@ -165,7 +120,7 @@ class DataStore {
                 }
                 print(self.currentLocation)
                 print("Count: \(self.farmersMarketArray.count)")
-                print("Array: \(self.farmersMarketArray)")
+                //                print("Array: \(self.farmersMarketArray)")
                 //                 self.farmersMarketArray = self.sortArrayByDistance(self.farmersMarketArray)
                 
                 //                print( self.farmersMarketArray)
@@ -184,7 +139,7 @@ class DataStore {
         Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
             locationDictionary = response.result.value as! NSDictionary
             let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
-            
+            //            print("LocationArrays : \(locationArrays)")
             for location in locationArrays {
                 
                 var tempDictionary = [String : String]()
@@ -200,10 +155,9 @@ class DataStore {
                 
             }
             
-            completion()
             
+            completion()
         }
-        
     }
     
     //Used to call parks data on demand that is passed to getParkByTypeOnDemand method
@@ -219,7 +173,7 @@ class DataStore {
             
             
             let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
-            
+            //            print("LocationArrays : \(locationArrays)")
             for location in locationArrays {
                 
                 var tempDictionary = [String : String]()
@@ -318,6 +272,7 @@ class DataStore {
             
         }
         self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
+        //        print("ParkTypeArray = \(self.parkTypeArray)")
     }
     
     //To be used only when masterParkDictionary is empty. Otherwise, use getParkByType
@@ -333,17 +288,14 @@ class DataStore {
                 
                 if parks[key]![category]?.containsString(type) == true{
                     
-//                    if type == "Garden" {
-//                        self.gardenArray.append(parks[key]!)
-//                    } else {
-                        self.parkTypeArray.append(parks[key]!)
-//                    }
+                    self.parkTypeArray.append(parks[key]!)
+                    print("i have the parks")
                 }
                 
             }
-            self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
-//            self.gardenArray = self.organizeParkCoordinates(self.gardenArray)
             
+            self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
+            //            print("ParkTypeArray = \(self.parkTypeArray)")
             completion()
         }
         
@@ -355,12 +307,11 @@ class DataStore {
         for park in parks {
             var parkCopy : [String : AnyObject] = park
             
-            if let coordinatesAsString = park["coordinates"] {
+            if let coordinatesAsString = park["coordinates"] as? String {
                 
                 parkCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
                 
-                parkCopy = LocationStuff().sortWithDistance(parkCopy, location: self.currentLocation)
-                print("Used locationManager  ")
+                parkCopy = LocationStuff().sortWithDistance(parkCopy)
                 
                 parksCopy.append(parkCopy)
             }
@@ -370,30 +321,65 @@ class DataStore {
     }
     
     //Combines the custom "get" functions and picks one based on the existence on data in the masterParksDictionary
-    func populateParkByTypeBasedOnState(category: String, type: String, completion:() -> ()) {
+    func populateParkByTypeBasedOnState(category: String, type: String, completion:(Bool) -> ()) {
         
         if self.masterParksDictionary.count != 0 {
             
             getParkByType(category, type: type)
             
-            print("Results results results\(self.parkTypeArray)")
-            //
-            //            print("Data existed in masterParksDictionary")
-            completion()
+            completion(true)
             
         } else {
             
-            getParkByTypeOnDemand(category, type: type, completion: {
+            print("I have nothing in data store so i need to populate \(self.parkTypeArray)")
+            
+            getParkByTypeOnDemand(category, type: type, completion:  {
                 
-                //                print("Results on demand \(self.typeResults)")
-                
-                print("Data retrieved on demand")
-                
-                completion()
+                completion(true)
             })
         }
     }
     
     
+    func greenThumbParse(completionHandler: (Bool) -> ()) {
+        
+        // var greenThumbArray: [[String: String]] = []
+        var greenThumbDictionary : [String : [ String : AnyObject]] = [:]
+        
+        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/3ckp-upxf/rows.json?") .responseJSON { response in
+            
+            //            self.greenThumbdictionary = response.result.value as! NSDictionary
+            
+            if let jsonData = response.data {
+                let jsonObj = JSON(data: jsonData)
+                
+                let arrayOfData = jsonObj["data"].array
+                
+                var dictionaryWithInfo = [String: AnyObject]()
+                
+                if let arrayOfData = arrayOfData {
+                    
+                    for detail in arrayOfData {
+//                        if !self.greenThumbArray.contains(detail[10].string) {
+                        dictionaryWithInfo["Garden"] = detail[10].string
+                        dictionaryWithInfo["Address"] = detail[11].string
+                        dictionaryWithInfo["phone number"] = detail[15].string
+                        if let coordinate = detail[8].string {
+                            print(coordinate)
+                        dictionaryWithInfo["coordinates"] = coordinate
+                        }
+                       greenThumbDictionary[detail[10].string!] = dictionaryWithInfo
+//                        self.greenThumbArray.append(dictionaryWithInfo)
+//                        }
+                    }
+                    self.greenThumbArray = Array(greenThumbDictionary.values)
+                    self.greenThumbArray = self.organizeParkCoordinates(self.greenThumbArray)
+                    print(self.greenThumbArray)
+                    completionHandler(true)
+                    
+                }
+            }
+        }
+    }
 }
 
