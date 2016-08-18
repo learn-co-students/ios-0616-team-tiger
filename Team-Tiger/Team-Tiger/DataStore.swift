@@ -20,6 +20,7 @@ class DataStore {
     var gardenArray : [[String:AnyObject]] = []
     var masterParksDictionary = [String : [String : String]]()
     var currentLocation = CLLocation()
+    var airQualityReport = []
     
     
     

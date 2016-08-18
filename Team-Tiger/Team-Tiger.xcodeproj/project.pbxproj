@@ -28,6 +28,7 @@
 		4F66D8C21D650C9100C45E8F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66D8BE1D650C9100C45E8F /* Location.swift */; };
 		4F66D8C41D650F2B00C45E8F /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66D8C31D650F2B00C45E8F /* FavoritesTableViewController.swift */; };
 		4F66D8C81D661A4900C45E8F /* AQI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F66D8C71D661A4900C45E8F /* AQI.storyboard */; };
+		4F66D8CA1D66262F00C45E8F /* AQIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66D8C91D66262F00C45E8F /* AQIViewController.swift */; };
 		4F6B89B61D5A79AE0051BA1C /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6B89B51D5A79AE0051BA1C /* OnboardingPageViewController.swift */; };
 		4F6B89B81D5A7D090051BA1C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6B89B71D5A7D090051BA1C /* OnboardingViewController.swift */; };
 		4F8C6DA31D5BBD3400291193 /* AirQualityAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C6DA21D5BBD3400291193 /* AirQualityAPIClient.swift */; };
@@ -61,6 +62,7 @@
 		4F66D8BE1D650C9100C45E8F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		4F66D8C31D650F2B00C45E8F /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		4F66D8C71D661A4900C45E8F /* AQI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AQI.storyboard; sourceTree = "<group>"; };
+		4F66D8C91D66262F00C45E8F /* AQIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AQIViewController.swift; sourceTree = "<group>"; };
 		4F6B89B51D5A79AE0051BA1C /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		4F6B89B71D5A7D090051BA1C /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		4F8C6DA21D5BBD3400291193 /* AirQualityAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirQualityAPIClient.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				4F57E5E01D5E0FCA00A6B27B /* SearchResultsTableViewController.swift */,
 				8F0257DA1D61562A002F9D5B /* detailViewController.swift */,
 				4F66D8C31D650F2B00C45E8F /* FavoritesTableViewController.swift */,
+				4F66D8C91D66262F00C45E8F /* AQIViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				4F66D8BF1D650C9100C45E8F /* User+CoreDataProperties.swift in Sources */,
 				4F66D8C41D650F2B00C45E8F /* FavoritesTableViewController.swift in Sources */,
 				4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */,
+				4F66D8CA1D66262F00C45E8F /* AQIViewController.swift in Sources */,
 				4F8C6DA31D5BBD3400291193 /* AirQualityAPIClient.swift in Sources */,
 				110E70F41D5D08D00063AE78 /* BotanicalGardensTableViewController.swift in Sources */,
 				110E70F21D5D035C0063AE78 /* CommunityGardensTableViewController.swift in Sources */,

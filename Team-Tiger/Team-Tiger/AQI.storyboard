@@ -9,7 +9,7 @@
         <!--View Controller-->
         <scene sceneID="vRD-Bz-5cW">
             <objects>
-                <viewController id="JTC-wI-HpZ" sceneMemberID="viewController">
+                <viewController id="JTC-wI-HpZ" customClass="AQIViewController" customModule="Team_Tiger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UA1-Yd-cec"/>
                         <viewControllerLayoutGuide type="bottom" id="geK-5a-NCi"/>
@@ -55,7 +55,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="E1y-il-yZK">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="E1y-il-yZK">
                                 <rect key="frame" x="180" y="357" width="240" height="150"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">It's an AQI Action Day. Groups that are sensitive to pollutants should reduce exposure by eliminating prolonged or heavy exertion outdoors. For ozone this includes children and adults who are active outdoors and people with lung disease, such as asthma.</string>
@@ -118,6 +118,11 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="actionDayStatus" destination="E1y-il-yZK" id="UM1-5p-Tla"/>
+                        <outlet property="ozoneLabel" destination="eHH-Os-KWS" id="kyI-gX-Zwm"/>
+                        <outlet property="particulateLabel" destination="Nyo-FC-MAs" id="ONr-1x-UNI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FSK-Qe-TVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

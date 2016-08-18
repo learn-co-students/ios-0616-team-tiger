@@ -31,7 +31,10 @@ var zip : String = ""
         
         dataStore.fetchData()
         
-        AirQualityAPIClient.getAirQualityIndex("10012")
+        AirQualityAPIClient.getAirQualityIndex("10012") { (report) in
+            self.dataStore.airQualityReport = report
+        }
+        
         getLocation { 
             self.dataStore.populateParkByTypeBasedOnState("type", type: "Park", completion: {
                 print(self.dataStore.parkTypeArray)
