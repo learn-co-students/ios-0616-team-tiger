@@ -35,11 +35,7 @@ var zip : String = ""
             self.dataStore.airQualityReport = report
         }
         
-        getLocation { 
-            self.dataStore.populateParkByTypeBasedOnState("type", type: "Park", completion: {
-                print(self.dataStore.parkTypeArray)
-            })
-        }
+         getLocation()
                 return true
     }
 
@@ -130,7 +126,7 @@ var zip : String = ""
             }
         }
     }
-    func getLocation(completion: () -> ()) {
+    func getLocation() {
         
         locationManager.delegate = self
         
