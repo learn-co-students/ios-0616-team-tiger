@@ -18,7 +18,7 @@ class GoogleDetailsViewController: UIViewController {
         var latitude = String()
         var longitude = String()
         
-        var detailView = detailViewController()
+        var locationFromDetailView = detailViewController()
 
         
         override func viewDidLoad() {
@@ -37,7 +37,7 @@ class GoogleDetailsViewController: UIViewController {
         
         func googleSearchTest(completionHandler: ([String: String]) -> ()) {
             
-            var closestCoordinate = String(detailView.dictionaryOfData["Closest Coordinate"])
+            var closestCoordinate = String(locationFromDetailView.locationToPresent["Closest Coordinate"])
             let parseCoordinatesFirstPass = closestCoordinate.componentsSeparatedByString(">").first
             let parseCoordinatesSecondPass = parseCoordinatesFirstPass?.componentsSeparatedByString("<").last
             let coordinates = parseCoordinatesSecondPass?.componentsSeparatedByString(",")
