@@ -17,7 +17,7 @@ class DataStore {
     var farmersMarketDictionaryArray = []
     var farmersMarketArray : [[String:AnyObject]] = []
     var parkTypeArray: [[String:AnyObject]] = []
-
+    var gardenArray : [[String:AnyObject]] = []
     var masterParksDictionary = [String : [String : String]]()
     var currentLocation = CLLocation()
     
@@ -28,17 +28,17 @@ class DataStore {
     
     var user = [User]()
     
-//    
-//    func getJohannData(completion:()->()){
-//        ParksApiClient.getJohann { (userArray) in
-//            self.dataStoreUserArray = userArray
-//        }
-//    }
+    //
+    //    func getJohannData(completion:()->()){
+    //        ParksApiClient.getJohann { (userArray) in
+    //            self.dataStoreUserArray = userArray
+    //        }
+    //    }
     
-    
+     
     func fetchData() {
-   
-    
+        
+        
         let userFetchRequest = NSFetchRequest(entityName: "User")
         
         do {
@@ -46,12 +46,20 @@ class DataStore {
         } catch {
             print("ERROR")
         }
+        
+        if user.count == 0 {
+            
+            generateData()
+            
+        }
     }
     
     func generateData() {
         
         //possible that we may have to change this from let to var
         let firstUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext) as! User
+        
+        firstUser.favorites = []
         
         saveContext()
         fetchData()
@@ -69,41 +77,41 @@ class DataStore {
     }
     
     
-//    func farmersMarketParse() {
-//        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/j8gx-kc43/rows.json?") .responseJSON { response in
-//            self.farmersMarketDictionary = response.result.value as! NSDictionary
-//            
-//            if let jsonData = response.data {
-//                let jsonObj = JSON(data: jsonData)
-//                
-//                let arrayOfData = jsonObj["data"].array
-//                
-//                var dictionaryWithInfo = [String:String]()
-//                
-//                if let arrayOfData = arrayOfData {
-//                    
-//                    for detail in arrayOfData {
-//                        
-//                        dictionaryWithInfo["name"] = detail[8].string
-//                        dictionaryWithInfo["zip"] = detail[13].string
-//                        dictionaryWithInfo["longitude"] = detail[15].string
-//                        dictionaryWithInfo["latitude"] = detail[14].string
-//                        
-//                        if let addressInDictionary = detail[10].string {
-//                            
-//                            dictionaryWithInfo["address"] = addressInDictionary
-//                            print(dictionaryWithInfo)
-//                            
-//                        } else {
-//                            print("IN SEARCH OF ADDRESS")
-//                        }
-//                    }
-//                    print(dictionaryWithInfo)
-//                }
-//                
-//            }
-//        }
-//    }
+    //    func farmersMarketParse() {
+    //        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/j8gx-kc43/rows.json?") .responseJSON { response in
+    //            self.farmersMarketDictionary = response.result.value as! NSDictionary
+    //
+    //            if let jsonData = response.data {
+    //                let jsonObj = JSON(data: jsonData)
+    //
+    //                let arrayOfData = jsonObj["data"].array
+    //
+    //                var dictionaryWithInfo = [String:String]()
+    //
+    //                if let arrayOfData = arrayOfData {
+    //
+    //                    for detail in arrayOfData {
+    //
+    //                        dictionaryWithInfo["name"] = detail[8].string
+    //                        dictionaryWithInfo["zip"] = detail[13].string
+    //                        dictionaryWithInfo["longitude"] = detail[15].string
+    //                        dictionaryWithInfo["latitude"] = detail[14].string
+    //
+    //                        if let addressInDictionary = detail[10].string {
+    //
+    //                            dictionaryWithInfo["address"] = addressInDictionary
+    //                            print(dictionaryWithInfo)
+    //
+    //                        } else {
+    //                            print("IN SEARCH OF ADDRESS")
+    //                        }
+    //                    }
+    //                    print(dictionaryWithInfo)
+    //                }
+    //
+    //            }
+    //        }
+    //    }
     
     func farmersMarketParse(completionHandler: (Bool) -> ()) {
         Alamofire.request(.GET, "https://data.ny.gov/resource/farmersmarkets.json?") .responseJSON { response in
@@ -149,7 +157,7 @@ class DataStore {
                             }
                             
                             dictionaryWithInfo["coordinates"] = CLLocation(latitude: (dictionaryWithInfo["latitude"] as? Double)!, longitude: (dictionaryWithInfo["longitude"] as? Double)!)
-                                                    
+                            
                             self.farmersMarketArray.append(dictionaryWithInfo)
                         }
                     }
@@ -157,16 +165,16 @@ class DataStore {
                 print(self.currentLocation)
                 print("Count: \(self.farmersMarketArray.count)")
                 print("Array: \(self.farmersMarketArray)")
-//                 self.farmersMarketArray = self.sortArrayByDistance(self.farmersMarketArray)
+                //                 self.farmersMarketArray = self.sortArrayByDistance(self.farmersMarketArray)
                 
-//                print( self.farmersMarketArray)
+                //                print( self.farmersMarketArray)
                 
                 completionHandler(true)
                 
             }
         }
     }
-
+    
     //Gets all park data at startup
     
     func getParks(completion: () -> ()) {
@@ -192,7 +200,7 @@ class DataStore {
             }
             
             completion()
-
+            
         }
         
     }
@@ -226,7 +234,7 @@ class DataStore {
                 
             }
             completion(parks: parsedParksDictionary)
-         }
+        }
         
     }
     
@@ -324,14 +332,16 @@ class DataStore {
                 
                 if parks[key]![category]?.containsString(type) == true{
                     
-                    self.parkTypeArray.append(parks[key]!)
-                    // Changes the coordinates to coordinates
-                    
+//                    if type == "Garden" {
+//                        self.gardenArray.append(parks[key]!)
+//                    } else {
+                        self.parkTypeArray.append(parks[key]!)
+//                    }
                 }
                 
             }
             self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
-            
+//            self.gardenArray = self.organizeParkCoordinates(self.gardenArray)
             
             completion()
         }
@@ -347,16 +357,11 @@ class DataStore {
             if let coordinatesAsString = park["coordinates"] {
                 
                 parkCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
-                let testLocation = CLLocation(latitude: 40.75921100, longitude: -73.98463800)
-                //                testLocation.coordinate = CLLocationCoordinate2D(latitude: 40.75921100, longitude: -73.98463800)
-                if ButtonsViewController().locationManager.location == nil {
-                    parkCopy = LocationStuff().sortWithDistance(parkCopy, location: testLocation)
-                    print("Used testLocation")
-                } else {
-                    parkCopy = LocationStuff().sortWithDistance(parkCopy, location: ButtonsViewController().locationManager.location!)
-                    print("Used locationManager  ")
-                }
-                parksCopy.append(parkCopy) 
+                
+                parkCopy = LocationStuff().sortWithDistance(parkCopy, location: self.currentLocation)
+                print("Used locationManager  ")
+                
+                parksCopy.append(parkCopy)
             }
         }
         
@@ -387,7 +392,7 @@ class DataStore {
             })
         }
     }
-
+    
     
 }
 
