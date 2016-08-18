@@ -41,9 +41,7 @@ class DataStore {
         }
         
         if user.count == 0 {
-            
             generateData()
-            
         }
     }
     
@@ -56,7 +54,6 @@ class DataStore {
         
         saveContext()
         fetchData()
-        
     }
     
     func sortArrayByDistance(array : [[String : AnyObject]]) -> [[String : AnyObject]] {
@@ -336,12 +333,8 @@ class DataStore {
             
             getParkByTypeOnDemand(category, type: type, completion:  {
                 
-                //                print("Results on demand \(self.typeResults)")
-                //                print("Data retrieved on demand")
-                
                 completion(true)
             })
-            
         }
     }
     
@@ -349,6 +342,7 @@ class DataStore {
     func greenThumbParse(completionHandler: (Bool) -> ()) {
         
         // var greenThumbArray: [[String: String]] = []
+        var greenThumbDictionary : [String : [ String : AnyObject]] = [:]
         
         Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/3ckp-upxf/rows.json?") .responseJSON { response in
             
@@ -364,7 +358,7 @@ class DataStore {
                 if let arrayOfData = arrayOfData {
                     
                     for detail in arrayOfData {
-                        
+//                        if !self.greenThumbArray.contains(detail[10].string) {
                         dictionaryWithInfo["Garden"] = detail[10].string
                         dictionaryWithInfo["Address"] = detail[11].string
                         dictionaryWithInfo["phone number"] = detail[15].string
@@ -372,9 +366,11 @@ class DataStore {
                             print(coordinate)
                         dictionaryWithInfo["coordinates"] = coordinate
                         }
-                        
-                        self.greenThumbArray.append(dictionaryWithInfo)
+                       greenThumbDictionary[detail[10].string!] = dictionaryWithInfo
+//                        self.greenThumbArray.append(dictionaryWithInfo)
+//                        }
                     }
+                    self.greenThumbArray = Array(greenThumbDictionary.values)
                     self.greenThumbArray = self.organizeParkCoordinates(self.greenThumbArray)
                     print(self.greenThumbArray)
                     completionHandler(true)
