@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:GoogleDetailsViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:Team-Tiger.xcodeproj">
    </FileRef>
    <FileRef

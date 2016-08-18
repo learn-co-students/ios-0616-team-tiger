@@ -18,7 +18,7 @@ class detailViewController: UIViewController {
     @IBOutlet weak var zipCode: UILabel!
     
     var dictionaryOfData: [String : AnyObject] = [:]
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
