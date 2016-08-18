@@ -20,7 +20,7 @@ class DataStore {
     var gardenArray : [[String:AnyObject]] = []
     var masterParksDictionary = [String : [String : String]]()
     var currentLocation = CLLocation()
-    
+    var arrayOfParks: [String] = []
     
     
     //static makes it a singleton
@@ -76,43 +76,6 @@ class DataStore {
         return arrayCopy
     }
     
-    
-    //    func farmersMarketParse() {
-    //        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/j8gx-kc43/rows.json?") .responseJSON { response in
-    //            self.farmersMarketDictionary = response.result.value as! NSDictionary
-    //
-    //            if let jsonData = response.data {
-    //                let jsonObj = JSON(data: jsonData)
-    //
-    //                let arrayOfData = jsonObj["data"].array
-    //
-    //                var dictionaryWithInfo = [String:String]()
-    //
-    //                if let arrayOfData = arrayOfData {
-    //
-    //                    for detail in arrayOfData {
-    //
-    //                        dictionaryWithInfo["name"] = detail[8].string
-    //                        dictionaryWithInfo["zip"] = detail[13].string
-    //                        dictionaryWithInfo["longitude"] = detail[15].string
-    //                        dictionaryWithInfo["latitude"] = detail[14].string
-    //
-    //                        if let addressInDictionary = detail[10].string {
-    //
-    //                            dictionaryWithInfo["address"] = addressInDictionary
-    //                            print(dictionaryWithInfo)
-    //
-    //                        } else {
-    //                            print("IN SEARCH OF ADDRESS")
-    //                        }
-    //                    }
-    //                    print(dictionaryWithInfo)
-    //                }
-    //
-    //            }
-    //        }
-    //    }
-    
     func farmersMarketParse(completionHandler: (Bool) -> ()) {
         Alamofire.request(.GET, "https://data.ny.gov/resource/farmersmarkets.json?") .responseJSON { response in
             
@@ -140,6 +103,7 @@ class DataStore {
                             dictionaryWithInfo["zip"] = detail["zip"].string
                             dictionaryWithInfo["hours"] = detail["operation_hours"].string
                             dictionaryWithInfo["season"] = detail["operation_season"].string
+                            dictionaryWithInfo["phone"] = detail["phone"].string
                             
                             if let latitude = detail["location_points"]["latitude"].string {
                                 dictionaryWithInfo["latitude"] = Double(latitude)
@@ -164,7 +128,7 @@ class DataStore {
                 }
                 print(self.currentLocation)
                 print("Count: \(self.farmersMarketArray.count)")
-                print("Array: \(self.farmersMarketArray)")
+//                print("Array: \(self.farmersMarketArray)")
                 //                 self.farmersMarketArray = self.sortArrayByDistance(self.farmersMarketArray)
                 
                 //                print( self.farmersMarketArray)
@@ -183,7 +147,7 @@ class DataStore {
         Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
             locationDictionary = response.result.value as! NSDictionary
             let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
-            
+//            print("LocationArrays : \(locationArrays)")
             for location in locationArrays {
                 
                 var tempDictionary = [String : String]()
@@ -199,10 +163,9 @@ class DataStore {
                 
             }
             
-            completion()
             
-        }
-        
+            completion()
+       }
     }
     
     //Used to call parks data on demand that is passed to getParkByTypeOnDemand method
@@ -218,7 +181,7 @@ class DataStore {
             
             
             let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
-            
+//            print("LocationArrays : \(locationArrays)")
             for location in locationArrays {
                 
                 var tempDictionary = [String : String]()
@@ -317,6 +280,7 @@ class DataStore {
             
         }
         self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
+//        print("ParkTypeArray = \(self.parkTypeArray)")
     }
     
     //To be used only when masterParkDictionary is empty. Otherwise, use getParkByType
@@ -332,20 +296,15 @@ class DataStore {
                 
                 if parks[key]![category]?.containsString(type) == true{
                     
-//                    if type == "Garden" {
-//                        self.gardenArray.append(parks[key]!)
-//                    } else {
-                        self.parkTypeArray.append(parks[key]!)
-//                    }
+                    self.parkTypeArray.append(parks[key]!)
                 }
-                
             }
-            self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
-//            self.gardenArray = self.organizeParkCoordinates(self.gardenArray)
             
-            completion()
+            self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
+//            print("ParkTypeArray = \(self.parkTypeArray)")
+            
         }
-        
+        completion()
     }
     // Makes Coordinates Readable.
     func organizeParkCoordinates(parks : [[String : AnyObject]]) -> [[String : AnyObject]] {
@@ -359,7 +318,7 @@ class DataStore {
                 parkCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
                 
                 parkCopy = LocationStuff().sortWithDistance(parkCopy, location: self.currentLocation)
-                print("Used locationManager  ")
+//                print("Used locationManager  ")
                 
                 parksCopy.append(parkCopy)
             }
@@ -375,7 +334,8 @@ class DataStore {
             
             getParkByType(category, type: type)
             
-            print("Results results results\(self.parkTypeArray)")
+//            print("Results results results\(self.parkTypeArray)")
+//            
             //
             //            print("Data existed in masterParksDictionary")
             completion()
@@ -392,7 +352,5 @@ class DataStore {
             })
         }
     }
-    
-    
 }
 
