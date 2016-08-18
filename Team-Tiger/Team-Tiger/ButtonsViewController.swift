@@ -11,6 +11,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     var farmersMarketArray: [[String:AnyObject]] = []
     var arrayOfFarmersMarkets: [String] = []
     var arrayOfParks: [String] = []
+    var arrayOfGardens : [String] = []
     let locationManager = CLLocationManager()
     
     let dataStore = DataStore.store
@@ -32,9 +33,10 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         
         dataStore.populateParkByTypeBasedOnState("type", type: "Park") { (success) in
             
-            self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
+            
             
             if success {
+                self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
                 for park in self.dataStore.parkTypeArray {
                     self.arrayOfParks.append((park["name"] as? String)!)
                     print(park["Distance"])
@@ -46,7 +48,11 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         print("All the parks")
         self.getFarmersMarkets()
         print("Farmers markets")
-        
+        self.getParks { (true) in
+            for garden in self.dataStore.greenThumbArray {
+                self.arrayOfGardens.append(garden["Garden"] as! String)
+            }
+        }
         print("Wifi Found")
     }
     
@@ -69,9 +75,21 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func sortArrayByDistance(array : [[String : AnyObject]]) -> [[String : AnyObject]] {
-        let sortedByDistance = array.sort { ($0["Distance"] as! Double) < ($1["Distance"] as! Double) }
-        //        print("Sortedsortedsorted \(sortedByDistance)")
-        return sortedByDistance
+        if array.first?["Distance"] == nil {
+            var arrayCopy : [[String : AnyObject]] = []
+            for park in array {
+                var parkCopy = park
+                parkCopy["Distance"] = parkCopy["coordinates"]!.distanceFromLocation(self.dataStore.currentLocation) * 0.00062137
+                arrayCopy.append(parkCopy)
+            }
+            let sortedByDistance = arrayCopy.sort { ($0["Distance"] as! Double) < ($1["Distance"] as! Double) }
+            return sortedByDistance
+            
+        } else {
+            let sortedByDistance = array.sort { ($0["Distance"] as! Double) < ($1["Distance"] as! Double) }
+            //        print("Sortedsortedsorted \(sortedByDistance)")
+            return sortedByDistance
+        }
     }
     
     // Farmers' Market
@@ -166,20 +184,22 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destinationVC = segue.destinationViewController as! SearchResultsTableViewController
         if segue.identifier == "showParks" {
-            //            self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
-            //            for park in self.dataStore.parkTypeArray {
-            //                self.arrayOfParks.append((park["name"] as? String)!)
-            //                print(park["Distance"])
-            //            }
             
             print(self.dataStore.parkTypeArray)
             print(self.arrayOfParks)
             destinationVC.arrayOfNames = self.arrayOfParks
-        } else if segue.identifier == "showParks" {
-            
-        } else {
+        } else if segue.identifier == "showShops" {
             destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
+        } else {
+            destinationVC.arrayOfNames = self.arrayOfGardens
         }
+    }
+    
+    func getParks(completion: (Bool) -> ()) {
+        dataStore.greenThumbParse({ (true) in
+            self.dataStore.greenThumbArray = self.sortArrayByDistance(self.dataStore.greenThumbArray)
+            completion(true)
+        })
     }
     //Location Things
     
