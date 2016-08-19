@@ -20,6 +20,8 @@ class detailViewController: UIViewController {
     
     var locationToPresent: [String : AnyObject] = [:]
     
+    var favoriteToPresent: Location? = nil
+    
     let dataStore = DataStore.store
     
     override func viewDidLoad() {
@@ -27,7 +29,17 @@ class detailViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
         
-        // self.locationName.text = locationNameText
+        if let favorite = self.favoriteToPresent {
+            
+            self.locationName.text = favorite.name
+            self.locationAddress.text = favorite.address
+            self.zipCode.text = favorite.zip
+            self.locationType.text = favorite.type
+            
+            
+            
+            
+        } else {
 
         var type = locationToPresent["type"] as! String
         locationName.text =  locationToPresent["name"] as! String
@@ -44,6 +56,8 @@ class detailViewController: UIViewController {
         
         print("Addresses of parks: \(locationAddress.text)")
         print(locationToPresent)
+            
+        }
         
         
         

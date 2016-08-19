@@ -269,6 +269,9 @@
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="KVL-F0-2XH" kind="show" id="uGN-aA-me7"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -280,7 +283,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TkJ-cl-UZn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2361" y="1115"/>
+            <point key="canvasLocation" x="3359" y="1115"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MEc-0B-Uno">
@@ -315,6 +318,7 @@
         <image name="tinySpa" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="uGN-aA-me7"/>
         <segue reference="MO3-kh-2p6"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -120,15 +120,20 @@ class FavoritesTableViewController: UITableViewController {
      }
      */
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+    
+        let destinationVC = segue.destinationViewController as! detailViewController
+        
+        let locationToPass = self.favorites[(self.tableView.indexPathForSelectedRow?.row)!]
+        
+        destinationVC.favoriteToPresent = locationToPass
+        
      }
-     */
+ 
     
     func assignIconForCell(cell: UITableViewCell, indexPath: NSIndexPath) {
         
