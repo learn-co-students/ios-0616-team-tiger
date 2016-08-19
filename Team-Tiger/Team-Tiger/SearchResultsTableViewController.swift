@@ -85,9 +85,9 @@ class SearchResultsTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
        
         if segue.identifier == "showDetail" {
-             let newVC = segue.destinationViewController as! detailViewController
+            
+            let newVC = segue.destinationViewController as! detailViewController
             self.tappedCell = (tableView.indexPathForSelectedRow?.row)!
-           
             newVC.locationToPresent = dataStore.parkTypeArray[tappedCell]
 
             
