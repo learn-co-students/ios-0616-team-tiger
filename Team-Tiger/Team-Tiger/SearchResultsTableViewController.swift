@@ -12,7 +12,6 @@ import UIKit
 class SearchResultsTableViewController: UITableViewController {
     
     var arrayOfNames: [String] = []
-   
     
     var tappedCell: Int = 0
     
@@ -62,11 +61,8 @@ class SearchResultsTableViewController: UITableViewController {
             
             cell.backgroundColor = UIColor.init(red: 161.0/255, green: 212.0/255, blue: 144.0/255, alpha: 100.0)
             
-            //cell.imageView?.image = UIImage.init(named: "tinyShop")
             
         } else {
-            
-//            cell.imageView?.image = UIImage.init(named: "tinySpa")
             
             cell.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
             

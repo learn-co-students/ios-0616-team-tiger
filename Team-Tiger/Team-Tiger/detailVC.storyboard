@@ -24,7 +24,7 @@
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAN-cY-l0J">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAN-cY-l0J">
                                 <rect key="frame" x="40" y="87" width="349" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="349" id="Hy9-pv-Otf"/>
@@ -82,6 +82,7 @@
                             <constraint firstItem="AFm-to-cPF" firstAttribute="top" secondItem="qIG-pV-btT" secondAttribute="bottom" constant="8" id="Gna-vC-hHe"/>
                             <constraint firstItem="laW-bI-xwP" firstAttribute="top" secondItem="sAN-cY-l0J" secondAttribute="bottom" constant="1" id="KSp-GN-KWi"/>
                             <constraint firstItem="AFm-to-cPF" firstAttribute="leading" secondItem="qIG-pV-btT" secondAttribute="leading" id="NKJ-Gh-bmG"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="sAN-cY-l0J" secondAttribute="trailing" constant="20" id="O88-ms-Mcn"/>
                             <constraint firstItem="n0Y-zo-OT4" firstAttribute="centerX" secondItem="aq0-Zt-Vqb" secondAttribute="centerX" id="URp-PW-L8H"/>
                             <constraint firstItem="STP-0S-lgP" firstAttribute="top" secondItem="n0Y-zo-OT4" secondAttribute="bottom" constant="50" id="XVD-K8-NfQ"/>
                             <constraint firstItem="qIG-pV-btT" firstAttribute="top" secondItem="OXg-yb-1Vx" secondAttribute="bottom" constant="8" symbolic="YES" id="dXp-BD-YH5"/>
@@ -92,6 +93,11 @@
                             <constraint firstItem="sAN-cY-l0J" firstAttribute="leading" secondItem="aq0-Zt-Vqb" secondAttribute="leadingMargin" constant="20" id="uYC-tO-7P2"/>
                             <constraint firstItem="sAN-cY-l0J" firstAttribute="leading" secondItem="qIG-pV-btT" secondAttribute="leading" id="zY7-tT-eyH"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="O88-ms-Mcn"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
