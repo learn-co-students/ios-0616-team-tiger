@@ -11,10 +11,12 @@ import Alamofire
 
 class AirQualityAPIClient {
     
+    let dataStore = DataStore.store
+    
     static var isActionDay: Bool = false
     
     
-    class func getAirQualityIndex(zipcode: String) {
+    class func getAirQualityIndex(zipcode: String, Completion: (report: NSArray) -> ()) {
         
         let parametersDictionary = ["zipCode":zipcode,
                                     "format":"application/json",
@@ -25,6 +27,7 @@ class AirQualityAPIClient {
             
             
             if let forecast = response.result.value as! NSArray? {
+                
             
             print(forecast)
             
@@ -51,6 +54,8 @@ class AirQualityAPIClient {
                     print("Sorry, we cannot currently access Air Quality data")
                     
                 }
+                
+                Completion(report: forecast)
                 
                 }
             }

@@ -20,69 +20,70 @@ class CommunityGardensTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        greenThumbParse { completion in
-            
-            if completion {
-                for gardenDictionary in self.greenThumbArray {
-                    if let gardenName = gardenDictionary["Garden"] {
-                        self.arrayOfGardens.append(gardenName)
-                    }
-                    
-                    if let gardenAddress = gardenDictionary["Address"] {
-                        self.arrayOfGardenAddresses.append(gardenAddress)
-                    }
-                }
-                NSOperationQueue.mainQueue().addOperationWithBlock({
-                    self.tableView.reloadData()
-                })
-            } else {
-                print("ERROR: Unable to retrieve community garden")
-            }
-        }
+//        greenThumbParse { completion in
+//            
+//            if completion {
+//                for gardenDictionary in self.greenThumbArray {
+//                    if let gardenName = gardenDictionary["Garden"] {
+//                        self.arrayOfGardens.append(gardenName)
+//                    }
+//                    
+//                    if let gardenAddress = gardenDictionary["Address"] {
+//                        self.arrayOfGardenAddresses.append(gardenAddress)
+//                    }
+//                }
+//                NSOperationQueue.mainQueue().addOperationWithBlock({
+//                    self.tableView.reloadData()
+//                })
+//            } else {
+//                print("ERROR: Unable to retrieve community garden")
+//            }
+//        }
         
     }
     
-    func greenThumbParse(completionHandler: (Bool) -> ()) {
-        
-        // var greenThumbArray: [[String: String]] = []
-        
-        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/ajxm-kzmj/rows.json?") .responseJSON { response in
-            
-            self.greenThumbdictionary = response.result.value as! NSDictionary
-            
-            if let jsonData = response.data {
-                let jsonObj = JSON(data: jsonData)
-                
-                let arrayOfData = jsonObj["data"].array
-                
-                var dictionaryWithInfo = [String:String]()
-                
-                if let arrayOfData = arrayOfData {
-                    
-                    for detail in arrayOfData {
-                        
-                        dictionaryWithInfo["Garden"] = detail[12].string
-                        dictionaryWithInfo["Address"] = detail[13].string
-                        //dictionaryWithInfo["Cross Streets"] = detail[17].string
-                        
-                        if let neighborhoodInDictionary = detail[16].string {
-                            
-                            dictionaryWithInfo["neighborhood"] = neighborhoodInDictionary
-                            
-                        } else {
-                            print("\n\n\n NEIGHBORHOOD ISN'T PROVIDED\n\n\n")
-                        }
-                        
-                        self.greenThumbArray.append(dictionaryWithInfo)
-                    }
-                    completionHandler(true)
-                    
-                }
-                
-            }
-        }
-    }
-    
+//    func greenThumbParse(completionHandler: (Bool) -> ()) {
+//        
+//        // var greenThumbArray: [[String: String]] = []
+//        
+//        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/3ckp-upxf/rows.json?accessType=DOWNLOAD") .responseJSON { response in
+//            
+//            self.greenThumbdictionary = response.result.value as! NSDictionary
+//            
+//            if let jsonData = response.data {
+//                let jsonObj = JSON(data: jsonData)
+//                
+//                let arrayOfData = jsonObj["data"].array
+//                
+//                var dictionaryWithInfo = [String:String]()
+//                
+//                if let arrayOfData = arrayOfData {
+//                    
+//                    for detail in arrayOfData {
+//                        
+//                        dictionaryWithInfo["Garden"] = detail[12].string
+//                        dictionaryWithInfo["Address"] = detail[13].string
+//                        //dictionaryWithInfo["Cross Streets"] = detail[17].string
+//                        dictionaryWithInfo["coordinates"] = detail[8].string
+//                        dictionaryWithInfo["phone number"] = 
+//                        if let neighborhoodInDictionary = detail[16].string {
+//                            
+//                            dictionaryWithInfo["neighborhood"] = neighborhoodInDictionary
+//                            
+//                        } else {
+//                            print("\n\n\n NEIGHBORHOOD ISN'T PROVIDED\n\n\n")
+//                        }
+//                        
+//                        self.greenThumbArray.append(dictionaryWithInfo)
+//                    }
+//                    completionHandler(true)
+//                    
+//                }
+//                
+//            }
+//        }
+//    }
+//    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
