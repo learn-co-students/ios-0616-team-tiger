@@ -35,8 +35,8 @@ class FavoritesTableViewController: UITableViewController {
         for favorite in dataStore.user[0].favorites! {
             
             if !self.favorites.contains(favorite as! Location) {
-            
-            self.favorites.append(favorite as! Location)
+                
+                self.favorites.append(favorite as! Location)
                 
             }
             
@@ -93,17 +93,23 @@ class FavoritesTableViewController: UITableViewController {
      }
      */
     
-    /*
-     // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
-     // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+    
+    // Override to support editing the table view.
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            // Delete the row from the data source
+            
+            self.favorites.removeAtIndex(indexPath.row)
+            
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+            self.tableView.reloadData()
+            
+        } else if editingStyle == .Insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
     
     /*
      // Override to support rearranging the table view.
@@ -121,19 +127,19 @@ class FavoritesTableViewController: UITableViewController {
      */
     
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // MARK: - Navigation
     
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         let destinationVC = segue.destinationViewController as! detailViewController
         
         let locationToPass = self.favorites[(self.tableView.indexPathForSelectedRow?.row)!]
         
         destinationVC.favoriteToPresent = locationToPass
         
-     }
- 
+    }
+    
     
     func assignIconForCell(cell: UITableViewCell, indexPath: NSIndexPath) {
         
