@@ -22,7 +22,7 @@ class SearchResultsTableViewController: UITableViewController {
         
 //        print("PARKS IN ARRAY \(dataStore.parkTypeArray)")
       
-      print(self.arrayOfNames)
+//      print(self.arrayOfNames)
         
         
         self.tableView.reloadData()
@@ -96,7 +96,7 @@ class SearchResultsTableViewController: UITableViewController {
         
         let waterfrontValue = currentLocation["waterfront"] as! String
         
-        print(waterfrontValue)
+//        print(waterfrontValue)
         
         let currentMarketOrGarden = self.arrayOfNames[indexPath.row]
         

@@ -17,6 +17,7 @@ class detailViewController: UIViewController {
     @IBOutlet weak var locationAddress: UILabel!
     @IBOutlet weak var locationType: UILabel!
     @IBOutlet weak var zipCode: UILabel!
+    @IBOutlet weak var saveFavoriteButton: UIButton!
     
     var locationToPresent: [String : AnyObject] = [:]
     
@@ -35,7 +36,7 @@ class detailViewController: UIViewController {
             self.locationAddress.text = favorite.address
             self.zipCode.text = favorite.zip
             self.locationType.text = favorite.type
-            
+            self.saveFavoriteButton.hidden = true
             
             
             
@@ -54,8 +55,8 @@ class detailViewController: UIViewController {
 
         zipCode.text =  locationToPresent["zip"] as! String
         
-        print("Addresses of parks: \(locationAddress.text)")
-        print(locationToPresent)
+//        print("Addresses of parks: \(locationAddress.text)")
+//        print(locationToPresent)
             
         }
         
@@ -104,7 +105,7 @@ class detailViewController: UIViewController {
         dataStore.fetchData()
         
         
-        print(dataStore.user[0].favorites?.count)
+//        print(dataStore.user[0].favorites?.count)
         
         
     }

@@ -30,7 +30,7 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
         }
         closestCoordinate = CLLocation(latitude: latitudeTotal/totalCount, longitude: longitudeTotal/totalCount)
         arrayCopy["coordinates"] = closestCoordinate
-        print("Average coordinates : \(closestCoordinate), \(array["name"])")
+//        print("Average coordinates : \(closestCoordinate), \(array["name"])")
         
         
         return arrayCopy

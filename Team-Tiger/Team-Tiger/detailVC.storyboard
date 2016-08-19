@@ -104,6 +104,7 @@
                         <outlet property="locationAddress" destination="laW-bI-xwP" id="BqB-qc-Eyo"/>
                         <outlet property="locationName" destination="sAN-cY-l0J" id="fPx-GX-o1z"/>
                         <outlet property="locationType" destination="qIG-pV-btT" id="Vnl-hP-1ik"/>
+                        <outlet property="saveFavoriteButton" destination="n0Y-zo-OT4" id="yte-Xk-SHo"/>
                         <outlet property="zipCode" destination="OXg-yb-1Vx" id="b7l-pw-xTq"/>
                     </connections>
                 </viewController>

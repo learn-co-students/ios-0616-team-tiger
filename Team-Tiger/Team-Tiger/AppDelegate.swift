@@ -142,7 +142,7 @@ var zip : String = ""
             
             locationManager.startUpdatingLocation()
             
-            print(dataStore.currentLocation)
+//            print(dataStore.currentLocation)
         
         } else {
 //            getZipCode()

@@ -41,7 +41,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
                 for park in self.dataStore.parkTypeArray {
                     self.arrayOfParks.append((park["name"] as? String)!)
-                    print(park["Distance"])
+//                    print(park["Distance"])
                 }
                 print("Got parks")
             }
@@ -82,7 +82,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             for park in array {
                 var parkCopy = park
                 if let coordinate = parkCopy["coordinates"] {
-                    print(coordinate.distanceFromLocation(self.dataStore.currentLocation))
+//                    print(coordinate.distanceFromLocation(self.dataStore.currentLocation))
                 parkCopy["Distance"] = (coordinate.distanceFromLocation(self.dataStore.currentLocation)) * 0.00062137
                 arrayCopy.append(parkCopy)
                 }
@@ -192,8 +192,8 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         let destinationVC = segue.destinationViewController as! SearchResultsTableViewController
         if segue.identifier == "showParks" {
             
-            print(self.dataStore.parkTypeArray)
-            print(self.arrayOfParks)
+//            print(self.dataStore.parkTypeArray)
+//            print(self.arrayOfParks)
             destinationVC.arrayOfNames = self.arrayOfParks
         } else if segue.identifier == "showShops" {
             destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
@@ -277,7 +277,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             if let placemark = placemarks?.first {
                 
                 self.dataStore.currentLocation = placemark.location!
-                print(self.dataStore.currentLocation)
+//                print(self.dataStore.currentLocation)
                 
             }
         })
@@ -289,10 +289,10 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             if let placemark = placemarks?.first {
                 
                 self.dataStore.currentLocation = placemark.location!
-                print(self.dataStore.currentLocation)
+//                print(self.dataStore.currentLocation)
                 
             }
         })
-        print(zipCode)
+//        print(zipCode)
     }
 }

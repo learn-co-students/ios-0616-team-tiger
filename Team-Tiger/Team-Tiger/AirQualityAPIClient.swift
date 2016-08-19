@@ -29,7 +29,7 @@ class AirQualityAPIClient {
             if let forecast = response.result.value as! NSArray? {
                 
             
-            print(forecast)
+//            print(forecast)
             
             for dataSet in forecast {
                 
@@ -39,19 +39,19 @@ class AirQualityAPIClient {
                         
                         self.isActionDay = true
                         
-                        print("It's an AQI Action Day. Groups that are sensitive to the pollutant should reduce exposure by eliminating prolonged or heavy exertion outdoors. For ozone this includes children and adults who are active outdoors and people with lung disease, such as asthma.")
+//                        print("It's an AQI Action Day. Groups that are sensitive to the pollutant should reduce exposure by eliminating prolonged or heavy exertion outdoors. For ozone this includes children and adults who are active outdoors and people with lung disease, such as asthma.")
                         
                         break
                         
                     } else {
                         
-                        print("It's not an AQI Action Day. Enjoy the clean air!")
+//                        print("It's not an AQI Action Day. Enjoy the clean air!")
                         
                     }
                     
                 } else {
                     
-                    print("Sorry, we cannot currently access Air Quality data")
+//                    print("Sorry, we cannot currently access Air Quality data")
                     
                 }
                 
