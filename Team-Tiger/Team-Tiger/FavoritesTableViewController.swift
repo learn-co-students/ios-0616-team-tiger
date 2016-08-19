@@ -34,7 +34,11 @@ class FavoritesTableViewController: UITableViewController {
         
         for favorite in dataStore.user[0].favorites! {
             
+            if !self.favorites.contains(favorite as! Location) {
+            
             self.favorites.append(favorite as! Location)
+                
+            }
             
         }
         
