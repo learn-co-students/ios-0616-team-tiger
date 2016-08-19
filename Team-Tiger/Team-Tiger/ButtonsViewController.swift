@@ -34,9 +34,6 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
 
         dataStore.populateParkByTypeBasedOnState("type", type: "Park") { (success) in
 
-            
-            
-            
             if success {
                 self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
                 for park in self.dataStore.parkTypeArray {
@@ -207,92 +204,5 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             self.dataStore.greenThumbArray = self.sortArrayByDistance(self.dataStore.greenThumbArray)
             completion(true)
         })
-    }
-    //Location Things
-    
-    func getLocation() {
-        
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            
-            print("Yay for location")
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            locationManager.requestLocation()
-            locationManager.startUpdatingLocation()
-            
-        } else {
-            self.getZipCode()
-            
-            print("No go on location")
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager, startUpdatingLocation location: CLLocation) {
-        dataStore.currentLocation = location
-        //    print("Data Store Location : \(dataStore.currentLocation)")
-        
-    }
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locations.count > 0 {
-            dataStore.currentLocation = (locations.first)!
-            self.locationManager.stopUpdatingLocation()
-            
-        }
-    }
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        
-        print("Failed to find user's location: \(error.localizedDescription)")
-    }
-    
-    
-    func getZipCode() {
-        var alertController:UIAlertController?
-        alertController = UIAlertController(title: "Location",
-                                            message: "Please enter your approximate address and/0 zip code",
-                                            preferredStyle: .Alert)
-        alertController!.addTextFieldWithConfigurationHandler(
-            {(textField: UITextField!) in
-                textField.placeholder = "Enter Address"
-        })
-        let action = UIAlertAction(title: "Submit",
-                                   style: UIAlertActionStyle.Default,
-                                   handler: {[weak self]
-                                    (paramAction:UIAlertAction!) in
-                                    if let textFields = alertController?.textFields{
-                                        
-                                        let theTextFields = textFields as [UITextField]
-                                        let enteredText = theTextFields[0].text
-                                        self?.zip = enteredText!
-                                    }
-            })
-        
-        alertController?.addAction(action)
-        self.presentViewController(alertController!,
-                                   animated: true,
-                                   completion: nil)
-        let zipCode = CLGeocoder().geocodeAddressString(self.zip, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-            if let placemark = placemarks?.first {
-                
-                self.dataStore.currentLocation = placemark.location!
-                print(self.dataStore.currentLocation)
-                
-            }
-        })
-    }
-    
-    func getCoordinatesFromZipCode(zip: String) {
-        
-        let zipCode = CLGeocoder().geocodeAddressString(zip, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-            if let placemark = placemarks?.first {
-                
-                self.dataStore.currentLocation = placemark.location!
-                print(self.dataStore.currentLocation)
-                
-            }
-        })
-        print(zipCode)
     }
 }
