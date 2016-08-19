@@ -99,7 +99,11 @@ class FavoritesTableViewController: UITableViewController {
         if editingStyle == .Delete {
             // Delete the row from the data source
             
-            self.favorites.removeAtIndex(indexPath.row)
+           let favoriteToRemove = self.favorites.removeAtIndex(indexPath.row)
+            
+            self.dataStore.managedObjectContext.deleteObject(favoriteToRemove)
+            
+            dataStore.saveContext()
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             
