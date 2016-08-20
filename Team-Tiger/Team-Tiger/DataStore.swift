@@ -25,7 +25,7 @@ class DataStore {
     var airQualityReport = []
     var arrayOfParks: [String] = []
     var greenThumbArray: [[String:AnyObject]] = []
-
+    
     
     //static makes it a singleton
     static let store = DataStore()

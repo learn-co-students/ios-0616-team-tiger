@@ -18,6 +18,11 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     
     var zip : String = ""
     
+    
+    var distanceForParks : [String] = []
+    var distanceForGardens : [String] = []
+    var distanceForMarkets : [String] = []
+    
     @IBOutlet weak var blurEffect: UIVisualEffectView!
     
     @IBOutlet weak var navBar: UINavigationItem!
@@ -38,18 +43,22 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
                 for park in self.dataStore.parkTypeArray {
                     self.arrayOfParks.append((park["name"] as? String)!)
-                    print(park["Distance"])
+                    let distance = park["Distance"] as? Double
+                    let distanceAsString = String(format: "%.2f", distance!)
+                    print(distanceAsString)
+                    self.distanceForParks.append(distanceAsString)
                 }
                 print("Got parks")
-            }
+            
         }
-        
+        }
         print("All the parks")
         self.getFarmersMarkets()
         print("Farmers markets")
         self.getParks { (true) in
             for garden in self.dataStore.greenThumbArray {
                 self.arrayOfGardens.append(garden["Garden"] as! String)
+                
             }
         }
         print("Wifi Found")
@@ -192,6 +201,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             print(self.dataStore.parkTypeArray)
             print(self.arrayOfParks)
             destinationVC.arrayOfNames = self.arrayOfParks
+            destinationVC.arrayOfDistance = self.distanceForParks
         } else if segue.identifier == "showShops" {
             destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
         } else {

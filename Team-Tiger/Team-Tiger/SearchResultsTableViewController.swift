@@ -12,7 +12,7 @@ import UIKit
 class SearchResultsTableViewController: UITableViewController {
     
     var arrayOfNames: [String] = []
-   
+    var arrayOfDistance : [String] = []
     
     var tappedCell: Int = 0
     
@@ -28,7 +28,6 @@ class SearchResultsTableViewController: UITableViewController {
         
         self.tableView.reloadData()
         
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -74,11 +73,7 @@ class SearchResultsTableViewController: UITableViewController {
         
         
         cell.textLabel?.text = arrayOfNames[indexPath.row]
-    
-
-       
-        
-    
+        cell.detailTextLabel?.text = arrayOfDistance[indexPath.row]
         return cell
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -9,6 +9,7 @@
 import UIKit
 import SystemConfiguration
 import CoreLocation
+import ReachabilitySwift
 
 class AQIViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -19,7 +20,8 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
     var airQualityReport: [[String : AnyObject]] = []
     let locationManager = CLLocationManager()
     let dataStore = DataStore.store
-    
+    var reachability: Reachability?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //        self.getLocation()
@@ -59,17 +61,25 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
             
         }
         
-        
-        if Reachability.isConnectedToNetwork() {
-            print("Yay!")
-        } else {
-            
-            //            showAlertAppDelegate("No Connection", message: "This app requires a network connection", buttonTitle: "Okay", window: self.window!)
-            print("Nope")
-        }
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+        } catch {
+            print("Unable to create Reachability")
+            return
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:",name: ReachabilityChangedNotification,object: reachability)
+        do{
+            try reachability?.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -131,7 +141,23 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
         print("Failed to find user's location: \(error.localizedDescription)")
     }
     
+    // Reachability shtuff
     
+    func reachabilityChanged(note: NSNotification) {
+        
+        let reachability = note.object as! Reachability
+        
+        if reachability.isReachable() {
+            if reachability.isReachableViaWiFi() {
+                print("Reachable via WiFi")
+            } else {
+                print("Reachable via Cellular")
+            }
+        } else {
+            print("Network not reachable")
+        }
+    }
+
     /*
      // MARK: - Navigation
      
