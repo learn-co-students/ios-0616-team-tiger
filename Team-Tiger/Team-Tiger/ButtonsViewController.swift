@@ -38,7 +38,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         
 
         dataStore.populateParkByTypeBasedOnState("type", type: "Park") { (success) in
-            
+
             if success {
                 self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
                 for park in self.dataStore.parkTypeArray {
@@ -211,6 +211,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             completion(true)
         })
     }
+
     //Location Things
     
     func getLocation() {
@@ -298,4 +299,5 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         })
 //        print(zipCode)
     }
+
 }

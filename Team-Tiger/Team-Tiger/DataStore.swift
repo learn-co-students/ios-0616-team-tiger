@@ -19,7 +19,9 @@ class DataStore {
     var parkTypeArray: [[String:AnyObject]] = []
     var gardenArray : [[String:AnyObject]] = []
     var masterParksDictionary = [String : [String : String]]()
-    var currentLocation = CLLocation()
+    
+    var hasLocation : Bool = false
+    var currentLocation : CLLocation = CLLocation(latitude: 40.759211, longitude: -73.984638)
     var airQualityReport = []
     var arrayOfParks: [String] = []
     var greenThumbArray: [[String:AnyObject]] = []
