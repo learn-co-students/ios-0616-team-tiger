@@ -44,7 +44,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                 for park in self.dataStore.parkTypeArray {
                     self.arrayOfParks.append((park["name"] as? String)!)
                     let distance = park["Distance"] as? Double
-                    let distanceAsString = String(format: "%.2f", distance!)
+                    let distanceAsString = String(format: "%.1f mi", distance!)
                     print(distanceAsString)
                     self.distanceForParks.append(distanceAsString)
                 }
@@ -58,6 +58,10 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         self.getParks { (true) in
             for garden in self.dataStore.greenThumbArray {
                 self.arrayOfGardens.append(garden["Garden"] as! String)
+                let distance = garden["Distance"] as? Double
+                let distanceAsString = String(format: "%.1f mi", distance!)
+                print(distanceAsString)
+                self.distanceForGardens.append(distanceAsString)
                 
             }
         }
@@ -127,6 +131,10 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
                     
                     if let marketName = marketDictionary["name"] {
                         self.arrayOfFarmersMarkets.append(marketName as! String)
+                        let distance = marketDictionary["Distance"] as? Double
+                        let distanceAsString = String(format: "%.1f mi", distance!)
+                        print(distanceAsString)
+                        self.distanceForMarkets.append(distanceAsString)
                     }
                 }
             } else {
@@ -204,6 +212,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             destinationVC.arrayOfDistance = self.distanceForParks
         } else if segue.identifier == "showShops" {
             destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
+            destinationVC.arrayOfDistance = self.distanceForMarkets
         } else {
             destinationVC.arrayOfNames = self.arrayOfGardens
         }
