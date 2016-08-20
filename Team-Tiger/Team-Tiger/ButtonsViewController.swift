@@ -14,6 +14,8 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     var arrayOfGardens : [String] = []
     let locationManager = CLLocationManager()
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     let dataStore = DataStore.store
     
     var zip : String = ""
@@ -31,11 +33,11 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         self.blurEffect.clipsToBounds = true
         self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
         
+        self.activityIndicator.hidden = true
+//        self.activityIndicator.startAnimating()
+        
 
         dataStore.populateParkByTypeBasedOnState("type", type: "Park") { (success) in
-
-            
-            
             
             if success {
                 self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
@@ -197,6 +199,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             destinationVC.arrayOfNames = self.arrayOfParks
         } else if segue.identifier == "showShops" {
             destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
+            
         } else {
             destinationVC.arrayOfNames = self.arrayOfGardens
         }

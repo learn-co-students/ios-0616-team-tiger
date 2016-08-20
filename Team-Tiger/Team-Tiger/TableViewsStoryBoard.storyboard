@@ -138,6 +138,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Greenway" id="1ly-We-Rdn"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="YKJ-5F-UOL" id="Glc-y7-czV"/>
                         <outlet property="blurEffect" destination="bNR-9s-0vN" id="ffU-Rc-fPZ"/>
                         <outlet property="navBar" destination="1ly-We-Rdn" id="Cgu-57-wWM"/>
                     </connections>
