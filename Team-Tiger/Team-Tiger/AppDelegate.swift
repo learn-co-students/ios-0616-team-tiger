@@ -132,7 +132,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
-            
             switch(CLLocationManager.authorizationStatus()) {
             case .NotDetermined, .Restricted, .Denied:
                 print("No access")
@@ -152,6 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 
                 print(self.dataStore.currentLocation)
             }
+
         } else {
             
             print("No go on location")

@@ -120,8 +120,8 @@ class DataStore {
                         }
                     }
                 }
-                print(self.currentLocation)
-                print("Count: \(self.farmersMarketArray.count)")
+//                print(self.currentLocation)
+//                print("Count: \(self.farmersMarketArray.count)")
                 //                print("Array: \(self.farmersMarketArray)")
                 //                 self.farmersMarketArray = self.sortArrayByDistance(self.farmersMarketArray)
                 
@@ -291,7 +291,7 @@ class DataStore {
                 if parks[key]![category]?.containsString(type) == true{
                     
                     self.parkTypeArray.append(parks[key]!)
-                    print("i have the parks")
+//                    print("i have the parks")
                 }
                 
             }
@@ -367,7 +367,7 @@ class DataStore {
                         dictionaryWithInfo["Address"] = detail[11].string
                         dictionaryWithInfo["phone number"] = detail[15].string
                         if let coordinate = detail[8].string {
-                            print(coordinate)
+//                            print(coordinate)
                         dictionaryWithInfo["coordinates"] = coordinate
                         }
                        greenThumbDictionary[detail[10].string!] = dictionaryWithInfo
@@ -376,6 +376,7 @@ class DataStore {
                     }
                     self.greenThumbArray = Array(greenThumbDictionary.values)
                     self.greenThumbArray = self.organizeParkCoordinates(self.greenThumbArray)
+                    print("got garden")
                     print(self.greenThumbArray)
                     completionHandler(true)
                     

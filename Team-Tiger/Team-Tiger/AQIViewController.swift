@@ -96,14 +96,14 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
         
         if !dataStore.hasLocation {
             
-            self.showAlertAppDelegate()
+            self.showAlertToGetLocation()
             print(self.dataStore.currentLocation)
             
         }
     }
     
     
-    func showAlertAppDelegate() {let alertController = UIAlertController(title: "Location Needed",
+    func showAlertToGetLocation() {let alertController = UIAlertController(title: "Location Needed",
                                                                          message: "The location services permission was not authorized. Please enable it in Settings to continue.",
                                                                          preferredStyle: .Alert)
         
@@ -115,7 +115,7 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
         }
         alertController.addAction(settingsAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "No Thanks", style: .Cancel, handler: nil)
         alertController.addAction(cancelAction)
         
         
