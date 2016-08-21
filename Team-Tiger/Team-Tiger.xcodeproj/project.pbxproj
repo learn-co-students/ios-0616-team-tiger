@@ -13,6 +13,7 @@
 		11DF7A0D1D5528BE004E410E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DF7A0C1D5528BE004E410E /* Secrets.swift */; };
 		11F768351D65112700B971C5 /* GoogleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F768341D65112700B971C5 /* GoogleDetailsViewController.swift */; };
 		174A95B11D5903F800841B2C /* LocationStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174A95B01D5903F800841B2C /* LocationStuff.swift */; };
+		177420861D6772E200F8CA99 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177420851D6772E200F8CA99 /* Reachability.swift */; };
 		4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF181D53D0290029FD30 /* AppDelegate.swift */; };
 		4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF1A1D53D0290029FD30 /* ViewController.swift */; };
 		4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF1F1D53D0290029FD30 /* Team_Tiger.xcdatamodeld */; };
@@ -46,6 +47,7 @@
 		11DF7A0C1D5528BE004E410E /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		11F768341D65112700B971C5 /* GoogleDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleDetailsViewController.swift; path = ../GoogleDetailsViewController.swift; sourceTree = "<group>"; };
 		174A95B01D5903F800841B2C /* LocationStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStuff.swift; sourceTree = SOURCE_ROOT; };
+		177420851D6772E200F8CA99 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		4F45BF151D53D0290029FD30 /* Team-Tiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team-Tiger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F45BF181D53D0290029FD30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F45BF1A1D53D0290029FD30 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				11DF7A0C1D5528BE004E410E /* Secrets.swift */,
 				174A95B01D5903F800841B2C /* LocationStuff.swift */,
 				4F45BF181D53D0290029FD30 /* AppDelegate.swift */,
+				177420851D6772E200F8CA99 /* Reachability.swift */,
 				11024A4E1D551C490001BAFC /* DataStore.swift */,
 				4F82FE561D6495E30085DBA4 /* ViewControllers */,
 				4F82FE551D6495CE0085DBA4 /* APIs */,
@@ -234,7 +237,7 @@
 				TargetAttributes = {
 					4F45BF141D53D0290029FD30 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 955825D98U;
+						DevelopmentTeam = 85826LGZGV;
 					};
 				};
 			};
@@ -344,6 +347,7 @@
 				4F5277751D5A49CC00B4EE49 /* ParksAPIClient.swift in Sources */,
 				4F66D8C21D650C9100C45E8F /* Location.swift in Sources */,
 				4F66D8C11D650C9100C45E8F /* Location+CoreDataProperties.swift in Sources */,
+				177420861D6772E200F8CA99 /* Reachability.swift in Sources */,
 				11024A4F1D551C490001BAFC /* DataStore.swift in Sources */,
 				4F57E5E11D5E0FCA00A6B27B /* SearchResultsTableViewController.swift in Sources */,
 				4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */,

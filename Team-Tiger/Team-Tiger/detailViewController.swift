@@ -17,8 +17,11 @@ class detailViewController: UIViewController {
     @IBOutlet weak var locationAddress: UILabel!
     @IBOutlet weak var locationType: UILabel!
     @IBOutlet weak var zipCode: UILabel!
+    @IBOutlet weak var saveFavoriteButton: UIButton!
     
     var locationToPresent: [String : AnyObject] = [:]
+    
+    var favoriteToPresent: Location? = nil
     
     let dataStore = DataStore.store
     
@@ -27,7 +30,17 @@ class detailViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
         
-        // self.locationName.text = locationNameText
+        if let favorite = self.favoriteToPresent {
+            
+            self.locationName.text = favorite.name
+            self.locationAddress.text = favorite.address
+            self.zipCode.text = favorite.zip
+            self.locationType.text = favorite.type
+            self.saveFavoriteButton.hidden = true
+            
+            
+            
+        } else {
 
         var type = locationToPresent["type"] as! String
         locationName.text =  locationToPresent["name"] as! String
@@ -42,8 +55,10 @@ class detailViewController: UIViewController {
 
         zipCode.text =  locationToPresent["zip"] as! String
         
-        print("Addresses of parks: \(locationAddress.text)")
-        print(locationToPresent)
+//        print("Addresses of parks: \(locationAddress.text)")
+//        print(locationToPresent)
+            
+        }
         
         
         
@@ -90,7 +105,7 @@ class detailViewController: UIViewController {
         dataStore.fetchData()
         
         
-        print(dataStore.user[0].favorites?.count)
+//        print(dataStore.user[0].favorites?.count)
         
         
     }

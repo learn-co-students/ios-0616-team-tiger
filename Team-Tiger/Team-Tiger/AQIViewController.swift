@@ -7,20 +7,22 @@
 //
 
 import UIKit
+import SystemConfiguration
+import CoreLocation
 
-class AQIViewController: UIViewController {
+class AQIViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var ozoneLabel: UILabel!
     @IBOutlet weak var particulateLabel: UILabel!
     @IBOutlet weak var actionDayStatus: UITextView!
     
     var airQualityReport: [[String : AnyObject]] = []
-    
+    let locationManager = CLLocationManager()
     let dataStore = DataStore.store
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //        self.getLocation()
         self.airQualityReport = dataStore.airQualityReport as! [[String : AnyObject]]
         
         let ozoneIndex = self.airQualityReport.count - 2
@@ -58,12 +60,75 @@ class AQIViewController: UIViewController {
         }
         
         
+        if Reachability.isConnectedToNetwork() {
+            print("Yay!")
+        } else {
+            
+            //            showAlertAppDelegate("No Connection", message: "This app requires a network connection", buttonTitle: "Okay", window: self.window!)
+            print("Nope")
+        }
         // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.getLocation()
+    }
+    func getLocation() {
+        
+        locationManager.delegate = self
+        
+        locationManager.requestWhenInUseAuthorization()
+        
+        if !dataStore.hasLocation {
+            
+            self.showAlertAppDelegate()
+            print(self.dataStore.currentLocation)
+            
+        }
+    }
+    
+    
+    func showAlertAppDelegate() {let alertController = UIAlertController(title: "Location Needed",
+                                                                         message: "The location services permission was not authorized. Please enable it in Settings to continue.",
+                                                                         preferredStyle: .Alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .Default) { (alertAction) in
+            
+            if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.sharedApplication().openURL(appSettings)
+            }
+        }
+        alertController.addAction(settingsAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        print("We know where you are")
+        
+        if locations.count > 0 {
+            
+            dataStore.currentLocation = (locations.first)!
+            
+            locationManager.stopUpdatingLocation()
+            
+            //            print("You are here : \(dataStore.currentLocation)")
+            
+        }
+        
+    }
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        
+        print("Failed to find user's location: \(error.localizedDescription)")
     }
     
     

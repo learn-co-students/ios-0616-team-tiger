@@ -14,6 +14,8 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     var arrayOfGardens : [String] = []
     let locationManager = CLLocationManager()
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     let dataStore = DataStore.store
     
     var zip : String = ""
@@ -31,17 +33,17 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         self.blurEffect.clipsToBounds = true
         self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
         
+        self.activityIndicator.hidden = true
+//        self.activityIndicator.startAnimating()
+        
 
         dataStore.populateParkByTypeBasedOnState("type", type: "Park") { (success) in
 
-            
-            
-            
             if success {
                 self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
                 for park in self.dataStore.parkTypeArray {
                     self.arrayOfParks.append((park["name"] as? String)!)
-                    print(park["Distance"])
+//                    print(park["Distance"])
                 }
                 print("Got parks")
             }
@@ -82,7 +84,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             for park in array {
                 var parkCopy = park
                 if let coordinate = parkCopy["coordinates"] {
-                    print(coordinate.distanceFromLocation(self.dataStore.currentLocation))
+//                    print(coordinate.distanceFromLocation(self.dataStore.currentLocation))
                 parkCopy["Distance"] = (coordinate.distanceFromLocation(self.dataStore.currentLocation)) * 0.00062137
                 arrayCopy.append(parkCopy)
                 }
@@ -192,11 +194,12 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         let destinationVC = segue.destinationViewController as! SearchResultsTableViewController
         if segue.identifier == "showParks" {
             
-            print(self.dataStore.parkTypeArray)
-            print(self.arrayOfParks)
+//            print(self.dataStore.parkTypeArray)
+//            print(self.arrayOfParks)
             destinationVC.arrayOfNames = self.arrayOfParks
         } else if segue.identifier == "showShops" {
             destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
+            
         } else {
             destinationVC.arrayOfNames = self.arrayOfGardens
         }
@@ -208,6 +211,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             completion(true)
         })
     }
+
     //Location Things
     
     func getLocation() {
@@ -277,7 +281,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             if let placemark = placemarks?.first {
                 
                 self.dataStore.currentLocation = placemark.location!
-                print(self.dataStore.currentLocation)
+//                print(self.dataStore.currentLocation)
                 
             }
         })
@@ -289,10 +293,11 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             if let placemark = placemarks?.first {
                 
                 self.dataStore.currentLocation = placemark.location!
-                print(self.dataStore.currentLocation)
+//                print(self.dataStore.currentLocation)
                 
             }
         })
-        print(zipCode)
+//        print(zipCode)
     }
+
 }
