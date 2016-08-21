@@ -9,7 +9,6 @@
 import UIKit
 import SystemConfiguration
 import CoreLocation
-import ReachabilitySwift
 
 class AQIViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -61,24 +60,12 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
             
         }
         
+            
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
-        do {
-            reachability = try Reachability.reachabilityForInternetConnection()
-        } catch {
-            print("Unable to create Reachability")
-            return
-        }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:",name: ReachabilityChangedNotification,object: reachability)
-        do{
-            try reachability?.startNotifier()
-        }catch{
-            print("could not start reachability notifier")
-        }
-
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -103,7 +90,8 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    func showAlertToGetLocation() {let alertController = UIAlertController(title: "Location Needed",
+    func showAlertToGetLocation() {
+        let alertController = UIAlertController(title: "Location Needed",
                                                                          message: "The location services permission was not authorized. Please enable it in Settings to continue.",
                                                                          preferredStyle: .Alert)
         
@@ -121,6 +109,7 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
         
         presentViewController(alertController, animated: true, completion: nil)
     }
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         print("We know where you are")
@@ -142,21 +131,42 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     // Reachability shtuff
-    
-    func reachabilityChanged(note: NSNotification) {
-        
-        let reachability = note.object as! Reachability
-        
-        if reachability.isReachable() {
-            if reachability.isReachableViaWiFi() {
-                print("Reachable via WiFi")
-            } else {
-                print("Reachable via Cellular")
-            }
-        } else {
-            print("Network not reachable")
-        }
-    }
+//    func showNoReachability() {
+//        let alertController = UIAlertController(title: "Location Needed",
+//                                                message: "The location services permission was not authorized. Please enable it in Settings to continue.",
+//                                                preferredStyle: .Alert)
+//        
+//        let settingsAction = UIAlertAction(title: "Settings", style: .Default) { (alertAction) in
+//            
+//            if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {
+//                UIApplication.sharedApplication().openURL(appSettings)
+//            }
+//        }
+//        alertController.addAction(settingsAction)
+//        
+//        let cancelAction = UIAlertAction(title: "No Thanks", style: .Cancel, handler: nil)
+//        alertController.addAction(cancelAction)
+//        
+//        
+//        presentViewController(alertController, animated: true, completion: nil)
+//        
+//    }
+//    
+//    func reachabilityChanged(note: NSNotification) {
+//        
+//        let reachability = note.object as! Reachability
+//        
+//        if reachability.isReachable() {
+//            if reachability.isReachableViaWiFi() {
+//                print("Reachable via WiFi")
+//            } else {
+//                print("Reachable via Cellular")
+//            }
+//        } else {
+//            showNoReachability()
+//            print("Network not reachable")
+//        }
+//    }
 
     /*
      // MARK: - Navigation

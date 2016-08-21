@@ -31,7 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             self.dataStore.airQualityReport = report
         }
         
-//        getLocation()
+        if Reachability.isConnectedToNetwork() == true {
+            print("Internet connection OK")
+        } else {
+            print("Internet connection FAILED")
+            var alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+        }
+
         return true
     }
     
@@ -128,29 +135,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func getLocation() {
         
         locationManager.delegate = self
-        
         locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
-            switch(CLLocationManager.authorizationStatus()) {
-            case .NotDetermined, .Restricted, .Denied:
-                print("No access")
-                
-                print(self.dataStore.currentLocation)
-            case .AuthorizedAlways, .AuthorizedWhenInUse:
-                print("Yay for location")
-                self.dataStore.hasLocation = true
-                locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-                
-                locationManager.requestLocation()
-                
-                locationManager.startUpdatingLocation()
-                print("Access")
-            default:
-                print("...")
-                
-                print(self.dataStore.currentLocation)
-            }
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.requestLocation()
 
         } else {
             

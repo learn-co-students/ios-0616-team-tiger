@@ -204,8 +204,6 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         let destinationVC = segue.destinationViewController as! SearchResultsTableViewController
         if segue.identifier == "showParks" {
             
-            //            print(self.dataStore.parkTypeArray)
-            //            print(self.arrayOfParks)
             destinationVC.arrayOfNames = self.arrayOfParks
             destinationVC.arrayOfDistance = self.distanceForParks
         } else if segue.identifier == "showShops" {
