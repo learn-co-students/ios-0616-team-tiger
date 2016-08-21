@@ -25,14 +25,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewWillAppear(animated: Bool) {
         
         
-        dataStore.populateParkByTypeBasedOnState("type", type: "Garden") {
-            //            print(apiClient.typeResults)
-            let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
-            var tableViewArray : NSArray = self.dataStore.parkTypeArray
-            tableViewArray = tableViewArray.sortedArrayUsingDescriptors([sortByDistance])
-            print("Maybe sorted \(tableViewArray)")
-            
-        }
+//        dataStore.populateParkByTypeBasedOnState("type", type: "Garden") {
+//            //            print(apiClient.typeResults)
+//            let sortByDistance = NSSortDescriptor(key: "Distance", ascending: true)
+//            var tableViewArray : NSArray = self.dataStore.parkTypeArray
+//            tableViewArray = tableViewArray.sortedArrayUsingDescriptors([sortByDistance])
+//            print("Maybe sorted \(tableViewArray)")
+//            
+//        }
         
     }
     

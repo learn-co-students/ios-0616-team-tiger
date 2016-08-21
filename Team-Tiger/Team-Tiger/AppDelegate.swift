@@ -31,8 +31,11 @@ var zip : String = ""
         
         dataStore.fetchData()
         
-        AirQualityAPIClient.getAirQualityIndex("10012")
-        getLocation()
+        AirQualityAPIClient.getAirQualityIndex("10012") { (report) in
+            self.dataStore.airQualityReport = report
+        }
+        
+         getLocation()
                 return true
     }
 
