@@ -72,65 +72,63 @@ class DataStore {
     
     func farmersMarketParse(completionHandler: (Bool) -> ()) {
         Alamofire.request(.GET, "https://data.ny.gov/resource/farmersmarkets.json?") .responseJSON { response in
-//            if error != nil {
-//                print(error)
-//            } else {
-                if let response = response.result.value {
-                    self.farmersMarketDictionaryArray = response as! NSArray
-                    print("parsing")
-                    
-                } else {
-                    print("received no response result from farmer's market")
-                }
+            
+            if let response = response.result.value {
+                self.farmersMarketDictionaryArray = response as! NSArray
+                print("parsing")
                 
-                if let jsonData = response.data {
-                    
-                    let jsonObj = JSON(data: jsonData)
-                    let arrayOfData = jsonObj.array
-                    self.farmersMarketArray.removeAll()
-                    if let arrayOfData = arrayOfData {
-                        var dictionaryWithInfo : [String:AnyObject] = [:]
-                        for detail in arrayOfData {
+            } else {
+                print("received no response result from farmer's market")
+            }
+            
+            if let jsonData = response.data {
+                
+                let jsonObj = JSON(data: jsonData)
+                let arrayOfData = jsonObj.array
+                self.farmersMarketArray.removeAll()
+                if let arrayOfData = arrayOfData {
+                    var dictionaryWithInfo : [String:AnyObject] = [:]
+                    for detail in arrayOfData {
+                        
+                        dictionaryWithInfo.removeAll()
+                        
+                        if detail["county"] == "Kings" || detail["county"] == "Queens" || detail["county"] == "New York" || detail["county"] == "Bronx" || detail["county"] == "Richmond" {
+                            dictionaryWithInfo["name"] = detail["market_name"].string
+                            dictionaryWithInfo["zip"] = detail["zip"].string
+                            dictionaryWithInfo["hours"] = detail["operation_hours"].string
+                            dictionaryWithInfo["season"] = detail["operation_season"].string
+                            dictionaryWithInfo["phone"] = detail["phone"].string
                             
-                            dictionaryWithInfo.removeAll()
-                            
-                            if detail["county"] == "Kings" || detail["county"] == "Queens" || detail["county"] == "New York" || detail["county"] == "Bronx" || detail["county"] == "Richmond" {
-                                dictionaryWithInfo["name"] = detail["market_name"].string
-                                dictionaryWithInfo["zip"] = detail["zip"].string
-                                dictionaryWithInfo["hours"] = detail["operation_hours"].string
-                                dictionaryWithInfo["season"] = detail["operation_season"].string
-                                dictionaryWithInfo["phone"] = detail["phone"].string
-                                
-                                if let latitude = detail["location_points"]["latitude"].string {
-                                    dictionaryWithInfo["latitude"] = Double(latitude)
-                                }
-                                
-                                if let longitude = detail["location_points"]["longitude"].string {
-                                    dictionaryWithInfo["longitude"] = Double(longitude)
-                                }
-                                
-                                if let addressInDictionary = detail["address_line_1"].string {
-                                    dictionaryWithInfo["address"] = addressInDictionary
-                                } else {
-                                    
-                                    print("IN SEARCH OF ADDRESS")
-                                }
-                                
-                                dictionaryWithInfo["coordinates"] = CLLocation(latitude: (dictionaryWithInfo["latitude"] as? Double)!, longitude: (dictionaryWithInfo["longitude"] as? Double)!)
-                                
-                                self.farmersMarketArray.append(dictionaryWithInfo)
+                            if let latitude = detail["location_points"]["latitude"].string {
+                                dictionaryWithInfo["latitude"] = Double(latitude)
                             }
-//                        } 
+                            
+                            if let longitude = detail["location_points"]["longitude"].string {
+                                dictionaryWithInfo["longitude"] = Double(longitude)
+                            }
+                            
+                            if let addressInDictionary = detail["address_line_1"].string {
+                                dictionaryWithInfo["address"] = addressInDictionary
+                            } else {
+                                
+                                print("IN SEARCH OF ADDRESS")
+                            }
+                            
+                            dictionaryWithInfo["coordinates"] = CLLocation(latitude: (dictionaryWithInfo["latitude"] as? Double)!, longitude: (dictionaryWithInfo["longitude"] as? Double)!)
+                            
+                            self.farmersMarketArray.append(dictionaryWithInfo)
+                        }
                     }
-                    //                print(self.currentLocation)
-                    //                print("Count: \(self.farmersMarketArray.count)")
-                    //                print("Array: \(self.farmersMarketArray)")
-                    //                 self.farmersMarketArray = self.sortArrayByDistance(self.farmersMarketArray)
-                    
-                    //                print( self.farmersMarketArray)
-                    
-                    completionHandler(true)
                 }
+//                print(self.currentLocation)
+//                print("Count: \(self.farmersMarketArray.count)")
+                //                print("Array: \(self.farmersMarketArray)")
+                //                 self.farmersMarketArray = self.sortArrayByDistance(self.farmersMarketArray)
+                
+                //                print( self.farmersMarketArray)
+                
+                completionHandler(true)
+                
             }
         }
     }
@@ -142,21 +140,21 @@ class DataStore {
         var locationDictionary = [:]
         Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
             locationDictionary = response.result.value as! NSDictionary
-            if let locationArrays = locationDictionary["data"] as? Array<Array<AnyObject>> {
-                //            print("LocationArrays : \(locationArrays)")
-                for location in locationArrays {
-                    
-                    var tempDictionary = [String : String]()
-                    
-                    tempDictionary["address"] = location[10] as? String
-                    tempDictionary["name"] = location[17] as? String
-                    tempDictionary["type"] = location[18] as? String
-                    tempDictionary["waterfront"] = location[19] as? String
-                    tempDictionary["zip"] = location[13] as? String
-                    tempDictionary["coordinates"] = location[8] as? String
-                    
-                    self.masterParksDictionary[(location[17] as? String)!] = tempDictionary as? Dictionary
-                }
+            let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
+            //            print("LocationArrays : \(locationArrays)")
+            for location in locationArrays {
+                
+                var tempDictionary = [String : String]()
+                
+                tempDictionary["address"] = location[10] as? String
+                tempDictionary["name"] = location[17] as? String
+                tempDictionary["type"] = location[18] as? String
+                tempDictionary["waterfront"] = location[19] as? String
+                tempDictionary["zip"] = location[13] as? String
+                tempDictionary["coordinates"] = location[8] as? String
+                
+                self.masterParksDictionary[(location[17] as? String)!] = tempDictionary as? Dictionary
+                
             }
             
             
@@ -176,21 +174,21 @@ class DataStore {
             locationDictionary = response.result.value as! NSDictionary
             
             
-            if let locationArrays = locationDictionary["data"] as? Array<Array<AnyObject>> {
-                //            print("LocationArrays : \(locationArrays)")
-                for location in locationArrays {
-                    
-                    var tempDictionary = [String : String]()
-                    
-                    tempDictionary["address"] = location[10] as? String
-                    tempDictionary["name"] = location[17] as? String
-                    tempDictionary["type"] = location[18] as? String
-                    tempDictionary["waterfront"] = location[19] as? String
-                    tempDictionary["zip"] = location[13] as? String
-                    tempDictionary["coordinates"] = location[8] as? String
-                    
-                    parsedParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
-                }
+            let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
+            //            print("LocationArrays : \(locationArrays)")
+            for location in locationArrays {
+                
+                var tempDictionary = [String : String]()
+                
+                tempDictionary["address"] = location[10] as? String
+                tempDictionary["name"] = location[17] as? String
+                tempDictionary["type"] = location[18] as? String
+                tempDictionary["waterfront"] = location[19] as? String
+                tempDictionary["zip"] = location[13] as? String
+                tempDictionary["coordinates"] = location[8] as? String
+                
+                parsedParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
+                
             }
             completion(parks: parsedParksDictionary)
         }
@@ -257,6 +255,7 @@ class DataStore {
                 abort()
             }
         }
+        
     }
     
     func getParkByType(category: String, type: String) {
@@ -270,7 +269,9 @@ class DataStore {
             if self.masterParksDictionary[key]![category]!.containsString(type) == true {
                 
                 self.parkTypeArray.append(self.masterParksDictionary[key]!)
+                
             }
+            
         }
         self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
         //        print("ParkTypeArray = \(self.parkTypeArray)")
@@ -290,7 +291,7 @@ class DataStore {
                 if parks[key]![category]?.containsString(type) == true{
                     
                     self.parkTypeArray.append(parks[key]!)
-                    //                    print("i have the parks")
+//                    print("i have the parks")
                 }
                 
             }
@@ -361,27 +362,27 @@ class DataStore {
                 if let arrayOfData = arrayOfData {
                     
                     for detail in arrayOfData {
-                        //                        if !self.greenThumbArray.contains(detail[10].string) {
+//                        if !self.greenThumbArray.contains(detail[10].string) {
                         dictionaryWithInfo["Garden"] = detail[10].string
                         dictionaryWithInfo["Address"] = detail[11].string
                         dictionaryWithInfo["phone number"] = detail[15].string
                         if let coordinate = detail[8].string {
-                            //                            print(coordinate)
-                            dictionaryWithInfo["coordinates"] = coordinate
+//                            print(coordinate)
+                        dictionaryWithInfo["coordinates"] = coordinate
                         }
-                        greenThumbDictionary[detail[10].string!] = dictionaryWithInfo
-                        //                        self.greenThumbArray.append(dictionaryWithInfo)
-                        //                        }
+                       greenThumbDictionary[detail[10].string!] = dictionaryWithInfo
+//                        self.greenThumbArray.append(dictionaryWithInfo)
+//                        }
                     }
                     self.greenThumbArray = Array(greenThumbDictionary.values)
                     self.greenThumbArray = self.organizeParkCoordinates(self.greenThumbArray)
                     print("got garden")
                     print(self.greenThumbArray)
                     completionHandler(true)
+                    
                 }
             }
         }
     }
-    
 }
 

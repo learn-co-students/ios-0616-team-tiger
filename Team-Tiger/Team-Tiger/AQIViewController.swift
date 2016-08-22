@@ -64,7 +64,7 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             self.ozoneLabel.text = "N/A"
             self.particulateLabel.text = "N/A"
-            self.actionDayStatus.text = "Sorry, we cannot currently access Air Quality data. Please make sure you're connected to the internet and try again."
+            self.actionDayStatus.text = "Sorry, we cannot currently access Air Quality data. Please make sure you're connected to the internet, restart the app, and try again."
             self.letsGo.hidden = true
         }
         
