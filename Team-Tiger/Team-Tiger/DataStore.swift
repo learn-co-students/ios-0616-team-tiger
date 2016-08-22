@@ -20,7 +20,12 @@ class DataStore {
     var gardenArray : [[String:AnyObject]] = []
     var masterParksDictionary = [String : [String : String]]()
     
+<<<<<<< HEAD
     var currentLocation = CLLocation()
+=======
+    var hasLocation : Bool = false
+    var currentLocation : CLLocation = CLLocation(latitude: 40.759211, longitude: -73.984638)
+>>>>>>> master
     var airQualityReport = []
     var arrayOfParks: [String] = []
     var greenThumbArray: [[String:AnyObject]] = []
@@ -29,16 +34,23 @@ class DataStore {
     var longitude = String()
     var googleSearchResults: [String: String] = [:]
     
+<<<<<<< HEAD
+=======
+    var linkNycWifiSpots : [[String : AnyObject]] = []
+    
+    var outdoorWifiSpots : [[String : AnyObject]] = []
+    
+    // var locationFromDetailView = detailViewController()
+    var locationsFromDataStore = DataStore()
+    
+>>>>>>> master
     
     //static makes it a singleton
     static let store = DataStore()
     
     var user = [User]()
     
-    
     func fetchData() {
-        
-        
         let userFetchRequest = NSFetchRequest(entityName: "User")
         
         do {
@@ -73,6 +85,8 @@ class DataStore {
         return arrayCopy
     }
     
+    
+    
     func farmersMarketParse(completionHandler: (Bool) -> ()) {
         Alamofire.request(.GET, "https://data.ny.gov/resource/farmersmarkets.json?") .responseJSON { response in
             
@@ -89,6 +103,7 @@ class DataStore {
                 let jsonObj = JSON(data: jsonData)
                 let arrayOfData = jsonObj.array
                 self.farmersMarketArray.removeAll()
+                
                 if let arrayOfData = arrayOfData {
                     var dictionaryWithInfo : [String:AnyObject] = [:]
                     for detail in arrayOfData {
@@ -120,18 +135,12 @@ class DataStore {
                             dictionaryWithInfo["coordinates"] = CLLocation(latitude: (dictionaryWithInfo["latitude"] as? Double)!, longitude: (dictionaryWithInfo["longitude"] as? Double)!)
                             
                             self.farmersMarketArray.append(dictionaryWithInfo)
+                            
                         }
                     }
                 }
-                print(self.currentLocation)
-                print("Count: \(self.farmersMarketArray.count)")
-                //                print("Array: \(self.farmersMarketArray)")
-                //                 self.farmersMarketArray = self.sortArrayByDistance(self.farmersMarketArray)
-                
-                //                print( self.farmersMarketArray)
                 
                 completionHandler(true)
-                
             }
         }
     }
@@ -157,46 +166,12 @@ class DataStore {
                 tempDictionary["coordinates"] = location[8] as? String
                 
                 self.masterParksDictionary[(location[17] as? String)!] = tempDictionary as? Dictionary
-                
             }
-            
-            
             completion()
         }
     }
     
-    //Used to call parks data on demand that is passed to getParkByTypeOnDemand method
     
-    func getParksOnDemand(completion:(parks: [String : [String : String]]) -> ()) -> () {
-        
-        var parsedParksDictionary = [String : [String : String]]()
-        
-        var locationDictionary = [:]
-        
-        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
-            locationDictionary = response.result.value as! NSDictionary
-            
-            
-            let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
-            //            print("LocationArrays : \(locationArrays)")
-            for location in locationArrays {
-                
-                var tempDictionary = [String : String]()
-                
-                tempDictionary["address"] = location[10] as? String
-                tempDictionary["name"] = location[17] as? String
-                tempDictionary["type"] = location[18] as? String
-                tempDictionary["waterfront"] = location[19] as? String
-                tempDictionary["zip"] = location[13] as? String
-                tempDictionary["coordinates"] = location[8] as? String
-                
-                parsedParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
-                
-            }
-            completion(parks: parsedParksDictionary)
-        }
-        
-    }
     
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.kencooke.Team_Tiger" in the application's documents Application Support directory.
@@ -261,6 +236,38 @@ class DataStore {
         
     }
     
+    //Used to call parks data on demand that is passed to getParkByTypeOnDemand method
+    
+    func getParksOnDemand(completion:(parks: [String : [String : String]]) -> ()) -> () {
+        
+        var parsedParksDictionary = [String : [String : String]]()
+        
+        var locationDictionary = [:]
+        
+        Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/p7jc-c8ak/rows.json?accessType=DOWNLOAD").responseJSON { (response) in
+            locationDictionary = response.result.value as! NSDictionary
+            
+            
+            let locationArrays = locationDictionary["data"] as! Array<Array<AnyObject>>
+            //            print("LocationArrays : \(locationArrays)")
+            for location in locationArrays {
+                
+                var tempDictionary = [String : String]()
+                
+                tempDictionary["address"] = location[10] as? String
+                tempDictionary["name"] = location[17] as? String
+                tempDictionary["type"] = location[18] as? String
+                tempDictionary["waterfront"] = location[19] as? String
+                tempDictionary["zip"] = location[13] as? String
+                tempDictionary["coordinates"] = location[8] as? String
+                
+                parsedParksDictionary[(location[17] as? String)!] = tempDictionary as Dictionary
+                
+            }
+            completion(parks: parsedParksDictionary)
+        }
+    }
+    
     func getParkByType(category: String, type: String) {
         
         self.parkTypeArray.removeAll()
@@ -272,12 +279,9 @@ class DataStore {
             if self.masterParksDictionary[key]![category]!.containsString(type) == true {
                 
                 self.parkTypeArray.append(self.masterParksDictionary[key]!)
-                
             }
-            
         }
         self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
-        //        print("ParkTypeArray = \(self.parkTypeArray)")
     }
     
     //To be used only when masterParkDictionary is empty. Otherwise, use getParkByType
@@ -294,13 +298,11 @@ class DataStore {
                 if parks[key]![category]?.containsString(type) == true{
                     
                     self.parkTypeArray.append(parks[key]!)
-                    print("i have the parks")
+                    //                    print("i have the parks")
                 }
-                
             }
             
             self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
-            //            print("ParkTypeArray = \(self.parkTypeArray)")
             completion()
         }
         
@@ -319,9 +321,9 @@ class DataStore {
                 parkCopy = LocationStuff().sortWithDistance(parkCopy)
                 
                 parksCopy.append(parkCopy)
+                
             }
         }
-        
         return parksCopy
     }
     
@@ -345,15 +347,12 @@ class DataStore {
         }
     }
     
-    
     func greenThumbParse(completionHandler: (Bool) -> ()) {
         
         // var greenThumbArray: [[String: String]] = []
         var greenThumbDictionary : [String : [ String : AnyObject]] = [:]
         
         Alamofire.request(.GET, "https://data.cityofnewyork.us/api/views/3ckp-upxf/rows.json?") .responseJSON { response in
-            
-            //            self.greenThumbdictionary = response.result.value as! NSDictionary
             
             if let jsonData = response.data {
                 let jsonObj = JSON(data: jsonData)
@@ -365,27 +364,78 @@ class DataStore {
                 if let arrayOfData = arrayOfData {
                     
                     for detail in arrayOfData {
+<<<<<<< HEAD
                         //                        if !self.greenThumbArray.contains(detail[10].string) {
+=======
+                        
+>>>>>>> master
                         dictionaryWithInfo["Garden"] = detail[10].string
                         dictionaryWithInfo["Address"] = detail[11].string
                         dictionaryWithInfo["phone number"] = detail[15].string
                         if let coordinate = detail[8].string {
+<<<<<<< HEAD
                             print(coordinate)
                             dictionaryWithInfo["coordinates"] = coordinate
                         }
                         greenThumbDictionary[detail[10].string!] = dictionaryWithInfo
                         //                        self.greenThumbArray.append(dictionaryWithInfo)
                         //                        }
+=======
+                            dictionaryWithInfo["coordinates"] = coordinate
+                        }
+                        greenThumbDictionary[detail[10].string!] = dictionaryWithInfo
+>>>>>>> master
                     }
                     self.greenThumbArray = Array(greenThumbDictionary.values)
                     self.greenThumbArray = self.organizeParkCoordinates(self.greenThumbArray)
+                    print("got garden")
                     print(self.greenThumbArray)
-                    completionHandler(true)
                     
+                    completionHandler(true)
                 }
             }
         }
     }
+<<<<<<< HEAD
+=======
+    //GOOGLE SEARCH API
+    
+    //    googleSearchTest { results in
+    //
+    //    guard let placeID = results["place_id"] else {return}
+    //    print("\n\n\nplace id returned from results: \(placeID)\n\n\n")
+    //    self.googlePlaceDetails(placeID, completion: { (latitude, longitude) in
+    //
+    //
+    //    })
+    
+    
+    func getGoogleDetailsForCloseLocation(details: [String: String], completionHandler: ([String:String]?) -> ()) {
+        
+        // 1. Parse coordinates from raw string
+        guard let coordinates = parseCoordinates("") else {
+            completionHandler(nil)
+            return
+        }
+        
+         // 2. Get place id for location
+        getGoogleSearchPlaceIDFrom(("", "")) { id in
+            
+            guard let placeID = id else {completionHandler(nil);return}
+            
+            // 3. Get details using place id
+            self.getGooglePlaceDetailsFrom(placeID: placeID, completionHandler: { results in
+                
+                guard let placeResults = results else {completionHandler(nil);return}
+                
+                completionHandler(placeResults)
+                
+            })
+            
+        }
+        
+    }
+>>>>>>> master
     
     func parseCoordinates(rawCoordinates: String) -> (String, String)? {
         
@@ -424,9 +474,12 @@ class DataStore {
             // Add results to dictionary
             self.googleSearchResults["place_id"] = placeID
             
+<<<<<<< HEAD
             guard let rating = jsonObject["results"][0]["rating"].double else {return}
             
             
+=======
+>>>>>>> master
             completionHandler(placeID)
         }
         
@@ -456,6 +509,65 @@ class DataStore {
             
         }
     }
+<<<<<<< HEAD
 }
 
 
+=======
+    
+    // Wifi
+    
+    
+    func getLinkNYCWifiSpots()  {
+        var locationArray = [[String : AnyObject]]()
+        
+        Alamofire.request(.GET, "https://data.cityofnewyork.us/resource/jd4g-ks2z.json") .responseJSON {
+            
+            response in
+            
+            locationArray = response.result.value as! Array
+            print("parsing")
+            
+            if let jsonData = response.data {
+                
+                let jsonObj = JSON(data: jsonData)
+                
+                let arrayOfData = jsonObj.array
+                if let arrayOfData = arrayOfData {
+                    for location in arrayOfData {
+                        if location["location_t"].string == ("Outdoor Kiosk") {
+                            var tempDictionary : [String : AnyObject] = [:]
+                            
+                            if location["name"] != nil {
+                                tempDictionary["name"] = location["name"].string
+                            }
+                            if location["location_t"] != nil {
+                                tempDictionary["location_t"] = location["location_t"].string
+                            }
+                            if location["lon"] != nil {
+                                tempDictionary["long"] = location["lon"].string
+                            }
+                            if location["ssid"] != nil {
+                                tempDictionary["ssid"] = location["ssid"].string
+                            }
+                            if location["zip"] != nil{
+                                tempDictionary["zip"] = location["zip"].string
+                            }
+                            if location["lat"] != nil {
+                                tempDictionary["lat"] = location["lat"].string
+                            }
+                            //                            print(tempDictionary)
+                            self.linkNycWifiSpots.append(tempDictionary)
+                        }
+                    }
+                }
+            }
+        }
+        print(linkNycWifiSpots)
+    }
+    
+}
+
+
+
+>>>>>>> master

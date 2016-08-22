@@ -11,7 +11,7 @@
 		110E70F21D5D035C0063AE78 /* CommunityGardensTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110E70F11D5D035C0063AE78 /* CommunityGardensTableViewController.swift */; };
 		110E70F41D5D08D00063AE78 /* BotanicalGardensTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110E70F31D5D08D00063AE78 /* BotanicalGardensTableViewController.swift */; };
 		11DF7A0D1D5528BE004E410E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DF7A0C1D5528BE004E410E /* Secrets.swift */; };
-		11F768351D65112700B971C5 /* GoogleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F768341D65112700B971C5 /* GoogleDetailsViewController.swift */; };
+		1745EB571D6B443300A13998 /* ReachabilityCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1745EB561D6B443300A13998 /* ReachabilityCheck.swift */; };
 		174A95B11D5903F800841B2C /* LocationStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174A95B01D5903F800841B2C /* LocationStuff.swift */; };
 		4F45BF191D53D0290029FD30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF181D53D0290029FD30 /* AppDelegate.swift */; };
 		4F45BF1B1D53D0290029FD30 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F45BF1A1D53D0290029FD30 /* ViewController.swift */; };
@@ -44,7 +44,7 @@
 		110E70F31D5D08D00063AE78 /* BotanicalGardensTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotanicalGardensTableViewController.swift; sourceTree = "<group>"; };
 		1145F1DC1D5CF7E400DEFA97 /* FarmersMarketTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FarmersMarketTableViewController.swift; sourceTree = "<group>"; };
 		11DF7A0C1D5528BE004E410E /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
-		11F768341D65112700B971C5 /* GoogleDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleDetailsViewController.swift; path = ../GoogleDetailsViewController.swift; sourceTree = "<group>"; };
+		1745EB561D6B443300A13998 /* ReachabilityCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityCheck.swift; sourceTree = "<group>"; };
 		174A95B01D5903F800841B2C /* LocationStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStuff.swift; sourceTree = SOURCE_ROOT; };
 		4F45BF151D53D0290029FD30 /* Team-Tiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team-Tiger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F45BF181D53D0290029FD30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +120,7 @@
 				11DF7A0C1D5528BE004E410E /* Secrets.swift */,
 				174A95B01D5903F800841B2C /* LocationStuff.swift */,
 				4F45BF181D53D0290029FD30 /* AppDelegate.swift */,
+				1745EB561D6B443300A13998 /* ReachabilityCheck.swift */,
 				11024A4E1D551C490001BAFC /* DataStore.swift */,
 				4F82FE561D6495E30085DBA4 /* ViewControllers */,
 				4F82FE551D6495CE0085DBA4 /* APIs */,
@@ -141,7 +142,6 @@
 				1145F1DC1D5CF7E400DEFA97 /* FarmersMarketTableViewController.swift */,
 				110E70F11D5D035C0063AE78 /* CommunityGardensTableViewController.swift */,
 				110E70F31D5D08D00063AE78 /* BotanicalGardensTableViewController.swift */,
-				11F768341D65112700B971C5 /* GoogleDetailsViewController.swift */,
 			);
 			name = CurrentlyUnused;
 			sourceTree = "<group>";
@@ -234,7 +234,7 @@
 				TargetAttributes = {
 					4F45BF141D53D0290029FD30 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 955825D98U;
+						DevelopmentTeam = TDFXWLD7DJ;
 					};
 				};
 			};
@@ -326,8 +326,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F0257DB1D61562A002F9D5B /* detailViewController.swift in Sources */,
-				11F768351D65112700B971C5 /* GoogleDetailsViewController.swift in Sources */,
 				11DF7A0D1D5528BE004E410E /* Secrets.swift in Sources */,
+				1745EB571D6B443300A13998 /* ReachabilityCheck.swift in Sources */,
 				4F66D8BF1D650C9100C45E8F /* User+CoreDataProperties.swift in Sources */,
 				4F66D8C41D650F2B00C45E8F /* FavoritesTableViewController.swift in Sources */,
 				4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */,
@@ -469,7 +469,7 @@
 				);
 				INFOPLIST_FILE = "Team-Tiger/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Team-Tiger-ios-0616";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.electricchance.Team-Tiger-ios-0616";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -489,7 +489,7 @@
 				);
 				INFOPLIST_FILE = "Team-Tiger/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Team-Tiger-ios-0616";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.electricchance.Team-Tiger-ios-0616";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

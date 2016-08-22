@@ -29,7 +29,6 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         
     }
     
-    
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
         var index = (viewController as! onboardingViewController).controllerIndex
@@ -37,14 +36,11 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         if index <= 0 {
             
             return nil
-            
         }
         
         index = index! - 1
         
         return self.viewControllerAtIndex(index!)
-        
-        
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
@@ -54,20 +50,16 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         if index >= self.imageArray.count {
             
             return nil
-            
         }
         
         index = index! + 1
         
         return self.viewControllerAtIndex(index!)
-        
-        
     }
     
     func viewControllerAtIndex(index : Int) -> UIViewController? {
         
         if((self.textArray.count == 0) || (index >= self.textArray.count)) {
-            
             return nil
             
         }
@@ -85,13 +77,9 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
             if view.controllerIndex == 2 {
                 
                 view.buttonHidden = false
-                
             }
-            
             return view
-            
         }
-        
         return nil
     }
     
@@ -103,12 +91,9 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         
         if let bench = benchPhoto, flower = flowerPhoto, plant = plantPhoto {
             
-            
             self.imageArray.append(flower)
             self.imageArray.append(plant)
             self.imageArray.append(bench)
-            
         }
     }
-    
 }
