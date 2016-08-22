@@ -25,7 +25,15 @@ class DataStore {
     var airQualityReport = []
     var arrayOfParks: [String] = []
     var greenThumbArray: [[String:AnyObject]] = []
-
+    
+    var latitude = String()
+    var longitude = String()
+    var googleSearchResults: [String: String] = [:]
+    
+   // var locationFromDetailView = detailViewController()
+    var locationsFromDataStore = DataStore()
+    
+    
     
     //static makes it a singleton
     static let store = DataStore()
@@ -86,6 +94,7 @@ class DataStore {
                 let jsonObj = JSON(data: jsonData)
                 let arrayOfData = jsonObj.array
                 self.farmersMarketArray.removeAll()
+                
                 if let arrayOfData = arrayOfData {
                     var dictionaryWithInfo : [String:AnyObject] = [:]
                     for detail in arrayOfData {
@@ -117,11 +126,12 @@ class DataStore {
                             dictionaryWithInfo["coordinates"] = CLLocation(latitude: (dictionaryWithInfo["latitude"] as? Double)!, longitude: (dictionaryWithInfo["longitude"] as? Double)!)
                             
                             self.farmersMarketArray.append(dictionaryWithInfo)
+                            
                         }
                     }
                 }
-//                print(self.currentLocation)
-//                print("Count: \(self.farmersMarketArray.count)")
+                //                print(self.currentLocation)
+                //                print("Count: \(self.farmersMarketArray.count)")
                 //                print("Array: \(self.farmersMarketArray)")
                 //                 self.farmersMarketArray = self.sortArrayByDistance(self.farmersMarketArray)
                 
@@ -291,7 +301,7 @@ class DataStore {
                 if parks[key]![category]?.containsString(type) == true{
                     
                     self.parkTypeArray.append(parks[key]!)
-//                    print("i have the parks")
+                    //                    print("i have the parks")
                 }
                 
             }
@@ -316,6 +326,7 @@ class DataStore {
                 parkCopy = LocationStuff().sortWithDistance(parkCopy)
                 
                 parksCopy.append(parkCopy)
+                
             }
         }
         
@@ -362,26 +373,138 @@ class DataStore {
                 if let arrayOfData = arrayOfData {
                     
                     for detail in arrayOfData {
-//                        if !self.greenThumbArray.contains(detail[10].string) {
+                        //                        if !self.greenThumbArray.contains(detail[10].string) {
                         dictionaryWithInfo["Garden"] = detail[10].string
                         dictionaryWithInfo["Address"] = detail[11].string
                         dictionaryWithInfo["phone number"] = detail[15].string
                         if let coordinate = detail[8].string {
-//                            print(coordinate)
-                        dictionaryWithInfo["coordinates"] = coordinate
+                            //                            print(coordinate)
+                            dictionaryWithInfo["coordinates"] = coordinate
                         }
-                       greenThumbDictionary[detail[10].string!] = dictionaryWithInfo
-//                        self.greenThumbArray.append(dictionaryWithInfo)
-//                        }
+                        greenThumbDictionary[detail[10].string!] = dictionaryWithInfo
+                        
+                        //self.greenThumbArray.append(dictionaryWithInfo)
+                        //                        }
                     }
                     self.greenThumbArray = Array(greenThumbDictionary.values)
                     self.greenThumbArray = self.organizeParkCoordinates(self.greenThumbArray)
-//                    print(self.greenThumbArray)
+                    print(" \n\n\n\n\n THIS SHOULD BE THE COORDINATES: \(self.greenThumbArray)\n\n\n\n\n\n")
+                    
                     completionHandler(true)
                     
                 }
             }
         }
     }
+    
+    //GOOGLE SEARCH API
+    
+//    googleSearchTest { results in
+//    
+//    guard let placeID = results["place_id"] else {return}
+//    print("\n\n\nplace id returned from results: \(placeID)\n\n\n")
+//    self.googlePlaceDetails(placeID, completion: { (latitude, longitude) in
+//    
+//    
+//    })
+    
+    
+    func getGoogleDetailsForCloseLocation(details: [String: String], completionHandler: ([String:String]?) -> ()) {
+        
+        // 1. Parse coordinates from raw string
+        guard let coordinates = parseCoordinates("") else {
+            completionHandler(nil)
+            return
+        }
+        
+        
+        // 2. Get place id for location
+        getGoogleSearchPlaceIDFrom(coordinates: ("", "")) { id in
+            
+            guard let placeID = id else {completionHandler(nil);return}
+            
+            // 3. Get details using place id
+            getGooglePlaceDetailsFrom(placeID: placeID, completionHandler: { results in
+                
+                guard let placeResults = results else {completionHandler(nil);return}
+                
+                completionHandler(placeResults)
+                
+            })
+            
+        }
+  
+    }
+    
+
+    
+    func parseCoordinates(rawCoordinates: String) -> (String, String)? {
+
+        let parseCoordinatesFirstPass = rawCoordinates.componentsSeparatedByString(">").first
+        let parseCoordinatesSecondPass = parseCoordinatesFirstPass?.componentsSeparatedByString("<").last
+        let finalCoordinates = parseCoordinatesSecondPass?.componentsSeparatedByString(",")
+        
+//        let finalCoordinatesForFM = String(locationsFromDataStore.farmersMarketArray[0]["coordinates"])
+//        let finalCoordinatesFirstPassFM = finalCoordinatesForFM.componentsSeparatedByString(">").first
+//        let finalCoordinatesSecondPassFM = finalCoordinatesFirstPassFM?.componentsSeparatedByString("<").last
+//        let farmersMarketCoordinates = finalCoordinatesSecondPassFM?.componentsSeparatedByString(",")
+//        
+//        let finalCoordinatesForGardens = String(locationsFromDataStore.greenThumbArray[0]["coordinates"])
+//        let finalCoordinatesFirstPassGardens = finalCoordinatesForGardens.componentsSeparatedByString(">").first
+//        let finalCoordinatesSecondPassGardens = finalCoordinatesFirstPassGardens?.componentsSeparatedByString("<").last
+//        let gardenCoordinates = finalCoordinatesSecondPassGardens?.componentsSeparatedByString(",")
+
+
+        //should probably unwrap these appropiately//also may have to specify that this is the PARKS lat/long
+        latitude = finalCoordinates![0]
+        longitude = finalCoordinates![1]
+
+        let coordinates = (latitude,longitude)
+        return coordinates
+    }
+        
+    func getGoogleSearchPlaceIDFrom(coordinates: (String, String), completionHandler: (String?) -> ()) {
+
+        Alamofire.request(.GET, "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=500&type=restaurant&name=cruise&key=AIzaSyBL-Opv8MzHLhMcQ241dZBWYtanPhqfSHQ").responseJSON {response in
+        
+            guard let jsonData = response.data else {return}
+            let jsonObject = JSON(data: jsonData)
+            let placeID = jsonObject["results"][1]["place_id"].string!
+            
+            
+            // Add results to dictionary
+            self.googleSearchResults["place_id"] = placeID
+            
+            completionHandler(placeID)
+        }
+    
+    }
+    
+    func getGooglePlaceDetailsFrom(placeID id: String, completionHandler: [String: String]? -> ()){
+        
+        Alamofire.request(.GET, "https://maps.googleapis.com/maps/api/place/details/json?placeid=\(id)&key=AIzaSyBkEKRXCtoXZThYqylgUrHKGkjAmJ_1mSM").responseJSON {response in
+            let checkingOutTheResponse = response.result.value
+            print(checkingOutTheResponse)
+            
+            
+            guard let rawData = response.data else {return}
+            
+            let jsonObject = JSON(data: rawData)
+            print(jsonObject)
+            
+            let phoneNumber = jsonObject["result"]["formatted_phone_number"].stringValue
+            
+            //let ratings = jsonObject["result"]["rating"].doubleValue
+            //print("Rating: \(ratings)")
+            
+            let openingHours = jsonObject["result"]["opening_hours"]["weekday_text"].arrayValue
+            
+            let address = jsonObject["result"]["formatted_address"].stringValue
+            
+            
+        }
+    }
 }
+
+
 

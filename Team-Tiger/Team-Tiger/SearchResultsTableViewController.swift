@@ -14,16 +14,17 @@ class SearchResultsTableViewController: UITableViewController {
     var arrayOfNames: [String] = []
     
     var tappedCell: Int = 0
-    
+        
     let dataStore = DataStore.store
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print("PARKS IN ARRAY \(dataStore.parkTypeArray)")
       
-//      print(self.arrayOfNames)
         
+        let getDetailsForMarkets = dataStore.getGoogleDetailsForCloseLocation(dataStore.locationsFromDataStore.farmersMarketArray[0], completionHandler: ([String:String]))
+        let getDetailsForGardens = dataStore.getGoogleDetailsForCloseLocation(dataStore.locationsFromDataStore.greenThumbArray[0], completionHandler: ([String:String]))
+        let getDetailsForParks = dataStore.getGoogleDetailsForCloseLocation(dataStore.parkTypeArray, completionHandler: ([String:String]))
         
         self.tableView.reloadData()
         
@@ -83,8 +84,8 @@ class SearchResultsTableViewController: UITableViewController {
             
             let newVC = segue.destinationViewController as! detailViewController
             self.tappedCell = (tableView.indexPathForSelectedRow?.row)!
+            
             newVC.locationToPresent = dataStore.parkTypeArray[tappedCell]
-
             
         }
         

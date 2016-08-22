@@ -324,7 +324,7 @@
         <image name="tinySpa" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uGN-aA-me7"/>
         <segue reference="gN2-fu-PLP"/>
+        <segue reference="9hm-02-MY1"/>
     </inferredMetricsTieBreakers>
 </document>
