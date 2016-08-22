@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class GoogleDetailsViewController: UIViewController {
     
-  
+    
     @IBOutlet weak var locaionName: UILabel!
     @IBOutlet weak var locationAddress: UILabel!
     @IBOutlet weak var locationRating: UILabel!
@@ -21,7 +21,7 @@ class GoogleDetailsViewController: UIViewController {
     var latitude = String()
     var longitude = String()
     var googleSearchResults: [String: String] = [:]
-
+    
     var locationFromDetailView = detailViewController()
     
     
@@ -41,54 +41,54 @@ class GoogleDetailsViewController: UIViewController {
         locaionName.text = googleSearchResults["name"]
     }
     
-    func googleSearchTest(completionHandler: ([String: String]) -> ()) {
+    func parseCoordinates(rawCoordinates: String) -> (String, String)? {
         
-        var closestCoordinate = String(locationFromDetailView.locationToPresent["Closest Coordinate"])
-        let parseCoordinatesFirstPass = closestCoordinate.componentsSeparatedByString(">").first
+        let parseCoordinatesFirstPass = rawCoordinates.componentsSeparatedByString(">").first
         let parseCoordinatesSecondPass = parseCoordinatesFirstPass?.componentsSeparatedByString("<").last
-        let coordinates = parseCoordinatesSecondPass?.componentsSeparatedByString(",")
+        let finalCoordinates = parseCoordinatesSecondPass?.componentsSeparatedByString(",")
         
-        //should probably unwrap these appropiately
-        latitude = coordinates![0]
-        longitude = coordinates![1]
+        //        let finalCoordinatesForFM = String(locationsFromDataStore.farmersMarketArray[0]["coordinates"])
+        //        let finalCoordinatesFirstPassFM = finalCoordinatesForFM.componentsSeparatedByString(">").first
+        //        let finalCoordinatesSecondPassFM = finalCoordinatesFirstPassFM?.componentsSeparatedByString("<").last
+        //        let farmersMarketCoordinates = finalCoordinatesSecondPassFM?.componentsSeparatedByString(",")
+        //
+        //        let finalCoordinatesForGardens = String(locationsFromDataStore.greenThumbArray[0]["coordinates"])
+        //        let finalCoordinatesFirstPassGardens = finalCoordinatesForGardens.componentsSeparatedByString(">").first
+        //        let finalCoordinatesSecondPassGardens = finalCoordinatesFirstPassGardens?.componentsSeparatedByString("<").last
+        //        let gardenCoordinates = finalCoordinatesSecondPassGardens?.componentsSeparatedByString(",")
         
+        
+        //should probably unwrap these appropiately//also may have to specify that this is the PARKS lat/long
+        latitude = finalCoordinates![0]
+        longitude = finalCoordinates![1]
+        
+        let coordinates = (latitude,longitude)
+        return coordinates
+    }
+    
+    func getGoogleSearchPlaceIDFrom(coordinates: (String, String), completionHandler: (String?) -> ()) {
         
         Alamofire.request(.GET, "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=500&type=restaurant&name=cruise&key=AIzaSyBL-Opv8MzHLhMcQ241dZBWYtanPhqfSHQ").responseJSON {response in
             
-            // let dataFromSearch = response.result.value
-            
             guard let jsonData = response.data else {return}
-            
             let jsonObject = JSON(data: jsonData)
-            
-            
-            let name = jsonObject["results"][0]["name"].string!
-            
-            // Get place id
             let placeID = jsonObject["results"][1]["place_id"].string!
-            //print("PLACE ID!!::: \(placeID)")
             
-            // Get rating
-            guard let rating = jsonObject["results"][0]["rating"].double else {return}
-            
-            // Get open status
-            let openNow = jsonObject["results"][1]["opening_hours"]["open_now"].stringValue
-            //print(openNow)
             
             // Add results to dictionary
             self.googleSearchResults["place_id"] = placeID
-            self.googleSearchResults["rating"] = String(rating)
-            self.googleSearchResults["open_status"] = openNow
-            self.googleSearchResults["name"] = name
             
-            completionHandler(self.googleSearchResults)
+            guard let rating = jsonObject["results"][0]["rating"].double else {return}
             
+            
+            completionHandler(placeID)
         }
+        
     }
     
-    func googlePlaceDetails(place_ID: String, completion: (String, String ) -> ()){
+    func getGooglePlaceDetailsFrom(placeID id: String, completionHandler: [String: String]? -> ()){
         
-        Alamofire.request(.GET, "https://maps.googleapis.com/maps/api/place/details/json?placeid=\(place_ID)&key=AIzaSyBkEKRXCtoXZThYqylgUrHKGkjAmJ_1mSM").responseJSON {response in
+        Alamofire.request(.GET, "https://maps.googleapis.com/maps/api/place/details/json?placeid=\(id)&key=AIzaSyBkEKRXCtoXZThYqylgUrHKGkjAmJ_1mSM").responseJSON {response in
             let checkingOutTheResponse = response.result.value
             print(checkingOutTheResponse)
             
@@ -107,7 +107,9 @@ class GoogleDetailsViewController: UIViewController {
             
             let address = jsonObject["result"]["formatted_address"].stringValue
             
-            completion(self.latitude, self.longitude)
+            
         }
     }
 }
+
+
