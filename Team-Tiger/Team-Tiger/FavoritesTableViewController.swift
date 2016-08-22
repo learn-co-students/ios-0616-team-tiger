@@ -142,6 +142,8 @@ class FavoritesTableViewController: UITableViewController {
         
         destinationVC.favoriteToPresent = locationToPass
         
+        destinationVC.passedDataType = "favorite"
+        
     }
     
     

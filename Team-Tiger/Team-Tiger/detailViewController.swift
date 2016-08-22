@@ -29,9 +29,21 @@ class detailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(locationToPresent)
+        //print(locationToPresent)
         
         self.view.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
+        
+        setViewLabelsBasedOnPassedType()
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func setViewLabelsBasedOnPassedType() {
         
         if self.passedDataType == "parks" {
             
@@ -41,21 +53,30 @@ class detailViewController: UIViewController {
             
             setupMarketLabels()
             
-        } else {
+        } else if self.passedDataType == "gardens" {
             
             setupGardenLabels()
             
+        } else {
+            
+            if let favorite = self.favoriteToPresent {
+                
+                self.locationName.text = favorite.name
+                self.locationAddress.text = favorite.address
+                self.zipCode.text = favorite.zip
+                self.locationType.text = favorite.type
+                self.saveFavoriteButton.hidden = true
+                
+            }
+            
+            
         }
+        
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     
     func setupUpParkLabels() {
+        
         
         if let favorite = self.favoriteToPresent {
             
