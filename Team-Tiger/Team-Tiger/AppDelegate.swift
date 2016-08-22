@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Alamofire
 import CoreLocation
+import ReachabilitySwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
@@ -22,16 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        ReachabilityCheck().reachabilitySetup()
+
+        AirQualityAPIClient.getAirQualityIndex("10012") { (report) in
+                self.dataStore.airQualityReport = report
+            }
         
         //Gathers initial park data
         self.getLocation()
         dataStore.fetchData()
         
-        AirQualityAPIClient.getAirQualityIndex("10012") { (report) in
-            self.dataStore.airQualityReport = report
-        }
-        
-//        getLocation()
         return true
     }
     
@@ -48,12 +49,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-//        self.getLocation()
+        
+        //        self.getLocation()
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         self.getLocation()
+//        ReachabilityCheck().reachabilitySetup(
         print("Hi, I'm back!")
     }
     
@@ -128,30 +131,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func getLocation() {
         
         locationManager.delegate = self
-        
         locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
-            switch(CLLocationManager.authorizationStatus()) {
-            case .NotDetermined, .Restricted, .Denied:
-                print("No access")
-                
-                print(self.dataStore.currentLocation)
-            case .AuthorizedAlways, .AuthorizedWhenInUse:
-                print("Yay for location")
-                self.dataStore.hasLocation = true
-                locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-                
-                locationManager.requestLocation()
-                
-                locationManager.startUpdatingLocation()
-                print("Access")
-            default:
-                print("...")
-                
-                print(self.dataStore.currentLocation)
-            }
-
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.requestLocation()
+            self.dataStore.hasLocation = true
         } else {
             
             print("No go on location")
@@ -177,41 +162,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         print("Failed to find user's location: \(error.localizedDescription)")
     }
-    //    func getZipCode() {
-    //        var alertController:UIAlertController?
-    //        alertController = UIAlertController(title: "Location",
-    //                                            message: "Please enter your approximate address and/0 zip code",
-    //                                            preferredStyle: .Alert)
-    //        alertController!.addTextFieldWithConfigurationHandler(
-    //            {(textField: UITextField!) in
-    //                textField.placeholder = "Enter Address"
-    //        })
-    //        let action = UIAlertAction(title: "Submit",
-    //                                   style: UIAlertActionStyle.Default,
-    //                                   handler: {[weak self]
-    //                                    (paramAction:UIAlertAction!) in
-    //                                    if let textFields = alertController?.textFields{
-    //
-    //                                        let theTextFields = textFields as [UITextField]
-    //                                        let enteredText = theTextFields[0].text
-    //                                        self?.zip = enteredText!
-    //                                    }
-    //            })
-    //
-    //        alertController?.addAction(action)
-    //        self.presentViewController(alertController!,
-    //                                   animated: true,
-    //                                   completion: nil)
-    //        let zipCode = CLGeocoder().geocodeAddressString(self.zip, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-    //            if let placemark = placemarks?.first {
-    //
-    //                self.dataStore.currentLocation = placemark.location!
-    //                print(self.dataStore.currentLocation)
-    //
-    //            }
-    //        })
-    //    }
-    
-    
 }
 

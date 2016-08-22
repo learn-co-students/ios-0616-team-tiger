@@ -23,19 +23,17 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
         var longitudeTotal = 0.0
         var totalCount = Double((coordinates!.count))
         for coordinate in coordinates! {
-            //            if coordinate.distanceFromLocation(location) < closestCoordinate.distanceFromLocation(location) {
+
             latitudeTotal = latitudeTotal + coordinate.coordinate.latitude
             longitudeTotal = longitudeTotal + coordinate.coordinate.longitude
-            //                closestCoordinate = coordinate
+            
         }
         closestCoordinate = CLLocation(latitude: latitudeTotal/totalCount, longitude: longitudeTotal/totalCount)
         arrayCopy["coordinates"] = closestCoordinate
-//        print("Average coordinates : \(closestCoordinate), \(array["name"])")
-        
-        
+
         return arrayCopy
-        
     }
+    
     public func makeCoordinatesIntoArray(parks: AnyObject) -> Array<CLLocation> {
         
         if parks.containsString("MULTIPOLYGON") {
@@ -56,7 +54,6 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
                     var locationCoordinatesAsString = locationSubset.componentsSeparatedByString(" ")
                     let locationCoordinates = CLLocation.init(latitude: ((locationCoordinatesAsString[1] as NSString).doubleValue), longitude: ((locationCoordinatesAsString[0] as NSString).doubleValue))
                     coordinateArray.append(locationCoordinates)
-                    
                 }
             }
             

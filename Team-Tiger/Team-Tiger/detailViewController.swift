@@ -38,15 +38,12 @@ class detailViewController: UIViewController {
             self.locationType.text = favorite.type
             self.saveFavoriteButton.hidden = true
             
-            
-            
         } else {
 
         var type = locationToPresent["type"] as! String
         locationName.text =  locationToPresent["name"] as! String
         locationAddress.text =  locationToPresent["address"] as! String
         
-
         //to replace after kens icons populate tableview
         if type.containsString("Garden") {
             type = type + " 🌿"
@@ -55,14 +52,9 @@ class detailViewController: UIViewController {
 
         zipCode.text =  locationToPresent["zip"] as! String
         
-//        print("Addresses of parks: \(locationAddress.text)")
-//        print(locationToPresent)
-            
         }
-        
-        
-        
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,7 +66,6 @@ class detailViewController: UIViewController {
     }
     
     @IBAction func saveToFavoritesTapped(sender: AnyObject) {
-        
         
         let newFavorite = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: dataStore.managedObjectContext) as! Location
         
@@ -99,17 +90,8 @@ class detailViewController: UIViewController {
         
         newFavorite.user = dataStore.user[0]
         
-        //dataStore.user[0].favorites?.setByAddingObject(newFavorite)
-        
         dataStore.saveContext()
         dataStore.fetchData()
         
-        
-//        print(dataStore.user[0].favorites?.count)
-        
-        
     }
-    
-    
-    
 }
