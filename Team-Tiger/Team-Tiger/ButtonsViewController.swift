@@ -40,6 +40,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         self.activityIndicator.hidden = true
         //        self.activityIndicator.startAnimating()
         
+        dataStore.getLinkNYCWifiSpots()
         
         dataStore.populateParkByTypeBasedOnState("type", type: "Park") { (success) in
             
@@ -141,60 +142,6 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    // Wifi
-    
-    var linkNycWifiSpots : [[String : AnyObject]] = []
-    
-    var outdoorWifiSpots : [[String : AnyObject]] = []
-    
-    func getOutdoorWifiSpots()  {
-        var locationArray = [[String : AnyObject]]()
-        
-        Alamofire.request(.GET, "https://data.cityofnewyork.us/resource/jd4g-ks2z.json") .responseJSON {
-            
-            response in
-            
-            locationArray = response.result.value as! Array
-            print("parsing")
-            
-            if let jsonData = response.data {
-                
-                let jsonObj = JSON(data: jsonData)
-                
-                let arrayOfData = jsonObj.array
-                if let arrayOfData = arrayOfData {
-                    for location in arrayOfData {
-                        if location["location_t"].string == ("Outdoor Kiosk") {
-                            var tempDictionary : [String : AnyObject] = [:]
-                            
-                            if location["name"] != nil {
-                                tempDictionary["name"] = location["name"].string
-                            }
-                            if location["location_t"] != nil {
-                                tempDictionary["location_t"] = location["location_t"].string
-                            }
-                            if location["lon"] != nil {
-                                tempDictionary["long"] = location["lon"].string
-                            }
-                            if location["ssid"] != nil {
-                                tempDictionary["ssid"] = location["ssid"].string
-                            }
-                            if location["zip"] != nil{
-                                tempDictionary["zip"] = location["zip"].string
-                            }
-                            if location["lat"] != nil {
-                                tempDictionary["lat"] = location["lat"].string
-                            }
-                            //                            print(tempDictionary)
-                            self.outdoorWifiSpots.append(tempDictionary)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    
     @IBAction func shopTapped(sender: AnyObject) {
         
         
@@ -226,6 +173,11 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             }
             completion(true)
         })
+    }
+    
+    func getLinkNyc() {
+        dataStore.getLinkNYCWifiSpots()
+        
     }
     
 //    func getZipCode() {

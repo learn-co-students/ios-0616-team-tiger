@@ -14,17 +14,11 @@ class ReachabilityCheck {
     var reachability : Reachability?
     
     func reachabilitySetup() {
-        
         do {
-            
             reachability = try Reachability.reachabilityForInternetConnection()
-            
         } catch let error as NSError {
-            
             print("Unable to start reachability \(error.localizedDescription)")
-            
         }
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reachabilityCheck), name: ReachabilityChangedNotification, object: reachability)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector(reachabilityCheck()), name: ReachabilityChangedNotification, object: reachability)
         do {
@@ -43,28 +37,21 @@ class ReachabilityCheck {
         let status = InternetStatus.shared
         
         if reachability.isReachable() {
-            
             if reachability.isReachableViaWiFi() {
                 
                 status.hasInternet = true
-                
                 print("Reachable via WiFi")
                 
             } else {
                 
                 status.hasInternet = true
-                
                 print("Reachable via Cellular")
             }
-            
         } else {
             
             status.hasInternet = false
-            
             print("Network not reachable")
-            
         }
-        
     }
 }
 
