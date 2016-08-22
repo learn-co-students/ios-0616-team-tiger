@@ -20,12 +20,8 @@ class DataStore {
     var gardenArray : [[String:AnyObject]] = []
     var masterParksDictionary = [String : [String : String]]()
     
-<<<<<<< HEAD
-    var currentLocation = CLLocation()
-=======
     var hasLocation : Bool = false
     var currentLocation : CLLocation = CLLocation(latitude: 40.759211, longitude: -73.984638)
->>>>>>> master
     var airQualityReport = []
     var arrayOfParks: [String] = []
     var greenThumbArray: [[String:AnyObject]] = []
@@ -34,8 +30,6 @@ class DataStore {
     var longitude = String()
     var googleSearchResults: [String: String] = [:]
     
-<<<<<<< HEAD
-=======
     var linkNycWifiSpots : [[String : AnyObject]] = []
     
     var outdoorWifiSpots : [[String : AnyObject]] = []
@@ -43,7 +37,6 @@ class DataStore {
     // var locationFromDetailView = detailViewController()
     var locationsFromDataStore = DataStore()
     
->>>>>>> master
     
     //static makes it a singleton
     static let store = DataStore()
@@ -364,27 +357,17 @@ class DataStore {
                 if let arrayOfData = arrayOfData {
                     
                     for detail in arrayOfData {
-<<<<<<< HEAD
                         //                        if !self.greenThumbArray.contains(detail[10].string) {
-=======
                         
->>>>>>> master
                         dictionaryWithInfo["Garden"] = detail[10].string
                         dictionaryWithInfo["Address"] = detail[11].string
                         dictionaryWithInfo["phone number"] = detail[15].string
                         if let coordinate = detail[8].string {
-<<<<<<< HEAD
-                            print(coordinate)
+                            
                             dictionaryWithInfo["coordinates"] = coordinate
                         }
                         greenThumbDictionary[detail[10].string!] = dictionaryWithInfo
-                        //                        self.greenThumbArray.append(dictionaryWithInfo)
-                        //                        }
-=======
-                            dictionaryWithInfo["coordinates"] = coordinate
-                        }
-                        greenThumbDictionary[detail[10].string!] = dictionaryWithInfo
->>>>>>> master
+                        
                     }
                     self.greenThumbArray = Array(greenThumbDictionary.values)
                     self.greenThumbArray = self.organizeParkCoordinates(self.greenThumbArray)
@@ -396,8 +379,6 @@ class DataStore {
             }
         }
     }
-<<<<<<< HEAD
-=======
     //GOOGLE SEARCH API
     
     //    googleSearchTest { results in
@@ -418,7 +399,7 @@ class DataStore {
             return
         }
         
-         // 2. Get place id for location
+        // 2. Get place id for location
         getGoogleSearchPlaceIDFrom(("", "")) { id in
             
             guard let placeID = id else {completionHandler(nil);return}
@@ -435,7 +416,7 @@ class DataStore {
         }
         
     }
->>>>>>> master
+    
     
     func parseCoordinates(rawCoordinates: String) -> (String, String)? {
         
@@ -454,7 +435,7 @@ class DataStore {
         //        let gardenCoordinates = finalCoordinatesSecondPassGardens?.componentsSeparatedByString(",")
         
         
-        //should probably unwrap these appropiately//also may have to specify that this is the PARKS lat/long
+        //        should probably unwrap these appropiately//also may have to specify that this is the PARKS lat/long
         latitude = finalCoordinates![0]
         longitude = finalCoordinates![1]
         
@@ -474,12 +455,10 @@ class DataStore {
             // Add results to dictionary
             self.googleSearchResults["place_id"] = placeID
             
-<<<<<<< HEAD
             guard let rating = jsonObject["results"][0]["rating"].double else {return}
             
             
-=======
->>>>>>> master
+            
             completionHandler(placeID)
         }
         
@@ -509,11 +488,10 @@ class DataStore {
             
         }
     }
-<<<<<<< HEAD
-}
-
-
-=======
+    
+    
+    
+    
     
     // Wifi
     
@@ -567,7 +545,3 @@ class DataStore {
     }
     
 }
-
-
-
->>>>>>> master
