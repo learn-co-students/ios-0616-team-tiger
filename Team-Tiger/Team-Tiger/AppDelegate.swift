@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Alamofire
 import CoreLocation
+import ReachabilitySwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
@@ -22,23 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        ReachabilityCheck().reachabilitySetup()
+
+        AirQualityAPIClient.getAirQualityIndex("10012") { (report) in
+                self.dataStore.airQualityReport = report
+            }
         
         //Gathers initial park data
         self.getLocation()
         dataStore.fetchData()
         
-        AirQualityAPIClient.getAirQualityIndex("10012") { (report) in
-            self.dataStore.airQualityReport = report
-        }
-        
-        if Reachability.isConnectedToNetwork() == true {
-            print("Internet connection OK")
-        } else {
-            print("Internet connection FAILED")
-            var alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
-            alert.show()
-        }
-
         return true
     }
     
@@ -55,12 +49,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-//        self.getLocation()
+        
+        //        self.getLocation()
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         self.getLocation()
+//        ReachabilityCheck().reachabilitySetup(
         print("Hi, I'm back!")
     }
     
@@ -140,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
-
+            
         } else {
             
             print("No go on location")
@@ -166,6 +162,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         print("Failed to find user's location: \(error.localizedDescription)")
     }
+    
     //    func getZipCode() {
     //        var alertController:UIAlertController?
     //        alertController = UIAlertController(title: "Location",
@@ -200,7 +197,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     //            }
     //        })
     //    }
-    
     
 }
 

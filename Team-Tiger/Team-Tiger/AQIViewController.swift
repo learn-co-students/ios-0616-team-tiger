@@ -16,21 +16,25 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var particulateLabel: UILabel!
     @IBOutlet weak var actionDayStatus: UITextView!
     
+    @IBOutlet weak var letsGo: UIButton!
     var airQualityReport: [[String : AnyObject]] = []
     let locationManager = CLLocationManager()
     let dataStore = DataStore.store
-    var reachability: Reachability?
+//    var reachability: Reachability?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         //        self.getLocation()
-        self.airQualityReport = dataStore.airQualityReport as! [[String : AnyObject]]
+    self.airQualityReport = dataStore.airQualityReport as! [[String : AnyObject]]
         
         let ozoneIndex = self.airQualityReport.count - 2
-        
+        if InternetStatus.shared.hasInternet {
         if let ozone = self.airQualityReport[ozoneIndex]["AQI"] {
             
             self.ozoneLabel.text = "\(ozone)"
+            
+        } else {
+            self.ozoneLabel.text = "0"
             
         }
         
@@ -40,6 +44,8 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
             
             self.particulateLabel.text = "\(particulate)"
             
+        } else {
+            self.particulateLabel.text = "0"
         }
         
         if let actionDayStatus = self.airQualityReport[particulateIndex]["ActionDay"] {
@@ -53,11 +59,13 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
                 self.actionDayStatus.text = "It's not an Air Quality Action Day. Enjoy the fresh air!"
                 
             }
+            }
             
         } else {
-            
+            self.ozoneLabel.text = "N/A"
+            self.particulateLabel.text = "N/A"
             self.actionDayStatus.text = "Sorry, we cannot currently access Air Quality data. Please make sure you're connected to the internet and try again."
-            
+            self.letsGo.hidden = true
         }
         
             

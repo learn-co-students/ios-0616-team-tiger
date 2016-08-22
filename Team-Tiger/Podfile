@@ -8,6 +8,6 @@ target 'Team-Tiger' do
   # Pods for Team-Tiger
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON'
-  # pod 'ReachabilitySwift'
+  pod 'ReachabilitySwift'
 
 end
