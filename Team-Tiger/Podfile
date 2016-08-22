@@ -8,5 +8,7 @@ target 'Team-Tiger' do
   # Pods for Team-Tiger
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON'
+  pod 'AFNetworking', '~> 2.5'
+  pod 'BDBOAuth1Manager'
 
 end
