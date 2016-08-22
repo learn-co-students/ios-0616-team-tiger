@@ -20,6 +20,7 @@ class detailViewController: UIViewController {
     @IBOutlet weak var saveFavoriteButton: UIButton!
     
     var locationToPresent: [String : AnyObject] = [:]
+    var passedDataType: String = ""
     
     var favoriteToPresent: Location? = nil
     
@@ -28,7 +29,33 @@ class detailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(locationToPresent)
+        
         self.view.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
+        
+        if self.passedDataType == "parks" {
+            
+            setupUpParkLabels()
+            
+        } else if self.passedDataType == "markets" {
+            
+            setupMarketLabels()
+            
+        } else {
+            
+            setupGardenLabels()
+            
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    func setupUpParkLabels() {
         
         if let favorite = self.favoriteToPresent {
             
@@ -39,77 +66,87 @@ class detailViewController: UIViewController {
             self.saveFavoriteButton.hidden = true
             
             
-            
         } else {
-
-        var type = locationToPresent["type"] as! String
-        locationName.text =  locationToPresent["name"] as! String
-        locationAddress.text =  locationToPresent["address"] as! String
-        
-
-        //to replace after kens icons populate tableview
-        if type.containsString("Garden") {
-            type = type + " 🌿"
-        }
-        locationType.text = type
-
-        zipCode.text =  locationToPresent["zip"] as! String
-        
-//        print("Addresses of parks: \(locationAddress.text)")
-//        print(locationToPresent)
+            
+            let type = locationToPresent["type"] as! String
+            locationName.text =  (locationToPresent["name"] as! String)
+            locationAddress.text =  (locationToPresent["address"] as! String)
+            
+            
+            //to replace after kens icons populate tableview
+            //        if type.containsString("Garden") {
+            //            type = type + " 🌿"
+            //        }
+            locationType.text = type
+            
+            zipCode.text =  (locationToPresent["zip"] as! String)
             
         }
         
-        
-        
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func phoneNumber(sender: AnyObject) {
-        let url: NSURL = NSURL(string: "tel://3472321892")!
-        UIApplication.sharedApplication().openURL(url)
-    }
-    
-    @IBAction func saveToFavoritesTapped(sender: AnyObject) {
+    func setupMarketLabels() {
         
+        locationName.text =  (locationToPresent["name"] as! String)
+        locationAddress.text =  (locationToPresent["address"] as! String)
+        locationType.text = "Farmer's Market"
         
-        let newFavorite = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: dataStore.managedObjectContext) as! Location
-        
-        newFavorite.name = (locationToPresent["name"] as! String)
-        newFavorite.address = (locationToPresent["address"] as! String)
-        
-        if let type = locationToPresent["type"] {
-            newFavorite.type = (type as! String)
-        }
-        
-        if let zip = locationToPresent["zip"] {
-            newFavorite.zip = (zip as! String)
-        }
-        
-        if let waterfront = locationToPresent["waterfront"] {
-            newFavorite.waterfront = (waterfront as! String)
-        }
-        
-        if let hours = locationToPresent["hours"] {
-            newFavorite.hours = (hours as! String)
-        }
-        
-        newFavorite.user = dataStore.user[0]
-        
-        //dataStore.user[0].favorites?.setByAddingObject(newFavorite)
-        
-        dataStore.saveContext()
-        dataStore.fetchData()
-        
-        
-//        print(dataStore.user[0].favorites?.count)
-        
+        zipCode.text =  (locationToPresent["zip"] as! String)
         
     }
     
+    func setupGardenLabels() {
+        
+        locationName.text =  (locationToPresent["Garden"] as! String)
+        locationAddress.text =  (locationToPresent["Address"] as! String)
+        locationType.text = "Garden"
+        
+    }
+
+
+@IBAction func phoneNumber(sender: AnyObject) {
+    let url: NSURL = NSURL(string: "tel://3472321892")!
+    UIApplication.sharedApplication().openURL(url)
+}
+
+
+@IBAction func saveToFavoritesTapped(sender: AnyObject) {
     
     
+    let newFavorite = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: dataStore.managedObjectContext) as! Location
+    
+    newFavorite.name = (locationToPresent["name"] as! String)
+    newFavorite.address = (locationToPresent["address"] as! String)
+    
+    if let type = locationToPresent["type"] {
+        newFavorite.type = (type as! String)
+    }
+    
+    if let zip = locationToPresent["zip"] {
+        newFavorite.zip = (zip as! String)
+    }
+    
+    if let waterfront = locationToPresent["waterfront"] {
+        newFavorite.waterfront = (waterfront as! String)
+    }
+    
+    if let hours = locationToPresent["hours"] {
+        newFavorite.hours = (hours as! String)
+    }
+    
+    newFavorite.user = dataStore.user[0]
+    
+    //dataStore.user[0].favorites?.setByAddingObject(newFavorite)
+    
+    dataStore.saveContext()
+    dataStore.fetchData()
+    
+    
+    //        print(dataStore.user[0].favorites?.count)
+    
+    
+}
+
+
+
 }

@@ -16,32 +16,34 @@ class SearchResultsTableViewController: UITableViewController {
     var tappedCell: Int = 0
     
     let dataStore = DataStore.store
-
+    
+    var displayedDataType = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print("PARKS IN ARRAY \(dataStore.parkTypeArray)")
-      
-//      print(self.arrayOfNames)
+        //        print("PARKS IN ARRAY \(dataStore.parkTypeArray)")
+        
+        //      print(self.arrayOfNames)
         
         
         self.tableView.reloadData()
         
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-   
-
+    
+    
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
@@ -70,23 +72,42 @@ class SearchResultsTableViewController: UITableViewController {
         
         
         cell.textLabel?.text = arrayOfNames[indexPath.row]
-    
-
-       
         
-    
+        
+        
+        
+        
         return cell
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-       
-        if segue.identifier == "showDetail" {
-             let newVC = segue.destinationViewController as! detailViewController
-            self.tappedCell = (tableView.indexPathForSelectedRow?.row)!
-           
-            newVC.locationToPresent = dataStore.parkTypeArray[tappedCell]
+        
+        let newVC = segue.destinationViewController as! detailViewController
+        
+        self.tappedCell = (tableView.indexPathForSelectedRow?.row)!
 
+        
+        
+        if self.displayedDataType == "parks" {
+            
+            newVC.locationToPresent = dataStore.parkTypeArray[tappedCell]
+            
+            newVC.passedDataType = "parks"
+            
+        } else if self.displayedDataType == "markets" {
+            
+            newVC.locationToPresent = dataStore.farmersMarketArray[tappedCell]
+            
+            newVC.passedDataType = "markets"
+            
+        } else {
+            
+            newVC.locationToPresent = dataStore.greenThumbArray [tappedCell]
+            
+            newVC.passedDataType = "gardens"
             
         }
+        
+        
         
     }
     
@@ -96,7 +117,7 @@ class SearchResultsTableViewController: UITableViewController {
         
         let waterfrontValue = currentLocation["waterfront"] as! String
         
-//        print(waterfrontValue)
+        //        print(waterfrontValue)
         
         let currentMarketOrGarden = self.arrayOfNames[indexPath.row]
         

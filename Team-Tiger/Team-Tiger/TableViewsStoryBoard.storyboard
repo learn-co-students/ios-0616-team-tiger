@@ -42,9 +42,9 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVf-jb-4dI">
-                                <rect key="frame" x="241" y="326" width="77" height="30"/>
+                                <rect key="frame" x="241" y="314" width="121" height="54"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="35"/>
-                                <state key="normal" title="Shop">
+                                <state key="normal" title="Markets">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -53,9 +53,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHc-0k-6gc">
-                                <rect key="frame" x="215" y="439" width="122" height="30"/>
+                                <rect key="frame" x="215" y="427" width="128" height="54"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="35"/>
-                                <state key="normal" title="Participate">
+                                <state key="normal" title="Gardens">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -63,9 +63,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cX-oy-4KP">
-                                <rect key="frame" x="255" y="214" width="61" height="30"/>
+                                <rect key="frame" x="255" y="202" width="82" height="54"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="35"/>
-                                <state key="normal" title="Rest">
+                                <state key="normal" title="Parks">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -87,9 +87,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="shop" translatesAutoresizingMaskIntoConstraints="NO" id="qEc-NM-vFZ">
                                 <rect key="frame" x="536" y="316" width="52" height="50"/>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="YKJ-5F-UOL">
-                                <rect key="frame" x="290" y="110" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -105,13 +102,11 @@
                             <constraint firstItem="MHc-0k-6gc" firstAttribute="top" secondItem="xVf-jb-4dI" secondAttribute="bottom" constant="83" id="G7h-P1-Tfw"/>
                             <constraint firstItem="bNR-9s-0vN" firstAttribute="width" secondItem="FI1-ec-Ddt" secondAttribute="width" multiplier="0.8" id="GAZ-5S-qgN"/>
                             <constraint firstItem="yGJ-Ji-JFK" firstAttribute="leading" secondItem="MHc-0k-6gc" secondAttribute="trailing" constant="199" id="I8s-9i-5GI"/>
-                            <constraint firstItem="YKJ-5F-UOL" firstAttribute="centerY" secondItem="FI1-ec-Ddt" secondAttribute="centerY" id="K1a-7S-aaK"/>
                             <constraint firstItem="MHc-0k-6gc" firstAttribute="leading" secondItem="bNR-9s-0vN" secondAttribute="leading" constant="30" id="NTe-9Y-6BP"/>
                             <constraint firstItem="N4U-pA-ZTY" firstAttribute="height" secondItem="FI1-ec-Ddt" secondAttribute="height" id="O33-oc-YgS"/>
                             <constraint firstItem="bNR-9s-0vN" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="TlE-8J-hWJ"/>
                             <constraint firstItem="yGJ-Ji-JFK" firstAttribute="trailing" secondItem="bNR-9s-0vN" secondAttribute="trailing" constant="-30" id="gmE-Cl-jFb"/>
                             <constraint firstItem="s2v-eb-YnC" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="jLs-XD-ZNc"/>
-                            <constraint firstItem="YKJ-5F-UOL" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="jfn-yH-TEB"/>
                             <constraint firstItem="N4U-pA-ZTY" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="kMn-ct-XkY"/>
                             <constraint firstItem="0cX-oy-4KP" firstAttribute="top" secondItem="1Ju-K8-cqY" secondAttribute="bottom" constant="150" id="lCk-dK-GBX"/>
                             <constraint firstItem="xVf-jb-4dI" firstAttribute="top" secondItem="0cX-oy-4KP" secondAttribute="bottom" constant="82" id="omL-CQ-Oh2"/>
@@ -138,7 +133,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Greenway" id="1ly-We-Rdn"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="YKJ-5F-UOL" id="Glc-y7-czV"/>
                         <outlet property="blurEffect" destination="bNR-9s-0vN" id="ffU-Rc-fPZ"/>
                         <outlet property="navBar" destination="1ly-We-Rdn" id="Cgu-57-wWM"/>
                     </connections>

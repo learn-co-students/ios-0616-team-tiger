@@ -4,8 +4,9 @@ import SwiftyJSON
 import MapKit
 import CoreData
 import Foundation
+import NVActivityIndicatorView
 
-class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
+class ButtonsViewController: UIViewController, CLLocationManagerDelegate, NVActivityIndicatorViewable {
     var FMdictionary = []
     var dictionaryWithInfo = [String:AnyObject]()
     var farmersMarketArray: [[String:AnyObject]] = []
@@ -14,7 +15,6 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     var arrayOfGardens : [String] = []
     let locationManager = CLLocationManager()
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let dataStore = DataStore.store
     
@@ -29,23 +29,24 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        startActivityAnimating(CGSizeMake(120, 120), message: "Loading", type: .BallRotateChase, color: UIColor.whiteColor())
+        
         self.blurEffect.layer.cornerRadius = 10
         self.blurEffect.clipsToBounds = true
         self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
         
-        self.activityIndicator.hidden = true
-//        self.activityIndicator.startAnimating()
         
-
         dataStore.populateParkByTypeBasedOnState("type", type: "Park") { (success) in
-
+            
             if success {
                 self.dataStore.parkTypeArray = self.sortArrayByDistance(self.dataStore.parkTypeArray)
                 for park in self.dataStore.parkTypeArray {
                     self.arrayOfParks.append((park["name"] as? String)!)
-//                    print(park["Distance"])
+                    //                    print(park["Distance"])
                 }
                 print("Got parks")
+                self.stopActivityAnimating()
             }
         }
         
@@ -84,9 +85,9 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             for park in array {
                 var parkCopy = park
                 if let coordinate = parkCopy["coordinates"] {
-//                    print(coordinate.distanceFromLocation(self.dataStore.currentLocation))
-                parkCopy["Distance"] = (coordinate.distanceFromLocation(self.dataStore.currentLocation)) * 0.00062137
-                arrayCopy.append(parkCopy)
+                    //                    print(coordinate.distanceFromLocation(self.dataStore.currentLocation))
+                    parkCopy["Distance"] = (coordinate.distanceFromLocation(self.dataStore.currentLocation)) * 0.00062137
+                    arrayCopy.append(parkCopy)
                 }
             }
             let sortedByDistance = arrayCopy.sort { ($0["Distance"] as! Double) < ($1["Distance"] as! Double) }
@@ -184,24 +185,35 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-
+    
     @IBAction func shopTapped(sender: AnyObject) {
         
-
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         let destinationVC = segue.destinationViewController as! SearchResultsTableViewController
+        
         if segue.identifier == "showParks" {
             
-//            print(self.dataStore.parkTypeArray)
-//            print(self.arrayOfParks)
+            //            print(self.dataStore.parkTypeArray)
+            //            print(self.arrayOfParks)
             destinationVC.arrayOfNames = self.arrayOfParks
+            
+            destinationVC.displayedDataType = "parks"
+            
         } else if segue.identifier == "showShops" {
+            
             destinationVC.arrayOfNames = self.arrayOfFarmersMarkets
             
+            destinationVC.displayedDataType = "markets"
+            
         } else {
+            
             destinationVC.arrayOfNames = self.arrayOfGardens
+            
+            destinationVC.displayedDataType = "gardens"
         }
     }
     
@@ -211,7 +223,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             completion(true)
         })
     }
-
+    
     //Location Things
     
     func getLocation() {
@@ -281,7 +293,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             if let placemark = placemarks?.first {
                 
                 self.dataStore.currentLocation = placemark.location!
-//                print(self.dataStore.currentLocation)
+                //                print(self.dataStore.currentLocation)
                 
             }
         })
@@ -293,11 +305,11 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             if let placemark = placemarks?.first {
                 
                 self.dataStore.currentLocation = placemark.location!
-//                print(self.dataStore.currentLocation)
+                //                print(self.dataStore.currentLocation)
                 
             }
         })
-//        print(zipCode)
+        //        print(zipCode)
     }
-
+    
 }

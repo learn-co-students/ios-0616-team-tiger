@@ -9,5 +9,6 @@ target 'Team-Tiger' do
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON'
   pod 'ReachabilitySwift'
+  pod 'NVActivityIndicatorView'
 
 end
