@@ -12,8 +12,6 @@ class onboardingViewController: UIViewController {
     
     var controllerIndex: Int?
     
-
-    
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var introTextLabel: UILabel!
@@ -30,8 +28,6 @@ class onboardingViewController: UIViewController {
         self.introTextLabel.text = self.textToDisplay
         self.backgroundImage.image = self.imageForBackground
         self.startButton.hidden = buttonHidden
-        
-        
     }
   
 }

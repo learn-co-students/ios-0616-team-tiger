@@ -120,6 +120,7 @@
                     </view>
                     <connections>
                         <outlet property="actionDayStatus" destination="E1y-il-yZK" id="UM1-5p-Tla"/>
+                        <outlet property="letsGo" destination="Gbe-hp-0mh" id="DgY-yn-9TK"/>
                         <outlet property="ozoneLabel" destination="eHH-Os-KWS" id="kyI-gX-Zwm"/>
                         <outlet property="particulateLabel" destination="Nyo-FC-MAs" id="ONr-1x-UNI"/>
                     </connections>
