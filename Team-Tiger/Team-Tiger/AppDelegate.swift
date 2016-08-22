@@ -136,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
-            
+            self.dataStore.hasLocation = true
         } else {
             
             print("No go on location")
@@ -162,41 +162,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         print("Failed to find user's location: \(error.localizedDescription)")
     }
-    
-    //    func getZipCode() {
-    //        var alertController:UIAlertController?
-    //        alertController = UIAlertController(title: "Location",
-    //                                            message: "Please enter your approximate address and/0 zip code",
-    //                                            preferredStyle: .Alert)
-    //        alertController!.addTextFieldWithConfigurationHandler(
-    //            {(textField: UITextField!) in
-    //                textField.placeholder = "Enter Address"
-    //        })
-    //        let action = UIAlertAction(title: "Submit",
-    //                                   style: UIAlertActionStyle.Default,
-    //                                   handler: {[weak self]
-    //                                    (paramAction:UIAlertAction!) in
-    //                                    if let textFields = alertController?.textFields{
-    //
-    //                                        let theTextFields = textFields as [UITextField]
-    //                                        let enteredText = theTextFields[0].text
-    //                                        self?.zip = enteredText!
-    //                                    }
-    //            })
-    //
-    //        alertController?.addAction(action)
-    //        self.presentViewController(alertController!,
-    //                                   animated: true,
-    //                                   completion: nil)
-    //        let zipCode = CLGeocoder().geocodeAddressString(self.zip, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-    //            if let placemark = placemarks?.first {
-    //
-    //                self.dataStore.currentLocation = placemark.location!
-    //                print(self.dataStore.currentLocation)
-    //
-    //            }
-    //        })
-    //    }
-    
 }
 
