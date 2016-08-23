@@ -37,7 +37,6 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         if index <= 0 {
             
             return nil
-            
         }
         
         index = index! - 1
@@ -85,13 +84,9 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
             if view.controllerIndex == 2 {
                 
                 view.buttonHidden = false
-                
             }
-            
             return view
-            
         }
-        
         return nil
     }
     
@@ -102,7 +97,6 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         let flowerPhoto = UIImage.init(named: "blurredFlowers")
         
         if let bench = benchPhoto, flower = flowerPhoto, plant = plantPhoto {
-            
             
             self.imageArray.append(flower)
             self.imageArray.append(plant)

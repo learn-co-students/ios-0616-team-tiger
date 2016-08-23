@@ -8,8 +8,11 @@ target 'Team-Tiger' do
   # Pods for Team-Tiger
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON'
-  # pod 'ReachabilitySwift'
+<<<<<<< HEAD
   pod 'AFNetworking', '~> 2.5'
   pod 'BDBOAuth1Manager'
+=======
+  # pod 'ReachabilitySwift'
+>>>>>>> e147cb43e6ea028e25590a74f53c49fc90edc6c2
 
 end

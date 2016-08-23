@@ -69,24 +69,53 @@ class detailViewController: UIViewController {
     @IBOutlet weak var locationAddress: UILabel!
     @IBOutlet weak var locationType: UILabel!
     @IBOutlet weak var zipCode: UILabel!
+    @IBOutlet weak var saveFavoriteButton: UIButton!
     
     var locationToPresent: [String : AnyObject] = [:]
+
+    
+    var favoriteToPresent: Location? = nil
+    
+
     let dataStore = DataStore.store
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
        // view.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         yelpScrollView.contentSize.width = 1400
-        self.view.backgroundColor = UIColor.init(red: 161.0/255, green: 212.0/255, blue: 144.0/255, alpha: 100.0)
         self.yelpScrollView.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
+
+        
+        self.view.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
+        
+        if let favorite = self.favoriteToPresent {
+            
+            self.locationName.text = favorite.name
+            self.locationAddress.text = favorite.address
+            self.zipCode.text = favorite.zip
+            self.locationType.text = favorite.type
+            self.saveFavoriteButton.hidden = true
+            
+        } else {
+
 
         locationName.text =  locationToPresent["name"] as! String
         locationAddress.text =  locationToPresent["address"] as! String
+
         var type = locationToPresent["type"] as! String
+
+        
+        //to replace after kens icons populate tableview
+        if type.containsString("Garden") {
+            type = type + " 🌿"
+        }
+
         locationType.text = type
         zipCode.text =  locationToPresent["zip"] as! String
         
+
         //print("Addresses of parks: \(locationAddress.text)")
         //print(locationToPresent)
 
@@ -244,6 +273,7 @@ class detailViewController: UIViewController {
         saveFavorites.layer.cornerRadius = 10
         saveFavorites.clipsToBounds = true
         
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -259,7 +289,6 @@ class detailViewController: UIViewController {
     }
     
     @IBAction func saveToFavoritesTapped(sender: AnyObject) {
-        
         
         let newFavorite = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: dataStore.managedObjectContext) as! Location
         
@@ -284,17 +313,8 @@ class detailViewController: UIViewController {
         
         newFavorite.user = dataStore.user[0]
         
-        //dataStore.user[0].favorites?.setByAddingObject(newFavorite)
-        
         dataStore.saveContext()
         dataStore.fetchData()
         
-        
-        print(dataStore.user[0].favorites?.count)
-        
-        
     }
-    
-    
-    
 }

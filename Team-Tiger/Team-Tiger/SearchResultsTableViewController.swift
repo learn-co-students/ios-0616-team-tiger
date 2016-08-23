@@ -12,8 +12,8 @@ import UIKit
 class SearchResultsTableViewController: UITableViewController {
     
     var arrayOfNames: [String] = []
-   
-    
+    var arrayOfDistance : [String] = []
+
     var tappedCell: Int = 0
     
     let dataStore = DataStore.store
@@ -23,12 +23,11 @@ class SearchResultsTableViewController: UITableViewController {
         
 //        print("PARKS IN ARRAY \(dataStore.parkTypeArray)")
       
-      print(self.arrayOfNames)
+//      print(self.arrayOfNames)
         
         
         self.tableView.reloadData()
         
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -62,11 +61,8 @@ class SearchResultsTableViewController: UITableViewController {
             
             cell.backgroundColor = UIColor.init(red: 161.0/255, green: 212.0/255, blue: 144.0/255, alpha: 100.0)
             
-            //cell.imageView?.image = UIImage.init(named: "tinyShop")
             
         } else {
-            
-//            cell.imageView?.image = UIImage.init(named: "tinySpa")
             
             cell.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
             
@@ -74,11 +70,7 @@ class SearchResultsTableViewController: UITableViewController {
         
         
         cell.textLabel?.text = arrayOfNames[indexPath.row]
-    
-
-       
-        
-    
+        cell.detailTextLabel?.text = arrayOfDistance[indexPath.row]
         return cell
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -100,7 +92,7 @@ class SearchResultsTableViewController: UITableViewController {
         
         let waterfrontValue = currentLocation["waterfront"] as! String
         
-        print(waterfrontValue)
+//        print(waterfrontValue)
         
         let currentMarketOrGarden = self.arrayOfNames[indexPath.row]
         

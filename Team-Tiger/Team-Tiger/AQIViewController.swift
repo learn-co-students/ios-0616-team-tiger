@@ -7,20 +7,23 @@
 //
 
 import UIKit
+import SystemConfiguration
+import CoreLocation
 
-class AQIViewController: UIViewController {
+class AQIViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var ozoneLabel: UILabel!
     @IBOutlet weak var particulateLabel: UILabel!
     @IBOutlet weak var actionDayStatus: UITextView!
     
     var airQualityReport: [[String : AnyObject]] = []
-    
+    let locationManager = CLLocationManager()
     let dataStore = DataStore.store
-    
+    var reachability: Reachability?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //        self.getLocation()
         self.airQualityReport = dataStore.airQualityReport as! [[String : AnyObject]]
         
         let ozoneIndex = self.airQualityReport.count - 2
@@ -57,16 +60,114 @@ class AQIViewController: UIViewController {
             
         }
         
-        
+            
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.getLocation()
+    }
+    func getLocation() {
+        
+        locationManager.delegate = self
+        
+        locationManager.requestWhenInUseAuthorization()
+        
+        if !dataStore.hasLocation {
+            
+            self.showAlertToGetLocation()
+            print(self.dataStore.currentLocation)
+            
+        }
+    }
     
+    
+    func showAlertToGetLocation() {
+        let alertController = UIAlertController(title: "Location Needed",
+                                                                         message: "The location services permission was not authorized. Please enable it in Settings to continue.",
+                                                                         preferredStyle: .Alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .Default) { (alertAction) in
+            
+            if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.sharedApplication().openURL(appSettings)
+            }
+        }
+        alertController.addAction(settingsAction)
+        
+        let cancelAction = UIAlertAction(title: "No Thanks", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        print("We know where you are")
+        
+        if locations.count > 0 {
+            
+            dataStore.currentLocation = (locations.first)!
+            
+            locationManager.stopUpdatingLocation()
+            
+            //            print("You are here : \(dataStore.currentLocation)")
+            
+        }
+        
+    }
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
+    
+    // Reachability shtuff
+//    func showNoReachability() {
+//        let alertController = UIAlertController(title: "Location Needed",
+//                                                message: "The location services permission was not authorized. Please enable it in Settings to continue.",
+//                                                preferredStyle: .Alert)
+//        
+//        let settingsAction = UIAlertAction(title: "Settings", style: .Default) { (alertAction) in
+//            
+//            if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {
+//                UIApplication.sharedApplication().openURL(appSettings)
+//            }
+//        }
+//        alertController.addAction(settingsAction)
+//        
+//        let cancelAction = UIAlertAction(title: "No Thanks", style: .Cancel, handler: nil)
+//        alertController.addAction(cancelAction)
+//        
+//        
+//        presentViewController(alertController, animated: true, completion: nil)
+//        
+//    }
+//    
+//    func reachabilityChanged(note: NSNotification) {
+//        
+//        let reachability = note.object as! Reachability
+//        
+//        if reachability.isReachable() {
+//            if reachability.isReachableViaWiFi() {
+//                print("Reachable via WiFi")
+//            } else {
+//                print("Reachable via Cellular")
+//            }
+//        } else {
+//            showNoReachability()
+//            print("Network not reachable")
+//        }
+//    }
+
     /*
      // MARK: - Navigation
      
