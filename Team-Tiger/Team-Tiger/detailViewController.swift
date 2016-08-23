@@ -72,18 +72,23 @@ class detailViewController: UIViewController {
     @IBOutlet weak var saveFavoriteButton: UIButton!
     
     var locationToPresent: [String : AnyObject] = [:]
-<<<<<<< HEAD
+
     
     var favoriteToPresent: Location? = nil
     
-=======
->>>>>>> detailViewController
+    
+
     let dataStore = DataStore.store
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-<<<<<<< HEAD
+
+
+       // view.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        yelpScrollView.contentSize.width = 1400
+        self.yelpScrollView.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
+
         
         self.view.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
         
@@ -96,30 +101,36 @@ class detailViewController: UIViewController {
             self.saveFavoriteButton.hidden = true
             
         } else {
-=======
+
        // view.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         yelpScrollView.contentSize.width = 1400
         self.view.backgroundColor = UIColor.init(red: 161.0/255, green: 212.0/255, blue: 144.0/255, alpha: 100.0)
         self.yelpScrollView.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
->>>>>>> detailViewController
+
 
         locationName.text =  locationToPresent["name"] as! String
         locationAddress.text =  locationToPresent["address"] as! String
-<<<<<<< HEAD
+
+
+        locationName.text =  locationToPresent["name"] as! String
+        locationAddress.text =  locationToPresent["address"] as! String
+
+        var type = locationToPresent["type"] as! String
+
+
         
         //to replace after kens icons populate tableview
         if type.containsString("Garden") {
             type = type + " 🌿"
         }
-=======
-        var type = locationToPresent["type"] as! String
->>>>>>> detailViewController
+
+
+
         locationType.text = type
         zipCode.text =  locationToPresent["zip"] as! String
         
-<<<<<<< HEAD
-        }
-=======
+
+
         //print("Addresses of parks: \(locationAddress.text)")
         //print(locationToPresent)
 
@@ -277,7 +288,8 @@ class detailViewController: UIViewController {
         saveFavorites.layer.cornerRadius = 10
         saveFavorites.clipsToBounds = true
         
->>>>>>> detailViewController
+        }
+
     }
     
     override func didReceiveMemoryWarning() {

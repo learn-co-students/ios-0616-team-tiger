@@ -26,18 +26,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-<<<<<<< HEAD
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAN-cY-l0J">
                                 <rect key="frame" x="40" y="87" width="349" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="349" id="Hy9-pv-Otf"/>
                                     <constraint firstAttribute="height" constant="43" id="tSL-nt-NRx"/>
                                 </constraints>
-=======
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="sAN-cY-l0J">
-                                <rect key="frame" x="20" y="77" width="349" height="30"/>
-                                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
->>>>>>> detailViewController
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -232,7 +226,6 @@
                         </subviews>
                         <color key="backgroundColor" red="0.2268225599" green="0.71474149210000004" blue="0.25857936370000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-<<<<<<< HEAD
                             <constraint firstItem="sAN-cY-l0J" firstAttribute="top" secondItem="GiU-Pn-ROU" secondAttribute="bottom" constant="23" id="0i7-n8-zvG"/>
                             <constraint firstItem="OXg-yb-1Vx" firstAttribute="top" secondItem="laW-bI-xwP" secondAttribute="bottom" constant="8" symbolic="YES" id="1nm-7q-Yz0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Qz5-vE-dWe" secondAttribute="trailing" constant="36" id="D8H-VR-z7j"/>
@@ -250,10 +243,6 @@
                             <constraint firstItem="Qz5-vE-dWe" firstAttribute="leading" secondItem="aq0-Zt-Vqb" secondAttribute="leadingMargin" constant="36" id="ouY-yo-prb"/>
                             <constraint firstItem="sAN-cY-l0J" firstAttribute="leading" secondItem="aq0-Zt-Vqb" secondAttribute="leadingMargin" constant="20" id="uYC-tO-7P2"/>
                             <constraint firstItem="sAN-cY-l0J" firstAttribute="leading" secondItem="qIG-pV-btT" secondAttribute="leading" id="zY7-tT-eyH"/>
-=======
-                            <constraint firstItem="STP-0S-lgP" firstAttribute="top" secondItem="n0Y-zo-OT4" secondAttribute="bottom" constant="42" id="EGQ-m0-r6d"/>
-                            <constraint firstItem="n0Y-zo-OT4" firstAttribute="centerX" secondItem="aq0-Zt-Vqb" secondAttribute="centerX" id="Zlg-YC-9Cf"/>
->>>>>>> detailViewController
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -291,9 +280,6 @@
                         <outlet property="locationAddress" destination="laW-bI-xwP" id="BqB-qc-Eyo"/>
                         <outlet property="locationName" destination="sAN-cY-l0J" id="fPx-GX-o1z"/>
                         <outlet property="locationType" destination="qIG-pV-btT" id="Vnl-hP-1ik"/>
-<<<<<<< HEAD
-                        <outlet property="saveFavoriteButton" destination="n0Y-zo-OT4" id="yte-Xk-SHo"/>
-=======
                         <outlet property="ratingFive" destination="ZNJ-1o-wBw" id="p44-jn-QuN"/>
                         <outlet property="ratingFour" destination="yjf-9L-dhs" id="9gU-U2-Ja0"/>
                         <outlet property="ratingOne" destination="g7v-Lh-Sz3" id="08S-QE-cyP"/>
@@ -302,7 +288,7 @@
                         <outlet property="ratingTwo" destination="PC9-yC-XpO" id="XfF-Oo-sks"/>
                         <outlet property="saveFavorites" destination="n0Y-zo-OT4" id="Pis-90-Iko"/>
                         <outlet property="yelpScrollView" destination="Yzb-FZ-89d" id="DaD-jj-AiT"/>
->>>>>>> detailViewController
+                        <outlet property="saveFavoriteButton" destination="n0Y-zo-OT4" id="yte-Xk-SHo"/>
                         <outlet property="zipCode" destination="OXg-yb-1Vx" id="b7l-pw-xTq"/>
                     </connections>
                 </viewController>

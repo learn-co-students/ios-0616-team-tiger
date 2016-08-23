@@ -22,7 +22,13 @@ PODS:
     - AFNetworking/NSURLSession
   - Alamofire (3.4.1)
 <<<<<<< HEAD
+<<<<<<< HEAD
   - ReachabilitySwift (2.3.3)
+=======
+  - BDBOAuth1Manager (1.6.0):
+    - AFNetworking/NSURLConnection (~> 2.6.0)
+    - AFNetworking/NSURLSession (~> 2.6.0)
+>>>>>>> detailViewController
 =======
   - BDBOAuth1Manager (1.6.0):
     - AFNetworking/NSURLConnection (~> 2.6.0)
@@ -34,7 +40,11 @@ DEPENDENCIES:
   - AFNetworking (~> 2.5)
   - Alamofire (~> 3.4)
 <<<<<<< HEAD
+<<<<<<< HEAD
   - ReachabilitySwift
+=======
+  - BDBOAuth1Manager
+>>>>>>> detailViewController
 =======
   - BDBOAuth1Manager
 >>>>>>> detailViewController
@@ -43,6 +53,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+<<<<<<< HEAD
 <<<<<<< HEAD
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
@@ -53,6 +64,16 @@ PODFILE CHECKSUM: 5ea6082402ca51944f8082c382690ac77aaf20b4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 PODFILE CHECKSUM: 85930778d3a316665a6804e624190c5ae57644b5
+>>>>>>> detailViewController
+=======
+  BDBOAuth1Manager: cd5a5872f355ca38180d52ca2dd844f0b0c84797
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+<<<<<<< HEAD
+PODFILE CHECKSUM: 85930778d3a316665a6804e624190c5ae57644b5
+=======
+PODFILE CHECKSUM: 6f848a53050d89796ff88d8391c9d64176c1044f
+>>>>>>> e147cb43e6ea028e25590a74f53c49fc90edc6c2
 >>>>>>> detailViewController
 
 COCOAPODS: 1.0.1

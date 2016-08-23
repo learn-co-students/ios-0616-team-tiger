@@ -124,11 +124,9 @@
 				11DF7A0C1D5528BE004E410E /* Secrets.swift */,
 				174A95B01D5903F800841B2C /* LocationStuff.swift */,
 				4F45BF181D53D0290029FD30 /* AppDelegate.swift */,
-<<<<<<< HEAD
 				1745EB561D6B443300A13998 /* ReachabilityCheck.swift */,
-=======
 				8F38AF081D6A87C700FB1C70 /* YelpBusiness.swift */,
->>>>>>> detailViewController
+				17E1CBC91D6A301100F21532 /* Reachability.swift */,
 				11024A4E1D551C490001BAFC /* DataStore.swift */,
 				4F82FE561D6495E30085DBA4 /* ViewControllers */,
 				4F82FE551D6495CE0085DBA4 /* APIs */,
@@ -243,11 +241,7 @@
 				TargetAttributes = {
 					4F45BF141D53D0290029FD30 = {
 						CreatedOnToolsVersion = 7.3.1;
-<<<<<<< HEAD
-						DevelopmentTeam = TDFXWLD7DJ;
-=======
 						DevelopmentTeam = GLPY7EJHQF;
->>>>>>> detailViewController
 					};
 				};
 			};
@@ -340,11 +334,8 @@
 			files = (
 				8F0257DB1D61562A002F9D5B /* detailViewController.swift in Sources */,
 				11DF7A0D1D5528BE004E410E /* Secrets.swift in Sources */,
-<<<<<<< HEAD
 				1745EB571D6B443300A13998 /* ReachabilityCheck.swift in Sources */,
-=======
 				8F38AF0B1D6A87F600FB1C70 /* YelpClient.swift in Sources */,
->>>>>>> detailViewController
 				4F66D8BF1D650C9100C45E8F /* User+CoreDataProperties.swift in Sources */,
 				4F66D8C41D650F2B00C45E8F /* FavoritesTableViewController.swift in Sources */,
 				4F45BF211D53D0290029FD30 /* Team_Tiger.xcdatamodeld in Sources */,
@@ -487,11 +478,7 @@
 				);
 				INFOPLIST_FILE = "Team-Tiger/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = "com.electricchance.Team-Tiger-ios-0616";
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ehsan-zaman-Team-Tiger-ios-0616";
->>>>>>> detailViewController
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Team-Tiger-ios-0616";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -511,11 +498,7 @@
 				);
 				INFOPLIST_FILE = "Team-Tiger/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = "com.electricchance.Team-Tiger-ios-0616";
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ehsan-zaman-Team-Tiger-ios-0616";
->>>>>>> detailViewController
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Team-Tiger-ios-0616";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

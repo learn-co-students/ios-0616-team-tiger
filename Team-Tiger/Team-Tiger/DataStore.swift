@@ -35,7 +35,7 @@ class DataStore {
     var outdoorWifiSpots : [[String : AnyObject]] = []
     
     // var locationFromDetailView = detailViewController()
-    var locationsFromDataStore = DataStore()
+//    var locationsFromDataStore = DataStore()
     
     
     //static makes it a singleton
