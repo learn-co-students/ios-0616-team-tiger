@@ -40,7 +40,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
         self.activityIndicator.hidden = true
         //        self.activityIndicator.startAnimating()
         
-        dataStore.getLinkNYCWifiSpots()
+//        dataStore.getLinkNYCWifiSpots()
         
         dataStore.populateParkByTypeBasedOnState("type", type: "Park") { (success) in
             
@@ -174,11 +174,7 @@ class ButtonsViewController: UIViewController, CLLocationManagerDelegate {
             completion(true)
         })
     }
-    
-    func getLinkNyc() {
-        dataStore.getLinkNYCWifiSpots()
-        
-    }
+
     
 //    func getZipCode() {
 //        var alertController:UIAlertController?
