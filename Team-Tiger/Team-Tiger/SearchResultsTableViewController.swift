@@ -12,6 +12,7 @@ import UIKit
 class SearchResultsTableViewController: UITableViewController {
     
     var arrayOfNames: [String] = []
+    var arrayOfDistance : [String] = []
     
     var tappedCell: Int = 0
     
@@ -22,11 +23,13 @@ class SearchResultsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        print("PARKS IN ARRAY \(dataStore.parkTypeArray)")
-        
-        //      print(self.arrayOfNames)
         
         
+        //
+        //        let getDetailsForMarkets = dataStore.getGoogleDetailsForCloseLocation(dataStore.locationsFromDataStore.farmersMarketArray[0], completionHandler: ([String:String]))
+        //        let getDetailsForGardens = dataStore.getGoogleDetailsForCloseLocation(dataStore.locationsFromDataStore.greenThumbArray[0], completionHandler: ([String:String]))
+        //        let getDetailsForParks = dataStore.getGoogleDetailsForCloseLocation(dataStore.parkTypeArray, completionHandler: ([String:String]))
+        //
         self.tableView.reloadData()
         
         
@@ -73,18 +76,19 @@ class SearchResultsTableViewController: UITableViewController {
         
         cell.textLabel?.text = arrayOfNames[indexPath.row]
         
-        
-        
-        
+        cell.detailTextLabel?.text = arrayOfDistance[indexPath.row]
         
         return cell
     }
+    
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         let newVC = segue.destinationViewController as! detailViewController
         
         self.tappedCell = (tableView.indexPathForSelectedRow?.row)!
-
+        
         
         
         if self.displayedDataType == "parks" {

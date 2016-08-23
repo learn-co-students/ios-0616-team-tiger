@@ -12,8 +12,6 @@ class onboardingViewController: UIViewController {
     
     var controllerIndex: Int?
     
-
-    
     @IBOutlet weak var swipeLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var backgroundImage: UIImageView!
@@ -41,8 +39,7 @@ class onboardingViewController: UIViewController {
             self.onboardingScreenshot.image = screenShot
             
         }
-        
-        
+
     }
   
 }
