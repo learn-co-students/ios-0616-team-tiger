@@ -14,22 +14,33 @@ class onboardingViewController: UIViewController {
     
 
     
+    @IBOutlet weak var swipeLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var introTextLabel: UILabel!
+    @IBOutlet weak var onboardingScreenshot: UIImageView!
     
     var textToDisplay: String = ""
     
     var buttonHidden: Bool = true
+    var swipeHidden: Bool = false
     
     var imageForBackground: UIImage?
+    var screenShot: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.introTextLabel.text = self.textToDisplay
         self.backgroundImage.image = self.imageForBackground
-        self.startButton.hidden = buttonHidden
+        self.startButton.hidden = self.buttonHidden
+        self.swipeLabel.hidden = self.swipeHidden
+        
+        if let screenShot = self.screenShot {
+            
+            self.onboardingScreenshot.image = screenShot
+            
+        }
         
         
     }

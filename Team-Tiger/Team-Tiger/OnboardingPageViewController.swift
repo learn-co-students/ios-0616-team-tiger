@@ -11,9 +11,10 @@ import MapKit
 
 class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, CLLocationManagerDelegate {
     
-    let textArray = ["Greenway loves you!", "Really, I do!", "Don't you sometimes feel like our time together is all too short?"]
+    let textArray = ["Greenway is designed to help you find the nearest green space to unwind in. Whether it's a place to shop, read a book, or eat your lunch, we've got you covered.", "Just choose what you're looking for...", "...and we'll display results arranged by distance."]
     
-    var imageArray: [UIImage] = []
+    var backgroundImageArray: [UIImage] = []
+    var screenShotArray: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +52,7 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         
         var index = (viewController as! onboardingViewController).controllerIndex
         
-        if index >= self.imageArray.count {
+        if index >= self.backgroundImageArray.count {
             
             return nil
             
@@ -78,13 +79,20 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
             
             view.textToDisplay = self.textArray[index]
             
-            view.imageForBackground = self.imageArray[index]
+            view.imageForBackground = self.backgroundImageArray[index]
             
             view.controllerIndex = index
             
             if view.controllerIndex == 2 {
                 
                 view.buttonHidden = false
+                view.swipeHidden = true
+                
+            }
+            
+            if view.controllerIndex != 0 {
+                
+                view.screenShot = self.screenShotArray[index - 1]
                 
             }
             
@@ -103,12 +111,24 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
         
         if let bench = benchPhoto, flower = flowerPhoto, plant = plantPhoto {
             
-            
-            self.imageArray.append(flower)
-            self.imageArray.append(plant)
-            self.imageArray.append(bench)
+            self.backgroundImageArray.append(flower)
+            self.backgroundImageArray.append(plant)
+            self.backgroundImageArray.append(bench)
             
         }
+        
+        let photo2 = UIImage(named: "onboarding1")
+        let photo3 = UIImage(named: "onboarding2")
+        
+        if let photo2 = photo2, photo3 = photo3 {
+            
+            self.screenShotArray = [photo2, photo3]
+            
+        }
+        
+        
+        
+        
     }
     
 }
