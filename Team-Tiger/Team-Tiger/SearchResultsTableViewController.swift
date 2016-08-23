@@ -71,6 +71,7 @@ class SearchResultsTableViewController: UITableViewController {
         
         cell.textLabel?.text = arrayOfNames[indexPath.row]
         cell.detailTextLabel?.text = arrayOfDistance[indexPath.row]
+        cell.detailTextLabel?.textColor = UIColor.whiteColor()
         return cell
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
