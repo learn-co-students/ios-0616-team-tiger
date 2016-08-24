@@ -24,6 +24,7 @@ class detailViewController: UIViewController {
     @IBOutlet weak var saveFavoriteButton: UIButton!
     
     @IBOutlet weak var mapView: MKMapView!
+    
     @IBOutlet weak var season: UILabel!
     @IBOutlet weak var hours: UILabel!
     
@@ -44,10 +45,30 @@ class detailViewController: UIViewController {
         setViewLabelsBasedOnPassedType()
         
         let stringOfCoordinates = locationToPresent["coordinates"]
-        let latitudeAsString = stringOfCoordinates!.coordinate.latitude
-        let longitudeAsString = stringOfCoordinates!.coordinate.longitude
+        let latitudeAsString = stringOfCoordinates!.coordinate.latitude as Double
+        let longitudeAsString = stringOfCoordinates!.coordinate.longitude as Double
+        
+        var latDelta = 0.015
+        var longDelta = 0.015
+        
+        let span = MKCoordinateSpanMake(latDelta, longDelta)
         
         let location = CLLocationCoordinate2D(latitude: latitudeAsString , longitude: longitudeAsString)
+        
+        let region = MKCoordinateRegion(center: location, span: span)
+        
+
+        //PIN
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = locationToPresent["name"] as! String
+        
+        mapView.addAnnotation(annotation)
+        mapView.selectAnnotation(annotation, animated: true)
+        
+        mapView.addAnnotation(annotation)
+        
+        
         if locationToPresent["hours"] != nil {
             hours.text = locationToPresent["hours"] as! String }
         else {
@@ -58,12 +79,6 @@ class detailViewController: UIViewController {
         } else {
             season.text = ""
         }
-        //how much of the area we see
-        var span = MKCoordinateSpanMake(0.002, 0.002)
-        
-        var region = MKCoordinateRegion(center: location, span: span)
-        
-        mapView.setRegion(region, animated: true)
         
     }
     
@@ -72,6 +87,8 @@ class detailViewController: UIViewController {
         
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     func setViewLabelsBasedOnPassedType() {
         
@@ -103,6 +120,27 @@ class detailViewController: UIViewController {
         
     }
     
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        let circleRenderer = MKCircleRenderer(overlay: overlay) //Creates overlay
+        circleRenderer.strokeColor = UIColor(red: 0.094, green:0.655, blue:0.710, alpha:1.0) //Teal circle
+        circleRenderer.fillColor = UIColor(red: 0.094, green:0.655, blue:0.710, alpha:0.15) //Slightly transparent teal
+        circleRenderer.lineWidth = 0.1
+        return circleRenderer
+        
+    }
+
+//    func loadOverlayForRegionWithLatitude(latitude: Double, andLongitude longitude: Double) {
+//        
+//        
+//        let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//    
+//       var circle = MKCircle(centerCoordinate: coordinates, radius: 50)
+//        
+//        
+//        self.mapView.setRegion(MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 7, longitudeDelta: 7)), animated: true)
+//    
+//        self.mapView.addOverlay(circle)
+//    }
     
     func setupUpParkLabels() {
         
@@ -134,6 +172,8 @@ class detailViewController: UIViewController {
         }
         
     }
+    
+
     
     func setupMarketLabels() {
         
