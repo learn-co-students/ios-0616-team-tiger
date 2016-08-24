@@ -119,22 +119,41 @@ class SearchResultsTableViewController: UITableViewController {
         
         let currentLocation = dataStore.parkTypeArray[indexPath.row]
         
+//        print(currentLocation["name"])
+//        
+//        print(indexPath.row)
+        
         let waterfrontValue = currentLocation["waterfront"] as! String
         
         //        print(waterfrontValue)
         
-        let currentMarketOrGarden = self.arrayOfNames[indexPath.row]
+//        let currentMarketOrGarden = self.arrayOfNames[indexPath.row]
         
-        if currentMarketOrGarden.lowercaseString.containsString("market") || currentMarketOrGarden.lowercaseString.containsString("stand") {
+        if self.displayedDataType == "markets" {
             
             cell.imageView?.image = UIImage.init(named: "tinyShop")
             
+        }
+        
             
-        } else if waterfrontValue == "Yes" {
+        if self.displayedDataType == "parks" && waterfrontValue == "Yes" {
             
             cell.imageView?.image = UIImage.init(named: "tinyWaterfront")
             
-        } else if currentMarketOrGarden.lowercaseString.containsString("garden") {
+        } else if self.displayedDataType == "parks" {
+            
+            cell.imageView?.image = UIImage.init(named: "tinySpa")
+            
+            
+        }
+        
+//        if ((currentLocation["name"]?.lowercaseString.containsString("garden")) == true) {
+//            
+//            cell.imageView?.image = UIImage.init(named: "tinyFlower")
+//            
+//        }
+        
+        if self.displayedDataType == "gardens" {
             
             cell.imageView?.image = UIImage.init(named: "tinyFlower")
             
