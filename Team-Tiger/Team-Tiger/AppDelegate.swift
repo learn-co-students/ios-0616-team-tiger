@@ -136,6 +136,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
+            if locationManager.location != nil {
+            dataStore.currentLocation = locationManager.location!
+            } else {
+                dataStore.currentLocation = dataStore.currentLocation
+            }
             self.dataStore.hasLocation = true
         } else {
             

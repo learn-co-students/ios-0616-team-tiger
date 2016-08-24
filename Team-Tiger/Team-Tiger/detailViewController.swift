@@ -304,71 +304,84 @@ class detailViewController: UIViewController {
         
     }
     
+    
+    func setupUpParkLabels() {
         
-        func setupUpParkLabels() {
-            
-            
-            if let favorite = self.favoriteToPresent {
-                
-                self.locationName.text = favorite.name
-                self.locationAddress.text = favorite.address
-                self.zipCode.text = favorite.zip
-                self.locationType.text = favorite.type
-                self.saveFavoriteButton.hidden = true
-                
-                
-            } else {
-                
-                let type = locationToPresent["type"] as! String
-                locationName.text =  (locationToPresent["name"] as! String)
-                locationAddress.text =  (locationToPresent["address"] as! String)
-                
-                
-                //to replace after kens icons populate tableview
-                //        if type.containsString("Garden") {
-                //            type = type + " 🌿"
-                //        }
-                locationType.text = type
-                
-                zipCode.text =  (locationToPresent["zip"] as! String)
-                
-            }
-            
-        }
         
-        func setupMarketLabels() {
+        if let favorite = self.favoriteToPresent {
             
+            self.locationName.text = favorite.name
+            self.locationAddress.text = favorite.address
+            self.zipCode.text = favorite.zip
+            self.locationType.text = favorite.type
+            self.saveFavoriteButton.hidden = true
+            
+            
+        } else {
+            
+            let type = locationToPresent["type"] as! String
             locationName.text =  (locationToPresent["name"] as! String)
             locationAddress.text =  (locationToPresent["address"] as! String)
-            locationType.text = "Farmer's Market"
+            
+            
+            //to replace after kens icons populate tableview
+            //        if type.containsString("Garden") {
+            //            type = type + " 🌿"
+            //        }
+            locationType.text = type
             
             zipCode.text =  (locationToPresent["zip"] as! String)
             
         }
         
-        func setupGardenLabels() {
-            
-            locationName.text =  (locationToPresent["Garden"] as! String)
-            locationAddress.text =  (locationToPresent["Address"] as! String)
-            locationType.text = "Garden"
-            
-        }
+    }
+    
+    func setupMarketLabels() {
         
+        locationName.text =  (locationToPresent["name"] as! String)
+        locationAddress.text =  (locationToPresent["address"] as! String)
+        locationType.text = "Farmer's Market"
+        
+        zipCode.text =  (locationToPresent["zip"] as! String)
+        
+    }
+    
+    func setupGardenLabels() {
+        
+        locationName.text =  (locationToPresent["Garden"] as! String)
+        locationAddress.text =  (locationToPresent["Address"] as! String)
+        locationType.text = "Garden"
+        
+    }
     
     
+    
+    
+    @IBAction func phoneNumber(sender: AnyObject) {
+        let url: NSURL = NSURL(string: "tel://3472321892")!
+        UIApplication.sharedApplication().openURL(url)
+    }
+    
+    
+    @IBAction func saveToFavoritesTapped(sender: AnyObject) {
         
-        @IBAction func phoneNumber(sender: AnyObject) {
-            let url: NSURL = NSURL(string: "tel://3472321892")!
-            UIApplication.sharedApplication().openURL(url)
-        }
         
+        let newFavorite = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: dataStore.managedObjectContext) as! Location
         
-        @IBAction func saveToFavoritesTapped(sender: AnyObject) {
+        //gardens don't have a name, they have "Garden" as their key
+        
+        if self.passedDataType == "gardens" {
             
+            newFavorite.name = (locationToPresent["Garden"] as! String)
+            newFavorite.address = (locationToPresent["Address"] as! String)
             
-            let newFavorite = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: dataStore.managedObjectContext) as! Location
+            if let phone = locationToPresent["phone number"] {
+                
+                newFavorite.phone = (phone as! String)
+                
+            }
             
-            //gardens don't have a name, they have "Garden" as their key
+        } else {
             
             newFavorite.name = (locationToPresent["name"] as! String)
             newFavorite.address = (locationToPresent["address"] as! String)
@@ -389,17 +402,19 @@ class detailViewController: UIViewController {
                 newFavorite.hours = (hours as! String)
             }
             
-            newFavorite.user = dataStore.user[0]
-            
-            //dataStore.user[0].favorites?.setByAddingObject(newFavorite)
-            
-            dataStore.saveContext()
-            dataStore.fetchData()
-            
-            
-            //        print(dataStore.user[0].favorites?.count)
-            
-            
         }
+        
+        newFavorite.user = dataStore.user[0]
+        
+        //dataStore.user[0].favorites?.setByAddingObject(newFavorite)
+        
+        dataStore.saveContext()
+        dataStore.fetchData()
+        
+        
+        //        print(dataStore.user[0].favorites?.count)
+        
+        
+    }
     
 }
