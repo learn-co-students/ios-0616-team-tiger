@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import MapKit
+//import CoreLocation
 
 
 class detailViewController: UIViewController {
@@ -23,6 +25,9 @@ class detailViewController: UIViewController {
     
     var favoriteToPresent: Location? = nil
     
+    var coordinatesInDetailVC: AnyObject = ""
+    
+    
     let dataStore = DataStore.store
     
     override func viewDidLoad() {
@@ -30,29 +35,39 @@ class detailViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.init(red: 125.0/255, green: 181.0/255, blue: 107.0/255, alpha: 100.0)
         
-        if let favorite = self.favoriteToPresent {
-            
-            self.locationName.text = favorite.name
-            self.locationAddress.text = favorite.address
-            self.zipCode.text = favorite.zip
-            self.locationType.text = favorite.type
-            self.saveFavoriteButton.hidden = true
-            
-        } else {
-
-        var type = locationToPresent["type"] as! String
-        locationName.text =  locationToPresent["name"] as! String
-        locationAddress.text =  locationToPresent["address"] as! String
         
-        //to replace after kens icons populate tableview
-        if type.containsString("Garden") {
-            type = type + " 🌿"
-        }
-        locationType.text = type
-
-        zipCode.text =  locationToPresent["zip"] as! String
+    
+    
+    if let favorite = self.favoriteToPresent {
         
-        }
+        self.locationName.text = favorite.name
+        self.locationAddress.text = favorite.address
+        self.zipCode.text = favorite.zip
+        self.locationType.text = favorite.type
+        self.saveFavoriteButton.hidden = true
+        
+    } else {
+    
+    var type = locationToPresent["type"] as! String
+    locationName.text =  locationToPresent["name"] as! String
+    locationAddress.text =  locationToPresent["address"] as! String
+    
+    //to replace after kens icons populate tableview
+    if type.containsString("Garden") {
+    type = type + " 🌿"
+    }
+    locationType.text = type
+    
+    zipCode.text =  locationToPresent["zip"] as! String
+    
+    }
+    
+//    coordinatesInDetailVC = locationToPresent["coordinates"]!
+//    
+//    dataStore.getGoogleDetailsForCloseLocation(coordinatesInDetailVC as! CLLocation) { (_: [String:String]?) in
+//    print(self.coordinatesInDetailVC)
+//        }
+    
     }
     
     override func didReceiveMemoryWarning() {
@@ -95,3 +110,4 @@ class detailViewController: UIViewController {
         
     }
 }
+
