@@ -101,7 +101,7 @@ class FavoritesTableViewController: UITableViewController {
         if editingStyle == .Delete {
             // Delete the row from the data source
             
-           let favoriteToRemove = self.favorites.removeAtIndex(indexPath.row)
+            let favoriteToRemove = self.favorites.removeAtIndex(indexPath.row)
             
             self.dataStore.managedObjectContext.deleteObject(favoriteToRemove)
             
@@ -156,22 +156,26 @@ class FavoritesTableViewController: UITableViewController {
         
         if let waterfrontValue = favorite.waterfront {
             
-            
-            if favorite.name!.lowercaseString.containsString("market") || favorite.name!.lowercaseString.containsString("stand") {
-                
-                cell.imageView?.image = UIImage.init(named: "tinyShop")
-                
-                
-            } else if waterfrontValue == "Yes" {
+            if waterfrontValue == "Yes" {
                 
                 cell.imageView?.image = UIImage.init(named: "tinyWaterfront")
                 
-            } else if favorite.name!.lowercaseString.containsString("garden") {
-                
-                cell.imageView?.image = UIImage.init(named: "tinyFlower")
-                
-                
             }
+            
+        }
+        
+        
+        if favorite.name!.lowercaseString.containsString("market") || favorite.name!.lowercaseString.containsString("stand")
+            
+        {
+            
+            cell.imageView?.image = UIImage.init(named: "tinyShop")
+            
+        }
+        
+        if favorite.name!.lowercaseString.containsString("garden") {
+            
+            cell.imageView?.image = UIImage.init(named: "tinyFlower")
             
         }
         

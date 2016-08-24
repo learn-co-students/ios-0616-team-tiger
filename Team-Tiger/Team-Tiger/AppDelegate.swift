@@ -137,10 +137,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
             if locationManager.location != nil {
-                dataStore.currentLocation = locationManager.location!
-                print(locationManager.location)
-                self.dataStore.hasLocation = true
+            dataStore.currentLocation = locationManager.location!
+            } else {
+                dataStore.currentLocation = dataStore.currentLocation
             }
+            self.dataStore.hasLocation = true
+
         } else {
             
             print("No go on location")

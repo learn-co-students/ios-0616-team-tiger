@@ -31,6 +31,7 @@ class detailViewController: UIViewController {
     var locationToPresent: [String : AnyObject] = [:]
     var passedDataType: String = ""
     
+    @IBOutlet weak var phoneButton: UIButton!
     
     var favoriteToPresent: Location? = nil
     
@@ -44,6 +45,8 @@ class detailViewController: UIViewController {
         
         setViewLabelsBasedOnPassedType()
         
+        if favoriteToPresent == nil {
+        
         let stringOfCoordinates = locationToPresent["coordinates"]
         let latitudeAsString = stringOfCoordinates!.coordinate.latitude as Double
         let longitudeAsString = stringOfCoordinates!.coordinate.longitude as Double
@@ -52,6 +55,7 @@ class detailViewController: UIViewController {
         var longDelta = 0.015
         
         let span = MKCoordinateSpanMake(latDelta, longDelta)
+        
         
         let location = CLLocationCoordinate2D(latitude: latitudeAsString , longitude: longitudeAsString)
         
@@ -75,13 +79,27 @@ class detailViewController: UIViewController {
             hours.text = ""
         }
         if locationToPresent["season"] != nil  {
-        season.text = locationToPresent["season"] as! String
+            season.text = locationToPresent["season"] as! String
         } else {
             season.text = ""
         }
         
+            
+        }
+        
+        if locationToPresent["phone number"] != nil {
+            
+            let number = (locationToPresent["phone number"]! as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            if number.characters.count > 8 {
+                phoneButton.hidden = false
+                phoneButton.enabled = true
+                
+                
+            } } else {
+            phoneButton.hidden = true
+            phoneButton.enabled = false
+        }
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -152,14 +170,36 @@ class detailViewController: UIViewController {
             self.zipCode.text = favorite.zip
             self.locationType.text = favorite.type
             self.saveFavoriteButton.hidden = true
+            self.season.hidden = true
+            self.hours.hidden = true
             
             
         } else {
             
             let type = locationToPresent["type"] as! String
-            locationName.text =  (locationToPresent["name"] as! String)
-            locationAddress.text =  (locationToPresent["address"] as! String)
             
+            if locationToPresent["name"] != nil {
+                
+                locationName.text =  (locationToPresent["name"] as! String)
+            } else {
+                locationName.text = ""
+            }
+            
+            if locationToPresent["address"] != nil {
+                locationAddress.text =  (locationToPresent["address"] as! String)
+                
+//            //            if locationToPresent["name"] != nil {
+//            locationName.text =  (locationToPresent["name"] as? String)
+//            //            } else {
+//            //                locationName.text = ""
+//            //            }
+//            
+//            if locationToPresent["address"] != nil {
+//                locationAddress.text =  (locationToPresent["address"] as? String)
+
+            } else {
+                locationAddress.text = ""
+            }
             
             //to replace after kens icons populate tableview
             //        if type.containsString("Garden") {
@@ -167,7 +207,13 @@ class detailViewController: UIViewController {
             //        }
             locationType.text = type
             
-            zipCode.text =  (locationToPresent["zip"] as! String)
+            if locationToPresent["zip"] != nil {
+
+                zipCode.text =  (locationToPresent["zip"] as! String)
+
+            } else {
+                zipCode.text = ""
+            }
             
         }
         
@@ -197,9 +243,14 @@ class detailViewController: UIViewController {
     
     
     @IBAction func phoneNumber(sender: AnyObject) {
-        let url: NSURL = NSURL(string: "tel://3472321892")!
-        UIApplication.sharedApplication().openURL(url)
+        if locationToPresent["phone number"] != nil {
+            let url: NSURL = NSURL(string: "tel://\(locationToPresent["phone number"])")!
+            UIApplication.sharedApplication().openURL(url)
+        } else {
+            phoneButton.hidden = true
+        }
     }
+
     
     
     @IBAction func saveToFavoritesTapped(sender: AnyObject) {
@@ -209,23 +260,39 @@ class detailViewController: UIViewController {
         
         //gardens don't have a name, they have "Garden" as their key
         
-        newFavorite.name = (locationToPresent["name"] as! String)
-        newFavorite.address = (locationToPresent["address"] as! String)
         
-        if let type = locationToPresent["type"] {
-            newFavorite.type = (type as! String)
-        }
-        
-        if let zip = locationToPresent["zip"] {
-            newFavorite.zip = (zip as! String)
-        }
-        
-        if let waterfront = locationToPresent["waterfront"] {
-            newFavorite.waterfront = (waterfront as! String)
-        }
-        
-        if let hours = locationToPresent["hours"] {
-            newFavorite.hours = (hours as! String)
+        if self.passedDataType == "gardens" {
+            
+            newFavorite.name = (locationToPresent["Garden"] as! String)
+            newFavorite.address = (locationToPresent["Address"] as! String)
+            
+            if let phone = locationToPresent["phone number"] {
+                
+                newFavorite.phone = (phone as! String)
+                
+            }
+            
+        } else {
+            
+            newFavorite.name = (locationToPresent["name"] as! String)
+            newFavorite.address = (locationToPresent["address"] as! String)
+            
+            if let type = locationToPresent["type"] {
+                newFavorite.type = (type as! String)
+            }
+            
+            if let zip = locationToPresent["zip"] {
+                newFavorite.zip = (zip as! String)
+            }
+            
+            if let waterfront = locationToPresent["waterfront"] {
+                newFavorite.waterfront = (waterfront as! String)
+            }
+            
+            if let hours = locationToPresent["hours"] {
+                newFavorite.hours = (hours as! String)
+            }
+            
         }
         
         newFavorite.user = dataStore.user[0]
