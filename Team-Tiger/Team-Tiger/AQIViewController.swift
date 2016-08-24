@@ -16,6 +16,7 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var particulateLabel: UILabel!
     @IBOutlet weak var actionDayStatus: UITextView!
     
+    @IBOutlet weak var tryAgainButton: UIButton!
     @IBOutlet weak var letsGo: UIButton!
     var airQualityReport: [[String : AnyObject]] = []
     let locationManager = CLLocationManager()
@@ -25,54 +26,16 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         //        self.getLocation()
-    self.airQualityReport = dataStore.airQualityReport as! [[String : AnyObject]]
-        
-        let ozoneIndex = self.airQualityReport.count - 2
-        if InternetStatus.shared.hasInternet {
-        if let ozone = self.airQualityReport[ozoneIndex]["AQI"] {
-            
-            self.ozoneLabel.text = "\(ozone)"
-            
-        } else {
-            self.ozoneLabel.text = "0"
-            
-        }
-        
-        let particulateIndex = self.airQualityReport.count - 1
-        
-        if let particulate = self.airQualityReport[particulateIndex]["AQI"] {
-            
-            self.particulateLabel.text = "\(particulate)"
-            
-        } else {
-            self.particulateLabel.text = "0"
-        }
-        
-        if let actionDayStatus = self.airQualityReport[particulateIndex]["ActionDay"] {
-            
-            if String(actionDayStatus) == "1" {
-                
-                self.actionDayStatus.text = "It's an Air Quality Action Day. Groups that are sensitive to certain pollutants should reduce exposure by eliminating prolonged or heavy exertion outdoors. For ozone this includes children and adults who are active outdoors and people with lung disease, such as asthma."
-                
-            } else {
-                
-                self.actionDayStatus.text = "It's not an Air Quality Action Day. Enjoy the fresh air!"
-                
-            }
-            }
-            
-        } else {
-            self.ozoneLabel.text = "N/A"
-            self.particulateLabel.text = "N/A"
-            self.actionDayStatus.text = "Sorry, we cannot currently access Air Quality data. Please make sure you're connected to the internet, restart the app, and try again."
-            self.letsGo.hidden = true
-        }
         
             
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
+        
+        self.tryAgainButton.hidden = true
+        
+        presentAQI()
         
     }
     override func didReceiveMemoryWarning() {
@@ -138,6 +101,19 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
         print("Failed to find user's location: \(error.localizedDescription)")
     }
     
+    
+    
+    @IBAction func tryAgainTapped(sender: AnyObject) {
+        
+        
+//        let aqi = self.storyboard?.instantiateViewControllerWithIdentifier("aqi")
+//        
+//        self.presentViewController(aqi!, animated: true, completion: nil)
+        
+        
+        
+    }
+    
     // Reachability shtuff
 //    func showNoReachability() {
 //        let alertController = UIAlertController(title: "Location Needed",
@@ -185,5 +161,57 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
      // Pass the selected object to the new view controller.
      }
      */
+    
+    func presentAQI() {
+        
+        self.airQualityReport = dataStore.airQualityReport as! [[String : AnyObject]]
+        
+        let ozoneIndex = self.airQualityReport.count - 2
+        if InternetStatus.shared.hasInternet {
+            if let ozone = self.airQualityReport[ozoneIndex]["AQI"] {
+                
+                self.ozoneLabel.text = "\(ozone)"
+                
+            } else {
+                self.ozoneLabel.text = "0"
+                
+            }
+            
+            let particulateIndex = self.airQualityReport.count - 1
+            
+            if let particulate = self.airQualityReport[particulateIndex]["AQI"] {
+                
+                self.particulateLabel.text = "\(particulate)"
+                
+            } else {
+                self.particulateLabel.text = "0"
+            }
+            
+            if let actionDayStatus = self.airQualityReport[particulateIndex]["ActionDay"] {
+                
+                if String(actionDayStatus) == "1" {
+                    
+                    self.actionDayStatus.text = "It's an Air Quality Action Day. Groups that are sensitive to certain pollutants should reduce exposure by eliminating prolonged or heavy exertion outdoors. For ozone this includes children and adults who are active outdoors and people with lung disease, such as asthma."
+                    
+                } else {
+                    
+                    self.actionDayStatus.text = "It's not an Air Quality Action Day. Enjoy the fresh air!"
+                    
+                }
+            }
+            
+        } else {
+            self.ozoneLabel.text = "N/A"
+            self.particulateLabel.text = "N/A"
+            self.actionDayStatus.text = "Sorry, we cannot currently access Air Quality or Parks data. Please make sure you're connected to the internet and click below to try again."
+            
+            self.letsGo.hidden = true
+            self.tryAgainButton.hidden = false
+            
+            
+        }
+
+        
+    }
     
 }
