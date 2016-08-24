@@ -24,10 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         ReachabilityCheck().reachabilitySetup()
-
+        
         AirQualityAPIClient.getAirQualityIndex("10012") { (report) in
-                self.dataStore.airQualityReport = report
-            }
+            self.dataStore.airQualityReport = report
+        }
         
         //Gathers initial park data
         self.getLocation()
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         self.getLocation()
-//        ReachabilityCheck().reachabilitySetup(
+        //        ReachabilityCheck().reachabilitySetup(
         print("Hi, I'm back!")
     }
     
@@ -136,8 +136,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
-            print(locationManager.location)
-            self.dataStore.hasLocation = true
+            if locationManager.location != nil {
+                dataStore.currentLocation = locationManager.location!
+                print(locationManager.location)
+                self.dataStore.hasLocation = true
+            }
         } else {
             
             print("No go on location")
@@ -152,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             
             dataStore.currentLocation = (locations.first)!
             
-//            locationManager.stopUpdatingLocation()
+            //            locationManager.stopUpdatingLocation()
             self.dataStore.hasLocation = true
             //            print("You are here : \(dataStore.currentLocation)")
             

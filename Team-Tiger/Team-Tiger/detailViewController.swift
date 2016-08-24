@@ -24,6 +24,8 @@ class detailViewController: UIViewController {
     @IBOutlet weak var saveFavoriteButton: UIButton!
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var season: UILabel!
+    @IBOutlet weak var hours: UILabel!
     
     var locationToPresent: [String : AnyObject] = [:]
     var passedDataType: String = ""
@@ -44,9 +46,18 @@ class detailViewController: UIViewController {
         let stringOfCoordinates = locationToPresent["coordinates"]
         let latitudeAsString = stringOfCoordinates!.coordinate.latitude
         let longitudeAsString = stringOfCoordinates!.coordinate.longitude
-
-        let location = CLLocationCoordinate2D(latitude: latitudeAsString , longitude: longitudeAsString)
         
+        let location = CLLocationCoordinate2D(latitude: latitudeAsString , longitude: longitudeAsString)
+        if locationToPresent["hours"] != nil {
+            hours.text = locationToPresent["hours"] as! String }
+        else {
+            hours.text = ""
+        }
+        if locationToPresent["season"] != nil  {
+        season.text = locationToPresent["season"] as! String
+        } else {
+            season.text = ""
+        }
         //how much of the area we see
         var span = MKCoordinateSpanMake(0.002, 0.002)
         
@@ -54,14 +65,13 @@ class detailViewController: UIViewController {
         
         mapView.setRegion(region, animated: true)
         
-        func didReceiveMemoryWarning() {
-            super.didReceiveMemoryWarning()
-            
-            // Dispose of any resources that can be recreated.
-        }
     }
     
-    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        // Dispose of any resources that can be recreated.
+    }
     
     func setViewLabelsBasedOnPassedType() {
         
