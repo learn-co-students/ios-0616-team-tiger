@@ -44,6 +44,8 @@ class detailViewController: UIViewController {
         
         setViewLabelsBasedOnPassedType()
         
+        if favoriteToPresent == nil {
+        
         let stringOfCoordinates = locationToPresent["coordinates"]
         let latitudeAsString = stringOfCoordinates!.coordinate.latitude
         let longitudeAsString = stringOfCoordinates!.coordinate.longitude
@@ -69,17 +71,22 @@ class detailViewController: UIViewController {
         
         mapView.setRegion(region, animated: true)
         
-        let number = (locationToPresent["phone number"]! as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
-        //        if locationToPresent["phone number"] != nil {
-        if number.characters.count > 8 {
-            let url: NSURL = NSURL(string: "tel://\(number)")!
-        } else {
+            
+        }
+        
+        if locationToPresent["phone number"] != nil {
+            
+            let number = (locationToPresent["phone number"]! as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            if number.characters.count > 8 {
+                phoneButton.hidden = false
+                phoneButton.enabled = true
+                
+                
+            } } else {
             phoneButton.hidden = true
             phoneButton.enabled = false
         }
-        
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -127,6 +134,8 @@ class detailViewController: UIViewController {
             self.zipCode.text = favorite.zip
             self.locationType.text = favorite.type
             self.saveFavoriteButton.hidden = true
+            self.season.hidden = true
+            self.hours.hidden = true
             
             
         } else {
@@ -143,6 +152,15 @@ class detailViewController: UIViewController {
             if locationToPresent["address"] != nil {
                 locationAddress.text =  (locationToPresent["address"] as! String)
                 
+//            //            if locationToPresent["name"] != nil {
+//            locationName.text =  (locationToPresent["name"] as? String)
+//            //            } else {
+//            //                locationName.text = ""
+//            //            }
+//            
+//            if locationToPresent["address"] != nil {
+//                locationAddress.text =  (locationToPresent["address"] as? String)
+
             } else {
                 locationAddress.text = ""
             }
@@ -154,7 +172,9 @@ class detailViewController: UIViewController {
             locationType.text = type
             
             if locationToPresent["zip"] != nil {
+
                 zipCode.text =  (locationToPresent["zip"] as! String)
+
             } else {
                 zipCode.text = ""
             }
