@@ -136,6 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.requestLocation()
+            print(locationManager.location)
             self.dataStore.hasLocation = true
         } else {
             
@@ -151,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             
             dataStore.currentLocation = (locations.first)!
             
-            locationManager.stopUpdatingLocation()
+//            locationManager.stopUpdatingLocation()
             self.dataStore.hasLocation = true
             //            print("You are here : \(dataStore.currentLocation)")
             

@@ -126,7 +126,6 @@
 				4F45BF181D53D0290029FD30 /* AppDelegate.swift */,
 				1745EB561D6B443300A13998 /* ReachabilityCheck.swift */,
 				8F38AF081D6A87C700FB1C70 /* YelpBusiness.swift */,
-				17E1CBC91D6A301100F21532 /* Reachability.swift */,
 				11024A4E1D551C490001BAFC /* DataStore.swift */,
 				4F82FE561D6495E30085DBA4 /* ViewControllers */,
 				4F82FE551D6495CE0085DBA4 /* APIs */,
@@ -241,7 +240,7 @@
 				TargetAttributes = {
 					4F45BF141D53D0290029FD30 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 955825D98U;
+						DevelopmentTeam = KXY9EDFTF5;
 					};
 				};
 			};
