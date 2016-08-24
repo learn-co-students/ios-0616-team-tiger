@@ -30,6 +30,7 @@ class detailViewController: UIViewController {
     var locationToPresent: [String : AnyObject] = [:]
     var passedDataType: String = ""
     
+    @IBOutlet weak var phoneButton: UIButton!
     
     var favoriteToPresent: Location? = nil
     
@@ -47,14 +48,17 @@ class detailViewController: UIViewController {
         let latitudeAsString = stringOfCoordinates!.coordinate.latitude
         let longitudeAsString = stringOfCoordinates!.coordinate.longitude
         
+        
         let location = CLLocationCoordinate2D(latitude: latitudeAsString , longitude: longitudeAsString)
+        
+        
         if locationToPresent["hours"] != nil {
             hours.text = locationToPresent["hours"] as! String }
         else {
             hours.text = ""
         }
         if locationToPresent["season"] != nil  {
-        season.text = locationToPresent["season"] as! String
+            season.text = locationToPresent["season"] as! String
         } else {
             season.text = ""
         }
@@ -64,6 +68,15 @@ class detailViewController: UIViewController {
         var region = MKCoordinateRegion(center: location, span: span)
         
         mapView.setRegion(region, animated: true)
+        
+        let number = (locationToPresent["phone number"]! as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        //        if locationToPresent["phone number"] != nil {
+        if number.characters.count > 8 {
+            let url: NSURL = NSURL(string: "tel://\(number)")!
+        } else {
+            phoneButton.hidden = true
+            phoneButton.enabled = false
+        }
         
     }
     
@@ -157,8 +170,12 @@ class detailViewController: UIViewController {
     
     
     @IBAction func phoneNumber(sender: AnyObject) {
-        let url: NSURL = NSURL(string: "tel://3472321892")!
-        UIApplication.sharedApplication().openURL(url)
+        if locationToPresent["phone number"] != nil {
+            let url: NSURL = NSURL(string: "tel://\(locationToPresent["phone number"])")!
+            UIApplication.sharedApplication().openURL(url)
+        } else {
+            phoneButton.hidden = true
+        }
     }
     
     
