@@ -132,18 +132,28 @@ class detailViewController: UIViewController {
         } else {
             
             let type = locationToPresent["type"] as! String
+            if locationToPresent["name"] != nil {
             locationName.text =  (locationToPresent["name"] as! String)
-            locationAddress.text =  (locationToPresent["address"] as! String)
+            } else {
+                locationName.text = ""
+            }
             
+            if locationToPresent["address"] != nil {
+            locationAddress.text =  (locationToPresent["address"] as! String)
+            } else {
+                locationAddress.text = ""
+            }
             
             //to replace after kens icons populate tableview
             //        if type.containsString("Garden") {
             //            type = type + " 🌿"
             //        }
             locationType.text = type
-            
+            if locationToPresent["zip"] != nil {
             zipCode.text =  (locationToPresent["zip"] as! String)
-            
+            } else {
+                zipCode.text = ""
+            }
         }
         
     }
