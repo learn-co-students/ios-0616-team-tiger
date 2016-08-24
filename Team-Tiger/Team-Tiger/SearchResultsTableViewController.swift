@@ -105,7 +105,7 @@ class SearchResultsTableViewController: UITableViewController {
             
         } else {
             
-            newVC.locationToPresent = dataStore.greenThumbArray [tappedCell]
+            newVC.locationToPresent = dataStore.greenThumbArray[tappedCell]
             
             newVC.passedDataType = "gardens"
             
