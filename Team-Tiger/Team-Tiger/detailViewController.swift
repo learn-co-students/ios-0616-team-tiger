@@ -24,6 +24,7 @@ class detailViewController: UIViewController {
     @IBOutlet weak var saveFavoriteButton: UIButton!
     
     @IBOutlet weak var mapView: MKMapView!
+    
     @IBOutlet weak var season: UILabel!
     @IBOutlet weak var hours: UILabel!
     
@@ -44,12 +45,32 @@ class detailViewController: UIViewController {
         
         setViewLabelsBasedOnPassedType()
         
+        if favoriteToPresent == nil {
+        
         let stringOfCoordinates = locationToPresent["coordinates"]
-        let latitudeAsString = stringOfCoordinates!.coordinate.latitude
-        let longitudeAsString = stringOfCoordinates!.coordinate.longitude
+        let latitudeAsString = stringOfCoordinates!.coordinate.latitude as Double
+        let longitudeAsString = stringOfCoordinates!.coordinate.longitude as Double
+        
+        var latDelta = 0.015
+        var longDelta = 0.015
+        
+        let span = MKCoordinateSpanMake(latDelta, longDelta)
         
         
         let location = CLLocationCoordinate2D(latitude: latitudeAsString , longitude: longitudeAsString)
+        
+        let region = MKCoordinateRegion(center: location, span: span)
+        
+
+        //PIN
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = locationToPresent["name"] as! String
+        
+        mapView.addAnnotation(annotation)
+        mapView.selectAnnotation(annotation, animated: true)
+        
+        mapView.addAnnotation(annotation)
         
         
         if locationToPresent["hours"] != nil {
@@ -62,13 +83,9 @@ class detailViewController: UIViewController {
         } else {
             season.text = ""
         }
-        //how much of the area we see
-        var span = MKCoordinateSpanMake(0.002, 0.002)
         
-        var region = MKCoordinateRegion(center: location, span: span)
-        
-        mapView.setRegion(region, animated: true)
-        
+            
+        }
         
         if locationToPresent["phone number"] != nil {
             
@@ -95,6 +112,8 @@ class detailViewController: UIViewController {
         
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     func setViewLabelsBasedOnPassedType() {
         
@@ -126,6 +145,27 @@ class detailViewController: UIViewController {
         
     }
     
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        let circleRenderer = MKCircleRenderer(overlay: overlay) //Creates overlay
+        circleRenderer.strokeColor = UIColor(red: 0.094, green:0.655, blue:0.710, alpha:1.0) //Teal circle
+        circleRenderer.fillColor = UIColor(red: 0.094, green:0.655, blue:0.710, alpha:0.15) //Slightly transparent teal
+        circleRenderer.lineWidth = 0.1
+        return circleRenderer
+        
+    }
+
+//    func loadOverlayForRegionWithLatitude(latitude: Double, andLongitude longitude: Double) {
+//        
+//        
+//        let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//    
+//       var circle = MKCircle(centerCoordinate: coordinates, radius: 50)
+//        
+//        
+//        self.mapView.setRegion(MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 7, longitudeDelta: 7)), animated: true)
+//    
+//        self.mapView.addOverlay(circle)
+//    }
     
     func setupUpParkLabels() {
         
@@ -137,19 +177,33 @@ class detailViewController: UIViewController {
             self.zipCode.text = favorite.zip
             self.locationType.text = favorite.type
             self.saveFavoriteButton.hidden = true
+            self.season.hidden = true
+            self.hours.hidden = true
             
             
         } else {
             
             let type = locationToPresent["type"] as! String
-            //            if locationToPresent["name"] != nil {
-            locationName.text =  (locationToPresent["name"] as? String)
-            //            } else {
-            //                locationName.text = ""
-            //            }
+            
+            if locationToPresent["name"] != nil {
+                
+                locationName.text =  (locationToPresent["name"] as! String)
+            } else {
+                locationName.text = ""
+            }
             
             if locationToPresent["address"] != nil {
-                locationAddress.text =  (locationToPresent["address"] as? String)
+                locationAddress.text =  (locationToPresent["address"] as! String)
+                
+//            //            if locationToPresent["name"] != nil {
+//            locationName.text =  (locationToPresent["name"] as? String)
+//            //            } else {
+//            //                locationName.text = ""
+//            //            }
+//            
+//            if locationToPresent["address"] != nil {
+//                locationAddress.text =  (locationToPresent["address"] as? String)
+
             } else {
                 locationAddress.text = ""
             }
@@ -159,14 +213,20 @@ class detailViewController: UIViewController {
             //            type = type + " 🌿"
             //        }
             locationType.text = type
+            
             if locationToPresent["zip"] != nil {
-                zipCode.text =  (locationToPresent["zip"] as? String)
+
+                zipCode.text =  (locationToPresent["zip"] as! String)
+
             } else {
                 zipCode.text = ""
             }
+            
         }
         
     }
+    
+
     
     func setupMarketLabels() {
         if (locationToPresent["name"] as! String).characters.count > 0 {
@@ -222,6 +282,7 @@ class detailViewController: UIViewController {
         //            phoneButton.hidden = true
         //        }
     }
+
     
     
     @IBAction func saveToFavoritesTapped(sender: AnyObject) {
@@ -231,23 +292,39 @@ class detailViewController: UIViewController {
         
         //gardens don't have a name, they have "Garden" as their key
         
-        newFavorite.name = (locationToPresent["name"] as! String)
-        newFavorite.address = (locationToPresent["address"] as! String)
         
-        if let type = locationToPresent["type"] {
-            newFavorite.type = (type as! String)
-        }
-        
-        if let zip = locationToPresent["zip"] {
-            newFavorite.zip = (zip as! String)
-        }
-        
-        if let waterfront = locationToPresent["waterfront"] {
-            newFavorite.waterfront = (waterfront as! String)
-        }
-        
-        if let hours = locationToPresent["hours"] {
-            newFavorite.hours = (hours as! String)
+        if self.passedDataType == "gardens" {
+            
+            newFavorite.name = (locationToPresent["Garden"] as! String)
+            newFavorite.address = (locationToPresent["Address"] as! String)
+            
+            if let phone = locationToPresent["phone number"] {
+                
+                newFavorite.phone = (phone as! String)
+                
+            }
+            
+        } else {
+            
+            newFavorite.name = (locationToPresent["name"] as! String)
+            newFavorite.address = (locationToPresent["address"] as! String)
+            
+            if let type = locationToPresent["type"] {
+                newFavorite.type = (type as! String)
+            }
+            
+            if let zip = locationToPresent["zip"] {
+                newFavorite.zip = (zip as! String)
+            }
+            
+            if let waterfront = locationToPresent["waterfront"] {
+                newFavorite.waterfront = (waterfront as! String)
+            }
+            
+            if let hours = locationToPresent["hours"] {
+                newFavorite.hours = (hours as! String)
+            }
+            
         }
         
         newFavorite.user = dataStore.user[0]

@@ -24,10 +24,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNR-9s-0vN">
                                 <rect key="frame" x="60" y="184" width="480" height="337"/>
                                 <subviews>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fb1-lU-zfF">
-                                        <rect key="frame" x="8" y="8" width="240" height="128"/>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fb1-lU-zfF">
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="337"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="JYY-En-0XW">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="480" height="337"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="light"/>
@@ -41,8 +41,8 @@
                                     <constraint firstItem="Fb1-lU-zfF" firstAttribute="height" secondItem="bNR-9s-0vN" secondAttribute="height" id="gZP-hn-qEs"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVf-jb-4dI">
-                                <rect key="frame" x="241" y="314" width="121" height="54"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVf-jb-4dI">
+                                <rect key="frame" x="90" y="340" width="420" height="26"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="35"/>
                                 <state key="normal" title="Markets">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -52,8 +52,8 @@
                                     <segue destination="eMw-Ei-Duf" kind="show" identifier="showShops" id="MO3-kh-2p6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHc-0k-6gc">
-                                <rect key="frame" x="215" y="427" width="128" height="54"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHc-0k-6gc">
+                                <rect key="frame" x="90" y="463" width="420" height="54"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="35"/>
                                 <state key="normal" title="Gardens">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -62,8 +62,8 @@
                                     <segue destination="eMw-Ei-Duf" kind="show" identifier="ShowGardens" id="gN2-fu-PLP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cX-oy-4KP">
-                                <rect key="frame" x="255" y="202" width="82" height="54"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cX-oy-4KP">
+                                <rect key="frame" x="90" y="190" width="420" height="54"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="35"/>
                                 <state key="normal" title="Parks">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,20 +72,20 @@
                                     <segue destination="eMw-Ei-Duf" kind="show" identifier="showParks" id="fxQ-vn-wRe"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Where to?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2v-eb-YnC">
-                                <rect key="frame" x="227" y="110" width="79" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where to?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2v-eb-YnC">
+                                <rect key="frame" x="149" y="84" width="302" height="84"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="70"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bigFlower" translatesAutoresizingMaskIntoConstraints="NO" id="yGJ-Ji-JFK">
-                                <rect key="frame" x="536" y="429" width="52" height="50"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="bigFlower" translatesAutoresizingMaskIntoConstraints="NO" id="yGJ-Ji-JFK">
+                                <rect key="frame" x="462" y="466" width="48" height="48"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="rest" translatesAutoresizingMaskIntoConstraints="NO" id="NBU-xA-4oJ">
-                                <rect key="frame" x="536" y="204" width="52" height="50"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="rest" translatesAutoresizingMaskIntoConstraints="NO" id="NBU-xA-4oJ">
+                                <rect key="frame" x="462" y="193" width="48" height="48"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="shop" translatesAutoresizingMaskIntoConstraints="NO" id="qEc-NM-vFZ">
-                                <rect key="frame" x="536" y="316" width="52" height="50"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shop" translatesAutoresizingMaskIntoConstraints="NO" id="qEc-NM-vFZ">
+                                <rect key="frame" x="462" y="329" width="48" height="48"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,8 +97,10 @@
                             <constraint firstItem="qEc-NM-vFZ" firstAttribute="centerY" secondItem="xVf-jb-4dI" secondAttribute="centerY" id="AKj-2D-rqT"/>
                             <constraint firstItem="xVf-jb-4dI" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="Dyy-ha-aN6"/>
                             <constraint firstItem="MHc-0k-6gc" firstAttribute="centerX" secondItem="FI1-ec-Ddt" secondAttribute="centerX" id="DzJ-zy-EJE"/>
+                            <constraint firstItem="MHc-0k-6gc" firstAttribute="bottom" secondItem="bNR-9s-0vN" secondAttribute="bottom" constant="-20" id="EMu-f8-HG9"/>
                             <constraint firstItem="qEc-NM-vFZ" firstAttribute="leading" secondItem="xVf-jb-4dI" secondAttribute="trailing" constant="218" id="F16-zl-fNP"/>
                             <constraint firstItem="yGJ-Ji-JFK" firstAttribute="centerY" secondItem="MHc-0k-6gc" secondAttribute="centerY" id="FYc-3m-Hc7"/>
+                            <constraint firstItem="0cX-oy-4KP" firstAttribute="top" secondItem="bNR-9s-0vN" secondAttribute="top" constant="20" id="G36-Jd-M2k"/>
                             <constraint firstItem="MHc-0k-6gc" firstAttribute="top" secondItem="xVf-jb-4dI" secondAttribute="bottom" constant="83" id="G7h-P1-Tfw"/>
                             <constraint firstItem="bNR-9s-0vN" firstAttribute="width" secondItem="FI1-ec-Ddt" secondAttribute="width" multiplier="0.8" id="GAZ-5S-qgN"/>
                             <constraint firstItem="yGJ-Ji-JFK" firstAttribute="leading" secondItem="MHc-0k-6gc" secondAttribute="trailing" constant="199" id="I8s-9i-5GI"/>
@@ -173,7 +175,7 @@
                                             <rect key="frame" x="543" y="12" width="42" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
