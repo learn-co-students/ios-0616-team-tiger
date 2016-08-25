@@ -61,7 +61,7 @@ class detailViewController: UIViewController {
         
         let region = MKCoordinateRegion(center: location, span: span)
         
-
+        mapView.setRegion(region, animated: true)
         //PIN
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
