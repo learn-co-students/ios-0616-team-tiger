@@ -278,6 +278,7 @@ class DataStore {
                 self.parkTypeArray.append(self.masterParksDictionary[key]!)
             }
         }
+        print(self.parkTypeArray)
         self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
     }
     
@@ -298,8 +299,9 @@ class DataStore {
                     //                    print("i have the parks")
                 }
             }
-            
+//            print(
             self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
+            
             completion()
         }
         
@@ -310,7 +312,10 @@ class DataStore {
         
         for park in parks {
             var parkCopy : [String : AnyObject] = park
-            
+            if park["name"] as? String == "Central Park" {
+                print(park["coordinates"] as? String)
+                
+            } else {
             if let coordinatesAsString = park["coordinates"] as? String {
                 
                 parkCopy.updateValue(LocationStuff().makeCoordinatesIntoArray(coordinatesAsString), forKey: "coordinates")
@@ -319,6 +324,7 @@ class DataStore {
                 
                 parksCopy.append(parkCopy)
                 
+                }
             }
         }
         return parksCopy
