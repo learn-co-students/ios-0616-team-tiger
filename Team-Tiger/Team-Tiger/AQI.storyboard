@@ -84,7 +84,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="E1y-il-yZK">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" scrollEnabled="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="E1y-il-yZK">
                                 <rect key="frame" x="180" y="357" width="240" height="150"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">It's an AQI Action Day. Groups that are sensitive to pollutants should reduce exposure by eliminating prolonged or heavy exertion outdoors. For ozone this includes children and adults who are active outdoors and people with lung disease, such as asthma.</string>
@@ -92,7 +92,7 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbe-hp-0mh">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbe-hp-0mh">
                                 <rect key="frame" x="272" y="526" width="97" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
                                 <state key="normal" title="Let's Go">
@@ -102,7 +102,7 @@
                                     <segue destination="iGV-Oa-Hx3" kind="show" id="h7o-Qk-oGb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ET8-Uj-Jpb">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ET8-Uj-Jpb">
                                 <rect key="frame" x="268" y="526" width="65" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                 <state key="normal" title="Try Again">
@@ -135,8 +135,8 @@
                             <constraint firstItem="Qmr-fM-lIr" firstAttribute="width" secondItem="qcV-Af-jMn" secondAttribute="width" constant="-360" id="WCc-SV-FhZ"/>
                             <constraint firstItem="Qmr-fM-lIr" firstAttribute="centerX" secondItem="qcV-Af-jMn" secondAttribute="centerX" id="Ypr-YZ-Vc6"/>
                             <constraint firstItem="E1y-il-yZK" firstAttribute="top" secondItem="Nyo-FC-MAs" secondAttribute="bottom" constant="65" id="ZCc-p8-RQK"/>
-                            <constraint firstItem="geK-5a-NCi" firstAttribute="top" secondItem="ET8-Uj-Jpb" secondAttribute="bottom" constant="80" id="aBY-b2-47f"/>
-                            <constraint firstItem="geK-5a-NCi" firstAttribute="top" secondItem="Gbe-hp-0mh" secondAttribute="bottom" constant="80" id="aNQ-hw-5nu"/>
+                            <constraint firstItem="geK-5a-NCi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ET8-Uj-Jpb" secondAttribute="bottom" constant="70" id="aBY-b2-47f"/>
+                            <constraint firstItem="geK-5a-NCi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Gbe-hp-0mh" secondAttribute="bottom" constant="70" id="aNQ-hw-5nu"/>
                             <constraint firstItem="Qmr-fM-lIr" firstAttribute="height" secondItem="qcV-Af-jMn" secondAttribute="height" constant="-472" id="b2R-w8-uOc"/>
                             <constraint firstItem="aQ5-4R-B0d" firstAttribute="centerX" secondItem="Qmr-fM-lIr" secondAttribute="centerX" id="cve-Rx-uHQ"/>
                             <constraint firstItem="aQ5-4R-B0d" firstAttribute="top" secondItem="UA1-Yd-cec" secondAttribute="bottom" constant="24" id="cxl-fX-KW2"/>
