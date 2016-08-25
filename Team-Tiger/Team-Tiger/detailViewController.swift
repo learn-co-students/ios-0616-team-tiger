@@ -73,12 +73,19 @@ class detailViewController: UIViewController {
         if locationToPresent["phone number"] != nil {
             
             let number = (locationToPresent["phone number"]! as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            
+            // use regex for phone numbers
             if number.characters.count > 8 {
                 phoneButton.hidden = false
                 phoneButton.enabled = true
                 
                 
-            } } else {
+            } else {
+                phoneButton.hidden = true
+                phoneButton.enabled = false
+            }
+        }
+        else {
             phoneButton.hidden = true
             phoneButton.enabled = false
         }
@@ -162,33 +169,58 @@ class detailViewController: UIViewController {
     }
     
     func setupMarketLabels() {
+        if (locationToPresent["name"] as! String).characters.count > 0 {
+            locationName.text =  (locationToPresent["name"] as! String)
+        } else {
+            locationName.text = ""
+        }
+        if (locationToPresent["address"] as! String).characters.count > 0 {
+            locationAddress.text =  (locationToPresent["address"] as! String)
+        } else {
+            locationAddress.text = ""
+        }
         
-        locationName.text =  (locationToPresent["name"] as! String)
-        locationAddress.text =  (locationToPresent["address"] as! String)
         locationType.text = "Farmer's Market"
         
-        zipCode.text =  (locationToPresent["zip"] as! String)
-        
+        if (locationToPresent["zip"] as! String).characters.count > 4 {
+            zipCode.text =  (locationToPresent["zip"] as! String)
+        } else {
+            zipCode.text = ""
+        }
     }
     
     func setupGardenLabels() {
+        if (locationToPresent["Garden"] as! String).characters.count > 0 {
+            locationName.text =  (locationToPresent["Garden"] as! String)
+        } else {
+            locationName.text = ""
+        }
+        if (locationToPresent["Address"] as! String).characters.count > 0 {
+            locationAddress.text =  (locationToPresent["Address"] as! String)
+        } else {
+            locationAddress.text = ""
+        }
         
-        locationName.text =  (locationToPresent["Garden"] as! String)
-        locationAddress.text =  (locationToPresent["Address"] as! String)
+            zipCode.text = ""
+        
         locationType.text = "Garden"
         
     }
     
-    
-    
+    func validate(value: String) -> Bool {
+        let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result =  phoneTest.evaluateWithObject(value)
+        return result
+    }
     
     @IBAction func phoneNumber(sender: AnyObject) {
-        if locationToPresent["phone number"] != nil {
-            let url: NSURL = NSURL(string: "tel://\(locationToPresent["phone number"])")!
-            UIApplication.sharedApplication().openURL(url)
-        } else {
-            phoneButton.hidden = true
-        }
+        //        if locationToPresent["phone number"] != nil {
+        let url: NSURL = NSURL(string: "tel://\(locationToPresent["phone number"])")!
+        UIApplication.sharedApplication().openURL(url)
+        //        } else {
+        //            phoneButton.hidden = true
+        //        }
     }
     
     
