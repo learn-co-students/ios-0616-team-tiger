@@ -65,7 +65,16 @@ class detailViewController: UIViewController {
         //PIN
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
+            
+            if self.passedDataType == "gardens" {
+                
+                annotation.title = locationToPresent["Garden"] as! String
+                
+            } else {
+                
         annotation.title = locationToPresent["name"] as! String
+                
+            }
         
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
