@@ -9,7 +9,7 @@
         <!--Greenway-->
         <scene sceneID="PQ9-BM-dCO">
             <objects>
-                <viewController id="RLa-md-nwo" customClass="ButtonsViewController" customModule="Team_Tiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="RLa-md-nwo" customClass="ButtonsViewController" customModule="Greenway_NYC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1Ju-K8-cqY"/>
                         <viewControllerLayoutGuide type="bottom" id="POc-HI-ZEe"/>
@@ -146,7 +146,7 @@
         <!--Search Results Table View Controller-->
         <scene sceneID="laN-md-ber">
             <objects>
-                <tableViewController id="eMw-Ei-Duf" customClass="SearchResultsTableViewController" customModule="Team_Tiger" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="eMw-Ei-Duf" customClass="SearchResultsTableViewController" customModule="Greenway_NYC" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Iba-qW-Tof">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -251,7 +251,7 @@
         <!--Favorites-->
         <scene sceneID="Tp8-Vq-j1X">
             <objects>
-                <tableViewController id="1h3-rM-oWW" customClass="FavoritesTableViewController" customModule="Team_Tiger" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="1h3-rM-oWW" customClass="FavoritesTableViewController" customModule="Greenway_NYC" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ve9-TY-nr1">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

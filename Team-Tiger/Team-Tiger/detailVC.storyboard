@@ -11,7 +11,7 @@
         <!--Detail View Controller-->
         <scene sceneID="S80-bX-vhL">
             <objects>
-                <viewController id="E0U-DU-UPr" customClass="detailViewController" customModule="Team_Tiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="E0U-DU-UPr" customClass="detailViewController" customModule="Greenway_NYC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GiU-Pn-ROU"/>
                         <viewControllerLayoutGuide type="bottom" id="STP-0S-lgP"/>

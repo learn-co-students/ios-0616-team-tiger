@@ -49,7 +49,7 @@
 		11DF7A0C1D5528BE004E410E /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		1745EB561D6B443300A13998 /* ReachabilityCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityCheck.swift; sourceTree = "<group>"; };
 		174A95B01D5903F800841B2C /* LocationStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStuff.swift; sourceTree = SOURCE_ROOT; };
-		4F45BF151D53D0290029FD30 /* Team-Tiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team-Tiger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F45BF151D53D0290029FD30 /* Greenway NYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Greenway NYC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F45BF181D53D0290029FD30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F45BF1A1D53D0290029FD30 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4F45BF201D53D0290029FD30 /* Team_Tiger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Team_Tiger.xcdatamodel; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 		4F45BF161D53D0290029FD30 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4F45BF151D53D0290029FD30 /* Team-Tiger.app */,
+				4F45BF151D53D0290029FD30 /* Greenway NYC.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -228,7 +228,7 @@
 			);
 			name = "Team-Tiger";
 			productName = "Team-Tiger";
-			productReference = 4F45BF151D53D0290029FD30 /* Team-Tiger.app */;
+			productReference = 4F45BF151D53D0290029FD30 /* Greenway NYC.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -487,8 +487,8 @@
 				INFOPLIST_FILE = "Team-Tiger/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flatironschool.team-tiger";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "43285ea3-57cf-44d4-b16c-7c87ccddc5ee";
+				PRODUCT_NAME = "Greenway NYC";
+				PROVISIONING_PROFILE = "0a31ad32-6c9a-47ce-b071-3fa93eebcf24";
 			};
 			name = Debug;
 		};
@@ -507,7 +507,7 @@
 				INFOPLIST_FILE = "Team-Tiger/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flatironschool.team-tiger";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Greenway NYC";
 				PROVISIONING_PROFILE = "43285ea3-57cf-44d4-b16c-7c87ccddc5ee";
 			};
 			name = Release;
