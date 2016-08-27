@@ -271,9 +271,10 @@ class detailViewController: UIViewController {
         return result
     }
     
-    @IBAction func phoneNumber(sender: AnyObject) {
+    @IBAction func phoneNumber(sender: AnyObject)  {
+        let number = (locationToPresent["phone number"]! as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
         if locationToPresent["phone number"] != nil {
-            let url: NSURL = NSURL(string: "tel://\(locationToPresent["phone number"]!)")!
+            let url: NSURL = NSURL(string: "tel://\(number)")!
             
             UIApplication.sharedApplication().openURL(url)
         }
