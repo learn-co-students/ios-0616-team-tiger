@@ -21,7 +21,7 @@ class LocationStuff: NSObject, CLLocationManagerDelegate {
         
         var latitudeTotal = 0.0
         var longitudeTotal = 0.0
-        var totalCount = Double((coordinates!.count))
+        let totalCount = Double((coordinates!.count))
         for coordinate in coordinates! {
 
             latitudeTotal = latitudeTotal + coordinate.coordinate.latitude
