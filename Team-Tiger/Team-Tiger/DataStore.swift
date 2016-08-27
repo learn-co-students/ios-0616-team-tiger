@@ -278,7 +278,7 @@ class DataStore {
                 self.parkTypeArray.append(self.masterParksDictionary[key]!)
             }
         }
-        print(self.parkTypeArray)
+        //print(self.parkTypeArray)
         self.parkTypeArray = self.organizeParkCoordinates(self.parkTypeArray)
     }
     
@@ -313,7 +313,7 @@ class DataStore {
         for park in parks {
             var parkCopy : [String : AnyObject] = park
             if park["name"] as? String == "Central Park" {
-                print(park["coordinates"] as? String)
+                //print(park["coordinates"] as? String)
                 
             } else {
             if let coordinatesAsString = park["coordinates"] as? String {
@@ -341,7 +341,7 @@ class DataStore {
             
         } else {
             
-            print("I have nothing in data store so i need to populate \(self.parkTypeArray)")
+           // print("I have nothing in data store so i need to populate \(self.parkTypeArray)")
             
             getParkByTypeOnDemand(category, type: type, completion:  {
                 
@@ -382,7 +382,7 @@ class DataStore {
                     self.greenThumbArray = Array(greenThumbDictionary.values)
                     self.greenThumbArray = self.organizeParkCoordinates(self.greenThumbArray)
                     print("got garden")
-                    print(self.greenThumbArray)
+                   // print(self.greenThumbArray)
                     
                     completionHandler(true)
                 }
@@ -439,13 +439,13 @@ class DataStore {
         
         Alamofire.request(.GET, "https://maps.googleapis.com/maps/api/place/details/json?placeid=\(id)&key=AIzaSyBkEKRXCtoXZThYqylgUrHKGkjAmJ_1mSM").responseJSON {response in
             let checkingOutTheResponse = response.result.value
-            print(checkingOutTheResponse)
+           // print(checkingOutTheResponse)
             
             
             guard let rawData = response.data else {return}
             
             let jsonObject = JSON(data: rawData)
-            print(jsonObject)
+            //print(jsonObject)
             
             let phoneNumber = jsonObject["result"]["formatted_phone_number"].stringValue
             

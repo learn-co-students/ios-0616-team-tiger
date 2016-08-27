@@ -34,7 +34,7 @@ class AirQualityAPIClient {
                     for dataSet in forecast {
                         
                         if let actionDayStatus = dataSet["ActionDay"] {
-                            print(forecast)
+                            //print(forecast)
                             if String(actionDayStatus!) == "1" {
                                 
                                 self.isActionDay = true

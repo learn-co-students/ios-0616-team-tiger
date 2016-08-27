@@ -9,7 +9,7 @@
         <!--Onboarding View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="onboarding" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="onboardingViewController" customModule="Team_Tiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="onboarding" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="onboardingViewController" customModule="Greenway_NYC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -115,7 +115,7 @@
         <!--Onboarding Page View Controller-->
         <scene sceneID="xwz-Bw-CUA">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="vNX-zh-iNv" customClass="OnboardingPageViewController" customModule="Team_Tiger" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="vNX-zh-iNv" customClass="OnboardingPageViewController" customModule="Greenway_NYC" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RGt-F1-5nI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="112" y="1154"/>
@@ -123,7 +123,7 @@
         <!--View Controller-->
         <scene sceneID="gJI-kw-ySP">
             <objects>
-                <viewController id="EEL-0D-euG" customClass="ViewController" customModule="Team_Tiger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="EEL-0D-euG" customClass="ViewController" customModule="Greenway_NYC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zpQ-bS-8SY"/>
                         <viewControllerLayoutGuide type="bottom" id="bh7-5l-AZo"/>
