@@ -46,53 +46,52 @@ class detailViewController: UIViewController {
         setViewLabelsBasedOnPassedType()
         
         if favoriteToPresent == nil {
-        
-        let stringOfCoordinates = locationToPresent["coordinates"]
-        let latitudeAsString = stringOfCoordinates!.coordinate.latitude as Double
-        let longitudeAsString = stringOfCoordinates!.coordinate.longitude as Double
-        
-        var latDelta = 0.015
-        var longDelta = 0.015
-        
-        let span = MKCoordinateSpanMake(latDelta, longDelta)
-        
-        
-        let location = CLLocationCoordinate2D(latitude: latitudeAsString , longitude: longitudeAsString)
-        
-        let region = MKCoordinateRegion(center: location, span: span)
-        
-        mapView.setRegion(region, animated: true)
-        //PIN
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = location
+            
+            let stringOfCoordinates = locationToPresent["coordinates"]
+            let latitudeAsString = stringOfCoordinates!.coordinate.latitude as Double
+            let longitudeAsString = stringOfCoordinates!.coordinate.longitude as Double
+            
+            let latDelta = 0.015
+            let longDelta = 0.015
+            
+            let span = MKCoordinateSpanMake(latDelta, longDelta)
+            
+            let location = CLLocationCoordinate2D(latitude: latitudeAsString , longitude: longitudeAsString)
+            
+            let region = MKCoordinateRegion(center: location, span: span)
+            
+            mapView.setRegion(region, animated: true)
+            //PIN
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = location
             
             if self.passedDataType == "gardens" {
                 
-                annotation.title = locationToPresent["Garden"] as! String
+                annotation.title = locationToPresent["Garden"] as? String
                 
             } else {
                 
-        annotation.title = locationToPresent["name"] as! String
+                annotation.title = locationToPresent["name"] as? String
                 
             }
-        
-        mapView.addAnnotation(annotation)
-        mapView.selectAnnotation(annotation, animated: true)
-        
-        mapView.addAnnotation(annotation)
-        
-        
-        if locationToPresent["hours"] != nil {
-            hours.text = locationToPresent["hours"] as! String }
-        else {
-            hours.text = ""
-        }
-        if locationToPresent["season"] != nil  {
-            season.text = locationToPresent["season"] as! String
-        } else {
-            season.text = ""
-        }
-        
+            
+            mapView.addAnnotation(annotation)
+            mapView.selectAnnotation(annotation, animated: true)
+            
+            mapView.addAnnotation(annotation)
+            
+            
+            if locationToPresent["hours"] != nil {
+                hours.text = locationToPresent["hours"] as? String }
+            else {
+                hours.text = ""
+            }
+            if locationToPresent["season"] != nil  {
+                season.text = locationToPresent["season"] as? String
+            } else {
+                season.text = ""
+            }
+            
             
         }
         
@@ -122,8 +121,6 @@ class detailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
     func setViewLabelsBasedOnPassedType() {
         
         if self.passedDataType == "parks" {
@@ -147,11 +144,8 @@ class detailViewController: UIViewController {
                 self.zipCode.text = favorite.zip
                 self.locationType.text = favorite.type
                 self.saveFavoriteButton.hidden = true
-                
             }
-            
         }
-        
     }
     
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
@@ -162,19 +156,19 @@ class detailViewController: UIViewController {
         return circleRenderer
         
     }
-
-//    func loadOverlayForRegionWithLatitude(latitude: Double, andLongitude longitude: Double) {
-//        
-//        
-//        let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-//    
-//       var circle = MKCircle(centerCoordinate: coordinates, radius: 50)
-//        
-//        
-//        self.mapView.setRegion(MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 7, longitudeDelta: 7)), animated: true)
-//    
-//        self.mapView.addOverlay(circle)
-//    }
+    
+    //    func loadOverlayForRegionWithLatitude(latitude: Double, andLongitude longitude: Double) {
+    //
+    //
+    //        let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    //
+    //       var circle = MKCircle(centerCoordinate: coordinates, radius: 50)
+    //
+    //
+    //        self.mapView.setRegion(MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 7, longitudeDelta: 7)), animated: true)
+    //
+    //        self.mapView.addOverlay(circle)
+    //    }
     
     func setupUpParkLabels() {
         
@@ -204,15 +198,15 @@ class detailViewController: UIViewController {
             if locationToPresent["address"] != nil {
                 locationAddress.text =  (locationToPresent["address"] as! String)
                 
-//            //            if locationToPresent["name"] != nil {
-//            locationName.text =  (locationToPresent["name"] as? String)
-//            //            } else {
-//            //                locationName.text = ""
-//            //            }
-//            
-//            if locationToPresent["address"] != nil {
-//                locationAddress.text =  (locationToPresent["address"] as? String)
-
+                //            //            if locationToPresent["name"] != nil {
+                //            locationName.text =  (locationToPresent["name"] as? String)
+                //            //            } else {
+                //            //                locationName.text = ""
+                //            //            }
+                //
+                //            if locationToPresent["address"] != nil {
+                //                locationAddress.text =  (locationToPresent["address"] as? String)
+                
             } else {
                 locationAddress.text = ""
             }
@@ -224,18 +218,14 @@ class detailViewController: UIViewController {
             locationType.text = type
             
             if locationToPresent["zip"] != nil {
-
+                
                 zipCode.text =  (locationToPresent["zip"] as! String)
-
+                
             } else {
                 zipCode.text = ""
             }
-            
         }
-        
     }
-    
-
     
     func setupMarketLabels() {
         if (locationToPresent["name"] as! String).characters.count > 0 {
@@ -270,10 +260,8 @@ class detailViewController: UIViewController {
             locationAddress.text = ""
         }
         
-            zipCode.text = ""
-        
+        zipCode.text = ""
         locationType.text = "Garden"
-        
     }
     
     func validate(value: String) -> Bool {
@@ -284,14 +272,12 @@ class detailViewController: UIViewController {
     }
     
     @IBAction func phoneNumber(sender: AnyObject) {
-        //        if locationToPresent["phone number"] != nil {
-        let url: NSURL = NSURL(string: "tel://\(locationToPresent["phone number"])")!
-        UIApplication.sharedApplication().openURL(url)
-        //        } else {
-        //            phoneButton.hidden = true
-        //        }
+        if locationToPresent["phone number"] != nil {
+            let url: NSURL = NSURL(string: "tel://\(locationToPresent["phone number"]!)")!
+            
+            UIApplication.sharedApplication().openURL(url)
+        }
     }
-
     
     
     @IBAction func saveToFavoritesTapped(sender: AnyObject) {

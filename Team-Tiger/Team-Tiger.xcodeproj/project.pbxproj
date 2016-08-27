@@ -477,8 +477,8 @@
 			baseConfigurationReference = F15865EB5669683C33E0A35B /* Pods-Team-Tiger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Flatiron School, Inc (KXY9EDFTF5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Flatiron School, Inc (KXY9EDFTF5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"<Multiple",
 					"values>",
@@ -488,7 +488,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flatironschool.team-tiger";
 				PRODUCT_NAME = "Greenway NYC";
-				PROVISIONING_PROFILE = "0a31ad32-6c9a-47ce-b071-3fa93eebcf24";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -497,8 +497,8 @@
 			baseConfigurationReference = B7B2832F296E0C175CC97110 /* Pods-Team-Tiger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Flatiron School, Inc (KXY9EDFTF5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Flatiron School, Inc (KXY9EDFTF5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"<Multiple",
 					"values>",
@@ -508,7 +508,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flatironschool.team-tiger";
 				PRODUCT_NAME = "Greenway NYC";
-				PROVISIONING_PROFILE = "43285ea3-57cf-44d4-b16c-7c87ccddc5ee";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
