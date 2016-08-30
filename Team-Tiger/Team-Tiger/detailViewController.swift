@@ -368,11 +368,35 @@ class detailViewController: UIViewController {
     
     @IBAction func getDirectionsTapped(sender: AnyObject) {
         
-        let destination = MKMapItem.init(placemark: MKPlacemark.init(coordinate: CLLocationCoordinate2D(latitude: , longitude: ), addressDictionary: nil))
+        var coordinate = CLLocationCoordinate2D()
         
+        if self.favoriteToPresent == nil {
+            
+            let coordinates = self.locationToPresent["coordinates"]
+            
+            coordinate = coordinates!.coordinate
+            
+        } else {
+            
+            guard let coordinates = self.favoriteToPresent?.location?.componentsSeparatedByString(",") else {return}
+            
+            let latitude = coordinates[0]
+            let longitude = coordinates[1]
+            
+            coordinate = CLLocationCoordinate2D.init(latitude: Double(latitude)!, longitude: Double(longitude)!)
+            
+            
+        }
+        
+        let currentLocation = MKMapItem.mapItemForCurrentLocation()
+        
+        let destination = MKMapItem.init(placemark: MKPlacemark.init(coordinate: coordinate, addressDictionary: nil))
+        
+        MKMapItem.openMapsWithItems([currentLocation, destination], launchOptions: [MKLaunchOptionsDirectionsModeKey:
+            MKLaunchOptionsDirectionsModeDriving])
         
     }
- 
+    
     func breakCoordinatesIntoStringToSave() -> String {
         
         let locationCoordinates = locationToPresent["coordinates"]

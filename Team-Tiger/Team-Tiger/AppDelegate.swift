@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     let dataStore = DataStore.store
     let locationManager = CLLocationManager()
     
+    
     var window: UIWindow?
     var zip : String = ""
     
