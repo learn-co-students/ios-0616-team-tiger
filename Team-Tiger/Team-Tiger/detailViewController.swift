@@ -93,6 +93,33 @@ class detailViewController: UIViewController {
             }
             
             
+        } else if favoriteToPresent != nil {
+            
+            guard let coordinates = self.favoriteToPresent?.location?.componentsSeparatedByString(",") else {return}
+            
+            let latitude = coordinates[0]
+            let longitude = coordinates[1]
+            
+            let latDelta = 0.015
+            let longDelta = 0.015
+            
+            let span = MKCoordinateSpanMake(latDelta, longDelta)
+            
+            let location = CLLocationCoordinate2D(latitude: Double(latitude)! , longitude: Double(longitude)!)
+            
+            let region = MKCoordinateRegion(center: location, span: span)
+            
+            mapView.setRegion(region, animated: true)
+            //PIN
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = location
+            
+            annotation.title = favoriteToPresent?.name
+            
+            mapView.addAnnotation(annotation)
+            mapView.selectAnnotation(annotation, animated: true)
+            mapView.addAnnotation(annotation)
+            
         }
         
         if locationToPresent["phone number"] != nil {
@@ -144,6 +171,7 @@ class detailViewController: UIViewController {
                 self.zipCode.text = favorite.zip
                 self.locationType.text = favorite.type
                 self.saveFavoriteButton.hidden = true
+                
             }
         }
     }
@@ -288,6 +316,8 @@ class detailViewController: UIViewController {
         
         //gardens don't have a name, they have "Garden" as their key
         
+        newFavorite.location = breakCoordinatesIntoStringToSave()
+        
         
         if self.passedDataType == "gardens" {
             
@@ -335,5 +365,19 @@ class detailViewController: UIViewController {
         
         
     }
+    
+    func breakCoordinatesIntoStringToSave() -> String {
+        
+        let locationCoordinates = locationToPresent["coordinates"]
+        let latitudeAsDouble = locationCoordinates!.coordinate.latitude as Double
+        let longitudeAsDouble = locationCoordinates!.coordinate.longitude as Double
+        
+        let coordinatesAsString = "\(latitudeAsDouble),\(longitudeAsDouble)"
+        
+        return coordinatesAsString
+        
+    }
+    
+    
     
 }
