@@ -260,12 +260,20 @@
                                     </mask>
                                 </variation>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paU-gS-ctD">
+                                <rect key="frame" x="212" y="442" width="98" height="30"/>
+                                <state key="normal" title="Get Directions"/>
+                                <connections>
+                                    <action selector="getDirectionsTapped:" destination="E0U-DU-UPr" eventType="touchUpInside" id="Sgs-OR-Xfu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.4663754761456137" green="0.78898069367068069" blue="0.49049934519896288" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="sAN-cY-l0J" firstAttribute="top" secondItem="GiU-Pn-ROU" secondAttribute="bottom" constant="13" id="0i7-n8-zvG"/>
                             <constraint firstItem="kPk-VB-GG0" firstAttribute="height" relation="greaterThanOrEqual" secondItem="aq0-Zt-Vqb" secondAttribute="height" multiplier="0.33" constant="40" id="1He-hj-8R2"/>
                             <constraint firstItem="OXg-yb-1Vx" firstAttribute="top" secondItem="laW-bI-xwP" secondAttribute="bottom" constant="8" symbolic="YES" id="1nm-7q-Yz0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="paU-gS-ctD" secondAttribute="trailing" constant="-10" id="1sx-QO-hwB"/>
                             <constraint firstItem="laW-bI-xwP" firstAttribute="top" secondItem="sAN-cY-l0J" secondAttribute="bottom" constant="10" id="3jy-1b-9wa"/>
                             <constraint firstItem="Z5o-Jm-B3s" firstAttribute="centerY" secondItem="OXg-yb-1Vx" secondAttribute="centerY" id="58j-QE-vCM"/>
                             <constraint firstItem="qIG-pV-btT" firstAttribute="leading" secondItem="OXg-yb-1Vx" secondAttribute="leading" id="9RD-hO-PDx"/>
@@ -301,6 +309,7 @@
                             <constraint firstItem="qIG-pV-btT" firstAttribute="leading" secondItem="OXg-yb-1Vx" secondAttribute="leading" id="jT1-qA-BKG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="laW-bI-xwP" secondAttribute="trailing" constant="20" id="jTg-1q-B1S"/>
                             <constraint firstItem="OXg-yb-1Vx" firstAttribute="leading" secondItem="laW-bI-xwP" secondAttribute="leading" id="jvb-uU-EdT"/>
+                            <constraint firstItem="STP-0S-lgP" firstAttribute="top" secondItem="paU-gS-ctD" secondAttribute="bottom" constant="8" id="lGG-Pd-jkz"/>
                             <constraint firstItem="lK0-dj-AJu" firstAttribute="top" secondItem="Z5o-Jm-B3s" secondAttribute="bottom" constant="10" id="mGa-Ow-7pB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sAN-cY-l0J" secondAttribute="trailing" constant="20" id="nuq-e2-BwJ"/>
                             <constraint firstItem="lK0-dj-AJu" firstAttribute="centerY" secondItem="qIG-pV-btT" secondAttribute="centerY" id="oeP-L1-Jfi"/>

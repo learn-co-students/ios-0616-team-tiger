@@ -366,6 +366,13 @@ class detailViewController: UIViewController {
         
     }
     
+    @IBAction func getDirectionsTapped(sender: AnyObject) {
+        
+        let destination = MKMapItem.init(placemark: MKPlacemark.init(coordinate: CLLocationCoordinate2D(latitude: , longitude: ), addressDictionary: nil))
+        
+        
+    }
+ 
     func breakCoordinatesIntoStringToSave() -> String {
         
         let locationCoordinates = locationToPresent["coordinates"]
