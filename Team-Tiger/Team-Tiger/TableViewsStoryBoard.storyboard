@@ -231,7 +231,7 @@
         <scene sceneID="ilR-Dl-NjR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BNb-Wh-kIr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Locations" image="medList" id="weJ-7d-oto"/>
+                    <tabBarItem key="tabBarItem" title="Locations" image="search" id="weJ-7d-oto"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2uT-Fe-v1S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -297,11 +297,11 @@
             </objects>
             <point key="canvasLocation" x="3359" y="1115"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Favorites-->
         <scene sceneID="MEc-0B-Uno">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lEb-df-HPg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="STR-Kp-v9B"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="favoriteBorder" id="STR-Kp-v9B"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gdz-K5-qtb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -325,8 +325,9 @@
     <resources>
         <image name="bigFlower" width="48" height="48"/>
         <image name="blurredPlant" width="3000" height="4542"/>
-        <image name="medList" width="36" height="36"/>
+        <image name="favoriteBorder" width="24" height="24"/>
         <image name="rest" width="48" height="48"/>
+        <image name="search" width="24" height="24"/>
         <image name="shop" width="48" height="48"/>
         <image name="tinySpa" width="18" height="18"/>
     </resources>

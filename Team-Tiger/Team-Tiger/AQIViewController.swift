@@ -180,11 +180,11 @@ class AQIViewController: UIViewController, CLLocationManagerDelegate {
                 
                 if String(actionDayStatus) == "1" {
                     
-                    self.actionDayStatus.text = "It's an Air Quality Action Day. Groups that are sensitive to certain pollutants should reduce exposure by eliminating prolonged or heavy exertion outdoors. For ozone this includes children and adults who are active outdoors and people with lung disease, such as asthma."
+                    self.actionDayStatus.text = "Air Quality Alert! Groups that are sensitive to certain pollutants should reduce exposure by eliminating prolonged or heavy exertion outdoors. This includes children and adults who are active outdoors, people with lung disease or heart disease, and the elderly."
                     
                 } else {
                     
-                    self.actionDayStatus.text = "It's not an Air Quality Action Day. Enjoy the fresh air!"
+                    self.actionDayStatus.text = "There are no Air Quality alerts in effect today. Enjoy the fresh air!"
                     
                 }
             }
